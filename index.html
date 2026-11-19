@@ -490,27 +490,38 @@ body.pg-prev .tb-row{margin-bottom:0}
 .pv-seg button.on b{background:rgba(255,255,255,.22);color:#fff}
 .pv-save{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
 .pv-save i{width:7px;height:7px;border-radius:50%;background:var(--good)}
-.pv-tiles{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px;margin-top:14px}
-.pv-tile{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);min-width:0;transition:border-color .15s,transform .15s}
-.pv-tile:hover{border-color:var(--accent)}
-.pv-tile.sel{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft),var(--shadow)}
-.pv-tile:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.pv-tile .k{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-2);font-weight:600}
-.pv-tile .k i{width:10px;height:10px;border-radius:50%;flex:none}
-.pv-tile b{display:block;font-size:30px;font-weight:750;letter-spacing:-.02em;margin-top:6px;line-height:1.1;font-variant-numeric:tabular-nums}
-.pv-tile span.s{display:block;font-size:11.5px;color:var(--muted);margin-top:3px}
-.pv-ptabs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin-top:14px}
-.pv-ptab{all:unset;box-sizing:border-box;cursor:pointer;display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:14px;background:var(--surface);border:1px solid var(--line);min-width:0;position:relative;transition:border-color .15s,background .15s}
-.pv-ptab:hover{border-color:var(--accent)}
-.pv-ptab.on{border-color:var(--accent);background:var(--accent-soft);box-shadow:inset 0 -3px 0 var(--accent)}
-.pv-ptab:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.pv-ptab .t{min-width:0;display:flex;flex-direction:column;line-height:1.25}
-.pv-ptab .t b{font-size:12px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pv-ptab .t small{font-size:10.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.pv-ptab em{position:absolute;top:-7px;right:-5px;font-style:normal;font-size:10.5px;font-weight:800;min-width:20px;height:20px;padding:0 5px;border-radius:999px;display:grid;place-items:center;color:#fff;background:var(--crit);box-shadow:0 0 0 2px var(--page)}
-.pv-ptab em.soon{background:var(--warn);color:#111}
-@media screen and (max-width:1380px){.pv-ptabs{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media screen and (max-width:640px){.pv-ptabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.kb-bar{display:flex;justify-content:space-between;align-items:center;gap:10px 16px;flex-wrap:wrap;margin-top:14px}
+.kb-bar p{margin:0;font-size:12px;color:var(--muted);max-width:720px}
+.kb{display:grid;grid-template-columns:repeat(6,minmax(215px,1fr));gap:12px;margin-top:12px;overflow-x:auto;padding-bottom:6px;align-items:start}
+.kb-col{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;min-width:0}
+.kb-h{display:flex;align-items:center;gap:10px;padding:2px 4px 4px}
+.kb-h .pcode{height:30px;min-width:46px;font-size:12.5px;border-radius:9px}
+.kb-h b{display:block;font-size:12.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-h small{display:block;font-size:10.5px;color:var(--muted)}
+.kb-h>div{min-width:0}
+.kb-ball{--c:var(--muted);border-radius:14px;background:color-mix(in srgb,var(--c) 8%,var(--surface-2));border:1px solid color-mix(in srgb,var(--c) 30%,var(--line))}
+.kb-ball.b-late{--c:#d03b3b}.kb-ball.b-soon{--c:#fab219}.kb-ball.b-ok{--c:#0ca30c}
+.kb-ball header{display:flex;align-items:center;gap:7px;padding:8px 10px;font-size:12px;font-weight:700;color:var(--ink)}
+.kb-ball header i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
+.kb-ball header b{margin-left:auto;font-size:11px;min-width:22px;height:20px;padding:0 6px;border-radius:999px;display:grid;place-items:center;background:var(--c);color:#fff}
+.kb-ball.b-soon header b{color:#111}
+.kb-list{display:flex;flex-direction:column;gap:6px;padding:0 6px 6px;max-height:380px;overflow-y:auto}
+.kb-none{font-size:11.5px;color:var(--muted);padding:2px 6px 6px}
+.kb-card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:8px 10px;border-left:3px solid var(--c)}
+.kb-c1{display:flex;align-items:center;justify-content:space-between;gap:6px}
+.kb-c1 .pv-act{padding:3px 7px;font-size:11.5px}
+.kb-tp{font-size:10.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kb-kv{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin:6px 0 0;font-size:11.5px}
+.kb-kv dt{color:var(--muted)}
+.kb-kv dd{margin:0;font-variant-numeric:tabular-nums;min-width:0}
+.kb-kv dd small{color:var(--muted);margin-left:6px}
+.kb-fal{font-size:11.5px;font-weight:700;margin-top:5px;color:var(--good-ink)}
+.kb-fal.late{color:var(--crit)}.kb-fal.soon{color:var(--serious)}
+.kb-card .nexec{margin-top:4px;display:block}
+.kb-sem{border-top:1px dashed var(--line);padding:8px 4px 2px;font-size:11px;color:var(--muted)}
+.kb-sem>div{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.kb-chip{all:unset;cursor:pointer;font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;border-radius:7px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
+.kb-chip:hover{border-color:var(--accent);color:var(--accent)}
 .pv-due{display:flex;flex-direction:column;line-height:1.3}
 .pv-due small{font-size:11px;color:var(--muted)}
 .pv-due .late{color:var(--crit);font-weight:700}
@@ -576,10 +587,9 @@ body.pv-open .pv-drawer{transform:none}
 .pv-empty{text-align:center;padding:34px 16px;color:var(--muted)}
 .pv-empty b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
 .nexec{color:var(--crit);font-size:11.5px}
-@media screen and (max-width:1180px){.pv-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
-@media screen and (max-width:640px){.pv-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.ck-list{grid-template-columns:1fr}.pv-next{grid-template-columns:1fr}.pv-plans{grid-template-columns:1fr}.pv-drawer{top:0;right:0;bottom:0;width:100vw;border-radius:0}}
+@media screen and (max-width:640px){.ck-list{grid-template-columns:1fr}.pv-next{grid-template-columns:1fr}.pv-plans{grid-template-columns:1fr}.pv-drawer{top:0;right:0;bottom:0;width:100vw;border-radius:0}}
 body.printing .pv-top,body.printing .pv-act,body.printing .pv-del{display:none!important}
-body.printing .pv-tiles{grid-template-columns:repeat(5,minmax(0,1fr))}
+body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}body.printing .kb-list{max-height:none}
 </style>
 </head>
 <body>
@@ -1457,6 +1467,7 @@ function renderRiskTable(){const t=T();
 
 /* ---------- Versões ---------- */
 const VERSIONS=[
+  {v:'3.2',d:'19/11/2026',c:'Preventivas: o painel de revisões vira um Kanban com uma coluna por tipo (MP1, MP2, MP3, Intermediária, RP1 e RP2) e três balões em cada coluna (Próximo, Vencidas e Em dia), com um cartão por veículo. Saem as abas de filtro por tipo. Veículos sem revisão lançada ficam no rodapé da coluna. RP1 e RP2 (sob demanda) ficam em dia até 90 dias da última passagem, próximas de 91 a 180 e vencidas depois disso.'},
   {v:'3.1',d:'19/11/2026',c:'Login por usuário (Admin, Redig, Pedro) em vez de e-mail. Cadastro livre desativado: novos acessos só são criados pelo administrador no Supabase.'},
   {v:'3.0',d:'19/11/2026',c:'Versão online com Supabase: login por e-mail e senha, novos acessos liberados pelo administrador, bases de OS e de veículos lidas do banco e substituídas por inteiro a cada importação (operação única: se falhar, a base anterior continua), com aviso quando a planilha nova começa depois da base atual. Preventivas gravadas no banco e compartilhadas entre os usuários. Quadro de acessos e de atualizações das bases para o administrador.'},
   {v:'2.5',d:'19/11/2026',c:'Preventivas: o painel de revisões passa a ter uma aba para cada tipo de revisão (MP1, MP2, MP3, intermediária, RP1 e RP2), sem misturar os tipos na mesma tabela. Cada aba tem os próprios indicadores, filtros e exportação CSV e mostra no topo quantas revisões estão vencidas ou próximas. RP1 e RP2 mostram a última passagem de cada carreta e os itens não executados.'},
@@ -1698,7 +1709,7 @@ const PV_RANK={'Vencida':0,'Próxima':1,'Sem registro':2,'Em dia':3,'Sob demanda
 const semHod=t=>PV_CARR.includes(t); // carretas não têm hodômetro: sem km
 const pvBadge=s=>`<span class="badge"><i style="background:${PV_ST[s]}"></i>${s}</span>`;
 const pcode=id=>`<span class="pcode c-${id}">${id}</span>`;
-let PV={v:1,veics:[],revs:[],cfg:{},bk:null},PV_VIEW='painel',PV_F={q:'',st:'',pl:''},PV_VQ={q:'',t:''},PV_HQ={q:'',pl:''},PV_OK=true,PV_FLASH='';
+let PV={v:1,veics:[],revs:[],cfg:{},bk:null},PV_VIEW='painel',PV_F={q:''},PV_VQ={q:'',t:''},PV_HQ={q:'',pl:''},PV_OK=true,PV_FLASH='';
 /* ---------- Camada de dados das preventivas ----------
    Toda gravação passa por PV_DB (adicionar/alterar/remover veículo, revisão e intervalo).
    Hoje grava no navegador (localStorage). Para publicar com Supabase, basta preencher SUPABASE_CFG:
@@ -1797,55 +1808,44 @@ function pvRender(){
   else if(PV_VIEW==='veic')V.innerHTML=pvViewVeic();
   else if(PV_VIEW==='hist')V.innerHTML=pvViewHist();
   else V.innerHTML=pvViewPlanos();
-  if(PV_VIEW==='painel'&&PV.veics.length)pvPainelTable();
+  if(PV_VIEW==='painel'&&PV.veics.length)pvKanban();
   if(PV_VIEW==='veic'){pvVehTable();pvHint()}
   if(PV_VIEW==='hist'&&PV.revs.length)pvHistTable();
 }
 function pvFlash(){if(!PV_FLASH)return'';const m=PV_FLASH;PV_FLASH='';return`<div class="pv-msg" role="status" style="margin-top:12px">${esc(m)}</div>`}
+/* ---------- Painel de revisões em Kanban: uma coluna por tipo, três balões por coluna ---------- */
+const PV_KB=[['Próxima','Próximo','soon'],['Vencida','Vencidas','late'],['Em dia','Em dia','ok']];
+const PV_KB_ORD=['MP1','MP2','MP3','INT','RP1','RP2'];
+// RP1/RP2 são sob demanda: o balão vem do tempo desde a última passagem (até 90 dias em dia, 91 a 180 próximo, mais de 180 vencida)
+function pvKbSt(r){if(!r.last)return'Sem registro';if(!PLAN[r.id].sob)return r.st==='Sob demanda'?'Em dia':r.st;
+  const d=dayDiff(r.last.data,todayIso());return d<=90?'Em dia':d<=180?'Próxima':'Vencida'}
 function pvViewPainel(R){
   if(!PV.veics.length)return pvFlash()+`<div class="card" style="margin-top:14px"><div class="pv-empty"><b>Nenhum veículo no controle de preventivas</b>Primeiro cadastre os veículos e o tipo de cada um. Depois registre a última revisão feita para o painel calcular as próximas.<div style="margin-top:14px"><button class="btn primary" type="button" data-go="veic">Cadastrar veículos</button></div></div></div>`;
-  if(!PLAN[PV_F.pl])PV_F.pl='MP1';
-  const P=PLAN[PV_F.pl],RP=R.filter(r=>r.id===P.id),c=s=>RP.filter(r=>r.st===s).length,sob=!!P.sob;
-  // abas: uma por tipo de revisão, com o nº de vencidas (vermelho) ou próximas (amarelo)
-  const tabs=PLANOS.map(p=>{const x=R.filter(r=>r.id===p.id),v=x.filter(r=>r.st==='Vencida').length,n=x.filter(r=>r.st==='Próxima').length;
-    return`<button type="button" role="tab" class="pv-ptab${p.id===P.id?' on':''}" data-pl="${p.id}" title="${esc(p.nome)} · ${num(x.length)} veículos" aria-selected="${p.id===P.id}">${pcode(p.id)}<span class="t"><b>${esc(p.curto)}</b><small>${esc(p.sob?'sob demanda':ivTxt(pvIv(p.id)))}</small></span>${v?`<em class="late" title="${v} vencidas">${v}</em>`:n?`<em class="soon" title="${n} próximas">${n}</em>`:''}</button>`}).join('');
-  const T=sob?[['','Veículos no plano',RP.length,esc(P.tipos.join(', ').toLowerCase()),'var(--accent)'],['Revisado','Já revisados',RP.filter(r=>r.last).length,'têm pelo menos uma '+P.id,PV_ST['Em dia']],['Nunca revisado','Nunca revisados',RP.filter(r=>!r.last).length,'nenhuma '+P.id+' lançada',PV_ST['Sem registro']],['90d','Nos últimos 90 dias',RP.filter(r=>r.last&&dayDiff(r.last.data,todayIso())<=90).length,'revisados recentemente',PV_ST['Sob demanda']]]
-    :[['','Veículos no plano',RP.length,esc(ivTxt(pvIv(P.id))),'var(--accent)'],['Vencida','Vencidas',c('Vencida'),'passaram do km ou da data',PV_ST['Vencida']],['Próxima','Próximas',c('Próxima'),'até 15 dias ou 10% do km',PV_ST['Próxima']],['Em dia','Em dia',c('Em dia'),'dentro do intervalo',PV_ST['Em dia']],['Sem registro','Sem registro',c('Sem registro'),'nenhuma '+P.id+' lançada ainda',PV_ST['Sem registro']]];
-  const sts=sob?['Revisado','Nunca revisado','90d']:['Vencida','Próxima','Em dia','Sem registro'];if(PV_F.st&&!sts.includes(PV_F.st))PV_F.st='';
-  const head=sob?'<th>Placa</th><th>Veículo</th><th>Última revisão</th><th class="n">Revisões lançadas</th><th>Itens não executados na última</th><th></th>'
-    :'<th>Placa</th><th>Veículo</th><th>Última</th><th>Próxima</th><th>Faltam</th><th>Situação</th><th></th>';
-  return pvFlash()+`<div class="pv-ptabs" role="tablist" aria-label="Tipo de revisão">${tabs}</div>
-  <div class="pv-tiles" style="${sob?'grid-template-columns:repeat(4,minmax(0,1fr))':''}">${T.map(t=>`<button type="button" class="pv-tile${PV_F.st===t[0]&&t[0]?' sel':''}" data-st="${t[0]}"><span class="k"><i style="background:${t[4]}"></i>${t[1]}</span><b>${num(t[2])}</b><span class="s">${t[3]}</span></button>`).join('')}</div>
-  <div class="grid"><div class="card full"><div class="card-h"><div><h3>${pcode(P.id)} ${esc(P.nome)}</h3><p>${sob?'Revisão sob demanda: sem intervalo e sem km. A tabela mostra quando cada carreta passou pela última vez.':`A cada ${esc(ivTxt(pvIv(P.id)))}, o que vier primeiro. Conta só a partir da última ${P.id} de cada veículo.`}</p></div>
-    <div class="toolbar"><input class="inp" id="pvQ" placeholder="Buscar placa…" value="${esc(PV_F.q)}" autocomplete="off">
-    <select class="inp" id="pvFSt"><option value="">Todas as situações</option>${sts.map(s=>`<option value="${s}"${PV_F.st===s?' selected':''}>${s==='90d'?'Últimos 90 dias':s}</option>`).join('')}</select>
-    <button class="btn" type="button" id="pvCsv1">Exportar CSV</button></div></div>
-    <div class="table-wrap" style="max-height:640px"><table><thead><tr>${head}</tr></thead><tbody id="pvRowsT"></tbody></table></div><div class="tcount" id="pvRowsN"></div></div></div>`}
-let PV_PROWS=[];SORT_RENDER.pvRowsT=()=>pvPainelTable();
-function pvPainelTable(){const P=PLAN[PV_F.pl]||PLAN.MP1,sob=!!P.sob;
-  const q=normPlate(PV_F.q),stOk=r=>!PV_F.st||(sob?(PV_F.st==='Revisado'?!!r.last:PV_F.st==='Nunca revisado'?!r.last:!!r.last&&dayDiff(r.last.data,todayIso())<=90):r.st===PV_F.st);
-  const ALL=pvRows().filter(r=>r.id===P.id);let R=ALL.filter(r=>(!q||r.p.includes(q))&&stOk(r));
-  const nRev=p=>PV.revs.filter(x=>x.p===p&&x.plano===P.id).length;
-  if(sob){R.sort((a,b)=>(a.last?a.last.data:'')<(b.last?b.last.data:'')?-1:1);
-    R=sortRows('pvRowsT',R,[r=>r.p,r=>r.tipo,r=>r.last?r.last.data:null,r=>nRev(r.p),r=>r.last?(r.last.nexec||[]).length:null,null]);PV_PROWS=R;
-    $('#pvRowsT').innerHTML=R.length?R.map(r=>{const L=r.last;return`<tr><td><span class="plate" data-pv-p="${r.p}">${r.p}</span></td><td><div class="pv-due">${esc(r.tipo)}<small>${esc(vehDesc(r.p))||'sem cadastro de marca'}</small></div></td>
-      <td>${L?`<div class="pv-due">${fmtDate(L.data)}<small>há ${num(dayDiff(L.data,todayIso()))} dias${L.os?` · OS ${esc(L.os)}`:''}</small></div>`:'<span class="nd">nunca revisada</span>'}</td><td class="n">${num(nRev(r.p))}</td>
-      <td style="white-space:normal;max-width:360px">${L?((L.nexec||[]).length?`<span class="nexec">${L.nexec.map(esc).join(' · ')}</span>`:'<span class="nd">todos executados</span>'):'<span class="nd">—</span>'}</td>
-      <td><button class="pv-act" type="button" data-reg="${r.p}|${r.id}">Registrar</button></td></tr>`}).join(''):'<tr><td colspan="6" class="empty">Nenhuma carreta com esses filtros.</td></tr>';
-    $('#pvRowsN').textContent=`${num(R.length)} de ${num(ALL.length)} veículos no ${P.id}`;return}
-  R.sort((a,b)=>PV_RANK[a.st]-PV_RANK[b.st]||(a.dias??1e9)-(b.dias??1e9)||(a.kr??1e12)-(b.kr??1e12)||a.p.localeCompare(b.p));
-  R=sortRows('pvRowsT',R,[r=>r.p,r=>r.tipo,r=>r.last?r.last.data:null,r=>r.nd,r=>r.dias,r=>PV_RANK[r.st],null]);PV_PROWS=R;
-  $('#pvRowsT').innerHTML=R.length?R.map(r=>{const L=r.last;
-    const ult=L?`<div class="pv-due">${fmtDate(L.data)}<small>${L.km!=null?kmf(L.km):semHod(r.tipo)?'carreta sem km':'sem km'}${L.os?` · OS ${esc(L.os)}`:''}</small></div>`:'<span class="nd">—</span>';
-    const prx=r.st==='Sob demanda'?'<span class="nd">quando necessário</span>':L?(r.nk==null&&r.nd==null?'<span class="nd">—</span>':`<div class="pv-due">${r.nk!=null?kmf(r.nk):fmtDate(r.nd)}<small>${r.nk!=null&&r.nd?'ou '+fmtDate(r.nd):r.nk!=null?'':' '}</small></div>`):'<span class="nd">registre a última</span>';
-    let fal='<span class="nd">—</span>';
-    if(L&&(r.nk!=null||r.nd)){const cls=r.st==='Vencida'?'late':r.st==='Próxima'?'soon':'';
-      const kmT=r.kr!=null?(r.kr<=0?`passou ${kmf(-r.kr)}`:kmf(r.kr)):r.nk!=null?'km atual não informado':'';
-      const dd=n=>n===1?'1 dia':num(n)+' dias';
-      const dT=r.dias!=null?(r.dias<0?`venceu há ${dd(-r.dias)}`:r.dias===0?'vence hoje':dd(r.dias)):'';
-      fal=`<div class="pv-due"><span class="${cls}">${r.kr!=null?kmT:dT||kmT}</span><small>${r.kr!=null?dT:r.nk!=null&&r.dias!=null?kmT:''}</small></div>`}
-    return`<tr><td><span class="plate" data-pv-p="${r.p}">${r.p}</span></td><td><div class="pv-due">${esc(r.tipo)}<small>${esc(vehDesc(r.p))||'sem cadastro de marca'}</small></div></td><td>${ult}</td><td>${prx}</td><td>${fal}</td><td>${pvBadge(r.st)}</td><td><button class="pv-act" type="button" data-reg="${r.p}|${r.id}">Registrar</button></td></tr>`}).join(''):'<tr><td colspan="7" class="empty">Nenhum veículo com esses filtros.</td></tr>';
-  $('#pvRowsN').textContent=`${num(R.length)} de ${num(ALL.length)} veículos no ${P.id}`}
+  return pvFlash()+`<div class="kb-bar"><p>Cada coluna é um tipo de revisão, independente das outras. RP1 e RP2 são sob demanda: em dia até 90 dias da última passagem, próximo de 91 a 180 dias e vencida depois disso.</p>
+    <div class="toolbar"><input class="inp" id="pvQ" placeholder="Buscar placa…" value="${esc(PV_F.q)}" autocomplete="off"><button class="btn" type="button" id="pvCsv1">Exportar CSV</button></div></div>
+  <div class="kb" id="pvKb"></div>`}
+let PV_PROWS=[];
+function pvKbCard(r){const L=r.last,sob=!!PLAN[r.id].sob,dd=n=>n===1?'1 dia':num(n)+' dias';
+  const ult=L?`${fmtDate(L.data)}${L.km!=null?' · '+kmf(L.km):''}`:'—';
+  let prx,fal='';
+  if(sob){prx='sob demanda';fal=L?`há ${dd(dayDiff(L.data,todayIso()))}`:''}
+  else{prx=r.nk!=null||r.nd?[r.nk!=null?kmf(r.nk):'',r.nd?fmtDate(r.nd):''].filter(Boolean).join(' ou '):'—';
+    const kmT=r.kr!=null?(r.kr<=0?`passou ${kmf(-r.kr)}`:`faltam ${kmf(r.kr)}`):'';
+    const dT=r.dias!=null?(r.dias<0?`venceu há ${dd(-r.dias)}`:r.dias===0?'vence hoje':`faltam ${dd(r.dias)}`):'';
+    fal=[kmT,dT].filter(Boolean).join(' · ')}
+  const st=pvKbSt(r),cls=st==='Vencida'?'late':st==='Próxima'?'soon':'';
+  return`<div class="kb-card"><div class="kb-c1"><span class="plate" data-pv-p="${r.p}">${r.p}</span><button class="pv-act" type="button" data-reg="${r.p}|${r.id}">Registrar</button></div>
+    <div class="kb-tp">${esc(r.tipo)}${vehDesc(r.p)?` · ${esc(vehDesc(r.p))}`:''}</div>
+    <dl class="kb-kv"><dt>Última</dt><dd>${ult}${L&&L.os?`<small>OS ${esc(L.os)}</small>`:''}</dd><dt>Próxima</dt><dd>${prx}</dd></dl>
+    ${fal?`<div class="kb-fal ${cls}">${fal}</div>`:''}${sob&&L&&(L.nexec||[]).length?`<div class="nexec">Não executado: ${L.nexec.map(esc).join(' · ')}</div>`:''}</div>`}
+function pvKanban(){const q=normPlate(PV_F.q),ALL=pvRows(),R=ALL.filter(r=>!q||r.p.includes(q));PV_PROWS=R;
+  const ord=(a,b)=>(a.dias??1e9)-(b.dias??1e9)||(a.kr??1e12)-(b.kr??1e12)||(a.last&&b.last?(a.last.data<b.last.data?-1:1):0)||a.p.localeCompare(b.p);
+  $('#pvKb').innerHTML=PV_KB_ORD.map(id=>{const P=PLAN[id],X=R.filter(r=>r.id===id),tot=ALL.filter(r=>r.id===id).length;
+    const sem=X.filter(r=>pvKbSt(r)==='Sem registro');
+    const balls=PV_KB.map(([st,lbl,c])=>{const Y=X.filter(r=>pvKbSt(r)===st).sort(ord);
+      return`<section class="kb-ball b-${c}"><header><i></i>${lbl}<b>${num(Y.length)}</b></header><div class="kb-list">${Y.length?Y.map(pvKbCard).join(''):'<div class="kb-none">Nenhum veículo</div>'}</div></section>`}).join('');
+    return`<div class="kb-col"><div class="kb-h">${pcode(id)}<div><b>${esc(P.curto)}</b><small>${esc(P.sob?'sob demanda':ivTxt(pvIv(id)))} · ${num(tot)} veículos</small></div></div>${balls}
+      ${sem.length?`<div class="kb-sem"><span>Sem registro (${num(sem.length)})</span><div>${sem.map(r=>`<button type="button" class="kb-chip" data-reg="${r.p}|${r.id}" title="Registrar a última ${id} da ${r.p}">${r.p}</button>`).join('')}</div></div>`:''}</div>`}).join('')}
 
 function pvViewVeic(){
   return pvFlash()+`<div class="grid c2">
@@ -1981,11 +1981,9 @@ $('#pvBkFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if
   catch(err){alert('Não foi possível restaurar: '+err.message)}};
 const PV_V=$('#pvView');
 PV_V.addEventListener('click',e=>{const t=e.target;let b;
-  if(b=t.closest('[data-st]')){PV_F.st=b.dataset.st&&PV_F.st!==b.dataset.st?b.dataset.st:'';pvRender();return}
   if(b=t.closest('[data-go]')){PV_VIEW=b.dataset.go;pvRender();return}
   if(b=t.closest('[data-reg]')){const[p,id]=b.dataset.reg.split('|');pvOpen(p,id);return}
-  if(b=t.closest('[data-pl]')){PV_F.pl=b.dataset.pl;PV_F.st='';ls.set('pm-pv-pl',PV_F.pl);delete SORTS.pvRowsT;pvRender();return}
-  if(b=t.closest('[data-pv-p]')){PV_F.q=b.dataset.pvP;PV_F.st='';PV_VIEW='painel';pvRender();return}
+  if(b=t.closest('[data-pv-p]')){PV_F.q=PV_F.q===b.dataset.pvP&&PV_VIEW==='painel'?'':b.dataset.pvP;PV_VIEW='painel';pvRender();return}
   if(b=t.closest('[data-print]')){pvPrint(b.dataset.print);return}
   if(b=t.closest('[data-cfg-rst]')){PV_DB.cfgSet(b.dataset.cfgRst,null);pvRender();return}
   if(b=t.closest('[data-vdel]')){const p=b.dataset.vdel,n=PV.revs.filter(r=>r.p===p).length;
@@ -2002,22 +2000,21 @@ PV_V.addEventListener('click',e=>{const t=e.target;let b;
     if(!L.length){m.textContent='Cole pelo menos uma placa.';return}if(!tp){m.textContent='Selecione o tipo do veículo.';return}
     const novas=L.filter(p=>!pvVeh(p)&&p.length<=10);novas.forEach(p=>PV_DB.veicAdd({p,tipo:tp,km:null,kmData:null}));
     PV_FLASH=`${novas.length} ${novas.length===1?'placa adicionada':'placas adicionadas'} como ${tp}${L.length-novas.length?` · ${L.length-novas.length} já estavam no controle ou são inválidas`:''}.`;pvRender();return}
-  const csv={pvCsv1:()=>csvDownload('preventivas_'+PV_F.pl,['Placa','Tipo','Marca/Modelo','Revisão','Intervalo','Última data','Última km','Última OS','Próxima km','Próxima data','KM atual','Faltam km','Faltam dias','Situação'],PV_PROWS.map(r=>[r.p,r.tipo,vehDesc(r.p),r.id,ivTxt(r.iv),r.last?fmtDate(r.last.data):'',r.last&&r.last.km!=null?r.last.km:'',r.last?r.last.os||'':'',r.nk??'',r.nd?fmtDate(r.nd):'',r.v.km??'',r.kr??'',r.dias??'',r.st==='Sob demanda'?(r.last?'Revisado':'Nunca revisado'):r.st])),
+  const csv={pvCsv1:()=>csvDownload('preventivas_painel',['Placa','Tipo','Marca/Modelo','Revisão','Intervalo','Última data','Última km','Última OS','Próxima km','Próxima data','KM atual','Faltam km','Faltam dias','Situação'],PV_PROWS.map(r=>[r.p,r.tipo,vehDesc(r.p),r.id,ivTxt(r.iv),r.last?fmtDate(r.last.data):'',r.last&&r.last.km!=null?r.last.km:'',r.last?r.last.os||'':'',r.nk??'',r.nd?fmtDate(r.nd):'',r.v.km??'',r.kr??'',r.dias??'',pvKbSt(r)==='Próxima'?'Próximo':pvKbSt(r)])),
     pvCsv2:()=>csvDownload('preventivas_veiculos',['Placa','Marca/Modelo','Tipo','Revisões','KM atual','Leitura do km','Revisões lançadas'],PV.veics.map(v=>[v.p,vehDesc(v.p),v.tipo,plansFor(v.tipo).map(p=>p.id).join(' '),v.km??'',v.kmData?fmtDate(v.kmData):'',PV.revs.filter(r=>r.p===v.p).length])),
     pvCsv3:()=>csvDownload('preventivas_historico',['Data','Placa','Revisão','KM','OS Nº','Itens não executados','Observação'],PV.revs.slice().sort((a,b)=>a.data<b.data?1:-1).map(r=>[fmtDate(r.data),r.p,r.plano,r.km??'',r.os||'',(r.nexec||[]).join(' | '),r.obs||'']))};
   if(csv[t.id])csv[t.id]()});
 PV_V.addEventListener('input',e=>{const t=e.target;
-  if(t.id==='pvQ'){PV_F.q=t.value;pvPainelTable()}else if(t.id==='pvVQ'){PV_VQ.q=t.value;pvVehTable()}else if(t.id==='pvHQ'){PV_HQ.q=t.value;pvHistTable()}else if(t.id==='pvAP')pvHint()});
+  if(t.id==='pvQ'){PV_F.q=t.value;pvKanban()}else if(t.id==='pvVQ'){PV_VQ.q=t.value;pvVehTable()}else if(t.id==='pvHQ'){PV_HQ.q=t.value;pvHistTable()}else if(t.id==='pvAP')pvHint()});
 PV_V.addEventListener('change',e=>{const t=e.target;
-  if(t.id==='pvFSt'){PV_F.st=t.value;pvRender()}
-  else if(t.id==='pvVT'){PV_VQ.t=t.value;pvVehTable()}else if(t.id==='pvHPl'){PV_HQ.pl=t.value;pvHistTable()}
+  if(t.id==='pvVT'){PV_VQ.t=t.value;pvVehTable()}else if(t.id==='pvHPl'){PV_HQ.pl=t.value;pvHistTable()}
   else if(t.dataset.vt){const v=pvVeh(t.dataset.vt);v.tipo=t.value;if(semHod(v.tipo)){v.km=null;v.kmData=null}PV_DB.veicUpd(v);pvVehTable()}
   else if(t.dataset.vk){const v=pvVeh(t.dataset.vk),s=t.value.trim();v.km=s===''?null:Math.round(+s);v.kmData=s===''?null:todayIso();PV_DB.veicUpd(v);pvVehTable()}
   else if(t.dataset.cfgKm||t.dataset.cfgM){const id=t.dataset.cfgKm||t.dataset.cfgM,c=PV.cfg[id]||(PV.cfg[id]={...pvIv(id)}),s=t.value.trim(),n=s===''||+s<=0?null:Math.round(+s);
     if(t.dataset.cfgKm)c.km=n;else c.meses=n;PV_DB.cfgSet(id,c.km===PLAN[id].km&&c.meses===PLAN[id].meses?null:c);pvRender()}});
 // online: ao abrir a aba, busca de novo no banco se os dados tiverem mais de 1 minuto (outros usuários podem ter lançado)
 R_.prev=()=>{pvRender();if(SB_ON&&Date.now()-PV_LOADED>60000)pvLoad().then(()=>{if(PAGE==='prev')pvRender()})};
-if(!SB_ON)pvLoad().then(()=>{if(PAGE==='prev')pvRender()});PV_VIEW=ls.get('pm-pv-view')||'painel';PV_F.pl=ls.get('pm-pv-pl')||'MP1';
+if(!SB_ON)pvLoad().then(()=>{if(PAGE==='prev')pvRender()});PV_VIEW=ls.get('pm-pv-view')||'painel';
 
 /* ================= VERSÃO ONLINE: login, permissões e carga das bases ================= */
 let GATE_MODE='login';
