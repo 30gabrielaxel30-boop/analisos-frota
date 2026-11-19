@@ -811,10 +811,10 @@ body.printing .pv-tiles{grid-template-columns:repeat(5,minmax(0,1fr))}
     <h2 id="gateT">Painel de Manutenção da Frota</h2>
     <p class="gate-s" id="gateS"></p>
     <form id="gateForm" autocomplete="on" novalidate>
-      <label class="fld"><span>E-mail</span><input class="inp" id="gateEmail" type="email" autocomplete="username" required></label>
-      <label class="fld"><span>Senha</span><input class="inp" id="gatePass" type="password" autocomplete="current-password" minlength="6" required></label>
+      <label class="fld"><span>Usuário</span><input class="inp" id="gateEmail" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
+      <label class="fld"><span>Senha</span><input class="inp" id="gatePass" type="password" autocomplete="current-password" required></label>
       <button class="btn primary gate-go" id="gateGo" type="submit">Entrar</button>
-      <button class="gate-link" id="gateMode" type="button">Primeiro acesso? Criar meu acesso</button>
+      <p class="gate-s" style="margin:4px 0 0">Acesso restrito. Para um novo usuário, fale com o administrador.</p>
     </form>
     <div class="gate-msg" id="gateMsg" role="status"></div>
     <div class="gate-act" id="gateAct"></div>
@@ -1457,6 +1457,7 @@ function renderRiskTable(){const t=T();
 
 /* ---------- Versões ---------- */
 const VERSIONS=[
+  {v:'3.1',d:'19/11/2026',c:'Login por usuário (Admin, Redig, Pedro) em vez de e-mail. Cadastro livre desativado: novos acessos só são criados pelo administrador no Supabase.'},
   {v:'3.0',d:'19/11/2026',c:'Versão online com Supabase: login por e-mail e senha, novos acessos liberados pelo administrador, bases de OS e de veículos lidas do banco e substituídas por inteiro a cada importação (operação única: se falhar, a base anterior continua), com aviso quando a planilha nova começa depois da base atual. Preventivas gravadas no banco e compartilhadas entre os usuários. Quadro de acessos e de atualizações das bases para o administrador.'},
   {v:'2.5',d:'19/11/2026',c:'Preventivas: o painel de revisões passa a ter uma aba para cada tipo de revisão (MP1, MP2, MP3, intermediária, RP1 e RP2), sem misturar os tipos na mesma tabela. Cada aba tem os próprios indicadores, filtros e exportação CSV e mostra no topo quantas revisões estão vencidas ou próximas. RP1 e RP2 mostram a última passagem de cada carreta e os itens não executados.'},
   {v:'2.4',d:'19/11/2026',c:'Nova aba operacional “Preventivas”: cadastro dos 6 planos (MP1 40.000 km/3 meses, MP2 80.000 km/6 meses, MP3 120.000 km/12 meses, Revisão intermediária 20.000 km/2 meses, RP1 e RP2 de carretas sob demanda) com todos os serviços e o tipo de veículo de cada um; cada tipo de revisão conta o seu próprio intervalo; cadastro de veículos por tipo (um a um ou várias placas de uma vez); registro da revisão com data, km, OS e checklist; painel com a próxima revisão por km ou data, o que vier primeiro, e situação Vencida / Próxima / Em dia; histórico, impressão do checklist, exportação CSV e backup dos cadastros. Gravação separada em uma camada de dados pronta para Supabase.'},
@@ -2024,10 +2025,9 @@ function gate(mode,msg,cls){const g=$('#gate');g.hidden=false;GATE_MODE=mode;$('
   const f=$('#gateForm'),m=$('#gateMsg'),a=$('#gateAct');g.classList.toggle('busy',!['login','cadastro'].includes(mode));a.innerHTML='';
   m.className='gate-msg'+(cls?' '+cls:'');m.textContent=msg||'';
   $('#gateGo').disabled=false;
-  if(mode==='login'){$('#gateS').textContent='Entre com o seu e-mail e senha';$('#gateGo').textContent='Entrar';$('#gateMode').textContent='Primeiro acesso? Criar meu acesso';$('#gatePass').autocomplete='current-password'}
-  else if(mode==='cadastro'){$('#gateS').textContent='Crie seu acesso. Ele fica bloqueado até um administrador liberar.';$('#gateGo').textContent='Criar acesso';$('#gateMode').textContent='Já tenho acesso: entrar';$('#gatePass').autocomplete='new-password'}
+  if(mode==='login'){$('#gateS').textContent='Entre com o seu usuário e senha'}
   else if(mode==='carregando'){$('#gateS').textContent=msg||'Carregando…';m.textContent=''}
-  else{$('#gateS').textContent=SB.sess?SB.sess.email:'';
+  else{$('#gateS').textContent=SB.sess?userName(SB.sess.email):'';
     if(mode==='vazio'&&isAdmin()){a.innerHTML='<label class="btn primary" for="gateFile">Selecionar planilha de OS</label><input id="gateFile" type="file" accept=".xlsx,.xls" hidden>';
       $('#gateFile').onchange=async e=>{const fl=e.target.files[0];if(!fl)return;gate('carregando','Lendo e enviando a planilha…');
         try{const wb=XLSX.read(await fl.arrayBuffer(),{type:'array',cellDates:true}),nm=wb.SheetNames.find(n=>/ordens/i.test(n))||wb.SheetNames[0],rows=XLSX.utils.sheet_to_json(wb.Sheets[nm],{defval:''}),os=buildOS(rows);
@@ -2036,19 +2036,20 @@ function gate(mode,msg,cls){const g=$('#gate');g.hidden=false;GATE_MODE=mode;$('
     a.insertAdjacentHTML('beforeend','<button class="btn" type="button" id="gateRetry">Tentar de novo</button><button class="btn" type="button" id="gateOut">Sair</button>');
     $('#gateRetry').onclick=startOnline;$('#gateOut').onclick=async()=>{await SB.sair();gate('login')}}}
 function gateHide(){$('#gate').hidden=true}
-$('#gateMode').onclick=()=>gate(GATE_MODE==='login'?'cadastro':'login');
-$('#gateForm').onsubmit=async e=>{e.preventDefault();const em=$('#gateEmail').value.trim(),pw=$('#gatePass').value,m=$('#gateMsg');
-  if(!/^\S+@\S+\.\S+$/.test(em)){m.className='gate-msg err';m.textContent='Informe um e-mail válido.';return}
-  if(pw.length<6){m.className='gate-msg err';m.textContent='A senha precisa ter pelo menos 6 caracteres.';return}
-  $('#gateGo').disabled=true;m.className='gate-msg';m.textContent=GATE_MODE==='login'?'Entrando…':'Criando acesso…';
-  try{if(GATE_MODE==='login'){await SB.entrar(em,pw);$('#gatePass').value='';startOnline()}
-    else{const j=await SB.cadastrar(em,pw);$('#gatePass').value='';
-      if(SB.sess)startOnline();else{gate('login','Acesso criado. Abra o link de confirmação enviado para '+em+' e depois entre aqui.','ok');$('#gateEmail').value=em}}}
-  catch(err){$('#gateGo').disabled=false;m.className='gate-msg err';m.textContent=err.message}};
+// login por usuário: "Admin" → admin@rodovitor.local (endereço interno, nenhum e-mail é enviado)
+const LOGIN_DOM='@rodovitor.local';
+const userEmail=u=>{u=String(u||'').trim();return u.includes('@')?u.toLowerCase():u.toLowerCase()+LOGIN_DOM};
+const userName=e=>{e=String(e||'');if(!e.endsWith(LOGIN_DOM))return e;const n=e.slice(0,-LOGIN_DOM.length);return n.charAt(0).toUpperCase()+n.slice(1)};
+$('#gateForm').onsubmit=async e=>{e.preventDefault();const us=$('#gateEmail').value.trim(),pw=$('#gatePass').value,m=$('#gateMsg');
+  if(!us){m.className='gate-msg err';m.textContent='Informe o usuário.';return}
+  if(!pw){m.className='gate-msg err';m.textContent='Informe a senha.';return}
+  $('#gateGo').disabled=true;m.className='gate-msg';m.textContent='Entrando…';
+  try{await SB.entrar(userEmail(us),pw);$('#gatePass').value='';startOnline()}
+  catch(err){$('#gateGo').disabled=false;m.className='gate-msg err';m.textContent=err.message==='E-mail ou senha incorretos.'?'Usuário ou senha incorretos.':err.message}};
 async function startOnline(){SB.load();if(!SB.sess){gate('login');return}
   gate('carregando','Conferindo o acesso…');
   try{const me=await SB.req('perfis?select=*&id=eq.'+encodeURIComponent(SB.sess.uid));SB.perfil=me[0]||null;
-    if(!SB.perfil||!SB.perfil.ativo){gate('pendente','Seu acesso ainda não foi liberado. Peça a um administrador para liberar o e-mail '+SB.sess.email+'.');return}
+    if(!SB.perfil||!SB.perfil.ativo){gate('pendente','O acesso do usuário '+userName(SB.sess.email)+' está bloqueado. Fale com o administrador.');return}
     gate('carregando','Carregando as bases do Supabase…');
     const[os,fr,cg]=await Promise.all([SB.todos('os_linhas?select=data,os,placa,tecnico,minutos,tempo,tarefas&order=id'),SB.todos('frota_veiculos?select=placa,marca,modelo&order=id'),SB.req('cargas?select=*&order=feito_em.desc&limit=30')]);
     SB.cargas=cg;const cO=cg.find(c=>c.tipo==='os'),cF=cg.find(c=>c.tipo==='frota');
@@ -2061,15 +2062,15 @@ async function startOnline(){SB.load();if(!SB.sess){gate('login');return}
     await pvLoad();applyRole();gateHide();go(ls.get('pm-page')||'overview');
   }catch(err){if(!SB.sess)gate('login',err.message,'err');else gate('erro','Não foi possível carregar: '+err.message,'err')}}
 function applyRole(){const adm=isAdmin();document.body.classList.toggle('ro',!adm);
-  $('#userChip').hidden=false;$('#userMail').textContent=SB.sess.email;$('#userMail').title=SB.sess.email;$('#userRole').textContent=adm?'Administrador':'Usuário';$('#userIc').textContent=(SB.sess.email||'?')[0].toUpperCase();
+  const nm=userName(SB.sess.email);$('#userChip').hidden=false;$('#userMail').textContent=nm;$('#userMail').title=nm;$('#userRole').textContent=adm?'Administrador':'Usuário';$('#userIc').textContent=(nm||'?')[0].toUpperCase();
   ['#restoreBtn','#restoreVehBtn'].forEach(s=>{const b=$(s);if(b)b.closest('.toolbar').hidden=true});
   $$('#drop,#dropVeh').forEach(d=>d.classList.add('adm-only'));
   $$('.page[data-page="dados"] .note').forEach(n=>{n.innerHTML=n.innerHTML.replace(/A última (base|tabela) importada fica salva neste navegador\./,'Ao importar, a base anterior é substituída no Supabase para todos os usuários (somente administrador).')});
   $('#admCard').hidden=!adm;if(adm)admLoad()}
 async function admLoad(){if(!SB_ON||!isAdmin())return;const m=$('#admMsg');
   try{const[us,cg]=await Promise.all([SB.req('perfis?select=*&order=criado_em'),SB.req('cargas?select=*&order=feito_em.desc&limit=30')]);SB.cargas=cg;
-    $('#admUsers').innerHTML=us.map(u=>`<tr><td>${esc(u.email||'—')}</td><td>${fmtTs(u.criado_em).slice(0,10)}</td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="ativo"${u.ativo?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode bloquear o próprio acesso"':''} aria-label="Liberar ${esc(u.email)}"></td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="admin"${u.admin?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode tirar o próprio perfil de administrador"':''} aria-label="Administrador ${esc(u.email)}"></td></tr>`).join('')||'<tr><td colspan="4" class="empty">—</td></tr>';
-    $('#admCargas').innerHTML=cg.map(c=>`<tr><td>${fmtTs(c.feito_em)}</td><td>${c.tipo==='os'?'OS':'Veículos'}</td><td>${esc(c.arquivo||'—')}</td><td class="n">${num(c.linhas)}</td><td>${esc(c.feito_por_email||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Nenhuma atualização ainda.</td></tr>';
+    $('#admUsers').innerHTML=us.map(u=>`<tr><td>${esc(userName(u.email)||'—')}</td><td>${fmtTs(u.criado_em).slice(0,10)}</td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="ativo"${u.ativo?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode bloquear o próprio acesso"':''} aria-label="Liberar ${esc(u.email)}"></td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="admin"${u.admin?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode tirar o próprio perfil de administrador"':''} aria-label="Administrador ${esc(u.email)}"></td></tr>`).join('')||'<tr><td colspan="4" class="empty">—</td></tr>';
+    $('#admCargas').innerHTML=cg.map(c=>`<tr><td>${fmtTs(c.feito_em)}</td><td>${c.tipo==='os'?'OS':'Veículos'}</td><td>${esc(c.arquivo||'—')}</td><td class="n">${num(c.linhas)}</td><td>${esc(userName(c.feito_por_email)||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Nenhuma atualização ainda.</td></tr>';
     m.textContent=''}catch(e){m.className='pv-msg err';m.textContent='Falha ao carregar: '+e.message}}
 $('#admReload').onclick=admLoad;
 $('#admUsers').addEventListener('change',async e=>{const c=e.target.closest('.adm-ck');if(!c)return;const m=$('#admMsg');
