@@ -1,32 +1,25 @@
-# AnalisOS: painel de manutenção da frota (versão online)
+# AnalisOS: painel de manutenção da frota
 
-Painel da Rodovitor Transportes, num arquivo HTML único (`index.html`). Os dados ficam no Supabase, no projeto `analisos-frota` (região São Paulo, plano gratuito).
+Painel da Rodovitor Transportes num arquivo HTML único (index.html). Os dados ficam no Supabase, no projeto analisos-frota (São Paulo, plano gratuito).
 
-## Como funciona
+Endereço: https://30gabrielaxel30-boop.github.io/analisos-frota/
 
-- **Login:** é por e-mail e senha. O primeiro usuário cadastrado vira administrador. Os acessos seguintes entram bloqueados até um administrador liberar, em Dados e critérios › Acessos e atualizações.
-- **Base de OS e Tabela de Veículos:** ficam no Supabase. O administrador importa a planilha na aba Dados e critérios, e a base anterior é substituída por inteiro numa operação única. Se a importação falhar no meio, a base antiga continua no banco. Se a planilha nova começar depois da base atual, o painel avisa antes de apagar os meses mais antigos.
-- **Preventivas:** cada veículo e revisão é gravado no banco na hora. Todos os usuários liberados veem os mesmos dados.
-- **Segurança:** sem login liberado, o banco não devolve nenhum dado. A chave que aparece no `index.html` é a chave pública ("anon") e, sozinha, não acessa nada.
+## Acesso
+
+O login é por usuário e senha. O acesso é restrito e não existe cadastro livre. Usuários: Admin (administrador), Redig e Pedro.
+
+Para criar um usuário novo, vá no Supabase em Authentication > Users > Add user > Create new user. Use como e-mail nome@rodovitor.local e marque Auto Confirm User. Depois libere o usuário no painel, em Dados e critérios > Acessos e atualizações.
+
+Sem login liberado, o banco não devolve nenhum dado. A chave no index.html é a pública (anon).
+
+## Bases
+
+Base de OS e Tabela de Veículos: o administrador importa a planilha na aba Dados e critérios. A base anterior é substituída por inteiro numa operação única: se falhar, a antiga continua.
+
+Preventivas: são gravadas no banco na hora e todos os usuários veem os mesmos dados.
 
 ## Arquivos
 
-```
-README.md            este arquivo
-.gitignore           impede que planilhas, backups e chaves subam
-index.html           o painel (versão online, sem dados embutidos)
-supabase/schema.sql  tabelas, funções e regras de acesso (já aplicado no projeto)
-```
+index.html é o painel. supabase/schema.sql tem as tabelas, funções e regras de acesso. O .gitignore impede subir planilhas, backups e chaves.
 
-## Publicar no GitHub
-
-1. Crie o repositório em github.com. Ele pode ser **público**, porque o `index.html` não tem dados da empresa, só a chave pública do Supabase.
-2. Envie os arquivos desta pasta:
-   - pelo GitHub Desktop;
-   - ou pelo site: "Add file" › "Upload files", arrastando `index.html`, `README.md`, `.gitignore` e a pasta `supabase`.
-3. Em Settings › Pages, escolha "Deploy from a branch", branch `main`, pasta `/ (root)`. O endereço fica parecido com `https://SEU-USUARIO.github.io/NOME-DO-REPOSITORIO/`.
-4. No Supabase, em Authentication › URL Configuration, coloque esse endereço em **Site URL**. Assim o link de confirmação do e-mail volta para o painel.
-
-## Atualizar o painel
-
-Cada versão nova do painel substitui o `index.html`. O banco não muda, a menos que a versão traga um script novo em `supabase/`.
+Para publicar uma versão nova, substitua o index.html. O site atualiza em cerca de 1 minuto.
