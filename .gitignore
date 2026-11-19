@@ -1,0 +1,19 @@
+# Planilhas e bases com dados da empresa: nao sobem para o repositorio
+*.xlsx
+*.xls
+*.csv
+*.json
+
+# Backups das preventivas e PDFs exportados
+preventivas_backup_*.json
+*.pdf
+
+# Chaves e configuracao local
+.env
+.env.*
+config.local.js
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
