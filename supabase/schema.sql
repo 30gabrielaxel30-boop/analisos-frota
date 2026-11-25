@@ -200,3 +200,30 @@ revoke execute on function public.substituir_estoque(jsonb,text,date,date) from 
 grant execute on function public.substituir_estoque(jsonb,text,date,date) to authenticated;
 revoke execute on function public.substituir_frota(jsonb,text) from public, anon;
 grant execute on function public.substituir_frota(jsonb,text) to authenticated;
+
+-- ======================================================================
+-- v4.1 (APLICADO em 25/11/2026, migração v41_abas_por_usuario)
+-- ======================================================================
+-- O administrador escolhe as abas de cada usuário. null = todas as abas.
+alter table public.perfis add column if not exists abas text[];
+
+-- pode_ver(aba): usuário ativo e (administrador, ou sem restrição, ou com a aba liberada)
+create or replace function public.pode_ver(p_aba text) returns boolean
+language sql stable security definer set search_path = public as
+$$ select coalesce((select ativo and (admin or abas is null or p_aba = any(abas)) from public.perfis where id = auth.uid()), false) $$;
+revoke execute on function public.pode_ver(text) from public, anon;
+grant execute on function public.pode_ver(text) to authenticated;
+
+-- Custos: o estoque (valores em R$) só para quem tem a aba Custos
+drop policy if exists estoque_ver on public.estoque_mov;
+create policy estoque_ver on public.estoque_mov for select to authenticated using (public.pode_ver('custos'));
+
+-- Preventivas: veículos, revisões e planos só para quem tem a aba Preventivas
+drop policy if exists prev_veiculos_tudo on public.prev_veiculos;
+create policy prev_veiculos_tudo on public.prev_veiculos for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
+drop policy if exists revisoes_tudo on public.revisoes;
+create policy revisoes_tudo on public.revisoes for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
+drop policy if exists planos_config_tudo on public.planos_config;
+create policy planos_config_tudo on public.planos_config for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
+-- As demais abas usam a base de OS (os_linhas), que continua liberada para todo usuário ativo:
+-- esconder essas abas vale só no painel. Só o administrador altera perfis (política perfis_admin).
