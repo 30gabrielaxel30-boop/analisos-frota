@@ -12,6 +12,8 @@ Para criar um usuário novo, vá no Supabase em Authentication > Users > Add use
 
 Sem login liberado, o banco não devolve nenhum dado. A chave no index.html é a pública (anon).
 
+Desde a v4.1, o administrador escolhe quais abas cada usuário vê, no quadro "O que cada usuário vê" (Dados e critérios > Acessos e atualizações). Sem a aba Custos, o usuário não vê nenhum valor em R$; sem Preventivas, não lê nem grava revisões. Esses dois bloqueios também valem no banco (função pode_ver). As outras abas usam a mesma base de OS, então escondê-las vale só no painel.
+
 ## Bases
 
 São 3 bases: Ordens de Serviço, Tabela de Veículos (com tipo, proprietário e ano) e Movimentações de Estoque, que dão o custo de peças por veículo e por OS. Elas existem desde a v4.0.

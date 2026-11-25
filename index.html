@@ -417,8 +417,40 @@ body.printing .pager{background:none}
 
 /* ---------- Tema Grafite Industrial (v4.0): trilho de ícones, grafite, laranja de segurança, cantos retos ---------- */
 body{font-family:var(--f-ui)}
-/* menu: trilho encostado na borda; recolhido (só ícones) por padrão, expande pelo botão do rodapé */
-.sidebar{top:0;left:0;bottom:0;border-radius:0;background:var(--side);border:0;border-right:1px solid var(--side-line);box-shadow:none;padding:14px 10px}
+/* menu: flutuante, afastado da borda e com cantos arredondados (v4.1); recolhido (só ícones) por padrão, expande pelo botão do rodapé.
+   v4.2: começa abaixo da barra superior (--hb = altura dela, medida no carregamento) e a logo sai do menu e vai para a barra */
+.sidebar{top:calc(var(--hb) + 12px);left:12px;bottom:12px;border-radius:14px;background:var(--side);border:1px solid var(--side-line);box-shadow:0 14px 36px rgba(0,0,0,.32);padding:12px 10px}
+.sidebar .brand{display:none}
+
+/* barra superior (v4.2): mesma cor do menu, em toda a largura, sem cantos arredondados */
+:root{--hb:60px}
+body{padding-top:var(--hb)}
+.hbar{position:fixed;top:0;left:0;right:0;z-index:58;min-height:60px;display:flex;align-items:center;gap:14px;padding:10px 20px;
+  background:var(--side);color:var(--side-ink);border-bottom:1px solid var(--side-line);color-scheme:dark;
+  --surface:#141518;--surface-2:#1b1c20;--line:#2a2c31;--ink:#f2f2f2;--ink-2:#c4c6cc;--muted:#8b8e96;--accent:#ff7a1a;--accent-soft:rgba(255,122,26,.14);--on-accent:#111}
+.hb-logo{display:block;height:34px;width:auto;flex:none}
+.hb-filters{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;min-width:0}
+.hb-acts{display:flex;align-items:center;gap:8px;flex:none;padding-left:14px;border-left:1px solid var(--side-line)}
+.hbar .inp{height:36px;padding-top:0;padding-bottom:0}
+.hbar .inp::placeholder{color:#7b7e86}
+.hbar .inp:hover{border-color:#3a3d44}
+.hbar .search svg{color:#7b7e86}
+.hbar .svc-n{display:none}/* a contagem de tipos de serviço vai para a dica do campo */
+.hbar .chip{color:#f2f2f2}
+.hb-ic{all:unset;box-sizing:border-box;width:36px;height:36px;display:grid;place-items:center;flex:none;cursor:pointer;border-radius:var(--r);border:1px solid #2a2c31;color:#c9cbd0;transition:background .15s,color .15s,border-color .15s}
+.hb-ic:hover{background:var(--side-hover);border-color:#3a3d44;color:var(--accent)}
+.hb-ic:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.hb-ic svg{width:20px;height:20px;display:block}
+.hb-ic .pdf-txt{fill:var(--side);font-family:var(--f-ui);letter-spacing:.02em}
+#themeIc{display:grid}
+.hbar .menu-btn{background:transparent;border:1px solid #2a2c31;color:var(--side-ink);width:36px;height:36px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+/* título da aba na área de conteúdo; os indicadores continuam fixos logo abaixo da barra superior */
+.pg-head{padding:18px 0 0}
+.topbar{top:var(--hb)}
+body.printing{padding-top:0}
+body.printing .hbar,body.printing .pg-head{display:none!important}
+@media print{.hbar,.pg-head{display:none!important}body{padding-top:8mm!important}}
 .brand{border-bottom:1px solid var(--side-line);padding:4px 6px 14px;margin-bottom:10px}
 .brand-logo{display:block;width:100%;max-width:180px;height:auto;margin:0 auto}
 .brand .brand-mark{display:none;width:48px;height:48px;border-radius:var(--r);background:var(--accent);box-shadow:none}
@@ -428,7 +460,7 @@ body.collapsed .brand-logo{display:none}
 body.collapsed .brand .brand-mark{display:grid}
 .nav-label{letter-spacing:.16em}
 .nav button,.side-btn{border-radius:var(--r);letter-spacing:.02em}
-.nav button.active{background:var(--side-active);color:var(--accent);box-shadow:inset 3px 0 0 var(--accent)}
+.nav button.active{background:var(--side-active);color:var(--accent);box-shadow:inset 3px 0 0 var(--accent);border-radius:0 var(--r) var(--r) 0}/* v4.2: marcador da aba reto (canto esquerdo sem arredondar) */
 .nav button.active::before{display:none}
 .nav button:focus-visible,.side-btn:focus-visible{outline-color:var(--accent)}
 .nav .count{background:rgba(255,255,255,.08);border-radius:3px}
@@ -437,13 +469,28 @@ body.collapsed .nav button{height:46px;padding:0}
 .u-ic{background:var(--accent);color:#111;border-radius:var(--r-sm)}
 .user-chip{border-radius:var(--r)}
 .u-out{border-radius:var(--r-sm)}
+/* grupos do menu (v4.1): o título "Análises" recolhe e expande as abas do grupo */
+.nav-grp{display:flex;flex-direction:column}
+.nav-grp+.nav-grp{margin-top:6px}
+body.collapsed .nav-grp+.nav-grp{border-top:1px solid var(--side-line);padding-top:6px}
+.nav-items{display:grid;grid-template-rows:1fr;transition:grid-template-rows .22s ease}
+.nav-items>div{min-height:0;overflow:hidden;display:flex;flex-direction:column;gap:2px;visibility:visible;transition:visibility 0s}
+.nav-grp.min .nav-items{grid-template-rows:0fr}
+.nav-grp.min .nav-items>div{visibility:hidden;transition:visibility 0s .22s}
+.nav .nav-hd{display:flex;align-items:center;gap:8px;height:auto;padding:8px 8px 7px 12px;margin-bottom:2px;border-radius:var(--r-sm);color:var(--side-muted);font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;box-shadow:none}
+.nav .nav-hd:hover{background:var(--side-hover);color:var(--side-ink)}
+.nav .nav-hd .nav-n{margin-left:auto;font-size:10px;letter-spacing:0;background:rgba(255,255,255,.08);border-radius:3px;padding:1px 6px;color:var(--side-ink)}
+.nav .nav-hd svg{width:15px;height:15px;transition:transform .22s ease}
+.nav-grp.min .nav-hd svg{transform:rotate(-90deg)}
+.nav-grp.min.has-on .nav-hd{color:var(--accent)}
+body.collapsed .nav .nav-hd{justify-content:center;height:28px;padding:0;margin-bottom:4px;background:rgba(255,255,255,.04)}
+body.collapsed .nav .nav-hd:hover{background:var(--side-hover)}
+/* sem acesso aos custos (v4.1): some tudo o que mostra valor em R$ */
+body.no-cost .cost-only{display:none!important}
 
 /* área principal */
-.app{margin-left:calc(var(--sw) + 24px);padding-right:24px}
+.app{margin-left:calc(var(--sw) + 36px);padding-right:24px}
 .tb-title h1{font-size:24px;font-weight:700;letter-spacing:.02em}
-.tb-logo{display:none;box-sizing:content-box;height:28px;width:auto;flex:none;padding-right:16px;border-right:1px solid var(--line)}
-body.collapsed .tb-logo{display:block}
-:root:not([data-theme="dark"]) .tb-logo{background:var(--side);padding:7px 12px;border-radius:var(--r);border-right:0}
 .inp,.btn,.menu-btn{border-radius:var(--r)}
 .pdf-btn{border-radius:var(--r);background:var(--accent);border:1px solid var(--accent);color:var(--on-accent);box-shadow:none;text-transform:uppercase;letter-spacing:.06em;font-size:12px}
 .pdf-btn:hover{filter:brightness(1.08)}
@@ -492,8 +539,21 @@ body.printing .ph-m{color:#c4c6cc}
   body.collapsed .brand .brand-mark,body.collapsed .tb-logo{display:none}
   body.collapsed .nav button,body.collapsed .side-btn{justify-content:flex-start;padding:10px 12px;height:auto}
   body.collapsed .brand{justify-content:flex-start;padding:4px 6px 14px}
+  body.collapsed .nav .nav-hd{justify-content:flex-start;height:auto;padding:8px 8px 7px 12px;background:none}
+  body.collapsed .nav-grp+.nav-grp{border-top:0;padding-top:0}
+  /* barra superior: menu, logo e ícones na primeira linha; filtros na segunda */
+  .hbar{flex-wrap:wrap;padding:10px 16px;gap:10px}
+  .hb-acts{margin-left:auto;border-left:0;padding-left:0}
+  .hb-filters{order:3;flex-basis:100%;margin-left:0;justify-content:flex-start}
 }
-@media screen and (max-width:640px){.kpi .v{font-size:21px}}
+@media screen and (max-width:640px){.kpi .v{font-size:21px}
+  /* no celular a barra superior rola junto com a página, para não ocupar a tela */
+  .hbar{position:absolute}
+  .sidebar{top:12px}
+  .hb-logo{height:24px}
+  .hb-filters #periodSel{flex:1 1 100%}
+  .hb-filters .search{flex:1 1 140px}
+}
 
 /* ---------- Login (versão online) ---------- */
 .gate{position:fixed;inset:0;z-index:200;display:grid;place-items:center;padding:16px;
@@ -527,11 +587,22 @@ body.printing .ph-m{color:#c4c6cc}
 body.collapsed .user-chip{justify-content:center;padding:8px 0;background:none}
 .adm-ck{accent-color:var(--accent);width:16px;height:16px;cursor:pointer}
 .adm-ck[disabled]{cursor:not-allowed;opacity:.5}
+.adm-abas-box{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.adm-abas-n{margin:0 0 12px}
+.adm-abas th,.adm-abas td{text-align:center;white-space:nowrap}
+.adm-abas th:first-child,.adm-abas td:first-child{text-align:left;position:sticky;left:0;z-index:1}
+.adm-abas td:first-child{background:var(--surface)}
+.adm-abas thead th:first-child{z-index:2}
+.adm-abas td:first-child small{display:block;color:var(--muted);font-size:11px;font-weight:400}
+.adm-abas .ab-tot{color:var(--muted);font-size:12px}
+.adm-abas .ab-x{all:unset;cursor:pointer;color:var(--accent);font-size:11.5px;font-weight:600;padding:2px 4px}
+.adm-abas .ab-x:hover{text-decoration:underline}
+.adm-abas tr.ab-adm td{color:var(--muted)}
 body.ro .adm-only{display:none!important}
 @media print{.gate{display:none!important}}
 
 /* ---------- Preventivas (operacional) ---------- */
-body.pg-prev .kpis,body.pg-prev #periodSel,body.pg-prev #svcBox,body.pg-prev .tb-tools>.search,body.pg-prev #chip{display:none!important}
+body.pg-prev .kpis,body.pg-prev #periodSel,body.pg-prev #svcBox,body.pg-prev .hb-filters>.search,body.pg-prev #chip{display:none!important}
 body.pg-prev .tb-row{margin-bottom:0}
 .pv-top{display:flex;justify-content:space-between;align-items:center;gap:10px 14px;flex-wrap:wrap;margin-top:6px}
 .pv-seg{height:38px;padding:0 3px;border-radius:var(--r)}
@@ -643,15 +714,28 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
 </style>
 </head>
 <body>
+<!-- Barra superior (v4.2): faixa grafite em toda a largura, com a logo, os filtros e os ícones de PDF e de tema -->
+<header class="hbar" id="hbar">
+  <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+  <img class="hb-logo" id="tbLogo" alt="Rodovitor Transportes">
+  <div class="hb-filters">
+    <select class="inp" id="periodSel" aria-label="Período" title="Período"></select>
+    <div class="search svc-search" id="svcBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg><input class="inp" id="svcSearch" list="svcList" placeholder="Filtrar serviço…" autocomplete="off" aria-label="Filtrar por serviço (digitação livre)" title="Digite parte do nome do serviço (ex.: freio, pneu, óleo) e tecle Enter"><datalist id="svcList"></datalist><button type="button" class="svc-x" id="svcX" aria-label="Limpar filtro de serviço" title="Limpar serviço">×</button><span class="svc-n" id="svcN"></span></div>
+    <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="inp" id="plateSearch" list="plateList" placeholder="Filtrar placa…" autocomplete="off" aria-label="Filtrar placa"><datalist id="plateList"></datalist></div>
+    <div class="chip" id="chip"><span id="chipTxt"></span><button type="button" id="chipX" aria-label="Limpar filtro">×</button></div>
+  </div>
+  <div class="hb-acts">
+    <button class="hb-ic" id="pdfBtn" type="button" title="Exportar PDF (aba atual, paisagem)" aria-label="Exportar a aba atual em PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><rect class="pdf-tag" x="2.5" y="10" width="15" height="7.5" rx="1" fill="currentColor" stroke="none"/><text class="pdf-txt" x="10" y="15.9" text-anchor="middle" font-size="5.6" font-weight="700" stroke="none">PDF</text></svg></button>
+    <button class="hb-ic" id="themeBtn" type="button"><span id="themeIc"></span><span class="sr-only" id="themeLbl">Modo claro</span></button>
+  </div>
+</header>
 <aside class="sidebar" id="sidebar" aria-label="Navegação">
   <div class="brand">
     <div class="brand-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 20V12M10 20V6M15 20v-9M20 20V4"/></svg></div>
     <img class="brand-logo" alt="Rodovitor Transportes" src="data:image/png;base64,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">
   </div>
-  <div class="nav-label">Análises</div>
   <nav class="nav" id="nav"></nav>
   <div class="side-foot">
-    <button class="side-btn" id="themeBtn" type="button"><span id="themeIc"></span><span class="lbl" id="themeLbl">Modo claro</span></button>
     <button class="side-btn collapse-btn" id="collapseBtn" type="button" title="Recolher menu"><svg class="collapse-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><span class="lbl">Recolher menu</span></button>
     <div class="user-chip" id="userChip" hidden><span class="u-ic" id="userIc"></span><span class="lbl u-t"><b id="userMail"></b><small id="userRole"></small></span><button type="button" class="u-out lbl" id="logoutBtn" title="Sair">Sair</button></div>
     <div class="ver-badge lbl" id="verBadge" title="Ver histórico de versões em Dados e critérios"></div>
@@ -661,19 +745,8 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
 
 <div class="app">
   <div class="print-head" id="printHead" aria-hidden="true"><img id="printLogo" alt="Rodovitor Transportes"><div class="ph-t"><b id="phTitle"></b><span id="phSub"></span></div><div class="ph-m" id="phMeta"></div></div>
+  <div class="tb-title pg-head"><h1 id="pgTitle">Visão geral</h1><p id="pgSub"></p></div>
   <header class="topbar">
-    <div class="tb-row">
-      <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-      <img class="tb-logo" id="tbLogo" alt="Rodovitor Transportes">
-      <div class="tb-title"><h1 id="pgTitle">Visão geral</h1><p id="pgSub"></p></div>
-      <div class="tb-tools">
-        <select class="inp" id="periodSel" aria-label="Período"></select>
-        <div class="search svc-search" id="svcBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg><input class="inp" id="svcSearch" list="svcList" placeholder="Filtrar serviço…" autocomplete="off" aria-label="Filtrar por serviço (digitação livre)" title="Digite parte do nome do serviço (ex.: freio, pneu, óleo) e tecle Enter"><datalist id="svcList"></datalist><button type="button" class="svc-x" id="svcX" aria-label="Limpar filtro de serviço" title="Limpar serviço">×</button><span class="svc-n" id="svcN"></span></div>
-        <button class="pdf-btn" id="pdfBtn" type="button" title="Exportar a aba atual em PDF (paisagem)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M12 12v6M9.5 15.5L12 18l2.5-2.5"/></svg>Exportar PDF</button>
-        <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="inp" id="plateSearch" list="plateList" placeholder="Filtrar placa…" autocomplete="off" aria-label="Filtrar placa"><datalist id="plateList"></datalist></div>
-        <div class="chip" id="chip"><span id="chipTxt"></span><button type="button" id="chipX" aria-label="Limpar filtro">×</button></div>
-      </div>
-    </div>
     <div class="kpis" id="kpis"></div>
   </header>
 
@@ -682,9 +755,9 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
   <section class="page" data-page="overview">
     <div class="grid c4" id="ovIns"></div>
     <div class="grid c2">
-      <div class="card"><div class="card-h"><div><h3 id="ovCostT">Custo de peças por semana</h3><p>Saídas do estoque com destino a veículos · a semana corrente pode estar incompleta</p></div></div><div class="cw h260"><canvas id="ovCost"></canvas></div></div>
+      <div class="card cost-only"><div class="card-h"><div><h3 id="ovCostT">Custo de peças por semana</h3><p>Saídas do estoque com destino a veículos · a semana corrente pode estar incompleta</p></div></div><div class="cw h260"><canvas id="ovCost"></canvas></div></div>
       <div class="card"><div class="card-h"><div><h3 id="ovMonthT">Atendimentos por semana</h3><p>OS consolidadas e veículos distintos atendidos</p></div></div><div class="cw h260"><canvas id="ovMonth"></canvas></div></div>
-      <div class="card"><div class="card-h"><div><h3>Veículos com maior custo de peças</h3><p>Todas as placas com saída do estoque · 10 por página</p></div><span class="tag">Clique para detalhar</span></div><div class="cw"><canvas id="ovCostTop"></canvas></div></div>
+      <div class="card cost-only"><div class="card-h"><div><h3>Veículos com maior custo de peças</h3><p>Todas as placas com saída do estoque · 10 por página</p></div><span class="tag">Clique para detalhar</span></div><div class="cw"><canvas id="ovCostTop"></canvas></div></div>
       <div class="card"><div class="card-h"><div><h3>Veículos com mais atendimentos</h3><p>Todas as placas do período · 10 por página</p></div><span class="tag">Clique para detalhar</span></div><div class="cw"><canvas id="ovTop"></canvas></div></div>
       <div class="card"><div class="card-h"><div><h3>Tempo sem manutenção por classificação</h3><p>Dias desde a última OS de cada placa atendida</p></div><span class="tag">Clique para detalhar</span></div>
         <div class="donut-wrap"><div class="donut"><canvas id="ovDonut"></canvas><div class="donut-c"><div><b id="ovDonutTot">0</b><span>veículos</span></div></div></div><div class="legend" id="ovLegend"></div></div></div>
@@ -723,8 +796,8 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
       <div class="card"><div class="card-h"><div><h3>Distribuição de atendimentos por veículo</h3><p>Quantas placas estão em cada faixa de frequência</p></div></div><div class="cw h260"><canvas id="frHist"></canvas></div></div>
       <div class="card"><div class="card-h"><div><h3>Concentração da demanda</h3><p id="frConcSub">Quanto da demanda vem de poucos veículos</p></div></div><div class="cw h260"><canvas id="frConc"></canvas></div></div>
       <div class="card full"><div class="card-h"><div><h3>Todos os veículos</h3><p>Clique na placa para filtrar o painel inteiro</p></div>
-        <div class="toolbar"><input class="inp" id="frQ" placeholder="Buscar placa, marca ou modelo…"><select class="inp" id="frSort"><option value="atendimentos">Mais atendimentos</option><option value="custo">Maior custo de peças</option><option value="horas">Mais horas-homem</option><option value="tipos">Mais tipos reincidentes</option><option value="dias">Mais dias sem manutenção</option></select><button class="btn" data-export="frota" type="button">Exportar CSV</button></div></div>
-        <div class="table-wrap"><table><thead><tr><th>Placa</th><th>Marca / Modelo</th><th>Tipo</th><th class="n">Atendimentos</th><th class="n">Dias com OS</th><th class="n">Horas-homem</th><th class="n">Peças (R$)</th><th>Última manutenção</th><th class="n">Dias sem</th><th>Classificação</th><th class="n">Tipos reincidentes</th></tr></thead><tbody id="frRows"></tbody></table></div><div class="tcount" id="frCount"></div></div>
+        <div class="toolbar"><input class="inp" id="frQ" placeholder="Buscar placa, marca ou modelo…"><select class="inp" id="frSort"><option value="atendimentos">Mais atendimentos</option><option value="custo" class="cost-only">Maior custo de peças</option><option value="horas">Mais horas-homem</option><option value="tipos">Mais tipos reincidentes</option><option value="dias">Mais dias sem manutenção</option></select><button class="btn" data-export="frota" type="button">Exportar CSV</button></div></div>
+        <div class="table-wrap"><table><thead><tr><th>Placa</th><th>Marca / Modelo</th><th>Tipo</th><th class="n">Atendimentos</th><th class="n">Dias com OS</th><th class="n">Horas-homem</th><th class="n cost-only">Peças (R$)</th><th>Última manutenção</th><th class="n">Dias sem</th><th>Classificação</th><th class="n">Tipos reincidentes</th></tr></thead><tbody id="frRows"></tbody></table></div><div class="tcount" id="frCount"></div></div>
     </div>
   </section>
 
@@ -817,8 +890,8 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
   <section class="page" data-page="risco">
     <div class="grid">
       <div class="card"><div class="card-h"><div><h3>Matriz de risco da frota</h3><p>Dias sem manutenção × atendimentos. O tamanho do ponto indica os tipos reincidentes. Linhas: 30 dias e mediana de atendimentos.</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="rkScatter"></canvas></div></div>
-      <div class="card"><div class="card-h"><div><h3>Fila de prioridade</h3><p>Índice 0–100 = 35% dias sem manutenção (teto 90 d) + 25% tipos reincidentes + 15% retrabalho em até 30 dias + 25% custo de peças</p></div><div class="toolbar"><button class="btn" data-export="risco" type="button">Exportar CSV</button></div></div>
-        <div class="table-wrap"><table><thead><tr><th>#</th><th>Placa</th><th>Índice</th><th>Classificação</th><th class="n">Dias sem</th><th class="n">Tipos reincidentes</th><th class="n">Retrabalhos ≤30 d</th><th class="n">Atendimentos</th><th class="n">Peças (R$)</th></tr></thead><tbody id="rkRows"></tbody></table></div></div>
+      <div class="card"><div class="card-h"><div><h3>Fila de prioridade</h3><p id="rkSub">Índice 0–100 = 35% dias sem manutenção (teto 90 d) + 25% tipos reincidentes + 15% retrabalho em até 30 dias + 25% custo de peças</p></div><div class="toolbar"><button class="btn" data-export="risco" type="button">Exportar CSV</button></div></div>
+        <div class="table-wrap"><table><thead><tr><th>#</th><th>Placa</th><th>Índice</th><th>Classificação</th><th class="n">Dias sem</th><th class="n">Tipos reincidentes</th><th class="n">Retrabalhos ≤30 d</th><th class="n">Atendimentos</th><th class="n cost-only">Peças (R$)</th></tr></thead><tbody id="rkRows"></tbody></table></div></div>
     </div>
   </section>
 
@@ -847,7 +920,7 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
         <div class="toolbar" style="margin-top:12px"><button class="btn" id="restoreVehBtn" type="button">Restaurar tabela embutida</button></div>
         <p class="note">Colunas usadas: <b>Placa</b> (ou “Placa/Identificador”), <b>Marca</b>, <b>Modelo</b>, <b>Tipo</b>, <b>Proprietário</b> e <b>Ano Fabricação</b>. As demais colunas são ignoradas. A última tabela importada fica salva neste navegador.</p>
       </div>
-      <div class="card full"><div class="card-h"><div><span class="base-n">Base 3</span><h3>Movimentações de Estoque</h3><p>Saídas de peças por placa e nº de OS: é a base do custo por veículo. As entradas (compras) aparecem só como informação.</p></div></div>
+      <div class="card full cost-only"><div class="card-h"><div><span class="base-n">Base 3</span><h3>Movimentações de Estoque</h3><p>Saídas de peças por placa e nº de OS: é a base do custo por veículo. As entradas (compras) aparecem só como informação.</p></div></div>
         <label class="drop" id="dropEst" for="estFile">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
           <h4>Arraste a planilha de movimentações de estoque aqui</h4><p>ou clique para selecionar um arquivo .xlsx / .xls</p>
@@ -875,13 +948,16 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
         <p><b>Hoje:</b> no seletor de período, mostra as OS com apontamento na data de hoje.</p>
         <p><b>Período:</b> o seletor do topo restringe as OS analisadas. Os dias sem manutenção sempre usam o histórico completo.</p>
         <p><b>Preventivas:</b> a próxima revisão é a última + o intervalo do plano, em km e em meses; vence no que chegar primeiro. <b>Vencida</b> = passou da data ou o km atual passou do km previsto. <b>Próxima</b> = faltam até 15 dias ou até 10% do intervalo em km. Cada tipo de revisão é independente: a próxima MP1 conta só a partir da última MP1, e assim por diante. RP1 e RP2 (carretas) são sob demanda: não têm intervalo nem km, porque carretas não têm hodômetro. Sem o km atual do veículo, a situação usa só a data. Os cadastros ficam salvos no navegador em que foram feitos; use “Fazer backup” para guardar ou levar para outro computador.</p>
-        <p><b>Custo de peças:</b> soma do “Valor Total do Item” das <b>saídas</b> do estoque. O veículo vem de “Veículo destino” e a OS de “O.S. do Item”. O custo de uma OS é a soma das saídas com o número dela, e o custo de um veículo é a soma das saídas com a placa dele, com ou sem OS. As <b>entradas</b> são compras para o estoque e não entram no custo por veículo, para não contar duas vezes. O período das saídas segue o seletor do topo, pela data da movimentação. <b>Mão de obra</b> (opcional, na aba Custos) = horas-homem × valor da hora informado.</p>
+        <p class="cost-only"><b>Custo de peças:</b> soma do “Valor Total do Item” das <b>saídas</b> do estoque. O veículo vem de “Veículo destino” e a OS de “O.S. do Item”. O custo de uma OS é a soma das saídas com o número dela, e o custo de um veículo é a soma das saídas com a placa dele, com ou sem OS. As <b>entradas</b> são compras para o estoque e não entram no custo por veículo, para não contar duas vezes. O período das saídas segue o seletor do topo, pela data da movimentação. <b>Mão de obra</b> (opcional, na aba Custos) = horas-homem × valor da hora informado.</p>
         <p><b>Tipo e proprietário:</b> vêm da Tabela de Veículos. Os nomes de tipo são padronizados (ex.: “CAR/ S REBOQUE/C FECHADA” = Semi-reboque baú) e agrupados em cavalos, caminhões, implementos e leves.</p>
         <p><b>Limitações:</b> linhas sem placa, data ou OS são ignoradas. A análise considera somente o histórico do arquivo.</p>
       </div>
       <div class="card full" id="admCard" hidden><div class="card-h"><div><h3>Acessos e atualizações</h3><p>Somente administradores veem este quadro. Novos acessos entram bloqueados até serem liberados aqui.</p></div><div class="toolbar"><button class="btn" type="button" id="admReload">Atualizar lista</button></div></div>
-        <div class="kv-2"><div><h4 class="kv-t">Usuários</h4><div class="table-wrap" style="max-height:340px"><table><thead><tr><th>E-mail</th><th>Desde</th><th>Liberado</th><th>Administrador</th></tr></thead><tbody id="admUsers"></tbody></table></div></div>
+        <div class="kv-2"><div><h4 class="kv-t">Usuários</h4><div class="table-wrap" style="max-height:340px"><table><thead><tr><th>Usuário</th><th>Desde</th><th>Liberado</th><th>Administrador</th></tr></thead><tbody id="admUsers"></tbody></table></div></div>
           <div><h4 class="kv-t">Últimas atualizações das bases</h4><div class="table-wrap" style="max-height:340px"><table><thead><tr><th>Quando</th><th>Base</th><th>Arquivo</th><th class="n">Linhas</th><th>Por</th></tr></thead><tbody id="admCargas"></tbody></table></div></div></div>
+        <div class="adm-abas-box"><h4 class="kv-t">O que cada usuário vê</h4>
+          <p class="note adm-abas-n">Marque as abas liberadas para cada usuário; a mudança vale no próximo acesso dele. O administrador vê todas. Sem a aba <b>Custos</b>, o usuário não vê nenhum valor em R$ nas outras abas, e sem <b>Preventivas</b> não lê nem grava revisões. Esses dois bloqueios também valem no banco de dados.</p>
+          <div class="table-wrap"><table class="adm-abas"><thead id="admAbasH"></thead><tbody id="admAbas"></tbody></table></div></div>
         <div class="pv-msg" id="admMsg" role="status"></div></div>
       <div class="card full"><div class="card-h"><div><h3>Histórico de versões</h3><p>Versão atual: <b id="verNow"></b> · cópias de cada versão na pasta <b>versoes</b></p></div></div>
         <div class="table-wrap" style="max-height:none"><table><thead><tr><th>Versão</th><th>Data</th><th>Mudanças</th></tr></thead><tbody id="verRows"></tbody></table></div>
@@ -949,8 +1025,8 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
     <div class="table-wrap sum-tw"><table class="sum-os"><thead><tr><th>Data</th><th>OS Nº</th><th class="c-pl">Placa</th><th>Serviços e técnicos</th><th class="n" id="sumHrsH">Reparo (h)</th></tr></thead><tbody id="sumOs"></tbody></table></div>
     <h4 class="sum-sec" id="sumSec2"></h4>
     <div class="table-wrap sum-tw"><table><thead id="sumT2h"></thead><tbody id="sumT2"></tbody></table></div>
-    <h4 class="sum-sec" id="sumSec3"></h4>
-    <div class="table-wrap sum-tw"><table><thead><tr><th>Data</th><th>OS Nº</th><th class="c-pl">Placa</th><th>Peça</th><th class="n">Qtd.</th><th class="n">Valor</th></tr></thead><tbody id="sumT3"></tbody></table></div>
+    <h4 class="sum-sec cost-only" id="sumSec3"></h4>
+    <div class="table-wrap sum-tw cost-only"><table><thead><tr><th>Data</th><th>OS Nº</th><th class="c-pl">Placa</th><th>Peça</th><th class="n">Qtd.</th><th class="n">Valor</th></tr></thead><tbody id="sumT3"></tbody></table></div>
   </div>
 </aside>
 </div>
@@ -1009,22 +1085,30 @@ const IC={
  clip:'<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1"/><path d="M9 12.5l2 2 4-4.5"/>',
  trash:'<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>',
  coin:'<circle cx="12" cy="12" r="9"/><path d="M15 9.2c-.6-1-1.7-1.5-3-1.5-1.8 0-3 .9-3 2.2 0 3 6 1.6 6 4.6 0 1.3-1.3 2.3-3.1 2.3-1.4 0-2.6-.6-3.2-1.6M12 6v1.7M12 16.8v1.7"/>',
- box:'<path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/>'
+ box:'<path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/>',
+ chevd:'<path d="M6 9l6 6 6-6"/>'
 };
 const svg=(k,sw=1.9)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round">${IC[k]}</svg>`;
 
 const PAGES=[
- {id:'overview',t:'Visão geral',s:'Resumo executivo: desempenho, custo e reincidência da frota',ic:'grid'},
+ {id:'overview',t:'Visão geral',s:'Resumo executivo: desempenho, custo e reincidência da frota',sc:'Resumo executivo: desempenho e reincidência da frota',ic:'grid'},
  {id:'custos',t:'Custos',s:'Custo de peças por veículo, OS, tipo, proprietário, marca e peça (saídas do estoque)',ic:'coin'},
  {id:'frota',t:'Frota',s:'Atendimentos, esforço, tempo sem manutenção, marcas e modelos por veículo',ic:'truck'},
  {id:'tarefas',t:'Serviços',s:'Volume, horas e sazonalidade por tipo de serviço',ic:'wrench'},
- {id:'reinc',t:'Reincidência e retrabalho',s:'O mesmo serviço repetido na mesma placa e as repetições em intervalo curto',ic:'repeat'},
- {id:'equipe',t:'Equipe técnica',s:'Carga de trabalho e tempo de execução por técnico',ic:'users'},
+ {id:'reinc',t:'Reincidência e retrabalho',c:'Reincidência',s:'O mesmo serviço repetido na mesma placa e as repetições em intervalo curto',ic:'repeat'},
+ {id:'equipe',t:'Equipe técnica',c:'Equipe',s:'Carga de trabalho e tempo de execução por técnico',ic:'users'},
  {id:'confiab',t:'Confiabilidade',s:'MTBF, MTTR, disponibilidade física e duração das OS',ic:'pulse'},
- {id:'risco',t:'Prioridades',s:'Fila de atenção por veículo: tempo sem manutenção, reincidência, retrabalho e custo',ic:'alert'},
- {id:'prev',t:'Preventivas',s:'Cadastro de veículos, registro de revisões e próximas preventivas por km ou data',ic:'clip',grp:'Operação'},
- {id:'dados',t:'Dados e critérios',s:'Importação da planilha e regras de cálculo',ic:'upload',grp:'Sistema'}
+ {id:'risco',t:'Prioridades',s:'Fila de atenção por veículo: tempo sem manutenção, reincidência, retrabalho e custo',sc:'Fila de atenção por veículo: tempo sem manutenção, reincidência e retrabalho',ic:'alert'},
+ {id:'prev',t:'Preventivas',s:'Cadastro de veículos, registro de revisões e próximas preventivas por km ou data',ic:'clip'},
+ {id:'dados',t:'Dados e critérios',c:'Dados',s:'Importação da planilha e regras de cálculo',ic:'upload',g:'sis'}
 ];
+// grupos do menu (v4.1): Preventivas passou para Análises; o grupo Análises recolhe e expande pelo título
+const GRUPOS=[{id:'an',t:'Análises',dobra:true},{id:'sis',t:'Sistema'}];
+// abas liberadas para o usuário logado (v4.1): null = todas. O administrador vê todas; offline também.
+let ABAS=null;
+const podeVer=id=>!ABAS||ABAS.includes(id);
+const verCusto=()=>podeVer('custos');// sem a aba Custos, nenhum valor em R$ aparece nas outras abas
+const semColCusto=(h,rows,i)=>verCusto()?[h,rows]:[h.filter((_,j)=>j!==i),rows.map(r=>r.filter((_,j)=>j!==i))];
 
 /* ================= MODELO ================= */
 let RAW=null;        // {os:[...], meta:{}}
@@ -1354,8 +1438,11 @@ function renderKpis(f){
   const K=[
     ['truck','Veículos atendidos',num(V.length),'',PERIOD==='all'?'Placas com OS no período da base':'Placas atendidas no período'],
     ['file','Ordens de serviço',num(at),'',V.length?`${dec(at/V.length)} OS por veículo`:'—'],
-    ['coin','Custo de peças',semEst?'N/D':brlK(ct),'',semEst?'Importe a base de estoque':`${num(f.E.length)} saídas do estoque · ${num(plC)} veículos`],
-    ['coin','Custo médio por OS',semEst||!osC?'N/D':brl(sumBy(f.E.filter(e=>e.os),e=>e.v)/osC),'',semEst?'Base de estoque não carregada':`${num(osC)} OS com saída de peças`],
+    ...(verCusto()?[['coin','Custo de peças',semEst?'N/D':brlK(ct),'',semEst?'Importe a base de estoque':`${num(f.E.length)} saídas do estoque · ${num(plC)} veículos`],
+    ['coin','Custo médio por OS',semEst||!osC?'N/D':brl(sumBy(f.E.filter(e=>e.os),e=>e.v)/osC),'',semEst?'Base de estoque não carregada':`${num(osC)} OS com saída de peças`]]
+    // sem acesso aos custos (v4.1): MTBF e horas-homem no lugar dos dois indicadores em R$
+    :[['pulse','MTBF',rel.mtbf!=null?dec(rel.mtbf):'N/D',rel.mtbf!=null?'dias':'','Dias rodando entre paradas'],
+    ['users','Horas-homem',num(Math.round(rel.hh)),'h','Soma do tempo de todos os técnicos']]),
     ['timer','MTTR',rel.mttr!=null?dec(rel.mttr,2):'N/D',rel.mttr!=null?'h':'','Horas de reparo por OS'],
     ['gauge','Disponibilidade',rel.av!=null?dec(rel.av):'N/D',rel.av!=null?'%':'',rel.mdt!=null?`Física · ${dec(rel.mdt)} dias parado por parada`:'Física: MTBF ÷ (MTBF + dias parado)']];
   $('#kpis').innerHTML=K.map(k=>`<div class="kpi"><div class="l"><span class="ic ${k[5]||''}">${svg(k[0])}</span>${k[1]}</div><div class="v">${k[2]}${k[3]?`<small>${k[3]}</small>`:''}</div><div class="n" title="${esc(k[4])}">${k[4]}</div></div>`).join('');
@@ -1366,9 +1453,13 @@ const R_={};
 R_.overview=f=>{
   const t=T(),V=f.V,pr=new Set(f.R.map(r=>r.placa)).size,tasks=taskAgg(f.R),E=f.E,ct=sumBy(E,e=>e.v);
   const cv=custoPor(E.filter(e=>e.p),e=>e.p),top10=sumBy(cv.slice(0,10),x=>x.v);
+  const vA=V.slice().sort((a,b)=>b.atendimentos-a.atendimentos),osT=sumBy(V,v=>v.atendimentos),os10=sumBy(vA.slice(0,10),v=>v.atendimentos);
   const ins=[
-    ['coin',EST.rows.length?brlK(ct):'N/D',EST.rows.length?`em peças no período · ${num(new Set(E.filter(e=>e.os).map(e=>e.os)).size)} OS com saída do estoque`:'importe a base de estoque para ver o custo'],
-    ['truck',ct?pctf(top10/ct*100):'—',ct?`do custo de peças está em 10 veículos (${cv[0]?cv[0].k+' lidera com '+brlK(cv[0].v):''})`:'sem custo no filtro'],
+    ...(verCusto()?[['coin',EST.rows.length?brlK(ct):'N/D',EST.rows.length?`em peças no período · ${num(new Set(E.filter(e=>e.os).map(e=>e.os)).size)} OS com saída do estoque`:'importe a base de estoque para ver o custo'],
+    ['truck',ct?pctf(top10/ct*100):'—',ct?`do custo de peças está em 10 veículos (${cv[0]?cv[0].k+' lidera com '+brlK(cv[0].v):''})`:'sem custo no filtro']]
+    // sem acesso aos custos (v4.1): concentração das OS e horas de oficina no lugar dos destaques em R$
+    :[['truck',osT?pctf(os10/osT*100):'—',osT?`das OS estão em 10 veículos (${vA[0].placa} lidera com ${num(vA[0].atendimentos)} OS)`:'sem OS no filtro'],
+    ['timer',num(Math.round(sumBy(f.O,o=>o.h)/60))+' h',`de oficina (horas-homem) em ${num(f.O.length)} OS no período`]]),
     ['repeat',pctf(V.length?pr/V.length*100:0),'dos veículos atendidos têm algum serviço reincidente'],
     ['wrench',tasks[0]?esc(trunc(tasks[0].tarefa,26)):'—',tasks[0]?`é o serviço mais reincidente (${num(tasks[0].placas)} placas)`:'sem reincidências no filtro']];
   $('#ovIns').innerHTML=ins.map(i=>`<div class="card ins"><span class="dot">${svg(i[0])}</span><div><b>${i[1]}</b><p>${i[2]}</p></div></div>`).join('');
@@ -1380,8 +1471,8 @@ R_.overview=f=>{
   lineChart('ovMonth',ks.map(kt.lab),[{label:'OS consolidadas',data:ks.map(k=>byK.get(k)||0)},{label:'Veículos atendidos',data:ks.map(k=>vK.get(k)?.size||0)}]);
   const cK=new Map();E.forEach(e=>{const k=kt.key(e.d);cK.set(k,(cK.get(k)||0)+e.v)});const cks=[...cK.keys()].sort();
   $('#ovCostT').textContent=kt.wk?'Custo de peças por semana':'Custo de peças por mês';
-  bar('ovCost',cks.map(kt.lab),cks.map(k=>Math.round(cK.get(k))),{label:'Custo de peças',vlFmt:brlK,valTick:v=>brlK(v),tip:{label:c=>' '+brl(c.raw)}});
-  paged('ovCostTop',cv,10,top=>hbar('ovCostTop',top.map(x=>x.k),top.map(x=>Math.round(x.v)),{kind:'plate',label:'Custo de peças',vlFmt:brlK,valTick:v=>brlK(v),tip:{label:c=>[' '+brl(top[c.dataIndex].v,2),` ${num(top[c.dataIndex].os.size)} OS · ${num(top[c.dataIndex].n)} itens`]}}),'veículos');
+  if(verCusto()){bar('ovCost',cks.map(kt.lab),cks.map(k=>Math.round(cK.get(k))),{label:'Custo de peças',vlFmt:brlK,valTick:v=>brlK(v),tip:{label:c=>' '+brl(c.raw)}});
+  paged('ovCostTop',cv,10,top=>hbar('ovCostTop',top.map(x=>x.k),top.map(x=>Math.round(x.v)),{kind:'plate',label:'Custo de peças',vlFmt:brlK,valTick:v=>brlK(v),tip:{label:c=>[' '+brl(top[c.dataIndex].v,2),` ${num(top[c.dataIndex].os.size)} OS · ${num(top[c.dataIndex].n)} itens`]}}),'veículos')}
   paged('ovTop',V.slice().sort((a,b)=>b.atendimentos-a.atendimentos),10,top=>hbar('ovTop',top.map(v=>v.placa),top.map(v=>v.atendimentos),{kind:'plate',label:'Atendimentos'}),'veículos');
   paged('ovTasks',tasks,10,tt=>hbar('ovTasks',tt.map(x=>x.tarefa),tt.map(x=>x.placas),{kind:'task',label:'Placas com reincidência',trunc:28}),'tipos');
 };
@@ -1437,8 +1528,8 @@ function renderFrotaTable(){const f=filtered(),q=$('#frQ').value.trim().toUpperC
   const key={atendimentos:v=>v.atendimentos,custo:v=>v.custo,horas:v=>v.horas,tipos:v=>v.tiposReincidentes,dias:v=>v.diasSem}[s];
   const rows=sortRows('frRows',f.V.filter(v=>v.placa.includes(q)||normTxt(v.marca+' '+v.modelo+' '+v.tipo).includes(normTxt(q))).sort((a,b)=>key(b)-key(a)),
     [v=>v.placa,v=>v.marca+' '+v.modelo,v=>v.tipo,v=>v.atendimentos,v=>v.diasComOS,v=>v.horas,v=>v.custo,v=>v.ultima,v=>v.diasSem,v=>clsRank(v.classe),v=>v.tiposReincidentes]);
-  $('#frRows').innerHTML=rows.length?rows.map(v=>`<tr><td><span class="plate" data-p="${v.placa}">${v.placa}</span></td><td class="mm-cell${v.marca===SEM_CAD?' nd':''}">${v.marca===SEM_CAD?SEM_CAD:`<b>${esc(v.marca)}</b> ${esc(v.modelo)}`}</td><td class="mm-cell">${esc(v.tipo)}</td><td class="n">${num(v.atendimentos)}</td><td class="n">${num(v.diasComOS)}</td><td class="n">${dec(v.horas)}</td><td class="n">${v.custo?brl(v.custo):'<span class="nd">—</span>'}</td><td>${fmtDate(v.ultima)}</td><td class="n">${num(v.diasSem)}</td><td>${badge(v.classe)}</td><td class="n">${num(v.tiposReincidentes)}</td></tr>`).join(''):'<tr><td colspan="11" class="empty">Nenhum veículo encontrado.</td></tr>';
-  $('#frCount').textContent=`${num(rows.length)} veículos`;EXPORT.frota=()=>['veiculos',['Placa','Marca','Modelo','Tipo','Proprietário','Atendimentos','Dias com OS','Horas-homem','Peças (R$)','Última manutenção','Dias sem manutenção','Classificação','Tipos reincidentes'],rows.map(v=>[v.placa,v.marca,v.modelo,v.tipo,v.prop,v.atendimentos,v.diasComOS,dec(v.horas),dec(v.custo,2),fmtDate(v.ultima),v.diasSem,v.classe,v.tiposReincidentes])]}
+  $('#frRows').innerHTML=rows.length?rows.map(v=>`<tr><td><span class="plate" data-p="${v.placa}">${v.placa}</span></td><td class="mm-cell${v.marca===SEM_CAD?' nd':''}">${v.marca===SEM_CAD?SEM_CAD:`<b>${esc(v.marca)}</b> ${esc(v.modelo)}`}</td><td class="mm-cell">${esc(v.tipo)}</td><td class="n">${num(v.atendimentos)}</td><td class="n">${num(v.diasComOS)}</td><td class="n">${dec(v.horas)}</td><td class="n cost-only">${v.custo?brl(v.custo):'<span class="nd">—</span>'}</td><td>${fmtDate(v.ultima)}</td><td class="n">${num(v.diasSem)}</td><td>${badge(v.classe)}</td><td class="n">${num(v.tiposReincidentes)}</td></tr>`).join(''):'<tr><td colspan="11" class="empty">Nenhum veículo encontrado.</td></tr>';
+  $('#frCount').textContent=`${num(rows.length)} veículos`;EXPORT.frota=()=>['veiculos',...semColCusto(['Placa','Marca','Modelo','Tipo','Proprietário','Atendimentos','Dias com OS','Horas-homem','Peças (R$)','Última manutenção','Dias sem manutenção','Classificação','Tipos reincidentes'],rows.map(v=>[v.placa,v.marca,v.modelo,v.tipo,v.prop,v.atendimentos,v.diasComOS,dec(v.horas),dec(v.custo,2),fmtDate(v.ultima),v.diasSem,v.classe,v.tiposReincidentes]),8)]}
 
 R_.aging=f=>{const V=f.V;
   paged('agTop',V.slice().sort((a,b)=>b.diasSem-a.diasSem),15,st=>hbar('agTop',st.map(v=>v.placa),st.map(v=>v.diasSem),{kind:'plate',label:'Dias sem manutenção',colors:st.map(v=>ST[v.classe]),vlFmt:v=>num(v)+' d',tip:{label:c=>` ${num(c.raw)} dias · ${st[c.dataIndex].classe}`}}),'veículos');
@@ -1643,14 +1734,16 @@ R_.risco=f=>{const t=T(),V=f.V.filter(v=>v.atendimentos>0||PERIOD==='all');
       plugins:{...baseOpts({legend:true,vl:false,lines:[{x:30,label:'30 dias'},{y:medA,label:`mediana ${num(medA)} OS`}]}).plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{title:c=>c[0].raw.p,label:c=>[` ${num(c.raw.x)} dias sem manutenção`,` ${num(c.raw.y)} atendimentos`,` ${num(c.raw.t)} tipos reincidentes`]}}},
       onClick:(e,els,c)=>{if(els.length)openSummary('plate',c.data.datasets[els[0].datasetIndex].data[els[0].index].p)},onHover:(e,els)=>{e.native.target.style.cursor=els.length?'pointer':'default'}}});
   // índice: 35% dias sem manutenção (teto 90) + 25% tipos reincidentes + 15% retrabalho + 25% custo de peças (relativo ao maior)
-  const maxC=Math.max(1,...V.map(v=>v.custo));
-  RK_ROWS=V.map(v=>({...v,score:Math.round((.35*Math.min(v.diasSem,90)/90+.25*v.tiposReincidentes/maxT+.15*v.retrab/maxW+.25*v.custo/maxC)*100)})).sort((a,b)=>b.score-a.score).slice(0,50).map((v,i)=>({...v,pos:i+1}));
+  // sem acesso aos custos (v4.1): o custo sai do índice e os outros três pesos são redistribuídos (≈47% + 33% + 20%)
+  const maxC=Math.max(1,...V.map(v=>v.custo)),cc=verCusto();
+  $('#rkSub').textContent=cc?'Índice 0–100 = 35% dias sem manutenção (teto 90 d) + 25% tipos reincidentes + 15% retrabalho em até 30 dias + 25% custo de peças':'Índice 0–100 = 47% dias sem manutenção (teto 90 d) + 33% tipos reincidentes + 20% retrabalho em até 30 dias';
+  RK_ROWS=V.map(v=>({...v,score:Math.round((.35*Math.min(v.diasSem,90)/90+.25*v.tiposReincidentes/maxT+.15*v.retrab/maxW+(cc?.25*v.custo/maxC:0))/(cc?1:.75)*100)})).sort((a,b)=>b.score-a.score).slice(0,50).map((v,i)=>({...v,pos:i+1}));
   renderRiskTable()};
 let RK_ROWS=[];SORT_RENDER.rkRows=()=>renderRiskTable();
 function renderRiskTable(){const t=T();
   const rows=sortRows('rkRows',RK_ROWS,[v=>v.pos,v=>v.placa,v=>v.score,v=>clsRank(v.classe),v=>v.diasSem,v=>v.tiposReincidentes,v=>v.retrab,v=>v.atendimentos,v=>v.custo]);
-  $('#rkRows').innerHTML=rows.length?rows.map((v,i)=>`<tr><td class="n">${v.pos}</td><td><span class="plate" data-p="${v.placa}">${v.placa}</span></td><td><div class="meter"><span><i style="width:${v.score}%;background:${v.score>=60?ST.Urgente:v.score>=40?ST.Alerta:t.s1}"></i></span><b>${v.score}</b></div></td><td>${badge(v.classe)}</td><td class="n">${num(v.diasSem)}</td><td class="n">${num(v.tiposReincidentes)}</td><td class="n">${num(v.retrab)}</td><td class="n">${num(v.atendimentos)}</td><td class="n">${v.custo?brl(v.custo):'—'}</td></tr>`).join(''):'<tr><td colspan="9" class="empty">Sem veículos.</td></tr>';
-  EXPORT.risco=()=>['prioridades',['Posição','Placa','Índice','Classificação','Dias sem','Tipos reincidentes','Retrabalhos ≤30d','Atendimentos','Peças (R$)'],rows.map(v=>[v.pos,v.placa,v.score,v.classe,v.diasSem,v.tiposReincidentes,v.retrab,v.atendimentos,dec(v.custo,2)])];
+  $('#rkRows').innerHTML=rows.length?rows.map((v,i)=>`<tr><td class="n">${v.pos}</td><td><span class="plate" data-p="${v.placa}">${v.placa}</span></td><td><div class="meter"><span><i style="width:${v.score}%;background:${v.score>=60?ST.Urgente:v.score>=40?ST.Alerta:t.s1}"></i></span><b>${v.score}</b></div></td><td>${badge(v.classe)}</td><td class="n">${num(v.diasSem)}</td><td class="n">${num(v.tiposReincidentes)}</td><td class="n">${num(v.retrab)}</td><td class="n">${num(v.atendimentos)}</td><td class="n cost-only">${v.custo?brl(v.custo):'—'}</td></tr>`).join(''):'<tr><td colspan="9" class="empty">Sem veículos.</td></tr>';
+  EXPORT.risco=()=>['prioridades',...semColCusto(['Posição','Placa','Índice','Classificação','Dias sem','Tipos reincidentes','Retrabalhos ≤30d','Atendimentos','Peças (R$)'],rows.map(v=>[v.pos,v.placa,v.score,v.classe,v.diasSem,v.tiposReincidentes,v.retrab,v.atendimentos,dec(v.custo,2)]),8)];
 };
 
 /* ---------- Abas unidas na v4.0: Frota = Atendimentos + Tempo sem manutenção + Marcas e modelos; Reincidência = + Retrabalho ---------- */
@@ -1720,6 +1813,8 @@ $('#csVh').addEventListener('change',e=>{VH=Math.max(0,+e.target.value||0);ls.se
 
 /* ---------- Versões ---------- */
 const VERSIONS=[
+  {v:'4.2',d:'25/11/2026',c:'Barra superior grafite em toda a largura, na mesma cor do menu: logo, filtros de período, serviço e placa, e os botões de PDF e de modo claro/escuro só com ícone. O título da aba passa para a área de conteúdo e os indicadores continuam fixos logo abaixo da barra. O menu lateral continua flutuante, agora começando abaixo da barra, e o marcador da aba selecionada ficou reto.'},
+  {v:'4.1',d:'25/11/2026',c:'Controle de acesso por usuário: o administrador escolhe, em Dados e critérios › Acessos e atualizações, quais abas cada usuário vê. Sem a aba Custos, o usuário não vê nenhum valor em R$ (indicadores, gráficos, colunas e resumo trocam o custo por MTBF e horas-homem, e o índice de Prioridades fica sem o peso do custo); sem Preventivas, não lê nem grava revisões. Esses dois bloqueios também valem no banco de dados. Menu flutuante, afastado da borda e com cantos arredondados. Preventivas entra no grupo Análises, que agora recolhe e expande pelo título.'},
   {v:'4.0',d:'25/11/2026',c:'Base de estoque no Supabase (só o administrador substitui, como as outras bases). Visual novo “Grafite Industrial”: menu só com ícones (expande pelo rodapé), grafite com laranja de segurança, fonte Bahnschrift, títulos em maiúsculas e cantos retos. Reestruturação com 3 bases (OS, Veículos e Estoque). Nova aba “Custos”: custo de peças por veículo, tipo, proprietário, marca e peça, custo por OS com os serviços apontados, custo × horas, compras por fornecedor e conferência do cruzamento entre estoque e OS (saídas sem OS, placa divergente, OS sem apontamento). Custo também nos KPIs, na Visão geral, na Frota, nas Prioridades e no resumo de cada veículo (peças aplicadas). Abas unidas: Atendimentos + Tempo sem manutenção + Marcas e modelos viram “Frota”; Reincidência + Retrabalho viram uma aba só. Tabela de Veículos passa a usar tipo, proprietário e ano. Gráficos no tempo mudam sozinhos para semana quando a base cobre poucas semanas.'},
   {v:'3.3',d:'23/11/2026',c:'Correção: o cabeçalho de cada coluna do Kanban de Preventivas mostra “1 veículo” no singular.'},
   {v:'3.2',d:'19/11/2026',c:'Preventivas: o painel de revisões vira um Kanban com uma coluna por tipo (MP1, MP2, MP3, Intermediária, RP1 e RP2) e três balões em cada coluna (Próximo, Vencidas e Em dia), com um cartão por veículo. Saem as abas de filtro por tipo. Veículos sem revisão lançada ficam no rodapé da coluna. RP1 e RP2 (sob demanda) ficam em dia até 90 dias da última passagem, próximas de 91 a 180 e vencidas depois disso.'},
@@ -1802,8 +1897,8 @@ function openSummary(kind,value,extra){
   const osN=new Set(O.map(o=>o.n));
   const EP=MODEL.E.filter(e=>pl1?e.p===pl1&&(!extra.plate||kind==='plate'||osN.has(e.os)):plateFn?plateFn(e.p):osN.has(e.os)).sort((a,b)=>a.d<b.d?1:a.d>b.d?-1:b.v-a.v);
   SUM.E=EP;const cE=sumBy(EP,e=>e.v);
-  const st=[['Ordens de serviço',num(new Set(O.map(o=>o.n+'|'+o.p)).size)],kind==='plate'||extra.plate?['Dias com OS',num(new Set(O.flatMap(o=>o.ds)).size)]:['Veículos',num(plates)],[kind==='tech'?'Horas do técnico':kind==='task'?'Horas no serviço':'Horas-homem',dec(hh)+' h'],kind==='task'?['Execuções/veículo',plates?dec(O.length/plates):'—']:['Reparo médio por OS',O.length?dec(rep/O.length,2)+' h':'—'],
-    ['Peças do estoque',EST.rows.length?brl(cE):'N/D']];
+  const st=[['Ordens de serviço',num(new Set(O.map(o=>o.n+'|'+o.p)).size)],kind==='plate'||extra.plate?['Dias com OS',num(new Set(O.flatMap(o=>o.ds)).size)]:['Veículos',num(plates)],[kind==='tech'?'Horas do técnico':kind==='task'?'Horas no serviço':'Horas-homem',dec(hh)+' h'],kind==='task'?['Execuções/veículo',plates?dec(O.length/plates):'—']:['Reparo médio por OS',O.length?dec(rep/O.length,2)+' h':'—']];
+  if(verCusto())st.push(['Peças do estoque',EST.rows.length?brl(cE):'N/D']);
   $('#sumStats').innerHTML=st.map(s=>`<div><span>${s[0]}</span><b>${s[1]}</b></div>`).join('');
   $('#sumSec3').textContent=`Peças aplicadas (${num(EP.length)} itens · ${brl(cE,2)})${kind==='task'||kind==='tech'?' · todas as peças das OS com '+(kind==='task'?'este serviço':'este técnico'):''}`;
   $('#sumT3').innerHTML=EP.length?EP.slice(0,300).map(e=>`<tr><td>${fmtDate(e.d)}</td><td>${e.os||'<span class="nd">sem OS</span>'}</td><td class="c-pl">${e.p?`<span class="plate" data-sum-p="${e.p}">${e.p}</span>`:'—'}</td><td style="white-space:normal">${esc(e.peca)}</td><td class="n">${dec(e.q,e.q%1?2:0)}</td><td class="n">${brl(e.v,2)}</td></tr>`).join('')+(EP.length>300?`<tr><td colspan="6" class="empty">Mostrando 300 de ${num(EP.length)} itens · exporte o CSV para ver todos</td></tr>`:''):'<tr><td colspan="6" class="empty">Nenhuma saída de peça do estoque no período.</td></tr>';
@@ -1842,14 +1937,26 @@ function renderChip(){const L={plate:'Placa',class:'Classificação',task:'Manut
   $('#chip').classList.toggle('on',!!F);if(F){$('#chipTxt').textContent=`${L[F.kind]}: ${F.value}`;$('#chip').title=`${L[F.kind]}: ${F.value}`}}
 function renderAll(){PG={};const f=filtered();renderKpis(f);renderChip();
   const p=PAGES.find(x=>x.id===PAGE);$('#pgTitle').textContent=p.t;
-  $('#pgSub').textContent=PAGE==='prev'?p.s:`${p.s} · Ref. ${fmtDate(MODEL.ref)}${SVC?` · Serviço: “${SVC}”`:''}`;
+  const ps=!verCusto()&&p.sc?p.sc:p.s;// sem acesso aos custos: subtítulo sem a palavra "custo"
+  $('#pgSub').textContent=PAGE==='prev'?ps:`${ps} · Ref. ${fmtDate(MODEL.ref)}${SVC?` · Serviço: “${SVC}”`:''}`;
   R_[PAGE](f)}
-function go(id){if(!R_[id]||!PAGES.some(p=>p.id===id))id='overview';/* abas antigas (aging, retrab, marcas) caem na visão geral */PAGE=id;ls.set('pm-page',id);destroyAll();document.body.classList.toggle('pg-prev',id==='prev');
+function go(id){// abas antigas (aging, retrab, marcas) e abas não liberadas caem na primeira aba liberada
+  if(!R_[id]||!PAGES.some(p=>p.id===id&&podeVer(p.id)))id=(PAGES.find(p=>podeVer(p.id))||PAGES[0]).id;
+  PAGE=id;ls.set('pm-page',id);destroyAll();document.body.classList.toggle('pg-prev',id==='prev');
   $$('.page').forEach(s=>s.classList.toggle('active',s.dataset.page===id));
-  $$('#nav button').forEach(b=>{b.classList.toggle('active',b.dataset.id===id);b.setAttribute('aria-current',b.dataset.id===id?'page':'false')});
-  document.body.classList.remove('nav-open');window.scrollTo({top:0});renderAll()}
-function buildNav(){$('#nav').innerHTML=PAGES.map(p=>`${p.grp?`<div class="nav-label">${p.grp}</div>`:''}<button type="button" data-id="${p.id}" title="${p.t}">${svg(p.ic)}<span class="lbl">${p.t}</span></button>`).join('');
-  $$('#nav button').forEach(b=>b.onclick=()=>go(b.dataset.id))}
+  markNav();document.body.classList.remove('nav-open');window.scrollTo({top:0});renderAll()}
+function markNav(){$$('#nav button[data-id]').forEach(b=>{const on=b.dataset.id===PAGE;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')});
+  $$('#nav .nav-grp').forEach(g=>g.classList.toggle('has-on',!!g.querySelector('button.active')))}
+function buildNav(){const min=g=>g.dobra&&ls.get('pm-grp-'+g.id)==='min';
+  $('#nav').innerHTML=GRUPOS.map(g=>{const it=PAGES.filter(p=>(p.g||'an')===g.id&&podeVer(p.id));if(!it.length)return'';
+    const hd=g.dobra?`<button type="button" class="nav-hd" data-grp="${g.id}" aria-expanded="${!min(g)}" title="${min(g)?'Expandir':'Recolher'} ${g.t}"><span class="lbl">${g.t}</span><span class="nav-n lbl">${it.length}</span>${svg('chevd',2.2)}</button>`:`<div class="nav-label">${g.t}</div>`;
+    return`<div class="nav-grp${min(g)?' min':''}" data-grp="${g.id}">${hd}<div class="nav-items"><div>${it.map(p=>`<button type="button" data-id="${p.id}" title="${p.t}">${svg(p.ic)}<span class="lbl">${p.t}</span></button>`).join('')}</div></div></div>`}).join('');
+  $$('#nav button[data-id]').forEach(b=>b.onclick=()=>go(b.dataset.id));
+  $$('#nav .nav-hd').forEach(h=>h.onclick=()=>{const g=GRUPOS.find(x=>x.id===h.dataset.grp),el=h.closest('.nav-grp'),m=el.classList.toggle('min');
+    ls.set('pm-grp-'+g.id,m?'min':'');h.setAttribute('aria-expanded',String(!m));h.title=(m?'Expandir ':'Recolher ')+g.t});
+  markNav()}
+// aplica as abas liberadas: refaz o menu e esconde os valores em R$ se a aba Custos não estiver liberada
+function aplicarAbas(){document.body.classList.toggle('no-cost',!verCusto());buildNav()}
 function buildPeriods(){const ms=monthsOf(RAW.os).reverse();
   const hj=new Date(),pad=n=>String(n).padStart(2,'0');
   $('#periodSel').innerHTML=`<option value="all">Todo o período</option><option value="today">Hoje (${pad(hj.getDate())}/${pad(hj.getMonth()+1)})</option><option value="last30">Últimos 30 dias</option><option value="last90">Últimos 90 dias</option><option value="last180">Últimos 180 dias</option><optgroup label="Mês">${ms.map(m=>`<option value="${m}">${monLabel(m)}</option>`).join('')}</optgroup>`;
@@ -1861,6 +1968,7 @@ function applySvc(v){v=String(v||'').trim();
   if(v){const q=normTxt(v);const tipos=new Set();RAW.os.forEach(o=>Object.keys(o.t).forEach(t=>{if(normTxt(t).includes(q))tipos.add(t)}));
     if(!tipos.size){const i=$('#svcSearch');i.setCustomValidity('Nenhum serviço contém “'+v+'”');i.reportValidity();setTimeout(()=>{i.setCustomValidity('');i.value=SVC},1800);return}
     $('#svcN').textContent=tipos.size===1?'1 tipo de serviço':`${num(tipos.size)} tipos de serviço`}else $('#svcN').textContent='';
+  $('#svcBox').title=v?`Serviço “${v}”: ${$('#svcN').textContent}`:'';// v4.2: na barra superior a contagem aparece na dica do campo
   if(v===SVC)return;SVC=v;$('#svcBox').classList.toggle('on',!!SVC);$('#svcSearch').value=SVC;
   if(F&&F.kind==='task'&&SVC&&!svcMatch(F.value))F=null;
   derive();destroyAll();renderAll()}
@@ -2329,10 +2437,13 @@ async function startOnline(){SB.load();if(!SB.sess){gate('login');return}
   gate('carregando','Conferindo o acesso…');
   try{const me=await SB.req('perfis?select=*&id=eq.'+encodeURIComponent(SB.sess.uid));SB.perfil=me[0]||null;
     if(!SB.perfil||!SB.perfil.ativo){gate('pendente','O acesso do usuário '+userName(SB.sess.email)+' está bloqueado. Fale com o administrador.');return}
+    // v4.1: abas liberadas pelo administrador (perfis.abas); vazio = todas
+    ABAS=SB.perfil.admin||!Array.isArray(SB.perfil.abas)?null:SB.perfil.abas.filter(a=>PAGES.some(p=>p.id===a));
+    if(!PAGES.some(p=>podeVer(p.id))){gate('pendente','Nenhuma aba está liberada para o usuário '+userName(SB.sess.email)+'. Fale com o administrador.');return}
     gate('carregando','Carregando as bases do Supabase…');
     const ult=t=>SB.req(`cargas?select=*&tipo=eq.${t}&order=feito_em.desc&limit=1`).then(a=>a[0]||null);// última carga de cada base
     const[os,fr,es,cO,cF,cE]=await Promise.all([SB.todos('os_linhas?select=data,os,placa,tecnico,minutos,tempo,tarefas&order=id'),SB.todos('frota_veiculos?select=placa,marca,modelo,tipo,proprietario,ano&order=id'),
-      SB.todos('estoque_mov?select=data,saida,placa,os,codigo,peca,quantidade,valor_unit,valor_total,motivo,local,fornecedor&order=id'),ult('os'),ult('frota'),ult('estoque')]);
+      verCusto()?SB.todos('estoque_mov?select=data,saida,placa,os,codigo,peca,quantidade,valor_unit,valor_total,motivo,local,fornecedor&order=id'):Promise.resolve([]),ult('os'),ult('frota'),ult('estoque')]);
     loadVeh(fr.map(r=>[r.placa,r.marca,r.modelo,r.tipo,r.proprietario,r.ano]),{fonte:cF?cF.arquivo:'—',quando:cF?fmtTs(cF.feito_em):'—'});
     $('#vehStatus').textContent=fr.length?`Tabela do Supabase: ${cF?cF.arquivo:''} · ${num(VEH.size)} veículos`:'Nenhuma tabela de veículos no Supabase';
     loadEst(es.map(estFromDb),{fonte:cE?cE.arquivo:'—',quando:cE?fmtTs(cE.feito_em):'—'});
@@ -2341,9 +2452,9 @@ async function startOnline(){SB.load();if(!SB.sess){gate('login');return}
     const objs=os.map(r=>({'Data':r.data,'OS Nº':r.os,'Placa':r.placa,'Técnico':r.tecnico,'Minutos (raw)':r.minutos,'Tempo (hh:mm)':r.tempo,'Tarefas':r.tarefas}));
     loadRaw(buildOS(objs),{fonte:cO?cO.arquivo:'Supabase',quando:cO?fmtTs(cO.feito_em):'—',linhas:os.length});
     $('#importStatus').textContent=`Base do Supabase: ${cO?cO.arquivo:''} · atualizada em ${cO?fmtTs(cO.feito_em):'—'}`;
-    await pvLoad();applyRole();gateHide();go(ls.get('pm-page')||'overview');
+    if(podeVer('prev'))await pvLoad();applyRole();gateHide();go(ls.get('pm-page')||'overview');
   }catch(err){if(!SB.sess)gate('login',err.message,'err');else gate('erro','Não foi possível carregar: '+err.message,'err')}}
-function applyRole(){const adm=isAdmin();document.body.classList.toggle('ro',!adm);
+function applyRole(){const adm=isAdmin();document.body.classList.toggle('ro',!adm);aplicarAbas();
   const nm=userName(SB.sess.email);$('#userChip').hidden=false;$('#userMail').textContent=nm;$('#userMail').title=nm;$('#userRole').textContent=adm?'Administrador':'Usuário';$('#userIc').textContent=(nm||'?')[0].toUpperCase();
   ['#restoreBtn','#restoreVehBtn','#restoreEstBtn'].forEach(s=>{const b=$(s);if(b)b.closest('.toolbar').hidden=true});
   $$('#drop,#dropVeh,#dropEst').forEach(d=>d.classList.add('adm-only'));
@@ -2352,16 +2463,39 @@ function applyRole(){const adm=isAdmin();document.body.classList.toggle('ro',!ad
 async function admLoad(){if(!SB_ON||!isAdmin())return;const m=$('#admMsg');
   try{const[us,cg]=await Promise.all([SB.req('perfis?select=*&order=criado_em'),SB.req('cargas?select=*&order=feito_em.desc&limit=30')]);SB.cargas=cg;
     $('#admUsers').innerHTML=us.map(u=>`<tr><td>${esc(userName(u.email)||'—')}</td><td>${fmtTs(u.criado_em).slice(0,10)}</td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="ativo"${u.ativo?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode bloquear o próprio acesso"':''} aria-label="Liberar ${esc(u.email)}"></td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="admin"${u.admin?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode tirar o próprio perfil de administrador"':''} aria-label="Administrador ${esc(u.email)}"></td></tr>`).join('')||'<tr><td colspan="4" class="empty">—</td></tr>';
+    admAbasRender(us);
     $('#admCargas').innerHTML=cg.map(c=>`<tr><td>${fmtTs(c.feito_em)}</td><td>${({os:'OS',frota:'Veículos',estoque:'Estoque'})[c.tipo]||esc(c.tipo)}</td><td>${esc(c.arquivo||'—')}</td><td class="n">${num(c.linhas)}</td><td>${esc(userName(c.feito_por_email)||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Nenhuma atualização ainda.</td></tr>';
     m.textContent=''}catch(e){m.className='pv-msg err';m.textContent='Falha ao carregar: '+e.message}}
 $('#admReload').onclick=admLoad;
+// v4.1: quadro "O que cada usuário vê" (uma linha por usuário, uma coluna por aba). perfis.abas: null = todas
+let ADM_US=[];
+function admAbasRender(us){ADM_US=us;
+  $('#admAbasH').innerHTML=`<tr><th>Usuário</th>${PAGES.map(p=>`<th title="${esc(p.t)}">${esc(p.c||p.t)}</th>`).join('')}<th>Liberadas</th></tr>`;
+  $('#admAbas').innerHTML=us.map(u=>{const adm=!!u.admin,lib=adm||!Array.isArray(u.abas)?PAGES.map(p=>p.id):u.abas,n=PAGES.filter(p=>lib.includes(p.id)).length;
+    return`<tr class="${adm?'ab-adm':''}"><td><b>${esc(userName(u.email)||'—')}</b><small>${adm?'Administrador · vê todas':u.ativo?'Usuário':'Usuário bloqueado'}</small></td>${PAGES.map(p=>`<td><input type="checkbox" class="adm-ck ab-ck" data-u="${u.id}" data-aba="${p.id}"${lib.includes(p.id)?' checked':''}${adm?' disabled title="O administrador vê todas as abas"':''} aria-label="${esc(p.t)} para ${esc(userName(u.email))}"></td>`).join('')}
+      <td><span class="ab-tot">${n===PAGES.length?'Todas':`${n} de ${PAGES.length}`}</span>${adm?'':` <button type="button" class="ab-x" data-ab-all="${u.id}">${n===PAGES.length?'Desmarcar':'Marcar todas'}</button>`}</td></tr>`}).join('')||`<tr><td colspan="${PAGES.length+2}" class="empty">—</td></tr>`}
+async function admAbasSalvar(uid,lista){const m=$('#admMsg'),u=ADM_US.find(x=>x.id===uid);if(!u)return;
+  const abas=lista.length===PAGES.length?null:PAGES.map(p=>p.id).filter(id=>lista.includes(id));// todas marcadas = null (inclui abas de versões futuras)
+  try{await SB.req('perfis?id=eq.'+uid,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({abas})});u.abas=abas;
+    m.className='pv-msg';m.textContent=`${userName(u.email)}: ${abas?abas.length?`${abas.length} de ${PAGES.length} abas liberadas`:'nenhuma aba liberada (não consegue entrar no painel)':'todas as abas liberadas'}.`}
+  catch(err){m.className='pv-msg err';m.textContent='Falha: '+err.message}
+  admAbasRender(ADM_US)}
+$('#admAbas').addEventListener('change',e=>{const c=e.target.closest('.ab-ck');if(!c)return;
+  admAbasSalvar(c.dataset.u,$$(`#admAbas .ab-ck[data-u="${c.dataset.u}"]`).filter(x=>x.checked).map(x=>x.dataset.aba))});
+$('#admAbas').addEventListener('click',e=>{const b=e.target.closest('[data-ab-all]');if(!b)return;const uid=b.dataset.abAll;
+  const tudo=$$(`#admAbas .ab-ck[data-u="${uid}"]`).every(x=>x.checked);admAbasSalvar(uid,tudo?[]:PAGES.map(p=>p.id))});
 $('#admUsers').addEventListener('change',async e=>{const c=e.target.closest('.adm-ck');if(!c)return;const m=$('#admMsg');
-  try{await SB.req('perfis?id=eq.'+c.dataset.u,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({[c.dataset.f]:c.checked})});m.className='pv-msg';m.textContent='Acesso atualizado.'}
+  try{await SB.req('perfis?id=eq.'+c.dataset.u,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({[c.dataset.f]:c.checked})});m.className='pv-msg';m.textContent='Acesso atualizado.';
+    const u=ADM_US.find(x=>x.id===c.dataset.u);if(u){u[c.dataset.f]=c.checked;admAbasRender(ADM_US)}}
   catch(err){c.checked=!c.checked;m.className='pv-msg err';m.textContent='Falha: '+err.message}});
 $('#logoutBtn').onclick=async()=>{if(!confirm('Sair do painel?'))return;await SB.sair();location.reload()};
 
 /* início */
 if(ls.get('pm-rail')!=='0')document.body.classList.add('collapsed');// v4.0: menu só com ícones por padrão
+// v4.2: altura real da barra superior em --hb (muda quando os filtros quebram linha em telas estreitas).
+// Medida depois de recolher o menu: medir antes faria o menu aparecer largo e animar ao abrir a página.
+(()=>{const hb=$('#hbar'),set=()=>document.documentElement.style.setProperty('--hb',hb.offsetHeight+'px');set();
+  if(window.ResizeObserver)new ResizeObserver(set).observe(hb);else window.addEventListener('resize',set)})();
 syncCollapse();$('#tbLogo').src=$('.brand-logo').src;
 REF_MODE=ls.get('pm-ref')||'today';
 buildNav();setTheme(document.documentElement.dataset.theme||'dark',false);
