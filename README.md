@@ -14,7 +14,9 @@ Sem login liberado, o banco não devolve nenhum dado. A chave no index.html é a
 
 ## Bases
 
-Base de OS e Tabela de Veículos: o administrador importa a planilha na aba Dados e critérios. A base anterior é substituída por inteiro numa operação única: se falhar, a antiga continua.
+São 3 bases: Ordens de Serviço, Tabela de Veículos (com tipo, proprietário e ano) e Movimentações de Estoque, que dão o custo de peças por veículo e por OS. Elas existem desde a v4.0.
+
+O administrador importa as planilhas na aba Dados e critérios. A base anterior é substituída por inteiro numa operação única: se falhar, a antiga continua.
 
 Preventivas: são gravadas no banco na hora e todos os usuários veem os mesmos dados.
 

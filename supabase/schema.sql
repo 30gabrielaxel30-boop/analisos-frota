@@ -139,3 +139,64 @@ create policy cargas_ver on public.cargas for select to authenticated using (pub
 create policy prev_veiculos_tudo on public.prev_veiculos for all to authenticated using (public.eh_ativo()) with check (public.eh_ativo());
 create policy revisoes_tudo on public.revisoes for all to authenticated using (public.eh_ativo()) with check (public.eh_ativo());
 create policy planos_config_tudo on public.planos_config for all to authenticated using (public.eh_ativo()) with check (public.eh_ativo());
+
+-- ======================================================================
+-- v4.0 (APLICADO em 25/11/2026, migração v40_estoque_e_cadastro_veiculos)
+-- ======================================================================
+-- Tabela de Veículos: tipo, proprietário e ano (a v3.x continua funcionando: as colunas ficam vazias)
+alter table public.frota_veiculos add column if not exists tipo text, add column if not exists proprietario text, add column if not exists ano text;
+
+-- Movimentações de Estoque (substituída a cada importação)
+create table if not exists public.estoque_mov (
+  id bigint generated always as identity primary key,
+  data date not null,
+  saida boolean not null,          -- true = saída para veículo (custo); false = entrada (compra)
+  placa text, os text, codigo text, peca text,
+  quantidade numeric, valor_unit numeric, valor_total numeric,
+  motivo text, local text, fornecedor text
+);
+alter table public.estoque_mov enable row level security;
+create policy estoque_ver on public.estoque_mov for select to authenticated using (public.eh_ativo());
+
+alter table public.cargas drop constraint if exists cargas_tipo_check;
+alter table public.cargas add constraint cargas_tipo_check check (tipo in ('os','frota','estoque'));
+
+-- substituir_frota passa a gravar tipo, proprietário e ano (posições 3, 4 e 5 de cada linha)
+create or replace function public.substituir_frota(p_linhas jsonb, p_arquivo text)
+returns integer language plpgsql security definer set search_path = public as $$
+declare n integer;
+begin
+  if not public.eh_admin() then raise exception 'Somente administradores podem atualizar a tabela de veículos'; end if;
+  if jsonb_typeof(p_linhas) <> 'array' or jsonb_array_length(p_linhas) = 0 then raise exception 'Tabela vazia: nada foi alterado'; end if;
+  delete from public.frota_veiculos where true;
+  insert into public.frota_veiculos(placa,marca,modelo,tipo,proprietario,ano)
+    select e->>0, e->>1, e->>2, nullif(e->>3,''), nullif(e->>4,''), nullif(e->>5,'') from jsonb_array_elements(p_linhas) e;
+  get diagnostics n = row_count;
+  insert into public.cargas(tipo,arquivo,linhas,feito_por_email)
+    values ('frota',p_arquivo,n,(select email from public.perfis where id = auth.uid()));
+  return n;
+end $$;
+
+-- estoque: troca a base inteira (tudo ou nada, só administrador)
+-- cada linha: [data, saida, placa, os, codigo, peca, quantidade, valor_unit, valor_total, motivo, local, fornecedor]
+create or replace function public.substituir_estoque(p_linhas jsonb, p_arquivo text, p_ini date, p_fim date)
+returns integer language plpgsql security definer set search_path = public as $$
+declare n integer;
+begin
+  if not public.eh_admin() then raise exception 'Somente administradores podem atualizar a base de estoque'; end if;
+  if jsonb_typeof(p_linhas) <> 'array' or jsonb_array_length(p_linhas) = 0 then raise exception 'Base vazia: nada foi alterado'; end if;
+  delete from public.estoque_mov where true;
+  insert into public.estoque_mov(data,saida,placa,os,codigo,peca,quantidade,valor_unit,valor_total,motivo,local,fornecedor)
+    select (e->>0)::date, (e->>1)::boolean, nullif(e->>2,''), nullif(e->>3,''), nullif(e->>4,''), e->>5,
+           (e->>6)::numeric, (e->>7)::numeric, (e->>8)::numeric, nullif(e->>9,''), nullif(e->>10,''), nullif(e->>11,'')
+    from jsonb_array_elements(p_linhas) e;
+  get diagnostics n = row_count;
+  insert into public.cargas(tipo,arquivo,linhas,periodo_ini,periodo_fim,feito_por_email)
+    values ('estoque',p_arquivo,n,p_ini,p_fim,(select email from public.perfis where id = auth.uid()));
+  return n;
+end $$;
+
+revoke execute on function public.substituir_estoque(jsonb,text,date,date) from public, anon;
+grant execute on function public.substituir_estoque(jsonb,text,date,date) to authenticated;
+revoke execute on function public.substituir_frota(jsonb,text) from public, anon;
+grant execute on function public.substituir_frota(jsonb,text) to authenticated;
