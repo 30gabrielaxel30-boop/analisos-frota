@@ -555,88 +555,60 @@ body.printing .ph-m{color:#c4c6cc}
   .hb-filters .search{flex:1 1 140px}
 }
 
-/* ---------- Navegação v4.3: trilho de ícones unido à barra superior + painel em cascata (modelo Sienge) ----------
-   O ícone da aba abre o painel; o mesmo ícone fecha. Painel: abas do grupo (cabeçalhos) → partes (▸ abre a cascata) → blocos.
-   --nav-on = cor do ícone e do texto ativos no menu (branco, escolhido pelo usuário em 26/11; a outra opção era laranja claro);
-   --nav-bar = marcador reto da aba atual e setas, em laranja claro */
-:root{--rw:56px}
-body{--nav-on:#ffffff;--nav-bar:#ff9a4d;--nav-caret:#ff9a4d}
-.app{margin-left:calc(var(--rw) + 24px)}
+/* ---------- Navegação v4.4: trilho unido à barra superior, com as abas fixas (a cascata da v4.3 saiu) ----------
+   O botão › no canto inferior esquerdo expande o trilho (ícone + nome da aba); o mesmo botão, virado em ‹, recolhe (só ícones).
+   O estado fica gravado no navegador (pm-menu). --nav-on = ícone e texto da aba ativa (branco, escolhido em 26/11);
+   --nav-bar = marcador reto da aba atual, em laranja claro */
+:root{--rw:56px;--rw-ab:232px}
+body{--nav-on:#ffffff;--nav-bar:#ff9a4d}
+body.menu-ab{--rw:var(--rw-ab)}
+.app{margin-left:calc(var(--rw) + 24px);transition:margin-left .26s cubic-bezier(.2,.8,.2,1)}
+body.printing .app{transition:none}
 .hbar{padding:0 20px}
 .hb-user{all:unset;box-sizing:border-box;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none;cursor:pointer;background:#24262b;color:#f2f2f2;font-size:13px;font-weight:700;border:1px solid #3a3d44}
 .hb-user[hidden]{display:none}
 .hb-user:hover{border-color:var(--nav-bar);color:var(--nav-bar)}
 .hb-user:focus-visible{outline:2px solid var(--nav-bar);outline-offset:2px}
-.rail{position:fixed;top:var(--hb);left:0;bottom:0;width:var(--rw);z-index:60;background:var(--side);border-right:1px solid var(--side-line);display:flex;flex-direction:column;padding:6px 0 0}
+.rail{position:fixed;top:var(--hb);left:0;bottom:0;width:var(--rw);z-index:60;background:var(--side);border-right:1px solid var(--side-line);display:flex;flex-direction:column;padding:6px 0 0;overflow:hidden;transition:width .26s cubic-bezier(.2,.8,.2,1)}
 .rail .brand{display:none}
-.rail-nav{flex:1;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column}
+.rail-nav{flex:1;overflow-y:auto;overflow-x:hidden;scrollbar-width:none;display:flex;flex-direction:column}
 .rail-nav::-webkit-scrollbar{display:none}
 .rail-grp{display:flex;flex-direction:column}
 .rail-grp+.rail-grp{border-top:1px solid var(--side-line);margin-top:6px;padding-top:6px}
-.rail-nav button{all:unset;box-sizing:border-box;position:relative;width:100%;height:48px;display:grid;place-items:center;flex:none;cursor:pointer;color:#9a9da5;transition:background .15s,color .15s}
-.rail-nav button svg{width:21px;height:21px}
-.rail-nav button:hover{background:var(--side-hover);color:#f2f2f2}
-.rail-nav button.active,.rail-nav button.open{background:var(--side-active);color:var(--nav-on)}
+/* o ícone fica sempre na mesma coluna de 56 px; o nome da aba aparece à direita quando o trilho está expandido */
+.rail-nav button,.rail-tog{all:unset;box-sizing:border-box;position:relative;width:100%;height:46px;display:flex;align-items:center;flex:none;padding-left:17.5px;cursor:pointer;color:#9a9da5;white-space:nowrap;transition:background .15s,color .15s}
+.rail-nav button svg,.rail-tog svg{width:21px;height:21px;flex:none}
+.rail-lb{margin-left:14px;font-size:13.5px;font-weight:600;letter-spacing:.01em;opacity:0;transform:translateX(-6px);transition:opacity .16s ease,transform .2s ease}
+body.menu-ab .rail-lb{opacity:1;transform:none;transition:opacity .22s ease .06s,transform .26s cubic-bezier(.2,.8,.2,1) .04s}
+.rail-nav button:hover,.rail-tog:hover{background:var(--side-hover);color:#f2f2f2}
+.rail-nav button.active{background:var(--side-active);color:var(--nav-on)}
 .rail-nav button.active::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--nav-bar)}
-.rail-nav button:focus-visible{outline:2px solid var(--nav-bar);outline-offset:-2px}
-.rail-foot{padding:6px 0 8px;border-top:1px solid var(--side-line);display:grid;place-items:center}
-.rail-ver{all:unset;cursor:pointer;font-size:10.5px;color:var(--side-muted);letter-spacing:.02em;padding:4px}
+.rail-nav button:focus-visible,.rail-tog:focus-visible{outline:2px solid var(--nav-bar);outline-offset:-2px}
+.rail-foot{border-top:1px solid var(--side-line);display:flex;flex-direction:column;padding-top:4px}
+.rail-ver{all:unset;box-sizing:border-box;cursor:pointer;width:56px;text-align:center;font-size:10.5px;color:var(--side-muted);letter-spacing:.02em;padding:6px 0 0}
 .rail-ver:hover{color:#f2f2f2}
-.fly{position:fixed;top:var(--hb);bottom:0;left:var(--rw);width:290px;z-index:57;background:#131417;color:#e8e8e8;border-right:1px solid var(--side-line);display:flex;flex-direction:column;box-shadow:14px 0 32px rgba(0,0,0,.28);font-family:var(--f-ui);
-  visibility:hidden;opacity:0;transform:translateX(-14px);pointer-events:none;transition:opacity .18s ease,transform .2s ease,visibility 0s linear .2s}
-.fly2{left:calc(var(--rw) + 290px);background:#17181c}
-/* v4.3: o painel e a cascata deslizam e aparecem suavemente; ao fechar, fazem o caminho de volta */
-body.fly-on #fly,body.fly2-on #fly2{visibility:visible;opacity:1;transform:none;pointer-events:auto;transition:opacity .22s ease,transform .26s cubic-bezier(.2,.8,.2,1),visibility 0s}
-/* abas dentro do painel abrem e fecham com a altura animada; a troca de sub-aba na cascata entra com um leve deslize */
-.fl-wrap{display:grid;grid-template-rows:1fr}
-.fl-wrap>.fl-items{min-height:0;overflow:hidden}
-.fl-wrap.abre{animation:flAbre .26s cubic-bezier(.2,.8,.2,1)}
-.fl-wrap.fecha{animation:flFecha .2s ease forwards;pointer-events:none}
-@keyframes flAbre{from{grid-template-rows:0fr;opacity:0}to{grid-template-rows:1fr;opacity:1}}
-@keyframes flFecha{from{grid-template-rows:1fr;opacity:1}to{grid-template-rows:0fr;opacity:0}}
-.fly-b.troca{animation:flTroca .22s ease}
-@keyframes flTroca{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+/* botão › / ‹ no canto inferior esquerdo: a seta gira ao expandir e ao recolher */
+.rail-tog svg{transition:transform .26s cubic-bezier(.2,.8,.2,1)}
+body.menu-ab .rail-tog svg{transform:rotate(180deg)}
+body.nav-sem-anim .rail,body.nav-sem-anim .app,body.nav-sem-anim .rail-lb,body.nav-sem-anim .rail-tog svg{transition:none!important}
 @keyframes scrimIn{from{opacity:0}to{opacity:1}}
-@media (prefers-reduced-motion:reduce){.fly,body.fly-on #fly,body.fly2-on #fly2{transition:none}.fl-wrap.abre,.fl-wrap.fecha,.fly-b.troca,body.fly-on .scrim{animation:none}}
-.fly-h{display:flex;align-items:center;gap:8px;min-height:54px;padding:12px 18px;border-bottom:1px solid var(--side-line)}
-.fly-h h2{margin:0;font-size:17px;font-weight:700;color:#f2f2f2;letter-spacing:.01em}
-.fly-b{flex:1;overflow-y:auto;padding:8px 10px 16px;scrollbar-width:thin}
-.fl-gh{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:9px;width:100%;padding:8px;border-radius:var(--r-sm);cursor:pointer;color:#e8e8e8;font-size:13.5px;font-weight:700}
-.fl-gh:hover{background:var(--side-hover)}
-.fl-gh .tri{width:9px;height:9px;flex:none;color:var(--nav-caret);transition:transform .15s}
-.fl-g.ex .fl-gh .tri{transform:rotate(90deg)}
-.fl-gh.cur{color:var(--nav-on)}
-.fl-items{margin-left:12px;padding:2px 0 8px 8px;border-left:1px solid #2a2c31;display:flex;flex-direction:column;gap:1px}
-.fl-items>:last-child{margin-bottom:0}
-.fl-it,.fl-leaf{all:unset;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:8px;width:100%;padding:7px 10px;border-radius:var(--r-sm);cursor:pointer;color:#c4c6cc;font-size:13px;line-height:1.3}
-.fl-it svg{width:14px;height:14px;flex:none;color:#80838b}
-.fl-it:hover,.fl-leaf:hover{background:var(--side-hover);color:#fff}
-.fl-it.sel{background:var(--side-active);color:var(--nav-on);font-weight:600}
-.fl-it.sel svg{color:var(--nav-caret)}
-.fl-gh:focus-visible,.fl-it:focus-visible,.fl-leaf:focus-visible,.fl-back:focus-visible{outline:2px solid var(--nav-bar);outline-offset:-2px}
-.fly2 .fly-b{margin:8px 0 0 18px;padding:0 10px 16px 8px;border-left:1px solid #2a2c31}
-.fl-back{all:unset;box-sizing:border-box;display:none;place-items:center;width:30px;height:30px;border-radius:var(--r-sm);cursor:pointer;color:#c4c6cc;border:1px solid #2a2c31}
-.fl-back svg{width:16px;height:16px}
-.card.blk-hit{box-shadow:0 0 0 2px var(--accent)}
-.card{transition:box-shadow .4s}
-body.fly-on .scrim{display:block;position:fixed;top:var(--hb);left:var(--rw);right:0;bottom:0;background:rgba(0,0,0,.42);z-index:55;animation:scrimIn .22s ease}
-body.printing .rail,body.printing .fly,body.printing .scrim{display:none!important}
-@media print{.rail,.fly,.scrim{display:none!important}}
+@media (prefers-reduced-motion:reduce){.rail,.app,.rail-lb,body.menu-ab .rail-lb,.rail-tog svg{transition:none}body.nav-open .scrim{animation:none}}
+body.printing .rail,body.printing .scrim{display:none!important}
+@media print{.rail,.scrim{display:none!important}}
 @media screen and (max-width:980px){
+  /* tablet e celular: o trilho fica escondido e abre pelo botão ☰, já com os nomes das abas */
   .app{margin-left:0}
-  .rail{transform:translateX(-100%);transition:transform .2s ease}
+  .rail{width:var(--rw-ab);transform:translateX(-100%);transition:transform .22s ease}
+  .rail-lb{opacity:1;transform:none}
+  .rail-tog{display:none}
   body.nav-open .rail{transform:none}
-  body.nav-open .scrim{display:block;position:fixed;top:var(--hb);left:var(--rw);right:0;bottom:0;background:rgba(0,0,0,.42);z-index:55}
+  body.nav-open .scrim{display:block;position:fixed;top:var(--hb);left:0;right:0;bottom:0;background:rgba(0,0,0,.42);z-index:55;animation:scrimIn .22s ease}
   .hbar{padding:0 16px}
   .hb-filters{padding:0 0 10px}
 }
 @media screen and (max-width:640px){
-  .rail,.fly{top:0}
-  .fly{z-index:59}/* acima da barra superior, que no celular rola junto com a página */
-  body.fly-on .scrim,body.nav-open .scrim{top:0;z-index:58}
-  .fly{width:calc(100vw - var(--rw))}
-  .fly2{left:var(--rw);z-index:60}/* a cascata cobre o painel; o botão ‹ volta */
-  .fl-back{display:grid}
+  .rail{top:0}
+  body.nav-open .scrim{top:0;z-index:58}/* acima da barra superior, que no celular rola junto com a página */
 }
 
 /* ---------- Login (versão online) ---------- */
@@ -820,11 +792,12 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
     <img class="brand-logo" alt="Rodovitor Transportes" src="data:image/png;base64,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">
   </div>
   <nav class="rail-nav" id="nav"></nav>
-  <div class="rail-foot"><button class="rail-ver" id="verBadge" type="button" title="Ver histórico de versões em Dados e critérios"></button></div>
+  <div class="rail-foot">
+    <button class="rail-ver" id="verBadge" type="button" title="Ver histórico de versões em Dados e critérios"></button>
+    <!-- v4.4: expande (›) e recolhe (‹) o trilho -->
+    <button class="rail-tog" id="railTog" type="button" aria-controls="sidebar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><span class="rail-lb">Recolher menu</span></button>
+  </div>
 </aside>
-<!-- v4.3: painel em cascata (estilo Sienge). Abre e fecha pelo ícone da aba no trilho -->
-<div class="fly" id="fly" aria-label="Abas e sub-abas"></div>
-<div class="fly fly2" id="fly2" aria-label="Blocos da sub-aba"></div>
 <div class="scrim" id="scrim"></div>
 
 <div class="app">
@@ -837,7 +810,6 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
   <main id="main">
   <!-- VISÃO GERAL -->
   <section class="page" data-page="overview">
-    <div class="grid c4" id="ovIns"></div>
     <div class="grid c2">
       <div class="card cost-only"><div class="card-h"><div><h3 id="ovCostT">Custo de peças por semana</h3><p>Saídas do estoque com destino a veículos · a semana corrente pode estar incompleta</p></div></div><div class="cw h260"><canvas id="ovCost"></canvas></div></div>
       <div class="card"><div class="card-h"><div><h3 id="ovMonthT">Atendimentos por semana</h3><p>OS consolidadas e veículos distintos atendidos</p></div></div><div class="cw h260"><canvas id="ovMonth"></canvas></div></div>
@@ -853,7 +825,7 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
   <section class="page" data-page="custos">
     <div class="cs-bar"><p id="csNote">Custo de peças = saídas do estoque com destino a um veículo. Entradas (compras para o estoque) não entram no custo por veículo.</p>
       <label class="cs-vh" title="Opcional: soma a mão de obra (horas-homem × valor da hora) ao custo de peças">Valor da hora de oficina <span>R$</span><input class="inp sm" id="csVh" type="number" min="0" step="1" placeholder="0"></label></div>
-    <div class="grid c4" id="csStats"></div>
+    <div id="csAviso"></div>
     <div class="grid c2">
       <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por veículo</h3><p id="csVehSub">Peças aplicadas por placa · 15 por página</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csVeh"></canvas></div></div>
       <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por tipo de veículo</h3><p>Soma das peças pelo tipo do cadastro de veículos</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csTipo"></canvas></div></div>
@@ -1538,17 +1510,8 @@ function renderKpis(f){
 const R_={};
 R_.overview=f=>{
   const t=T(),V=f.V,pr=new Set(f.R.map(r=>r.placa)).size,tasks=taskAgg(f.R),E=f.E,ct=sumBy(E,e=>e.v);
-  const cv=custoPor(E.filter(e=>e.p),e=>e.p),top10=sumBy(cv.slice(0,10),x=>x.v);
-  const vA=V.slice().sort((a,b)=>b.atendimentos-a.atendimentos),osT=sumBy(V,v=>v.atendimentos),os10=sumBy(vA.slice(0,10),v=>v.atendimentos);
-  const ins=[
-    ...(verCusto()?[['coin',EST.rows.length?brlK(ct):'N/D',EST.rows.length?`em peças no período · ${num(new Set(E.filter(e=>e.os).map(e=>e.os)).size)} OS com saída do estoque`:'importe a base de estoque para ver o custo'],
-    ['truck',ct?pctf(top10/ct*100):'—',ct?`do custo de peças está em 10 veículos (${cv[0]?cv[0].k+' lidera com '+brlK(cv[0].v):''})`:'sem custo no filtro']]
-    // sem acesso aos custos (v4.1): concentração das OS e horas de oficina no lugar dos destaques em R$
-    :[['truck',osT?pctf(os10/osT*100):'—',osT?`das OS estão em 10 veículos (${vA[0].placa} lidera com ${num(vA[0].atendimentos)} OS)`:'sem OS no filtro'],
-    ['timer',num(Math.round(sumBy(f.O,o=>o.h)/60))+' h',`de oficina (horas-homem) em ${num(f.O.length)} OS no período`]]),
-    ['repeat',pctf(V.length?pr/V.length*100:0),'dos veículos atendidos têm algum serviço reincidente'],
-    ['wrench',tasks[0]?esc(trunc(tasks[0].tarefa,26)):'—',tasks[0]?`é o serviço mais reincidente (${num(tasks[0].placas)} placas)`:'sem reincidências no filtro']];
-  $('#ovIns').innerHTML=ins.map(i=>`<div class="card ins"><span class="dot">${svg(i[0])}</span><div><b>${i[1]}</b><p>${i[2]}</p></div></div>`).join('');
+  const cv=custoPor(E.filter(e=>e.p),e=>e.p);
+  // v4.4: a linha de destaques (custo no período, concentração em 10 veículos, % reincidente, serviço mais reincidente) saiu
   donut(V);
   // atendimentos e custo no tempo (semana ou mês, conforme o tamanho do período)
   const kt=chaveTempo(f.O.map(o=>o.d).concat(E.map(e=>e.d))),byK=countBy(f.O,o=>kt.key(o.d)),vK=new Map();f.O.forEach(o=>{const k=kt.key(o.d);if(!vK.has(k))vK.set(k,new Set());vK.get(k).add(o.p)});
@@ -1839,14 +1802,11 @@ function renderRiskTable(){const t=T();
 let CS_VEH=[],CS_OS=[];
 R_.custos=f=>{const E=f.E,ct=sumBy(E,e=>e.v),comOS=E.filter(e=>e.os),semOS=E.filter(e=>!e.os);
   $('#csVh').value=VH||'';
-  if(!EST.rows.length){$('#csStats').innerHTML='<div class="card full"><div class="pv-empty"><b>Base de estoque não carregada</b>Importe a planilha de Movimentações de Estoque em Dados e critérios para ver os custos.</div></div>';return}
+  if(!EST.rows.length){$('#csAviso').innerHTML='<div class="card"><div class="pv-empty"><b>Base de estoque não carregada</b>Importe a planilha de Movimentações de Estoque em Dados e critérios para ver os custos.</div></div>';return}
+  $('#csAviso').innerHTML='';
+  // v4.4: a linha de cartões (custo de peças, custo por veículo, custo médio por OS, saídas sem OS / mão de obra) saiu
   const byP=new Map();f.O.forEach(o=>{if(!byP.has(o.p))byP.set(o.p,{os:0,h:0});const x=byP.get(o.p);x.os++;x.h+=o.h/60});
   const cv=custoPor(E.filter(e=>e.p),e=>e.p);
-  const hh=sumBy(f.O,o=>o.h)/60,mo=VH*hh,osC=new Set(comOS.map(e=>e.os)).size,plC=cv.length;
-  const st=[['Custo de peças',brl(ct),`${num(E.length)} itens · ${num(plC)} veículos`],['Custo por veículo',plC?brl(ct/plC):'—','média dos veículos com peça aplicada'],
-    ['Custo médio por OS',osC?brl(sumBy(comOS,e=>e.v)/osC):'—',`${num(osC)} OS com saída de peças`],
-    VH?['Mão de obra estimada',brl(mo),`${dec(hh)} h × ${brl(VH,2)}/h · total ${brl(ct+mo)}`]:['Saídas sem OS',brl(sumBy(semOS,e=>e.v)),`${num(semOS.length)} itens (${pctf(ct?sumBy(semOS,e=>e.v)/ct*100:0)} do custo)`]];
-  $('#csStats').innerHTML=st.map(s=>`<div class="card stat"><div class="k">${s[0]}</div><div class="big">${s[1]}</div><div class="sub">${s[2]}</div></div>`).join('');
   const tipT=a=>({label:c=>[' '+brl(a[c.dataIndex].v,2),` ${num(a[c.dataIndex].pl.size)} veículos · ${num(a[c.dataIndex].os.size)} OS`]});
   paged('csVeh',cv,15,top=>hbar('csVeh',top.map(x=>x.k),top.map(x=>Math.round(x.v)),{kind:'plate',label:'Custo de peças',vlFmt:brlK,valTick:v=>brlK(v),tip:tipT(top)}),'veículos');
   const EV=E.filter(e=>e.p);// saídas para pessoas (sem veículo) ficam fora dos gráficos por veículo
@@ -1899,6 +1859,7 @@ $('#csVh').addEventListener('change',e=>{VH=Math.max(0,+e.target.value||0);ls.se
 
 /* ---------- Versões ---------- */
 const VERSIONS=[
+  {v:'4.4',d:'26/11/2026',c:'O painel em cascata saiu: o trilho mostra as abas fixas e um clique abre a aba direto. O botão › no canto inferior esquerdo expande o trilho com o nome das abas; o mesmo botão, como ‹ Recolher menu, recolhe de volta para só ícones, com animação suave. A escolha fica gravada no navegador. No celular, o ☰ abre o menu já com os nomes. Saíram a linha de destaques da Visão geral e a linha de cartões de custo da aba Custos.'},
   {v:'4.3',d:'26/11/2026',c:'Menu no modelo do Sienge. O trilho de ícones fica encostado na borda e unido à barra superior. O ícone da aba abre o painel, e o mesmo ícone fecha; o botão de recolher saiu. O painel mostra as abas do grupo; a aba clicada vem aberta com as suas partes, e as partes com ▸ abrem a cascata com os gráficos e tabelas. Clicar num bloco rola suavemente até ele. O painel, a cascata e as abas do painel abrem e fecham com animação suave. O usuário logado passa para o canto da barra superior. Ícone e texto ativos do menu em branco, com o marcador reto e as setas em laranja claro.'},
   {v:'4.2',d:'25/11/2026',c:'Barra superior grafite em toda a largura, na mesma cor do menu: logo, filtros de período, serviço e placa, e os botões de PDF e de modo claro/escuro só com ícone. O título da aba passa para a área de conteúdo e os indicadores continuam fixos logo abaixo da barra. O menu lateral continua flutuante, agora começando abaixo da barra, e o marcador da aba selecionada ficou reto.'},
   {v:'4.1',d:'25/11/2026',c:'Controle de acesso por usuário: o administrador escolhe, em Dados e critérios › Acessos e atualizações, quais abas cada usuário vê. Sem a aba Custos, o usuário não vê nenhum valor em R$ (indicadores, gráficos, colunas e resumo trocam o custo por MTBF e horas-homem, e o índice de Prioridades fica sem o peso do custo); sem Preventivas, não lê nem grava revisões. Esses dois bloqueios também valem no banco de dados. Menu flutuante, afastado da borda e com cantos arredondados. Preventivas entra no grupo Análises, que agora recolhe e expande pelo título.'},
@@ -2027,75 +1988,27 @@ function renderAll(){PG={};const f=filtered();renderKpis(f);renderChip();
   const ps=!verCusto()&&p.sc?p.sc:p.s;// sem acesso aos custos: subtítulo sem a palavra "custo"
   $('#pgSub').textContent=PAGE==='prev'?ps:`${ps} · Ref. ${fmtDate(MODEL.ref)}${SVC?` · Serviço: “${SVC}”`:''}`;
   R_[PAGE](f)}
-function go(id,manterMenu){// abas antigas (aging, retrab, marcas) e abas não liberadas caem na primeira aba liberada
+function go(id){// abas antigas (aging, retrab, marcas) e abas não liberadas caem na primeira aba liberada
   if(!R_[id]||!PAGES.some(p=>p.id===id&&podeVer(p.id)))id=(PAGES.find(p=>podeVer(p.id))||PAGES[0]).id;
   PAGE=id;ls.set('pm-page',id);destroyAll();document.body.classList.toggle('pg-prev',id==='prev');
   $$('.page').forEach(s=>s.classList.toggle('active',s.dataset.page===id));
-  if(!manterMenu)navClose();markNav();window.scrollTo({top:0});renderAll()}
+  navClose();markNav();window.scrollTo({top:0});renderAll()}
 
-/* ===== Navegação v4.3 (modelo Sienge): trilho de ícones + painel em cascata =====
-   1º clique no ícone da aba: abre a aba e o painel (com a aba expandida); 2º clique no mesmo ícone: fecha o painel.
-   No painel, cada aba mostra as suas partes; parte com ▸ abre a cascata com os blocos (gráficos e tabelas). */
-let NAV_OPEN=null,NAV_EXP=null,NAV_PART=null,NAV_TREE=[],NAV_LAST_EXP=null,NAV_LAST_PART=null;
-const TRI='<svg class="tri" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 .8l6.4 4.2L2 9.2z" fill="currentColor"/></svg>';
-function markNav(){$$('#nav button[data-id]').forEach(b=>{const on=b.dataset.id===PAGE,op=b.dataset.id===NAV_OPEN;b.classList.toggle('active',on);b.classList.toggle('open',op);b.setAttribute('aria-current',on?'page':'false');b.setAttribute('aria-expanded',String(op))})}
+/* ===== Navegação v4.4: trilho com as abas fixas (a cascata da v4.3 saiu) =====
+   O clique no ícone, ou no nome, abre a aba. O botão ›/‹ no canto inferior esquerdo expande e recolhe o trilho,
+   e o estado fica gravado no navegador (pm-menu). No tablet e no celular, o trilho abre pelo ☰ já com os nomes. */
+const NAV_NOME={reinc:'Reincidência'};// nome curto da aba no menu, quando o título da página é longo
+function markNav(){$$('#nav button[data-id]').forEach(b=>{const on=b.dataset.id===PAGE;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')})}
 function buildNav(){
   $('#nav').innerHTML=GRUPOS.map(g=>{const it=PAGES.filter(p=>(p.g||'an')===g.id&&podeVer(p.id));if(!it.length)return'';
-    return`<div class="rail-grp" data-grp="${g.id}">${it.map(p=>`<button type="button" data-id="${p.id}" title="${p.t}" aria-label="${p.t}">${svg(p.ic)}</button>`).join('')}</div>`}).join('');
-  $$('#nav button[data-id]').forEach(b=>b.onclick=()=>navRail(b.dataset.id));
-  if(NAV_OPEN&&!podeVer(NAV_OPEN))navClose();else navRender()}
-// sub-abas de uma aba: partes (data-part na seção ou no cartão) com os blocos dentro; blocos sem parte ficam soltos
-function navTree(id){
-  if(id==='prev')return[['painel','Painel de revisões'],['veic','Veículos'],['hist','Histórico'],['planos','Planos e serviços']].map(([pv,t])=>({t,pv}));
-  const out=[],parts=new Map(),vistos=new Map(),semCusto=!verCusto();
-  $$(`.page[data-page="${id}"] .card`).forEach(c=>{const h=c.querySelector('.card-h h3');if(!h||c.hidden||(semCusto&&c.closest('.cost-only')))return;
-    let t=h.textContent.trim();const n=(vistos.get(t)||0)+1;vistos.set(t,n);if(n>1)t+=c.querySelector('table')?' (tabela)':` (${n})`;
-    const pn=c.dataset.part||c.closest('.page').dataset.part,folha={t,card:c};
-    if(!pn){out.push(folha);return}
-    if(!parts.has(pn)){const g={t:pn,part:true,kids:[]};parts.set(pn,g);out.push(g)}
-    parts.get(pn).kids.push(folha)});
-  return out}
-function navRail(id){
-  if(NAV_OPEN===id){navClose();return}// 2º clique no mesmo ícone: fecha
-  NAV_OPEN=id;NAV_EXP=id;NAV_PART=null;
-  if(PAGE!==id)go(id,true);
-  document.body.classList.add('nav-open');navRender()}
-function navClose(){NAV_OPEN=null;NAV_PART=null;NAV_LAST_EXP=null;NAV_LAST_PART=null;document.body.classList.remove('fly-on','fly2-on','nav-open');markNav()}
-// animação (v4.3): só anima o que mudou desde o último desenho — a aba que abriu, a que fechou e a troca de sub-aba
-function navRender(){
-  if(!NAV_OPEN){document.body.classList.remove('fly-on','fly2-on');markNav();return}
-  const p0=PAGES.find(p=>p.id===NAV_OPEN),g=GRUPOS.find(x=>x.id===(p0.g||'an')),tabs=PAGES.filter(p=>(p.g||'an')===g.id&&podeVer(p.id));
-  const jaAberto=document.body.classList.contains('fly-on'),cascAberta=document.body.classList.contains('fly2-on');
-  NAV_TREE=NAV_EXP?navTree(NAV_EXP):[];
-  const abre=NAV_EXP&&NAV_EXP!==NAV_LAST_EXP,fecha=jaAberto&&NAV_LAST_EXP&&NAV_LAST_EXP!==NAV_EXP&&tabs.some(p=>p.id===NAV_LAST_EXP)?NAV_LAST_EXP:null;
-  const itens=(tr,cls,ativo)=>tr.length?`<div class="fl-wrap${cls}"><div class="fl-items">${tr.map((x,i)=>`<button type="button" class="fl-it${ativo&&x.part&&NAV_PART===i?' sel':''}" data-i="${i}"${ativo?'':' tabindex="-1"'}${x.part?` aria-expanded="${ativo&&NAV_PART===i}"`:''}><span>${esc(x.t)}</span>${x.part?svg('chevr',2.2):''}</button>`).join('')}</div></div>`:'';
-  $('#fly').innerHTML=`<div class="fly-h"><h2>${g.t}</h2></div><div class="fly-b">${tabs.map(p=>{const ex=p.id===NAV_EXP;
-    return`<div class="fl-g${ex?' ex':''}"><button type="button" class="fl-gh${p.id===PAGE?' cur':''}" data-tab="${p.id}" aria-expanded="${ex}">${TRI}<span>${p.t}</span></button>${ex?itens(NAV_TREE,abre?' abre':'',true):p.id===fecha?itens(navTree(fecha),' fecha',false):''}</div>`}).join('')}</div>`;
-  if(fecha)setTimeout(()=>$$('#fly .fl-wrap.fecha').forEach(el=>el.remove()),220);
-  const pt=NAV_PART!=null?NAV_TREE[NAV_PART]:null;
-  // a cascata só troca de conteúdo quando abre outra sub-aba; ao fechar, mantém o conteúdo enquanto some
-  if(pt&&pt.part)$('#fly2').innerHTML=`<div class="fly-h"><button type="button" class="fl-back" data-back aria-label="Voltar">${svg('chevl',2.2)}</button><h2>${esc(pt.t)}</h2></div><div class="fly-b${cascAberta&&NAV_PART!==NAV_LAST_PART?' troca':''}">${pt.kids.map((k,j)=>`<button type="button" class="fl-leaf" data-j="${j}">${esc(k.t)}</button>`).join('')}</div>`;
-  NAV_LAST_EXP=NAV_EXP;NAV_LAST_PART=pt&&pt.part?NAV_PART:null;
-  document.body.classList.add('fly-on');document.body.classList.toggle('fly2-on',!!(pt&&pt.part));markNav()}
-// leva até o bloco escolhido (descontando a barra superior e os indicadores fixos) e marca o cartão por um instante
-function navJump(id,f){
-  if(f.pv){PV_VIEW=f.pv;ls.set('pm-pv-view',f.pv)}
-  go(id);if(!f.card)return;
-  setTimeout(()=>{const c=f.card,tb=$('.topbar'),fixo=getComputedStyle(tb).position==='sticky'?$('#hbar').offsetHeight+tb.offsetHeight:0;
-    const alvo=Math.max(0,c.getBoundingClientRect().top+scrollY-fixo-12),ini=scrollY,suave=!matchMedia('(prefers-reduced-motion: reduce)').matches;
-    window.scrollTo({top:alvo,behavior:suave?'smooth':'auto'});
-    // garantia: se a rolagem suave não sair do lugar (navegador ocupado), salta direto para o bloco
-    if(suave)setTimeout(()=>{if(Math.abs(scrollY-ini)<2&&Math.abs(alvo-ini)>2)window.scrollTo({top:alvo})},700);
-    c.classList.add('blk-hit');setTimeout(()=>c.classList.remove('blk-hit'),1800)},60)}
-$('#fly').addEventListener('click',e=>{let b;
-  if(b=e.target.closest('.fl-gh')){const id=b.dataset.tab;
-    if(NAV_EXP===id){NAV_EXP=null;NAV_PART=null}else{NAV_EXP=id;NAV_PART=null;NAV_OPEN=id;if(PAGE!==id)go(id,true)}
-    navRender();return}
-  if(b=e.target.closest('.fl-it')){const i=+b.dataset.i,x=NAV_TREE[i];if(!x)return;
-    if(x.part){NAV_PART=NAV_PART===i?null:i;navRender()}else navJump(NAV_EXP,x)}});
-$('#fly2').addEventListener('click',e=>{let b;
-  if(e.target.closest('[data-back]')){NAV_PART=null;navRender();return}
-  if(b=e.target.closest('.fl-leaf')){const pt=NAV_TREE[NAV_PART];if(pt&&pt.kids[+b.dataset.j])navJump(NAV_EXP,pt.kids[+b.dataset.j])}});// aplica as abas liberadas: refaz o menu e esconde os valores em R$ se a aba Custos não estiver liberada
+    return`<div class="rail-grp" data-grp="${g.id}">${it.map(p=>{const n=NAV_NOME[p.id]||p.t;return`<button type="button" data-id="${p.id}" title="${n}">${svg(p.ic)}<span class="rail-lb">${n}</span></button>`}).join('')}</div>`}).join('');
+  $$('#nav button[data-id]').forEach(b=>b.onclick=()=>go(b.dataset.id));
+  markNav()}
+function navClose(){document.body.classList.remove('nav-open')}
+function menuAberto(ab,salvar){document.body.classList.toggle('menu-ab',ab);
+  const t=$('#railTog'),r=ab?'Recolher menu':'Expandir menu';t.title=r;t.setAttribute('aria-label',r);t.setAttribute('aria-expanded',String(ab));
+  if(salvar)ls.set('pm-menu',ab?'1':'0')}
+// aplica as abas liberadas: refaz o menu e esconde os valores em R$ se a aba Custos não estiver liberada
 function aplicarAbas(){document.body.classList.toggle('no-cost',!verCusto());buildNav()}
 function buildPeriods(){const ms=monthsOf(RAW.os).reverse();
   const hj=new Date(),pad=n=>String(n).padStart(2,'0');
@@ -2202,10 +2115,14 @@ window.addEventListener('beforeprint',preparePrint);
 window.addEventListener('afterprint',restorePrint);
 $('#pdfBtn').onclick=()=>{preparePrint();setTimeout(()=>{window.print();setTimeout(restorePrint,400)},250)};
 $('#verBadge').textContent='v'+APP_VERSION;$('#verBadge').title=`Versão ${APP_VERSION} · ver o histórico em Dados e critérios`;$('#verBadge').onclick=()=>go('dados');
-// v4.3: sem botão de recolher; o painel abre e fecha pelo ícone da aba. No celular, o botão ☰ mostra o trilho.
-$('#menuBtn').onclick=()=>{if(document.body.classList.contains('nav-open'))navClose();else document.body.classList.add('nav-open')};
+// v4.4: o botão ›/‹ expande e recolhe o trilho (o estado fica gravado). Ao abrir o painel, o estado gravado entra sem animação.
+$('#railTog').onclick=()=>menuAberto(!document.body.classList.contains('menu-ab'),true);
+document.body.classList.add('nav-sem-anim');menuAberto(ls.get('pm-menu')==='1');
+requestAnimationFrame(()=>requestAnimationFrame(()=>document.body.classList.remove('nav-sem-anim')));
+// no tablet e no celular, o botão ☰ mostra e esconde o trilho
+$('#menuBtn').onclick=()=>document.body.classList.toggle('nav-open');
 $('#scrim').onclick=navClose;
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.body.classList.contains('fly-on')||document.body.classList.contains('nav-open'))navClose();else if(F){F=null;renderAll()}}});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.body.classList.contains('nav-open'))navClose();else if(F){F=null;renderAll()}}});
 
 /* ================= PREVENTIVAS (operacional) ================= */
 const PV_MOTOR=['CAVALO 6X2','CAVALO 6X4','CAMINHÃO TRUCK','FURGÃO','FROTA LEVE'];
