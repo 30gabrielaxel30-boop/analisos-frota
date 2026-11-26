@@ -207,6 +207,11 @@ body.sum-open .sum-drawer{transform:none}
 .cs-vh{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);font-weight:600}
 .cs-vh span{color:var(--muted);font-weight:500}
 .cs-vh .inp{width:96px}
+.cs-ctl{display:flex;align-items:center;gap:10px 22px;flex-wrap:wrap}
+.cs-modo{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);font-weight:600}
+.cs-modo .mseg{height:28px}.cs-modo .mseg button{height:24px;padding:0 12px;font-size:12px}
+body.no-abs .abs-only{display:none!important}
+.tq td,.tq th{white-space:nowrap}.tq td:first-child{color:var(--ink-2)}
 .sum-stats div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .sum-stats span{display:block;font-size:11px;color:var(--muted)}
 .sum-stats b{display:block;font-size:18px;margin-top:2px;font-variant-numeric:tabular-nums}
@@ -320,6 +325,36 @@ tbody tr:last-child td{border-bottom:0}
 .rules p{margin:0 0 10px;font-size:13px;color:var(--ink-2)}
 .rules b{color:var(--ink)}
 .note{font-size:11.5px;color:var(--muted);margin:10px 0 0}
+/* v4.6: Dados e critérios compacto — 5 bases lado a lado, cruzamento em mini-cartões e caixas informativas com X */
+.bts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.bt{display:flex;flex-direction:column;gap:10px;min-width:0;border:1px solid var(--line);border-radius:var(--r);background:var(--surface-2);padding:12px}
+.bt-h{display:flex;align-items:center;gap:8px;min-width:0}.bt-h .base-n{margin:0;flex:none}
+.bt-h b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.drop.sm{flex-direction:row;gap:10px;padding:9px 10px;border-width:1px;border-radius:var(--r-sm);background:var(--surface)}
+.drop.sm svg{width:19px;height:19px;flex:none}
+.drop.sm .btn{padding:6px 12px;font-size:12px;min-height:0}
+.bt-st{display:flex;align-items:flex-start;gap:6px}
+.bt-st .status-line{margin:0;min-height:0;flex:1;min-width:0;font-size:11.5px;line-height:1.35}
+.bt-rst{all:unset;box-sizing:border-box;cursor:pointer;flex:none;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r-sm);color:var(--muted)}
+.bt-rst:hover{color:var(--accent);background:var(--accent-soft)}.bt-rst:focus-visible{outline:2px solid var(--accent)}.bt-rst svg{width:14px;height:14px}.bt-rst[hidden]{display:none}
+.bt-kv{display:grid;grid-template-columns:auto minmax(0,1fr);gap:5px 10px;margin:auto 0 0;padding-top:10px;border-top:1px solid var(--line);font-size:12px}
+.bt-kv dt{color:var(--muted);white-space:nowrap}.bt-kv dd{margin:0;font-weight:600;text-align:right;overflow-wrap:anywhere}
+.cx{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}
+.cx>div{border:1px solid var(--line);border-radius:var(--r);background:var(--surface-2);padding:10px 12px;min-width:0}
+.cx span{display:block;font-size:11.5px;color:var(--muted);margin-bottom:3px}.cx b{font-size:15px}
+.card-h:has(.ref-sel){flex-wrap:wrap;row-gap:8px}
+.ref-sel{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);font-weight:600}
+.ref-sel .inp{width:auto}
+.info-box[hidden],.info-rest[hidden]{display:none!important}
+.info-x{all:unset;box-sizing:border-box;cursor:pointer;flex:none;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center;border-radius:var(--r-sm);color:var(--muted)}
+.info-x:hover{color:var(--ink);background:var(--accent-soft)}.info-x:focus-visible{outline:2px solid var(--accent)}.info-x svg{width:14px;height:14px}
+.info-box.mini{display:flex;align-items:flex-start;gap:10px;margin:0 0 14px;padding:8px 6px 8px 12px;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r-sm);background:var(--surface-2)}
+.info-box.mini p{margin:3px 0 0;flex:1;font-size:12px;color:var(--ink-2)}
+.info-box.mini .info-x{width:22px;height:22px}
+.rules.info-body{columns:2 420px;column-gap:32px}.rules.info-body p{break-inside:avoid}
+.info-rest{grid-column:1/-1;display:flex;justify-content:flex-end}
+.info-rest button{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.info-rest button:hover{color:var(--accent)}.info-rest svg{width:14px;height:14px}
 .mt0{margin-top:0}
 
 /* Responsivo */
@@ -559,7 +594,7 @@ body.printing .ph-m{color:#c4c6cc}
    O botão › no canto inferior esquerdo expande o trilho (ícone + nome da aba); o mesmo botão, virado em ‹, recolhe (só ícones).
    O estado fica gravado no navegador (pm-menu). --nav-on = ícone e texto da aba ativa (branco, escolhido em 26/11);
    --nav-bar = marcador reto da aba atual, em laranja claro */
-:root{--rw:56px;--rw-ab:232px}
+:root{--rw:52px;--rw-ab:212px}
 body{--nav-on:#ffffff;--nav-bar:#ff9a4d}
 body.menu-ab{--rw:var(--rw-ab)}
 .app{margin-left:calc(var(--rw) + 24px);transition:margin-left .26s cubic-bezier(.2,.8,.2,1)}
@@ -576,16 +611,16 @@ body.printing .app{transition:none}
 .rail-grp{display:flex;flex-direction:column}
 .rail-grp+.rail-grp{border-top:1px solid var(--side-line);margin-top:6px;padding-top:6px}
 /* o ícone fica sempre na mesma coluna de 56 px; o nome da aba aparece à direita quando o trilho está expandido */
-.rail-nav button,.rail-tog{all:unset;box-sizing:border-box;position:relative;width:100%;height:46px;display:flex;align-items:center;flex:none;padding-left:17.5px;cursor:pointer;color:#9a9da5;white-space:nowrap;transition:background .15s,color .15s}
-.rail-nav button svg,.rail-tog svg{width:21px;height:21px;flex:none}
-.rail-lb{margin-left:14px;font-size:13.5px;font-weight:600;letter-spacing:.01em;opacity:0;transform:translateX(-6px);transition:opacity .16s ease,transform .2s ease}
+.rail-nav button,.rail-tog{all:unset;box-sizing:border-box;position:relative;width:100%;height:42px;display:flex;align-items:center;flex:none;padding-left:16.5px;cursor:pointer;color:#9a9da5;white-space:nowrap;transition:background .15s,color .15s}
+.rail-nav button svg,.rail-tog svg{width:19px;height:19px;flex:none}
+.rail-lb{margin-left:12px;font-size:12.5px;font-weight:400;letter-spacing:.01em;opacity:0;transform:translateX(-6px);transition:opacity .16s ease,transform .2s ease}
 body.menu-ab .rail-lb{opacity:1;transform:none;transition:opacity .22s ease .06s,transform .26s cubic-bezier(.2,.8,.2,1) .04s}
 .rail-nav button:hover,.rail-tog:hover{background:var(--side-hover);color:#f2f2f2}
 .rail-nav button.active{background:var(--side-active);color:var(--nav-on)}
 .rail-nav button.active::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--nav-bar)}
 .rail-nav button:focus-visible,.rail-tog:focus-visible{outline:2px solid var(--nav-bar);outline-offset:-2px}
 .rail-foot{border-top:1px solid var(--side-line);display:flex;flex-direction:column;padding-top:4px}
-.rail-ver{all:unset;box-sizing:border-box;cursor:pointer;width:56px;text-align:center;font-size:10.5px;color:var(--side-muted);letter-spacing:.02em;padding:6px 0 0}
+.rail-ver{all:unset;box-sizing:border-box;cursor:pointer;width:52px;text-align:center;font-size:10.5px;color:var(--side-muted);letter-spacing:.02em;padding:6px 0 0}
 .rail-ver:hover{color:#f2f2f2}
 /* botão › / ‹ no canto inferior esquerdo: a seta gira ao expandir e ao recolher */
 .rail-tog svg{transition:transform .26s cubic-bezier(.2,.8,.2,1)}
@@ -824,23 +859,30 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
   <!-- CUSTOS (base de estoque) -->
   <section class="page" data-page="custos">
     <div class="cs-bar"><p id="csNote">Custo de peças = saídas do estoque com destino a um veículo. Entradas (compras para o estoque) não entram no custo por veículo.</p>
-      <label class="cs-vh" title="Opcional: soma a mão de obra (horas-homem × valor da hora) ao custo de peças">Valor da hora de oficina <span>R$</span><input class="inp sm" id="csVh" type="number" min="0" step="1" placeholder="0"></label></div>
+      <div class="cs-ctl"><div class="cs-modo abs-only"><span>Custo considerado</span><div class="mseg" id="csModo" role="group" aria-label="Custo considerado nos gráficos"><button type="button" data-m="total">Total</button><button type="button" data-m="pecas">Manutenção</button><button type="button" data-m="comb">Combustível</button></div></div>
+      <label class="cs-vh" title="Opcional: soma a mão de obra (horas-homem × valor da hora) ao custo de peças">Valor da hora de oficina <span>R$</span><input class="inp sm" id="csVh" type="number" min="0" step="1" placeholder="0"></label></div></div>
     <div id="csAviso"></div>
     <div class="grid c2">
+      <div class="card full abs-only" data-part="Gráficos"><div class="card-h"><div><h3 id="csMesT">Custo por mês: manutenção × combustível</h3><p id="csMesSub">Peças do estoque, diesel e ARLA do tanque próprio</p></div></div><div class="cw"><canvas id="csMes"></canvas></div></div>
       <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por veículo</h3><p id="csVehSub">Peças aplicadas por placa · 15 por página</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csVeh"></canvas></div></div>
-      <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por tipo de veículo</h3><p>Soma das peças pelo tipo do cadastro de veículos</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csTipo"></canvas></div></div>
+      <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por tipo de veículo</h3><p id="csTipoSub">Soma das peças pelo tipo do cadastro de veículos</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csTipo"></canvas></div></div>
       <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por proprietário</h3><p>Frota própria e veículos de terceiros atendidos pela oficina</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csProp"></canvas></div></div>
-      <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por marca</h3><p>Soma das peças e custo médio por veículo da marca</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csMarca"></canvas></div></div>
+      <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo por marca</h3><p id="csMarcaSub">Soma das peças e custo médio por veículo da marca</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csMarca"></canvas></div></div>
       <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Peças com maior custo</h3><p>Valor total por peça no período · 15 por página</p></div></div><div class="cw h420"><canvas id="csPeca"></canvas></div></div>
       <div class="card" data-part="Gráficos"><div class="card-h"><div><h3>Custo × horas de oficina por veículo</h3><p>Cada ponto é uma placa. Alto custo com poucas horas costuma ser troca de peça cara; muitas horas com pouca peça, mão de obra.</p></div><span class="tag">Clique para detalhar</span></div><div class="cw h420"><canvas id="csScatter"></canvas></div></div>
-      <div class="card full" data-part="Tabelas"><div class="card-h"><div><h3>Custo por veículo</h3><p>Peças do estoque, OS e horas de oficina de cada placa</p></div>
+      <div class="card full" data-part="Tabelas"><div class="card-h"><div><h3>Custo por veículo</h3><p>Peças do estoque, combustível, OS e horas de oficina de cada placa</p></div>
         <div class="toolbar"><input class="inp" id="csQ" placeholder="Buscar placa, tipo, marca ou proprietário…"><button class="btn" data-export="custos" type="button">Exportar CSV</button></div></div>
         <div class="table-wrap"><table><thead id="csVehH"></thead><tbody id="csRows"></tbody></table></div><div class="tcount" id="csCount"></div></div>
+      <div class="card full abs-only" data-part="Tabelas"><div class="card-h"><div><h3>Combustível por veículo</h3><p>Abastecimentos de cada placa no tanque próprio: litros, valor e preço médio do litro</p></div>
+        <div class="toolbar"><input class="inp" id="cbQ" placeholder="Buscar placa, tipo ou marca…"><button class="btn" data-export="combustivel" type="button">Exportar CSV</button></div></div>
+        <div class="table-wrap"><table><thead id="cbH"></thead><tbody id="cbRows"></tbody></table></div><div class="tcount" id="cbCount"></div></div>
       <div class="card full" data-part="Tabelas"><div class="card-h"><div><h3>Custo por ordem de serviço</h3><p>Peças de cada OS e os serviços apontados nela</p></div>
         <div class="toolbar"><input class="inp" id="csOsQ" placeholder="Buscar OS, placa ou serviço…"><button class="btn" data-export="custos_os" type="button">Exportar CSV</button></div></div>
         <div class="table-wrap"><table><thead><tr><th>OS Nº</th><th>Data</th><th>Placa</th><th>Serviços apontados</th><th class="n">Horas</th><th class="n">Itens</th><th class="n">Peças (R$)</th><th>Situação</th></tr></thead><tbody id="csOsRows"></tbody></table></div><div class="tcount" id="csOsCount"></div></div>
       <div class="card" data-part="Conferência e compras"><div class="card-h"><div><h3>Conferência do cruzamento</h3><p>Pontos em que o estoque e as OS não batem</p></div></div><div id="csQual"></div></div>
       <div class="card" data-part="Conferência e compras"><div class="card-h"><div><h3>Entradas no estoque (compras)</h3><p id="csInSub">Por fornecedor · não somam no custo por veículo</p></div></div><div class="cw h420"><canvas id="csIn"></canvas></div></div>
+      <div class="card abs-only" data-part="Conferência e compras"><div class="card-h"><div><h3>Preço médio do litro</h3><p id="csPrecoSub">Valor ÷ litros dos abastecimentos de cada mês</p></div></div><div class="cw"><canvas id="csPreco"></canvas></div></div>
+      <div class="card abs-only" data-part="Conferência e compras"><div class="card-h"><div><h3>Tanque de combustível</h3><p id="csTqSub">Compras, abastecimentos e ajustes no período · só os abastecimentos somam no custo por veículo</p></div></div><div id="csTanque"></div></div>
     </div>
   </section>
 
@@ -954,46 +996,41 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
   <!-- DADOS -->
   <section class="page" data-page="dados">
     <div class="grid c2">
-      <div class="card" data-part="Bases"><div class="card-h"><div><span class="base-n">Base 1</span><h3>Ordens de Serviço</h3><p>Apontamentos das OS. O painel é recalculado no navegador; nenhum dado sai do seu computador.</p></div></div>
-        <label class="drop" id="drop" for="excelFile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg>
-          <h4>Arraste a planilha de OS aqui</h4><p>ou clique para selecionar um arquivo .xlsx / .xls</p>
-          <span class="btn primary">Selecionar planilha</span>
-        </label>
-        <input id="excelFile" type="file" accept=".xlsx,.xls" hidden>
-        <div class="status-line" id="importStatus"></div>
-        <div class="toolbar" style="margin-top:12px"><button class="btn" id="restoreBtn" type="button">Restaurar base embutida</button></div>
-        <p class="note">Colunas esperadas: <b>Data, OS Nº, Placa, Técnico, Tempo (hh:mm), Minutos (raw), Tarefas</b>. Usa a aba “Ordens de Serviço” (ou a primeira aba). A última base importada fica salva neste navegador.</p>
-      </div>
-      <div class="card" data-part="Bases"><div class="card-h"><div><span class="base-n">Base 2</span><h3>Tabela de Veículos</h3><p>Cadastro de equipamentos: liga cada placa à sua marca e modelo.</p></div></div>
-        <label class="drop" id="dropVeh" for="vehFile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg>
-          <h4>Arraste a tabela de veículos aqui</h4><p>ou clique para selecionar um arquivo .xlsx / .xls</p>
-          <span class="btn primary">Selecionar planilha</span>
-        </label>
-        <input id="vehFile" type="file" accept=".xlsx,.xls" hidden>
-        <div class="status-line" id="vehStatus"></div>
-        <div class="toolbar" style="margin-top:12px"><button class="btn" id="restoreVehBtn" type="button">Restaurar tabela embutida</button></div>
-        <p class="note">Colunas usadas: <b>Placa</b> (ou “Placa/Identificador”), <b>Marca</b>, <b>Modelo</b>, <b>Tipo</b>, <b>Proprietário</b> e <b>Ano Fabricação</b>. As demais colunas são ignoradas. A última tabela importada fica salva neste navegador.</p>
-      </div>
-      <div class="card full cost-only" data-part="Bases"><div class="card-h"><div><span class="base-n">Base 3</span><h3>Movimentações de Estoque</h3><p>Saídas de peças por placa e nº de OS: é a base do custo por veículo. As entradas (compras) aparecem só como informação.</p></div></div>
-        <label class="drop" id="dropEst" for="estFile">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg>
-          <h4>Arraste a planilha de movimentações de estoque aqui</h4><p>ou clique para selecionar um arquivo .xlsx / .xls</p>
-          <span class="btn primary">Selecionar planilha</span>
-        </label>
-        <input id="estFile" type="file" accept=".xlsx,.xls" hidden>
-        <div class="status-line" id="estStatus"></div>
-        <div class="toolbar" style="margin-top:12px"><button class="btn" id="restoreEstBtn" type="button">Restaurar base embutida</button></div>
-        <p class="note">Colunas usadas: <b>Data, Tipo</b> (Saída/Entrada), <b>Veículo destino, O.S.</b> (ou O.S. do Item), <b>Código e Nome da Peça, Quantidade, Valor Unitário, Valor Total do Item, Motivo, Local</b> e <b>Fornecedor</b>. A última base importada fica salva neste navegador.</p>
-      </div>
-      <div class="card full" data-part="Bases"><div class="card-h"><div><h3>Bases em uso</h3><p>Informações das bases carregadas</p></div></div>
-        <div class="kv-2"><div><h4 class="kv-t">Ordens de Serviço</h4><dl class="kv" id="baseInfo"></dl></div><div><h4 class="kv-t">Tabela de Veículos</h4><dl class="kv" id="vehInfo"></dl></div></div>
-        <div class="kv-2" style="margin-top:16px"><div><h4 class="kv-t">Movimentações de Estoque</h4><dl class="kv" id="estInfo"></dl></div><div><h4 class="kv-t">Cruzamento das bases</h4><dl class="kv" id="crossInfo"></dl></div></div>
-        <div style="margin-top:16px"><label class="note mt0" for="refSel" style="display:block;margin-bottom:6px">Data de referência para “dias sem manutenção”</label>
-        <select class="inp" id="refSel"><option value="today">Hoje</option><option value="base">Última data da base</option></select></div>
-      </div>
-      <div class="card full rules"><div class="card-h"><div><h3>Critérios de cálculo</h3></div></div>
+      <!-- v4.6: as 5 bases lado a lado, compactas (importar + resumo de cada uma) -->
+      <div class="card full" data-part="Bases"><div class="card-h"><div><h3>Bases</h3></div></div>
+        <div class="bts">
+          <div class="bt"><div class="bt-h"><span class="base-n">Base 1</span><b>Ordens de serviço</b></div>
+            <label class="drop sm" id="drop" for="excelFile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V3M7 8l5-5 5 5M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></svg><span class="btn primary">Selecionar planilha</span></label>
+            <input id="excelFile" type="file" accept=".xlsx,.xls" hidden>
+            <div class="bt-st"><div class="status-line" id="importStatus"></div><button class="bt-rst" id="restoreBtn" type="button" title="Restaurar a base embutida" aria-label="Restaurar a base embutida de OS"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button></div>
+            <dl class="bt-kv" id="baseInfo"></dl></div>
+          <div class="bt"><div class="bt-h"><span class="base-n">Base 2</span><b>Veículos</b></div>
+            <label class="drop sm" id="dropVeh" for="vehFile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h12v10H2zM14 10h4l3 3v3h-7"/><circle cx="6.5" cy="17.5" r="1.8"/><circle cx="17.5" cy="17.5" r="1.8"/></svg><span class="btn primary">Selecionar planilha</span></label>
+            <input id="vehFile" type="file" accept=".xlsx,.xls" hidden>
+            <div class="bt-st"><div class="status-line" id="vehStatus"></div><button class="bt-rst" id="restoreVehBtn" type="button" title="Restaurar a tabela embutida" aria-label="Restaurar a tabela de veículos embutida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button></div>
+            <dl class="bt-kv" id="vehInfo"></dl></div>
+          <div class="bt cost-only"><div class="bt-h"><span class="base-n">Base 3</span><b>Estoque de peças</b></div>
+            <label class="drop sm" id="dropEst" for="estFile"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8l-9-5-9 5 9 5 9-5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg><span class="btn primary">Selecionar planilha</span></label>
+            <input id="estFile" type="file" accept=".xlsx,.xls" hidden>
+            <div class="bt-st"><div class="status-line" id="estStatus"></div><button class="bt-rst" id="restoreEstBtn" type="button" title="Restaurar a base embutida" aria-label="Restaurar a base de estoque embutida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button></div>
+            <dl class="bt-kv" id="estInfo"></dl></div>
+          <div class="bt cost-only"><div class="bt-h"><span class="base-n">Base 4</span><b>Diesel</b></div>
+            <label class="drop sm" id="dropAbs_diesel" for="absFile_diesel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V5a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v16"/><path d="M3 21h12"/><path d="M7 8h4"/><path d="M14 9h2a2 2 0 0 1 2 2v5a1.5 1.5 0 0 0 3 0V8l-3-3"/></svg><span class="btn primary">Selecionar planilha</span></label>
+            <input id="absFile_diesel" type="file" accept=".xlsx,.xls" hidden>
+            <div class="bt-st"><div class="status-line" id="absStatus_diesel"></div><button class="bt-rst" id="restoreAbsBtn_diesel" type="button" title="Restaurar a base embutida" aria-label="Restaurar a base de diesel embutida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button></div>
+            <dl class="bt-kv" id="absInfo_diesel"></dl></div>
+          <div class="bt cost-only"><div class="bt-h"><span class="base-n">Base 5</span><b>ARLA</b></div>
+            <label class="drop sm" id="dropAbs_arla" for="absFile_arla"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11z"/><path d="M9.5 15a2.5 2.5 0 0 0 2.5 2.5"/></svg><span class="btn primary">Selecionar planilha</span></label>
+            <input id="absFile_arla" type="file" accept=".xlsx,.xls" hidden>
+            <div class="bt-st"><div class="status-line" id="absStatus_arla"></div><button class="bt-rst" id="restoreAbsBtn_arla" type="button" title="Restaurar a base embutida" aria-label="Restaurar a base de ARLA embutida"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg></button></div>
+            <dl class="bt-kv" id="absInfo_arla"></dl></div>
+        </div></div>
+      <div class="card full" data-part="Bases"><div class="card-h"><div><h3>Cruzamento das bases</h3></div>
+          <label class="ref-sel" for="refSel">Referência dos dias sem manutenção<select class="inp sm" id="refSel"><option value="today">Hoje</option><option value="base">Última data da base</option></select></label></div>
+        <div class="cx" id="crossInfo"></div></div>
+      <!-- v4.6: textos informativos em caixas com X (fechadas ficam gravadas no navegador) -->
+      <div class="card full info-box" data-info="criterios"><div class="card-h"><div><h3>Critérios de cálculo</h3></div><button class="info-x" type="button" title="Fechar" aria-label="Fechar os critérios de cálculo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+        <div class="rules info-body">
         <p><b>Atendimento (OS):</b> combinação única de nº da OS + placa (contagem distinta). Linhas de vários técnicos, vários serviços e vários dias da mesma OS são unidas em uma só. Linha com a placa em branco recebe a placa das outras linhas da mesma OS; se a OS não tiver placa em nenhuma linha, as horas contam só para o técnico (aba Equipe técnica). Nomes de técnico escritos com maiúsculas/minúsculas ou acentos diferentes são unificados.</p>
         <p><b>Classificação:</b> 0–15 dias = Leve · 16–25 = Médio · 26–30 = Alerta · acima de 30 = Urgente.</p>
         <p><b>Reincidência:</b> mesma tarefa na mesma placa em duas ou mais datas distintas. Nomes de tarefa são unificados sem diferenciar maiúsculas e minúsculas. <b>Retrabalho:</b> repetição em até 30 dias da execução anterior.</p>
@@ -1005,19 +1042,22 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
         <p><b>Período:</b> o seletor do topo restringe as OS analisadas. Os dias sem manutenção sempre usam o histórico completo.</p>
         <p><b>Preventivas:</b> a próxima revisão é a última + o intervalo do plano, em km e em meses; vence no que chegar primeiro. <b>Vencida</b> = passou da data ou o km atual passou do km previsto. <b>Próxima</b> = faltam até 15 dias ou até 10% do intervalo em km. Cada tipo de revisão é independente: a próxima MP1 conta só a partir da última MP1, e assim por diante. RP1 e RP2 (carretas) são sob demanda: não têm intervalo nem km, porque carretas não têm hodômetro. Sem o km atual do veículo, a situação usa só a data. Os cadastros ficam salvos no navegador em que foram feitos; use “Fazer backup” para guardar ou levar para outro computador.</p>
         <p class="cost-only"><b>Custo de peças:</b> soma do “Valor Total do Item” das <b>saídas</b> do estoque. O veículo vem de “Veículo destino” e a OS de “O.S. do Item”. O custo de uma OS é a soma das saídas com o número dela, e o custo de um veículo é a soma das saídas com a placa dele, com ou sem OS. As <b>entradas</b> são compras para o estoque e não entram no custo por veículo, para não contar duas vezes. O período das saídas segue o seletor do topo, pela data da movimentação. <b>Mão de obra</b> (opcional, na aba Custos) = horas-homem × valor da hora informado.</p>
+        <p class="cost-only"><b>Combustível:</b> soma do “Valor da transação” das <b>saídas</b> das planilhas de abastecimento (diesel e ARLA do tanque próprio), pela placa do “Equipamento” e pela data do abastecimento. As <b>entradas</b> (compras para o tanque) e os <b>ajustes</b> de inventário ficam só na conferência do tanque, para não contar duas vezes. O combustível não tem OS, por isso não entra no custo por OS, no custo médio por OS nem no índice de Prioridades, e fica de fora quando há filtro de serviço ou de técnico. Na aba Custos, “Custo considerado” escolhe o que os gráficos somam: total, só manutenção (peças) ou só combustível. Abastecimentos feitos fora da base (postos, cartão-frota) não estão nessas planilhas. <b>ARLA / diesel</b> = litros de ARLA ÷ litros de diesel; o consumo normal fica perto de 3% a 5%.</p>
         <p><b>Tipo e proprietário:</b> vêm da Tabela de Veículos. Os nomes de tipo são padronizados (ex.: “CAR/ S REBOQUE/C FECHADA” = Semi-reboque baú) e agrupados em cavalos, caminhões, implementos e leves.</p>
         <p><b>Limitações:</b> linhas sem placa, data ou OS são ignoradas. A análise considera somente o histórico do arquivo.</p>
-      </div>
-      <div class="card full" id="admCard" hidden><div class="card-h"><div><h3>Acessos e atualizações</h3><p>Somente administradores veem este quadro. Novos acessos entram bloqueados até serem liberados aqui.</p></div><div class="toolbar"><button class="btn" type="button" id="admReload">Atualizar lista</button></div></div>
+      </div></div>
+      <div class="card full" id="admCard" hidden><div class="card-h"><div><h3>Acessos e atualizações</h3></div><div class="toolbar"><button class="btn" type="button" id="admReload">Atualizar lista</button></div></div>
+        <div class="info-box mini" data-info="acessos"><p>Somente administradores veem este quadro. Novos acessos entram bloqueados até serem liberados aqui.</p><button class="info-x" type="button" title="Fechar" aria-label="Fechar o aviso"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
         <div class="kv-2"><div><h4 class="kv-t">Usuários</h4><div class="table-wrap" style="max-height:340px"><table><thead><tr><th>Usuário</th><th>Desde</th><th>Liberado</th><th>Administrador</th></tr></thead><tbody id="admUsers"></tbody></table></div></div>
           <div><h4 class="kv-t">Últimas atualizações das bases</h4><div class="table-wrap" style="max-height:340px"><table><thead><tr><th>Quando</th><th>Base</th><th>Arquivo</th><th class="n">Linhas</th><th>Por</th></tr></thead><tbody id="admCargas"></tbody></table></div></div></div>
         <div class="adm-abas-box"><h4 class="kv-t">O que cada usuário vê</h4>
-          <p class="note adm-abas-n">Marque as abas liberadas para cada usuário; a mudança vale no próximo acesso dele. O administrador vê todas. Sem a aba <b>Custos</b>, o usuário não vê nenhum valor em R$ nas outras abas, e sem <b>Preventivas</b> não lê nem grava revisões. Esses dois bloqueios também valem no banco de dados.</p>
+          <div class="info-box mini" data-info="abas"><p>Marque as abas liberadas para cada usuário; a mudança vale no próximo acesso dele. O administrador vê todas. Sem a aba <b>Custos</b>, o usuário não vê nenhum valor em R$ nas outras abas, e sem <b>Preventivas</b> não lê nem grava revisões. Esses dois bloqueios também valem no banco de dados.</p><button class="info-x" type="button" title="Fechar" aria-label="Fechar a explicação"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
           <div class="table-wrap"><table class="adm-abas"><thead id="admAbasH"></thead><tbody id="admAbas"></tbody></table></div></div>
         <div class="pv-msg" id="admMsg" role="status"></div></div>
-      <div class="card full"><div class="card-h"><div><h3>Histórico de versões</h3><p>Versão atual: <b id="verNow"></b> · cópias de cada versão na pasta <b>versoes</b></p></div></div>
-        <div class="table-wrap" style="max-height:none"><table><thead><tr><th>Versão</th><th>Data</th><th>Mudanças</th></tr></thead><tbody id="verRows"></tbody></table></div>
+      <div class="card full info-box" data-info="versoes"><div class="card-h"><div><h3>Histórico de versões</h3><p>Versão atual: <b id="verNow"></b></p></div><button class="info-x" type="button" title="Fechar" aria-label="Fechar o histórico de versões"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+        <div class="table-wrap" style="max-height:380px"><table><thead><tr><th>Versão</th><th>Data</th><th>Mudanças</th></tr></thead><tbody id="verRows"></tbody></table></div>
       </div>
+      <div class="info-rest" id="infoRest" hidden><button type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>Mostrar os textos informativos</button></div>
     </div>
   </section>
 
@@ -1094,6 +1134,8 @@ const BASE_META={};
 const BASE_VEH=[];     // [[placa, marca, modelo, tipo, proprietário, ano], ...] da Tabela de Veículos
 const VEH_META={};
 const BASE_EST=/*__EST__*/[];     // Movimentações de Estoque: [[cabeçalho...],[linha...],...] (lido pelo nome das colunas)
+const BASE_ABS=/*__ABS__*/{};     // Abastecimentos (v4.6): {diesel:[[cabeçalho...],...],arla:[[cabeçalho...],...]} (lido pelo nome das colunas)
+const ABS_META=/*__ABSMETA__*/{};
 const EST_META=/*__ESTMETA__*/{};
 
 /* ================= UTILITÁRIOS ================= */
@@ -1150,7 +1192,7 @@ const svg=(k,sw=1.9)=>`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor
 
 const PAGES=[
  {id:'overview',t:'Visão geral',s:'Resumo executivo: desempenho, custo e reincidência da frota',sc:'Resumo executivo: desempenho e reincidência da frota',ic:'grid'},
- {id:'custos',t:'Custos',s:'Custo de peças por veículo, OS, tipo, proprietário, marca e peça (saídas do estoque)',ic:'coin'},
+ {id:'custos',t:'Custos',s:'Custo de peças e combustível por veículo, OS, tipo, proprietário e marca',ic:'coin'},
  {id:'frota',t:'Frota',s:'Atendimentos, esforço, tempo sem manutenção, marcas e modelos por veículo',ic:'truck'},
  {id:'tarefas',t:'Serviços',s:'Volume, horas e sazonalidade por tipo de serviço',ic:'wrench'},
  {id:'reinc',t:'Reincidência e retrabalho',c:'Reincidência',s:'O mesmo serviço repetido na mesma placa e as repetições em intervalo curto',ic:'repeat'},
@@ -1324,9 +1366,62 @@ async function importEst(file){const st=$('#estStatus');st.style.color='';st.tex
     loadEst(rows,meta);const ok=ls.set('pm-est',JSON.stringify({v:1,rows,meta}));
     st.textContent=`Atualizado: ${file.name} · ${num(rows.filter(r=>r.saida).length)} saídas${ok?' · salvo neste navegador':''}`;derive();destroyAll();renderAll();
   }catch(err){st.style.color='var(--crit)';st.textContent='Falha na importação: '+err.message+(SB_ON?' Nada foi alterado no Supabase.':'')}}
+/* ===== Base 4 (v4.6): Abastecimentos de diesel e ARLA do tanque próprio (custo de combustível por veículo) =====
+   As planilhas não dizem o produto: cada uma entra no seu espaço (diesel ou arla), e o preço do litro confere se não houve troca. */
+const COMB={diesel:'Diesel',arla:'ARLA'};
+let ABS={rows:[],meta:{}};
+// Linha da planilha → {d, hr, prod, tipo ('saida'|'entrada'|'ajuste'), sin (+1 entra no tanque, −1 sai), p (placa), l (litros), pu (R$/L), v (R$)}
+function absFromObjs(objs,prod){if(!objs.length)throw Error('A planilha está vazia.');
+  const keys=Object.keys(objs[0]),col=re=>keys.find(k=>re.test(k.trim()));
+  const kD=col(/^data/i),kT=col(/^tipo/i),kE=col(/equipamento|ve[ií]culo|placa/i),kL=col(/^litros/i),kP=col(/pre[cç]o/i),kV=col(/^valor/i);
+  if(!kD||!kT||!kE||!kL)throw Error('Não encontrei as colunas Data/Hora, Tipo de Transação, Equipamento e Litros.');
+  const out=[];
+  for(const o of objs){const raw=o[kD];const d=raw instanceof Date||typeof raw==='number'?parseDate(raw):parseDate(String(raw??''));if(!d)continue;
+    const hr=raw instanceof Date?`${String(raw.getHours()).padStart(2,'0')}:${String(raw.getMinutes()).padStart(2,'0')}`:(String(raw??'').match(/\b(\d{1,2}:\d{2})/)||[])[1]||'';
+    const tt=normTxt(o[kT]),tipo=/SAIDA/.test(tt)?'saida':/ENTRADA/.test(tt)?'entrada':/AJUSTE/.test(tt)?'ajuste':'';if(!tipo)continue;
+    const sin=tipo==='entrada'||/POSITIVO/.test(tt)?1:-1,eq=String(o[kE]??'').trim(),p=tipo==='saida'&&eq&&eq!=='-'?normPlate(eq):'';
+    const l=Math.abs(parseNum(o[kL])),pu=kP?parseNum(o[kP]):0;let v=kV?parseNum(o[kV]):0;if(!v&&pu)v=l*pu;
+    out.push({d:iso(d),hr,prod,tipo,sin,p,l,pu,v})}
+  return out}
+// confere o produto pelo preço típico do litro (diesel ~R$ 5–8, ARLA ~R$ 2–3)
+function absConfere(rows,prod){const ps=rows.filter(r=>r.pu>0).map(r=>r.pu).sort((a,b)=>a-b);if(!ps.length)return;const md=ps[Math.floor(ps.length/2)];
+  if(prod==='diesel'&&md<4)throw Error(`esta planilha parece ser de ARLA (litro típico de ${brl(md,2)}). Use o espaço do ARLA.`);
+  if(prod==='arla'&&md>=4)throw Error(`esta planilha parece ser de diesel (litro típico de ${brl(md,2)}). Use o espaço do diesel.`)}
+function loadAbs(prod,rows,meta){ABS.rows=ABS.rows.filter(r=>r.prod!==prod).concat(rows);ABS.meta[prod]={...(meta||{}),linhas:rows.length}}
+// formato do Supabase (tabela abastecimentos) ⇄ formato do painel
+const absToArr=r=>[r.d,r.hr,r.tipo,r.sin,r.p,r.l,r.pu,r.v];
+const absFromDb=r=>({d:String(r.data).slice(0,10),hr:r.hora||'',prod:r.produto,tipo:r.tipo,sin:+r.sinal||(r.tipo==='entrada'?1:-1),p:r.placa||'',l:+r.litros||0,pu:+r.preco_litro||0,v:+r.valor||0});
+function bootAbs(){ABS={rows:[],meta:{}};
+  for(const prod of ['diesel','arla']){const st=$('#absStatus_'+prod),s=ls.get('pm-abs-'+prod);
+    if(s){try{const j=JSON.parse(s);if(j&&j.v===1&&j.rows&&j.rows.length){loadAbs(prod,j.rows,j.meta);st.textContent=`Base importada em uso: ${j.meta.fonte}`;continue}}catch(e){}}
+    let rows=[];try{rows=BASE_ABS[prod]&&BASE_ABS[prod].length?absFromObjs(matrixToObjs(BASE_ABS[prod]),prod):[]}catch(e){}
+    const m=ABS_META[prod]||{};loadAbs(prod,rows,{fonte:m.fonte||'Base embutida',quando:m.quando||'—'});st.textContent=rows.length?'Base embutida em uso':`Nenhuma planilha de ${COMB[prod]} carregada`}}
+async function importAbs(file,prod){const st=$('#absStatus_'+prod);st.style.color='';st.textContent=`Lendo a planilha de ${COMB[prod]}…`;
+  try{if(!window.XLSX)throw Error('Biblioteca de leitura do Excel não carregou.');
+    const wb=XLSX.read(await file.arrayBuffer(),{type:'array',cellDates:true});
+    const rows=absFromObjs(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''}),prod);if(!rows.length)throw Error('Nenhum lançamento válido.');
+    absConfere(rows,prod);const meta={fonte:file.name,quando:new Date().toLocaleString('pt-BR')};
+    if(SB_ON){if(!isAdmin())throw Error('somente administradores podem atualizar as bases.');
+      st.textContent=`Enviando ${num(rows.length)} lançamentos para o Supabase…`;const ds=rows.map(r=>r.d).sort();
+      const n=await SB.rpc('substituir_abastecimentos',{p_produto:prod,p_linhas:rows.map(absToArr),p_arquivo:file.name,p_ini:ds[0],p_fim:ds[ds.length-1]});
+      meta.quando=fmtTs(new Date().toISOString());loadAbs(prod,rows,meta);st.textContent=`Base substituída no Supabase: ${file.name} · ${num(n)} lançamentos`;derive();destroyAll();renderAll();if(typeof admLoad==='function')admLoad();return}
+    loadAbs(prod,rows,meta);const ok=ls.set('pm-abs-'+prod,JSON.stringify({v:1,rows,meta}));
+    st.textContent=`Atualizado: ${file.name} · ${num(rows.filter(r=>r.tipo==='saida').length)} abastecimentos${ok?' · salvo neste navegador':''}`;derive();destroyAll();renderAll();
+  }catch(err){st.style.color='var(--crit)';st.textContent='Falha na importação: '+err.message+(SB_ON?' Nada foi alterado no Supabase.':'')}}
 // valor da hora de oficina (opcional): soma mão de obra ao custo de peças
 let VH=+(ls.get('pm-vh')||0)||0;
 function custoPor(E,keyFn){const m=new Map();for(const e of E){const k=keyFn(e);if(!m.has(k))m.set(k,{k,v:0,n:0,q:0,os:new Set(),pl:new Set()});const x=m.get(k);x.v+=e.v;x.n++;x.q+=e.q;if(e.os)x.os.add(e.os);if(e.p)x.pl.add(e.p)}return[...m.values()].sort((a,b)=>b.v-a.v)}
+// v4.6: custo em três parcelas por chave — peças (estoque), diesel e ARLA (abastecimentos)
+function custo3(E,A,keyFn){const m=new Map(),g=k=>{if(!m.has(k))m.set(k,{k,pecas:0,diesel:0,arla:0,n:0,pl:new Set(),os:new Set()});return m.get(k)};
+  for(const e of E){const x=g(keyFn(e));x.pecas+=e.v;x.n++;if(e.p)x.pl.add(e.p);if(e.os)x.os.add(e.os)}
+  for(const a of A){const x=g(keyFn(a));x[a.prod]+=a.v;if(a.p)x.pl.add(a.p)}
+  return[...m.values()]}
+// "Custo considerado" na aba Custos: total (peças + combustível), só manutenção (peças) ou só combustível
+let CS_MODO=['total','pecas','comb'].includes(ls.get('pm-cs-modo'))?ls.get('pm-cs-modo'):'total';
+const CS_SER=[{k:'pecas',l:'Peças',c:()=>css('--s1')},{k:'diesel',l:'Diesel',c:()=>css('--s3')},{k:'arla',l:'ARLA',c:()=>css('--s2')}];
+const CS_MODO_TXT={total:'Peças, diesel e ARLA',pecas:'Peças aplicadas',comb:'Diesel e ARLA'};
+const csSel=()=>!ABS.rows.length||CS_MODO==='pecas'?['pecas']:CS_MODO==='comb'?['diesel','arla']:['pecas','diesel','arla'];
+const csVal=x=>csSel().reduce((s,k)=>s+(x[k]||0),0);
 // série no tempo com granularidade automática: semana quando o período cobre até ~10 semanas, senão mês
 function semanaDe(d){const x=new Date(d+'T00:00:00');x.setDate(x.getDate()-((x.getDay()+6)%7));return iso(x)}
 function chaveTempo(dates){if(!dates.length)return{key:d=>d.slice(0,7),lab:monLabel,wk:false};const s=dates.slice().sort(),wk=dayDiff(s[0],s[s.length-1])<=70;
@@ -1341,7 +1436,7 @@ function svcOS(o){return !SVC||Object.keys(o.t).some(svcMatch)}
 function derive(){
   // com filtro de serviço, só entram as OS que têm algum serviço correspondente (inclusive para "dias sem manutenção")
   const all=SVC?RAW.os.filter(svcOS):RAW.os;
-  if(!all.length){MODEL={O:[],E:[],EIN:[],recs:[],repeats:[],vehicles:[],ref:iso(new Date()),periodAll:PERIOD==='all'};return}
+  if(!all.length){MODEL={O:[],E:[],EIN:[],A:[],AQ:[],recs:[],repeats:[],vehicles:[],ref:iso(new Date()),periodAll:PERIOD==='all'};return}
   const ref=REF_MODE==='base'?all.reduce((m,o)=>o.e>m?o.e:m,all[0].e):iso(new Date());
   const today=iso(new Date());
   const O=PERIOD==='all'?all:PERIOD==='today'?all.filter(o=>(o.ds||[o.d]).includes(today)):PERIOD.startsWith('last')?(()=>{const n=+PERIOD.slice(4),lim=new Date(ref);lim.setDate(lim.getDate()-n);const l=iso(lim);return all.filter(o=>o.d>l)})():all.filter(o=>o.d.slice(0,7)===PERIOD);
@@ -1349,6 +1444,8 @@ function derive(){
   const inP=PERIOD==='all'?()=>true:PERIOD==='today'?d=>d===today:PERIOD.startsWith('last')?(()=>{const n=+PERIOD.slice(4),lim=new Date(ref);lim.setDate(lim.getDate()-n);const l=iso(lim);return d=>d>l})():d=>d.slice(0,7)===PERIOD;
   const osSet=SVC?new Set(all.map(o=>o.n)):null;
   const E=EST.rows.filter(e=>e.saida&&inP(e.d)&&(!osSet||osSet.has(e.os))),EIN=EST.rows.filter(e=>!e.saida&&inP(e.d));
+  // combustível (v4.6): abastecimentos com placa no período; não tem OS, então fica de fora com o filtro de serviço. AQ = todo o movimento do tanque no período
+  const A=SVC?[]:ABS.rows.filter(a=>a.tipo==='saida'&&a.p&&inP(a.d)),AQ=ABS.rows.filter(a=>inP(a.d));
   const cOS=new Map();for(const e of EST.rows)if(e.saida&&e.os)cOS.set(e.os,(cOS.get(e.os)||0)+e.v);
   for(const o of RAW.os)o.c=cOS.get(o.n)||0;
   // última manutenção: histórico completo
@@ -1368,17 +1465,17 @@ function derive(){
   const vehicles=[...last.keys()].map(p=>{const items=byP.get(p)||[];const u=last.get(p),dias=Math.max(0,dayDiff(u,ref));
     return{placa:p,atendimentos:items.length,diasComOS:new Set(items.flatMap(o=>o.ds)).size,horas:sumBy(items,o=>o.h)/60,ultima:u,diasSem:dias,classe:classOf(dias),tiposReincidentes:recBy.get(p)||0,retrab:rwBy.get(p)||0,marca:marcaOf(p),modelo:modeloOf(p),
       tipo:tipoOf(p),grupo:grupoOf(p),prop:propOf(p),custo:cP.get(p)||0}});
-  MODEL={O,E,EIN,recs,repeats,vehicles,ref,periodAll:PERIOD==='all'};
+  MODEL={O,E,EIN,A,AQ,recs,repeats,vehicles,ref,periodAll:PERIOD==='all'};
 }
 
 /* Aplica o filtro cruzado */
 function filtered(){
-  let V=MODEL.vehicles,R=MODEL.recs,O=MODEL.O,RP=MODEL.repeats,E=MODEL.E;
+  let V=MODEL.vehicles,R=MODEL.recs,O=MODEL.O,RP=MODEL.repeats,E=MODEL.E,A=MODEL.A||[];
   if(PERIOD!=='all')V=V.filter(v=>v.atendimentos>0);
   if(F){
     // custo: placa/marca/modelo/tipo/proprietário filtram pela placa da saída; serviço/técnico pelas OS correspondentes
     const eBy={plate:e=>e.p===F.value,brand:e=>marcaOf(e.p)===F.value,model:e=>modeloOf(e.p)===F.value,vtype:e=>tipoOf(e.p)===F.value,owner:e=>propOf(e.p)===F.value,group:e=>grupoOf(e.p)===F.value}[F.kind];
-    if(eBy)E=E.filter(eBy);
+    if(eBy){E=E.filter(eBy);A=A.filter(eBy)}
     if(F.kind==='plate'){V=V.filter(v=>v.placa===F.value)}
     else if(F.kind==='brand'){V=V.filter(v=>v.marca===F.value)}
     else if(F.kind==='model'){V=V.filter(v=>v.modelo===F.value)}
@@ -1389,10 +1486,11 @@ function filtered(){
     else if(F.kind==='task'){R=R.filter(r=>r.tarefa===F.value);RP=RP.filter(r=>r.tarefa===F.value);O=O.filter(o=>F.value in o.t);const s=new Set(O.map(o=>o.p));V=V.filter(v=>s.has(v.placa))}
     else if(F.kind==='tech'){O=O.filter(o=>o.k.includes(F.value));const s=new Set(O.map(o=>o.p));V=V.filter(v=>s.has(v.placa))}
     if(F.kind!=='task'){const s=new Set(V.map(v=>v.placa));R=R.filter(r=>s.has(r.placa));RP=RP.filter(r=>s.has(r.placa));if(F.kind!=='tech')O=O.filter(o=>s.has(o.p))}
-    if(F.kind==='class'){const s=new Set(V.map(v=>v.placa));E=E.filter(e=>s.has(e.p))}
-    if(F.kind==='task'||F.kind==='tech'){const s=new Set(O.map(o=>o.n));E=E.filter(e=>s.has(e.os))}
+    if(F.kind==='class'){const s=new Set(V.map(v=>v.placa));E=E.filter(e=>s.has(e.p));A=A.filter(a=>s.has(a.p))}
+    // serviço e técnico ligam pela OS: o combustível (sem OS) fica de fora
+    if(F.kind==='task'||F.kind==='tech'){const s=new Set(O.map(o=>o.n));E=E.filter(e=>s.has(e.os));A=[]}
   }
-  return{V,R,O,RP,E};
+  return{V,R,O,RP,E,A};
 }
 /* Paradas de um veículo: OS que se sobrepõem no tempo (mesmo dia ou abertas juntas) viram uma parada só.
    up = dias inteiros rodando entre o fim de uma parada e o início da seguinte; down = dias corridos parado (início..fim, inclusive) */
@@ -1440,6 +1538,18 @@ function bar(id,labels,data,o={}){const t=T();
   const colors=o.colors||labels.map((l,i)=>o.highlight?(o.highlight(i,l)?t.s1:t.s1soft):(F&&o.kind&&F.kind===o.kind&&F.value!==l?t.s1soft:t.s1));
   mk(id,{type:'bar',data:{labels,datasets:[{label:o.label||'',data,backgroundColor:colors,hoverBackgroundColor:colors,borderRadius:2,borderSkipped:'start',maxBarThickness:o.horizontal?16:38,categoryPercentage:.82,barPercentage:.92}]},options:baseOpts(o)})}
 const hbar=(id,l,d,o={})=>bar(id,l,d,{...o,horizontal:true});
+/* v4.6: barras empilhadas (uma série por parcela), com fresta da cor do fundo entre as parcelas e o total escrito na ponta */
+const TOT={id:'tot',afterDatasetsDraw(c,a,po){if(!po||!po.on)return;const{ctx}=c,t=T(),h=c.options.indexAxis==='y';ctx.save();ctx.font='600 11px '+FONT_UI;ctx.fillStyle=t.ink2;
+  c.data.labels.forEach((l,i)=>{let tot=0,last=null;c.data.datasets.forEach((ds,j)=>{if(!c.isDatasetVisible(j))return;const v=ds.data[i]||0;if(v){tot+=v;last=c.getDatasetMeta(j).data[i]}});
+    if(!last)return;const s=po.fmt?po.fmt(tot):num(tot);if(h){ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillText(s,last.x+6,last.y)}else{ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText(s,last.x,last.y-4)}});ctx.restore()}};
+Chart.register(TOT);
+function stack(id,labels,series,o={}){const t=T(),h=!!o.horizontal,b=baseOpts({...o,vl:false,legend:series.length>1});
+  b.scales.x.stacked=true;b.scales.y.stacked=true;b.plugins.tot={on:true,fmt:o.vlFmt};if(!h)b.layout.padding.top=18;
+  const gap=series.length>1?(h?{right:2}:{top:2}):0;
+  mk(id,{type:'bar',data:{labels,datasets:series.map(s=>({label:s.label,data:s.data,backgroundColor:s.color,hoverBackgroundColor:s.color,borderColor:t.surface,borderWidth:gap,borderSkipped:false,borderRadius:0,maxBarThickness:h?16:38,categoryPercentage:.82,barPercentage:.92}))},options:b})}
+// dica das barras empilhadas: cada parcela em R$ e, no rodapé, o total e um complemento
+function stackTip(arr,ser,extra,title){return{...(title?{title:c=>title(arr[c[0].dataIndex])}:{}),label:c=>c.raw?` ${c.dataset.label}: ${brl(c.raw)}`:null,
+  footer:c=>{const x=arr[c[0].dataIndex];if(!x)return'';const L=ser.length>1?[`Total: ${brl(ser.reduce((s,k)=>s+(x[k.k]||0),0))}`]:[];if(extra)L.push(extra(x));else if(x.pl)L.push(`${num(x.pl.size)} veículos`);return L}}}
 
 /* ---------- Paginação de rankings (mesmo tamanho de caixa, todos os itens) ---------- */
 let PG={};
@@ -1804,15 +1914,23 @@ R_.custos=f=>{const E=f.E,ct=sumBy(E,e=>e.v),comOS=E.filter(e=>e.os),semOS=E.fil
   $('#csVh').value=VH||'';
   if(!EST.rows.length){$('#csAviso').innerHTML='<div class="card"><div class="pv-empty"><b>Base de estoque não carregada</b>Importe a planilha de Movimentações de Estoque em Dados e critérios para ver os custos.</div></div>';return}
   $('#csAviso').innerHTML='';
+  document.body.classList.toggle('no-abs',!ABS.rows.length);
+  $$('#csModo button').forEach(b=>{const on=b.dataset.m===CS_MODO;b.classList.toggle('on',on);b.setAttribute('aria-pressed',String(on))});
+  $('#csNote').textContent=ABS.rows.length?'Custo = peças do estoque (saídas para veículos) + combustível do tanque próprio (abastecimentos de diesel e ARLA). Compras para o estoque e para o tanque não entram no custo por veículo.'+(SVC||(F&&(F.kind==='task'||F.kind==='tech'))?' Com filtro de serviço ou de técnico, o combustível fica de fora: abastecimento não tem OS.':''):'Custo de peças = saídas do estoque com destino a um veículo. Entradas (compras para o estoque) não entram no custo por veículo.';
   // v4.4: a linha de cartões (custo de peças, custo por veículo, custo médio por OS, saídas sem OS / mão de obra) saiu
   const byP=new Map();f.O.forEach(o=>{if(!byP.has(o.p))byP.set(o.p,{os:0,h:0});const x=byP.get(o.p);x.os++;x.h+=o.h/60});
   const cv=custoPor(E.filter(e=>e.p),e=>e.p);
-  const tipT=a=>({label:c=>[' '+brl(a[c.dataIndex].v,2),` ${num(a[c.dataIndex].pl.size)} veículos · ${num(a[c.dataIndex].os.size)} OS`]});
-  paged('csVeh',cv,15,top=>hbar('csVeh',top.map(x=>x.k),top.map(x=>Math.round(x.v)),{kind:'plate',label:'Custo de peças',vlFmt:brlK,valTick:v=>brlK(v),tip:tipT(top)}),'veículos');
   const EV=E.filter(e=>e.p);// saídas para pessoas (sem veículo) ficam fora dos gráficos por veículo
-  const ctp=custoPor(EV,e=>tipoOf(e.p));hbar('csTipo',ctp.map(x=>x.k),ctp.map(x=>Math.round(x.v)),{kind:'vtype',label:'Custo',vlFmt:brlK,valTick:v=>brlK(v),trunc:26,tip:tipT(ctp)});
-  const cpr=custoPor(EV,e=>propOf(e.p));hbar('csProp',cpr.map(x=>x.k),cpr.map(x=>Math.round(x.v)),{kind:'owner',label:'Custo',vlFmt:brlK,valTick:v=>brlK(v),trunc:28,tip:tipT(cpr)});
-  const cmb=custoPor(EV,e=>marcaOf(e.p));hbar('csMarca',cmb.map(x=>x.k),cmb.map(x=>Math.round(x.v)),{kind:'brand',label:'Custo',vlFmt:brlK,valTick:v=>brlK(v),trunc:22,tip:{label:c=>{const x=cmb[c.dataIndex];return[' '+brl(x.v,2),` ${num(x.pl.size)} veículos · ${brl(x.v/Math.max(1,x.pl.size))} por veículo`]}}});
+  // v4.6: gráficos por veículo, tipo, proprietário e marca empilham peças, diesel e ARLA conforme o "Custo considerado"
+  const sel=csSel(),ser=CS_SER.filter(s=>sel.includes(s.k)),A=ABS.rows.length?f.A:[];
+  const grp=keyFn=>custo3(sel.includes('pecas')?EV:[],sel.some(k=>k!=='pecas')?A:[],keyFn).map(x=>(x.val=csVal(x),x)).filter(x=>x.val>0).sort((a,b)=>b.val-a.val);
+  const draw=(id,arr,o)=>stack(id,arr.map(x=>x.k),ser.map(s=>({label:s.l,color:s.c(),data:arr.map(x=>Math.round(x[s.k]))})),{horizontal:true,vlFmt:brlK,valTick:v=>brlK(v),tip:stackTip(arr,ser,o.extra),...o});
+  const nomeModo=CS_MODO_TXT[ABS.rows.length?CS_MODO:'pecas'];
+  $('#csVehSub').textContent=`${nomeModo} por placa · 15 por página`;$('#csTipoSub').textContent=`${nomeModo} pelo tipo do cadastro de veículos`;$('#csMarcaSub').textContent=`${nomeModo} e custo médio por veículo da marca`;
+  const gv=grp(e=>e.p);paged('csVeh',gv,15,top=>draw('csVeh',top,{kind:'plate',extra:x=>`${num(x.os.size)} OS com peças`}),'veículos');
+  draw('csTipo',grp(e=>tipoOf(e.p)),{kind:'vtype',trunc:26});
+  draw('csProp',grp(e=>propOf(e.p)),{kind:'owner',trunc:28});
+  draw('csMarca',grp(e=>marcaOf(e.p)),{kind:'brand',trunc:22,extra:x=>`${num(x.pl.size)} veículos · ${brl(x.val/Math.max(1,x.pl.size))} por veículo`});
   const cpc=custoPor(E,e=>e.peca);
   paged('csPeca',cpc,15,top=>hbar('csPeca',top.map(x=>x.k),top.map(x=>Math.round(x.v)),{label:'Custo',vlFmt:brlK,valTick:v=>brlK(v),trunc:34,tip:{label:c=>{const x=top[c.dataIndex];return[' '+brl(x.v,2),` ${dec(x.q,0)} un · ${num(x.pl.size)} veículos`]}}}),'peças');
   // custo × horas por veículo
@@ -1823,11 +1941,13 @@ R_.custos=f=>{const E=f.E,ct=sumBy(E,e=>e.v),comOS=E.filter(e=>e.os),semOS=E.fil
         y:{min:0,grid:{color:t.grid,drawTicks:false},border:{display:false},ticks:{color:t.muted,padding:8,callback:v=>brlK(v)},title:{display:true,text:'Custo de peças',color:t.muted,font:{size:11}}}},
       plugins:{...baseOpts({vl:false}).plugins,tooltip:{...baseOpts().plugins.tooltip,callbacks:{title:c=>c[0].raw.p,label:c=>[` ${brl(c.raw.y)} em peças`,` ${dec(c.raw.x)} h de oficina · ${num(c.raw.os)} OS`]}}},
       onClick:(e,els,c)=>{if(els.length)openSummary('plate',c.data.datasets[0].data[els[0].index].p)},onHover:(e,els)=>{e.native.target.style.cursor=els.length?'pointer':'default'}}});
+  if(ABS.rows.length)renderComb(f,EV);
   // compras (entradas) por fornecedor
   const ein=custoPor(MODEL.EIN,e=>e.forn||'(sem fornecedor)');$('#csInSub').textContent=`${brl(sumBy(MODEL.EIN,e=>e.v))} em ${num(MODEL.EIN.length)} itens · por fornecedor · não somam no custo por veículo`;
   hbar('csIn',ein.slice(0,15).map(x=>x.k),ein.slice(0,15).map(x=>Math.round(x.v)),{label:'Compras',vlFmt:brlK,valTick:v=>brlK(v),trunc:30,tip:{label:c=>' '+brl(ein[c.dataIndex].v,2)}});
   // tabelas
-  CS_VEH=cv.map(x=>{const o=byP.get(x.k)||{os:0,h:0};return{p:x.k,tipo:tipoOf(x.k),mm:VEH.get(x.k)?`${marcaOf(x.k)} ${VEH.get(x.k).modelo}`:SEM_CAD,prop:propOf(x.k),os:o.os,osE:x.os.size,h:o.h,v:x.v,itens:x.n,mo:VH*o.h}});
+  // tabela: todas as placas com peças ou combustível no período (v4.6: colunas de diesel, ARLA e total)
+  CS_VEH=custo3(EV,A,e=>e.p).map(x=>{const o=byP.get(x.k)||{os:0,h:0};return{p:x.k,tipo:tipoOf(x.k),mm:VEH.get(x.k)?`${marcaOf(x.k)} ${VEH.get(x.k).modelo}`:SEM_CAD,prop:propOf(x.k),os:o.os,osE:x.os.size,h:o.h,v:x.pecas,itens:x.n,mo:VH*o.h,di:x.diesel,ar:x.arla,tot:x.pecas+VH*o.h+x.diesel+x.arla}}).sort((a,b)=>b.tot-a.tot);
   const osI=new Map();RAW.os.forEach(o=>osI.set(o.n,o));const cos=custoPor(comOS,e=>e.os);
   CS_OS=cos.map(x=>{const o=osI.get(x.k),pe=[...x.pl][0]||'';return{n:x.k,d:o?o.d:E.find(e=>e.os===x.k).d,p:o?o.p:pe,pe,svc:o?Object.keys(o.t):[],h:o?o.h/60:null,itens:x.n,v:x.v,sit:!o?'Sem apontamento na base de OS':(o.p!==pe&&pe)?'Placa diferente no estoque ('+pe+')':'OK'}});
   renderCsTable();renderCsOsTable();
@@ -1841,13 +1961,55 @@ R_.custos=f=>{const E=f.E,ct=sumBy(E,e=>e.v),comOS=E.filter(e=>e.os),semOS=E.fil
   $('#csQual').innerHTML=`<div class="table-wrap" style="max-height:none"><table><thead><tr><th>Ponto</th><th class="n">Qtd.</th><th class="n">Valor</th><th>Exemplos</th></tr></thead><tbody>${Q.map(q=>`<tr><td><b>${q[0]}</b></td><td class="n">${num(q[1])}</td><td class="n">${q[2]}</td><td style="white-space:normal;font-size:12px;color:var(--ink-2)">${q[3]||'—'}</td></tr>`).join('')}</tbody></table></div>`;
 };
 SORT_RENDER.csRows=()=>renderCsTable();SORT_RENDER.csOsRows=()=>renderCsOsTable();
-function renderCsTable(){const q=normTxt($('#csQ').value);
-  $('#csVehH').innerHTML=`<tr><th>Placa</th><th>Tipo</th><th>Marca / Modelo</th><th>Proprietário</th><th class="n">OS</th><th class="n">Horas-homem</th><th class="n">Itens</th><th class="n">Peças (R$)</th>${VH?'<th class="n">Mão de obra (R$)</th><th class="n">Total (R$)</th>':''}<th class="n">Peças por OS</th></tr>`;
+function renderCsTable(){const q=normTxt($('#csQ').value),cb=ABS.rows.length>0,tot=VH||cb;
+  $('#csVehH').innerHTML=`<tr><th>Placa</th><th>Tipo</th><th>Marca / Modelo</th><th>Proprietário</th><th class="n">OS</th><th class="n">Horas-homem</th><th class="n">Itens</th><th class="n">Peças (R$)</th>${VH?'<th class="n">Mão de obra (R$)</th>':''}${cb?'<th class="n">Diesel (R$)</th><th class="n">ARLA (R$)</th>':''}${tot?'<th class="n">Total (R$)</th>':''}<th class="n">Peças por OS</th></tr>`;
   const L=CS_VEH.filter(x=>!q||normTxt([x.p,x.tipo,x.mm,x.prop].join(' ')).includes(q));
-  const rows=sortRows('csRows',L,[x=>x.p,x=>x.tipo,x=>x.mm,x=>x.prop,x=>x.os,x=>x.h,x=>x.itens,x=>x.v].concat(VH?[x=>x.mo,x=>x.v+x.mo]:[]).concat([x=>x.osE?x.v/x.osE:null]));
-  $('#csRows').innerHTML=rows.length?rows.map(x=>`<tr><td><span class="plate" data-p="${x.p}">${x.p}</span></td><td class="mm-cell">${esc(x.tipo)}</td><td class="mm-cell">${esc(x.mm)}</td><td class="mm-cell">${esc(x.prop)}</td><td class="n">${num(x.os)}</td><td class="n">${dec(x.h)}</td><td class="n">${num(x.itens)}</td><td class="n"><b>${brl(x.v,2)}</b></td>${VH?`<td class="n">${brl(x.mo,2)}</td><td class="n"><b>${brl(x.v+x.mo,2)}</b></td>`:''}<td class="n">${x.osE?brl(x.v/x.osE):'—'}</td></tr>`).join(''):`<tr><td colspan="${VH?11:9}" class="empty">Nenhum veículo com custo no filtro.</td></tr>`;
-  $('#csCount').textContent=`${num(rows.length)} veículos · ${brl(sumBy(rows,x=>x.v),2)} em peças`;
-  EXPORT.custos=()=>['custo_por_veiculo',['Placa','Tipo','Marca/Modelo','Proprietário','OS','Horas-homem','Itens','Peças (R$)'].concat(VH?['Mão de obra (R$)','Total (R$)']:[]).concat(['Peças por OS (R$)']),rows.map(x=>[x.p,x.tipo,x.mm,x.prop,x.os,dec(x.h),x.itens,dec(x.v,2)].concat(VH?[dec(x.mo,2),dec(x.v+x.mo,2)]:[]).concat([x.osE?dec(x.v/x.osE,2):'']))]}
+  const rows=sortRows('csRows',L,[x=>x.p,x=>x.tipo,x=>x.mm,x=>x.prop,x=>x.os,x=>x.h,x=>x.itens,x=>x.v].concat(VH?[x=>x.mo]:[]).concat(cb?[x=>x.di,x=>x.ar]:[]).concat(tot?[x=>x.tot]:[]).concat([x=>x.osE?x.v/x.osE:null]));
+  const z=v=>v?brl(v,2):'<span class="nd">—</span>';
+  $('#csRows').innerHTML=rows.length?rows.map(x=>`<tr><td><span class="plate" data-p="${x.p}">${x.p}</span></td><td class="mm-cell">${esc(x.tipo)}</td><td class="mm-cell">${esc(x.mm)}</td><td class="mm-cell">${esc(x.prop)}</td><td class="n">${num(x.os)}</td><td class="n">${dec(x.h)}</td><td class="n">${num(x.itens)}</td><td class="n">${tot?z(x.v):`<b>${brl(x.v,2)}</b>`}</td>${VH?`<td class="n">${brl(x.mo,2)}</td>`:''}${cb?`<td class="n">${z(x.di)}</td><td class="n">${z(x.ar)}</td>`:''}${tot?`<td class="n"><b>${brl(x.tot,2)}</b></td>`:''}<td class="n">${x.osE?brl(x.v/x.osE):'—'}</td></tr>`).join(''):`<tr><td colspan="${9+(VH?1:0)+(cb?2:0)+(tot?1:0)}" class="empty">Nenhum veículo com custo no filtro.</td></tr>`;
+  $('#csCount').textContent=`${num(rows.length)} veículos · ${brl(sumBy(rows,x=>x.v),2)} em peças`+(cb?` · ${brl(sumBy(rows,x=>x.di+x.ar),2)} em combustível · ${brl(sumBy(rows,x=>x.tot),2)} no total`:'');
+  EXPORT.custos=()=>['custo_por_veiculo',['Placa','Tipo','Marca/Modelo','Proprietário','OS','Horas-homem','Itens','Peças (R$)'].concat(VH?['Mão de obra (R$)']:[]).concat(cb?['Diesel (R$)','ARLA (R$)']:[]).concat(tot?['Total (R$)']:[]).concat(['Peças por OS (R$)']),
+    rows.map(x=>[x.p,x.tipo,x.mm,x.prop,x.os,dec(x.h),x.itens,dec(x.v,2)].concat(VH?[dec(x.mo,2)]:[]).concat(cb?[dec(x.di,2),dec(x.ar,2)]:[]).concat(tot?[dec(x.tot,2)]:[]).concat([x.osE?dec(x.v/x.osE,2):'']))]}
+/* v4.6: combustível — gráfico mensal (peças × diesel × ARLA), preço do litro, tanque e tabela por veículo */
+let CS_CB=[];
+function renderComb(f,EV){const t=T(),A=f.A,sel=csSel(),ser=CS_SER.filter(s=>sel.includes(s.k));
+  // custo no tempo: mês (ou semana, quando o período cobre até ~10 semanas)
+  const ck=chaveTempo([...EV.map(e=>e.d),...A.map(a=>a.d)]),m=new Map(),g=k=>{if(!m.has(k))m.set(k,{k,pecas:0,diesel:0,arla:0});return m.get(k)};
+  if(sel.includes('pecas'))f.E.forEach(e=>{g(ck.key(e.d)).pecas+=e.v});
+  A.forEach(a=>{if(sel.includes(a.prod))g(ck.key(a.d))[a.prod]+=a.v});
+  const ms=[...m.values()].sort((a,b)=>a.k<b.k?-1:1);ms.forEach(x=>x.val=csVal(x));
+  $('#csMesT').textContent=`Custo por ${ck.wk?'semana':'mês'}: `+({total:'manutenção × combustível',pecas:'manutenção',comb:'combustível'})[CS_MODO];
+  $('#csMesSub').textContent=`${CS_MODO_TXT[CS_MODO]} · ${brl(sumBy(ms,x=>x.val))} no período`+(ck.wk?' · a semana corrente pode estar incompleta':' · o mês corrente pode estar incompleto');
+  stack('csMes',ms.map(x=>ck.lab(x.k)),ser.map(s=>({label:s.l,color:s.c(),data:ms.map(x=>Math.round(x[s.k]))})),{vlFmt:brlK,valTick:v=>brlK(v),tip:stackTip(ms,ser,null,x=>ck.lab(x.k))});
+  // preço médio do litro por mês (mesma unidade, um eixo só)
+  const pm=new Map();A.forEach(a=>{const k=ck.key(a.d);if(!pm.has(k))pm.set(k,{diesel:{l:0,v:0},arla:{l:0,v:0}});const x=pm.get(k)[a.prod];x.l+=a.l;x.v+=a.v});
+  const pk=[...pm.keys()].sort(),pr=prod=>pk.map(k=>{const x=pm.get(k)[prod];return x.l?+(x.v/x.l).toFixed(3):null});
+  const cols={diesel:css('--s3'),arla:t.s2};$('#csPrecoSub').textContent=`Valor ÷ litros dos abastecimentos de cada ${ck.wk?'semana':'mês'}`;
+  mk('csPreco',{type:'line',data:{labels:pk.map(ck.lab),datasets:['diesel','arla'].map(prod=>({label:COMB[prod],data:pr(prod),borderColor:cols[prod],backgroundColor:cols[prod],borderWidth:2,tension:.3,spanGaps:true,pointRadius:pk.length>16?0:3,pointHoverRadius:5,pointBackgroundColor:cols[prod],pointBorderColor:t.surface,pointBorderWidth:2}))},
+    options:{...baseOpts({vl:false,legend:true,valTick:v=>brl(v,2),tip:{label:c=>c.raw==null?null:` ${c.dataset.label}: ${brl(c.raw,2)} por litro`}}),onClick:null}});
+  // tanque: compras, abastecimentos e ajustes no período (sem os filtros de veículo)
+  const Q=MODEL.AQ||[],tq=prod=>{const R=Q.filter(r=>r.prod===prod),en=R.filter(r=>r.tipo==='entrada'),sa=R.filter(r=>r.tipo==='saida'),ap=R.filter(r=>r.tipo==='ajuste'&&r.sin>0),an=R.filter(r=>r.tipo==='ajuste'&&r.sin<0);
+    const L=a=>sumBy(a,r=>r.l),V=a=>sumBy(a,r=>r.v);return{en,sa,ap,an,L,V,pl:new Set(sa.map(r=>r.p).filter(Boolean)).size}};
+  const D=tq('diesel'),R2=tq('arla'),lt=v=>`${dec(v,0)} L`,cel=(x,a)=>a.length?`${lt(x.L(a))}<br><small class="nd">${num(a.length)} lanç. · ${brl(x.V(a))}</small>`:'<span class="nd">—</span>';
+  const linhas=[['Compras (entradas no tanque)',x=>cel(x,x.en)],['Abastecimentos (saídas para veículos)',x=>cel(x,x.sa)],['Ajustes positivos',x=>x.ap.length?lt(x.L(x.ap)):'<span class="nd">—</span>'],['Ajustes negativos (perdas)',x=>x.an.length?lt(x.L(x.an)):'<span class="nd">—</span>'],
+    ['Preço médio de compra',x=>x.L(x.en)?brl(x.V(x.en)/x.L(x.en),2)+'/L':'<span class="nd">—</span>'],['Preço médio nos abastecimentos',x=>x.L(x.sa)?brl(x.V(x.sa)/x.L(x.sa),2)+'/L':'<span class="nd">—</span>'],['Veículos abastecidos',x=>num(x.pl)]];
+  $('#csTanque').innerHTML=`<div class="table-wrap" style="max-height:none"><table class="tq"><thead><tr><th>Movimento</th><th class="n">Diesel</th><th class="n">ARLA</th></tr></thead><tbody>${linhas.map(l=>`<tr><td>${l[0]}</td><td class="n">${l[1](D)}</td><td class="n">${l[1](R2)}</td></tr>`).join('')}</tbody></table></div>`;
+  // tabela por veículo
+  const bp=new Map();A.forEach(a=>{if(!bp.has(a.p))bp.set(a.p,{p:a.p,n:0,dl:0,dv:0,al:0,av:0,ult:''});const x=bp.get(a.p);x.n++;if(a.prod==='diesel'){x.dl+=a.l;x.dv+=a.v}else{x.al+=a.l;x.av+=a.v}if(a.d>x.ult)x.ult=a.d});
+  CS_CB=[...bp.values()].map(x=>({...x,tipo:tipoOf(x.p),mm:VEH.get(x.p)?`${marcaOf(x.p)} ${VEH.get(x.p).modelo}`:SEM_CAD,tot:x.dv+x.av,pu:x.dl?x.dv/x.dl:null,ra:x.dl?x.al/x.dl*100:null})).sort((a,b)=>b.tot-a.tot);
+  renderCbTable()}
+SORT_RENDER.cbRows=()=>renderCbTable();
+function renderCbTable(){const q=normTxt($('#cbQ').value);
+  $('#cbH').innerHTML='<tr><th>Placa</th><th>Tipo</th><th>Marca / Modelo</th><th class="n">Abastec.</th><th class="n">Diesel (L)</th><th class="n">Diesel (R$)</th><th class="n">R$/L diesel</th><th class="n">ARLA (L)</th><th class="n">ARLA (R$)</th><th class="n" title="Litros de ARLA ÷ litros de diesel. O consumo normal fica perto de 3% a 5%; acima disso, parte do diesel pode ter sido abastecida fora da base.">ARLA / diesel</th><th class="n">Total (R$)</th><th>Último abastec.</th></tr>';
+  const L=CS_CB.filter(x=>!q||normTxt([x.p,x.tipo,x.mm].join(' ')).includes(q));
+  const rows=sortRows('cbRows',L,[x=>x.p,x=>x.tipo,x=>x.mm,x=>x.n,x=>x.dl,x=>x.dv,x=>x.pu,x=>x.al,x=>x.av,x=>x.ra,x=>x.tot,x=>x.ult]);
+  const nd='<span class="nd">—</span>';
+  $('#cbRows').innerHTML=rows.length?rows.map(x=>`<tr><td><span class="plate" data-p="${x.p}">${x.p}</span></td><td class="mm-cell">${esc(x.tipo)}</td><td class="mm-cell">${esc(x.mm)}</td><td class="n">${num(x.n)}</td><td class="n">${x.dl?dec(x.dl,0):nd}</td><td class="n">${x.dv?brl(x.dv,2):nd}</td><td class="n">${x.pu!=null?brl(x.pu,2):nd}</td><td class="n">${x.al?dec(x.al,0):nd}</td><td class="n">${x.av?brl(x.av,2):nd}</td><td class="n">${x.ra!=null?pctf(x.ra):x.al?'só ARLA':nd}</td><td class="n"><b>${brl(x.tot,2)}</b></td><td>${fmtDate(x.ult)}</td></tr>`).join(''):'<tr><td colspan="12" class="empty">Nenhum abastecimento no filtro.</td></tr>';
+  $('#cbCount').textContent=`${num(rows.length)} veículos · ${dec(sumBy(rows,x=>x.dl),0)} L de diesel e ${dec(sumBy(rows,x=>x.al),0)} L de ARLA · ${brl(sumBy(rows,x=>x.tot),2)}`;
+  EXPORT.combustivel=()=>['combustivel_por_veiculo',['Placa','Tipo','Marca/Modelo','Abastecimentos','Diesel (L)','Diesel (R$)','R$/L diesel','ARLA (L)','ARLA (R$)','ARLA/diesel (%)','Total (R$)','Último abastecimento'],
+    rows.map(x=>[x.p,x.tipo,x.mm,x.n,dec(x.dl,2),dec(x.dv,2),x.pu!=null?dec(x.pu,3):'',dec(x.al,2),dec(x.av,2),x.ra!=null?dec(x.ra,1):'',dec(x.tot,2),fmtDate(x.ult)])]}
+$('#cbQ').addEventListener('input',()=>renderCbTable());
+$('#csModo').addEventListener('click',e=>{const b=e.target.closest('button[data-m]');if(!b||b.dataset.m===CS_MODO)return;CS_MODO=b.dataset.m;ls.set('pm-cs-modo',CS_MODO);PG.csVeh=0;destroyAll();renderAll()});
 function renderCsOsTable(){const q=normTxt($('#csOsQ').value);
   const L=CS_OS.filter(x=>!q||normTxt([x.n,x.p,x.pe,x.svc.join(' ')].join(' ')).includes(q));
   const rows=sortRows('csOsRows',L,[x=>+x.n,x=>x.d,x=>x.p,null,x=>x.h,x=>x.itens,x=>x.v,x=>x.sit]);
@@ -1859,6 +2021,8 @@ $('#csVh').addEventListener('change',e=>{VH=Math.max(0,+e.target.value||0);ls.se
 
 /* ---------- Versões ---------- */
 const VERSIONS=[
+  {v:'4.6',d:'26/11/2026',c:'Combustível no custo dos veículos. Nova Base 4, Abastecimentos, com as planilhas de diesel e de ARLA do tanque próprio (um espaço para cada uma; o preço do litro confere se não foram trocadas). Na aba Custos, o seletor “Custo considerado” (Total, Manutenção ou Combustível) define o que os gráficos por veículo, tipo, proprietário, marca e mês somam, com peças, diesel e ARLA em cores separadas. Novos: custo por mês (manutenção × combustível), preço médio do litro, conferência do tanque (compras, abastecimentos e ajustes) e a tabela Combustível por veículo (litros, R$/L e ARLA/diesel). A tabela Custo por veículo ganhou as colunas Diesel, ARLA e Total. O custo por OS, o custo médio por OS e as Prioridades continuam só com peças. Dados e critérios mais compacto: as 5 bases (OS, veículos, estoque, diesel e ARLA) ficam lado a lado, cada uma com o botão de importar e um resumo curto; o cruzamento das bases virou mini-cartões; saíram os textos de colunas; os critérios de cálculo e os avisos de acesso viraram caixas com X para fechar (“Mostrar os textos informativos” reabre).'},
+  {v:'4.5',d:'26/11/2026',c:'Menu lateral mais leve: o nome das abas passou para letra normal e menor (12,5 px), e o trilho ficou um pouco mais estreito (52 px recolhido, 212 px expandido), com ícones e linhas um pouco menores.'},
   {v:'4.4',d:'26/11/2026',c:'O painel em cascata saiu: o trilho mostra as abas fixas e um clique abre a aba direto. O botão › no canto inferior esquerdo expande o trilho com o nome das abas; o mesmo botão, como ‹ Recolher menu, recolhe de volta para só ícones, com animação suave. A escolha fica gravada no navegador. No celular, o ☰ abre o menu já com os nomes. Saíram a linha de destaques da Visão geral e a linha de cartões de custo da aba Custos.'},
   {v:'4.3',d:'26/11/2026',c:'Menu no modelo do Sienge. O trilho de ícones fica encostado na borda e unido à barra superior. O ícone da aba abre o painel, e o mesmo ícone fecha; o botão de recolher saiu. O painel mostra as abas do grupo; a aba clicada vem aberta com as suas partes, e as partes com ▸ abrem a cascata com os gráficos e tabelas. Clicar num bloco rola suavemente até ele. O painel, a cascata e as abas do painel abrem e fecham com animação suave. O usuário logado passa para o canto da barra superior. Ícone e texto ativos do menu em branco, com o marcador reto e as setas em laranja claro.'},
   {v:'4.2',d:'25/11/2026',c:'Barra superior grafite em toda a largura, na mesma cor do menu: logo, filtros de período, serviço e placa, e os botões de PDF e de modo claro/escuro só com ícone. O título da aba passa para a área de conteúdo e os indicadores continuam fixos logo abaixo da barra. O menu lateral continua flutuante, agora começando abaixo da barra, e o marcador da aba selecionada ficou reto.'},
@@ -1887,24 +2051,35 @@ const VERSIONS=[
 const APP_VERSION=VERSIONS[0].v;
 function renderVersions(){const n=$('#verNow');if(n)n.textContent='v'+APP_VERSION;const r=$('#verRows');if(r)r.innerHTML=VERSIONS.map((x,i)=>`<tr><td><b>v${x.v}</b>${i===0?' <span class="tag" style="margin-left:6px">atual</span>':''}</td><td>${x.d}</td><td style="white-space:normal">${esc(x.c)}</td></tr>`).join('')}
 R_.dados=()=>{renderVersions();const os=RAW.os,m=RAW.meta||{};
-  const info=[['Origem',esc(m.fonte||'—')],['Carregada em',esc(m.quando||'—')],['Período da base',`${fmtDate(os[0].d)} a ${fmtDate(os.reduce((x,o)=>o.e>x?o.e:x,os[0].e))}`],['Linhas da planilha',num(m.linhas||0)],['OS (Nº distinto + placa)',num(os.length)],['Linhas sem placa (só na equipe)',num((RAW.orphans||[]).length)],['Placas',num(new Set(os.map(o=>o.p)).size)],['Técnicos',num(new Set(os.flatMap(o=>o.k)).size)],['Tipos de manutenção',num(new Set(os.flatMap(o=>Object.keys(o.t))).size)],['Data de referência',fmtDate(MODEL.ref)]];
-  $('#baseInfo').innerHTML=info.map(i=>`<dt>${i[0]}</dt><dd>${i[1]}</dd>`).join('');
+  // v4.6: resumo curto de cada base, dentro do próprio bloco (o detalhe completo fica na dica ao passar o mouse)
+  const kvH=a=>a.map(i=>`<dt>${i[0]}</dt><dd${i[2]?` title="${esc(i[2])}"`:''}>${i[1]}</dd>`).join('');
+  const dc=d=>fmtDate(d).replace(/\/20(\d\d)$/,'/$1'),per=(a,b)=>a?`${dc(a)} a ${dc(b)}`:'—';
+  const osFim=os.reduce((x,o)=>o.e>x?o.e:x,os[0].e);
+  $('#baseInfo').innerHTML=kvH([['Arquivo',esc(m.fonte||'—'),`Carregada em ${m.quando||'—'} · ${num(m.linhas||0)} linhas`],['Período',per(os[0].d,osFim)],
+    ['OS · placas',`${num(os.length)} · ${num(new Set(os.map(o=>o.p)).size)}`,`OS = Nº distinto + placa · ${num((RAW.orphans||[]).length)} linhas sem placa contam só na equipe`],
+    ['Técnicos · serviços',`${num(new Set(os.flatMap(o=>o.k)).size)} · ${num(new Set(os.flatMap(o=>Object.keys(o.t))).size)}`]]);
   const osPl=[...new Set(os.map(o=>o.p))],semCad=osPl.filter(p=>!VEH.has(p)).sort();
-  const vi=[['Origem',esc(VEHINFO.fonte||'—')],['Carregada em',esc(VEHINFO.quando||'—')],['Linhas da planilha',num(VEHINFO.linhas||0)],['Veículos cadastrados',num(VEH.size)],
-    ['Marcas',num(new Set([...VEH.values()].map(v=>v.marca)).size)],['Modelos',num(new Set([...VEH.values()].map(v=>v.ml)).size)],
-    ['Placas das OS com cadastro',`${num(osPl.length-semCad.length)} de ${num(osPl.length)}`],['Placas das OS sem cadastro',semCad.length?esc(semCad.join(', ')):'nenhuma']];
-  $('#vehInfo').innerHTML=vi.map(i=>`<dt>${i[0]}</dt><dd>${i[1]}</dd>`).join('');
+  $('#vehInfo').innerHTML=kvH([['Arquivo',esc(VEHINFO.fonte||'—'),`Carregada em ${VEHINFO.quando||'—'} · ${num(VEHINFO.linhas||0)} linhas`],['Veículos',num(VEH.size)],
+    ['Marcas · modelos',`${num(new Set([...VEH.values()].map(v=>v.marca)).size)} · ${num(new Set([...VEH.values()].map(v=>v.ml)).size)}`],
+    ['OS sem cadastro',semCad.length?`${num(semCad.length)} placas`:'nenhuma',semCad.length?'Placas das OS sem cadastro: '+semCad.join(', '):'']]);
   const ER=EST.rows,ES=ER.filter(e=>e.saida),EI=ER.filter(e=>!e.saida),ed=ER.map(e=>e.d).sort();
-  const ei=[['Origem',esc(EST.meta.fonte||'—')],['Carregada em',esc(EST.meta.quando||'—')],['Período',ed.length?`${fmtDate(ed[0])} a ${fmtDate(ed[ed.length-1])}`:'—'],
-    ['Saídas (custo)',`${num(ES.length)} itens · ${brl(sumBy(ES,e=>e.v),2)}`],['Entradas (compras)',`${num(EI.length)} itens · ${brl(sumBy(EI,e=>e.v),2)}`],
-    ['Saídas com nº de OS',ES.length?pctf(sumBy(ES.filter(e=>e.os),e=>e.v)/Math.max(1,sumBy(ES,e=>e.v))*100)+' do valor':'—']];
-  $('#estInfo').innerHTML=ei.map(i=>`<dt>${i[0]}</dt><dd>${i[1]}</dd>`).join('');
-  const osN=new Set(os.map(o=>o.n)),eOS=[...new Set(ES.filter(e=>e.os).map(e=>e.os))],ePl=[...new Set(ES.map(e=>e.p).filter(Boolean))];
-  const ci=[['OS do estoque encontradas na base de OS',eOS.length?`${num(eOS.filter(n=>osN.has(n)).length)} de ${num(eOS.length)}`:'—'],
+  $('#estInfo').innerHTML=kvH([['Arquivo',esc(EST.meta.fonte||'—'),`Carregada em ${EST.meta.quando||'—'}`],['Período',per(ed[0],ed[ed.length-1])],
+    ['Saídas (custo)',ES.length?`${num(ES.length)} · ${brlK(sumBy(ES,e=>e.v))}`:'—',ES.length?`${brl(sumBy(ES,e=>e.v),2)} · ${pctf(sumBy(ES.filter(e=>e.os),e=>e.v)/Math.max(1,sumBy(ES,e=>e.v))*100)} do valor com nº de OS`:''],
+    ['Compras',EI.length?`${num(EI.length)} · ${brlK(sumBy(EI,e=>e.v))}`:'—','Entradas no estoque: não somam no custo por veículo']]);
+  // abastecimentos (diesel e ARLA)
+  const absPl={};
+  for(const prod of ['diesel','arla']){const R=ABS.rows.filter(r=>r.prod===prod),mt=ABS.meta[prod]||{},sa=R.filter(r=>r.tipo==='saida'),en=R.filter(r=>r.tipo==='entrada'),aj=R.filter(r=>r.tipo==='ajuste'),ds=R.map(r=>r.d).sort();
+    absPl[prod]=[...new Set(sa.map(r=>r.p).filter(Boolean))];const L=a=>dec(sumBy(a,r=>r.l),0)+' L';
+    $('#absInfo_'+prod).innerHTML=kvH([['Arquivo',esc(mt.fonte||'—'),`Carregada em ${mt.quando||'—'}`],['Período',per(ds[0],ds[ds.length-1])],
+      ['Abastecimentos',sa.length?`${num(sa.length)} · ${L(sa)}`:'—',sa.length?`${brl(sumBy(sa,r=>r.v),2)} · ${num(absPl[prod].length)} placas`:''],
+      ['Valor',sa.length?brlK(sumBy(sa,r=>r.v)):'—',(en.length?`Compras para o tanque: ${num(en.length)} · ${L(en)} · ${brl(sumBy(en,r=>r.v),2)}`:'')+(aj.length?` · Ajustes: +${dec(sumBy(aj.filter(r=>r.sin>0),r=>r.l),0)} L / −${dec(sumBy(aj.filter(r=>r.sin<0),r=>r.l),0)} L`:'')]])}
+  // cruzamento das bases (mini-cartões)
+  const osN=new Set(os.map(o=>o.n)),eOS=[...new Set(ES.filter(e=>e.os).map(e=>e.os))],ePl=[...new Set(ES.map(e=>e.p).filter(Boolean))],cPl=[...new Set([...absPl.diesel,...absPl.arla])];
+  const ci=[['Veículos do cadastro atendidos (OS)',`${num(osPl.filter(p=>VEH.has(p)).length)} de ${num(VEH.size)}`],['Placas das OS com cadastro',`${num(osPl.length-semCad.length)} de ${num(osPl.length)}`]]
+    .concat(verCusto()?[['OS do estoque na base de OS',eOS.length?`${num(eOS.filter(n=>osN.has(n)).length)} de ${num(eOS.length)}`:'—'],
     ['Valor dessas OS',ES.length?pctf(sumBy(ES.filter(e=>osN.has(e.os)),e=>e.v)/Math.max(1,sumBy(ES,e=>e.v))*100)+' das saídas':'—'],
-    ['Placas do estoque com cadastro',ePl.length?`${num(ePl.filter(p=>VEH.has(p)).length)} de ${num(ePl.length)}`:'—'],
-    ['Veículos do cadastro atendidos (OS)',`${num(osPl.filter(p=>VEH.has(p)).length)} de ${num(VEH.size)}`]];
-  $('#crossInfo').innerHTML=ci.map(i=>`<dt>${i[0]}</dt><dd>${i[1]}</dd>`).join('');
+    ['Placas do estoque com cadastro',ePl.length?`${num(ePl.filter(p=>VEH.has(p)).length)} de ${num(ePl.length)}`:'—']].concat(cPl.length?[['Placas do combustível com cadastro',`${num(cPl.filter(p=>VEH.has(p)).length)} de ${num(cPl.length)}`]]:[]):[]);
+  $('#crossInfo').innerHTML=ci.map(i=>`<div><span>${i[0]}</span><b>${i[1]}</b></div>`).join('');
   $('#refSel').value=REF_MODE;
 };
 
@@ -1947,6 +2122,8 @@ function openSummary(kind,value,extra){
   SUM.E=EP;const cE=sumBy(EP,e=>e.v);
   const st=[['Ordens de serviço',num(new Set(O.map(o=>o.n+'|'+o.p)).size)],kind==='plate'||extra.plate?['Dias com OS',num(new Set(O.flatMap(o=>o.ds)).size)]:['Veículos',num(plates)],[kind==='tech'?'Horas do técnico':kind==='task'?'Horas no serviço':'Horas-homem',dec(hh)+' h'],kind==='task'?['Execuções/veículo',plates?dec(O.length/plates):'—']:['Reparo médio por OS',O.length?dec(rep/O.length,2)+' h':'—']];
   if(verCusto())st.push(['Peças do estoque',EST.rows.length?brl(cE):'N/D']);
+  // v4.6: combustível do veículo (ou do grupo de veículos) no período
+  if(verCusto()&&ABS.rows.length&&!SVC&&(kind==='plate'||plateFn)){const AP=(MODEL.A||[]).filter(a=>kind==='plate'?a.p===value:plateFn(a.p));st.push(['Combustível',brl(sumBy(AP,a=>a.v))])}
   $('#sumStats').innerHTML=st.map(s=>`<div><span>${s[0]}</span><b>${s[1]}</b></div>`).join('');
   $('#sumSec3').textContent=`Peças aplicadas (${num(EP.length)} itens · ${brl(cE,2)})${kind==='task'||kind==='tech'?' · todas as peças das OS com '+(kind==='task'?'este serviço':'este técnico'):''}`;
   $('#sumT3').innerHTML=EP.length?EP.slice(0,300).map(e=>`<tr><td>${fmtDate(e.d)}</td><td>${e.os||'<span class="nd">sem OS</span>'}</td><td class="c-pl">${e.p?`<span class="plate" data-sum-p="${e.p}">${e.p}</span>`:'—'}</td><td style="white-space:normal">${esc(e.peca)}</td><td class="n">${dec(e.q,e.q%1?2:0)}</td><td class="n">${brl(e.v,2)}</td></tr>`).join('')+(EP.length>300?`<tr><td colspan="6" class="empty">Mostrando 300 de ${num(EP.length)} itens · exporte o CSV para ver todos</td></tr>`:''):'<tr><td colspan="6" class="empty">Nenhuma saída de peça do estoque no período.</td></tr>';
@@ -2092,6 +2269,18 @@ $('#restoreVehBtn').onclick=()=>{ls.del('pm-veh');bootVeh();derive();destroyAll(
   dE.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)importEst(f)})}
 $('#estFile').onchange=e=>{const f=e.target.files[0];if(f)importEst(f);e.target.value=''};
 $('#restoreEstBtn').onclick=()=>{ls.del('pm-est');bootEst();derive();destroyAll();renderAll()};
+for(const prod of ['diesel','arla']){const dA=$('#dropAbs_'+prod);
+  ['dragenter','dragover'].forEach(ev=>dA.addEventListener(ev,e=>{e.preventDefault();dA.classList.add('over')}));['dragleave','drop'].forEach(ev=>dA.addEventListener(ev,e=>{e.preventDefault();dA.classList.remove('over')}));
+  dA.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)importAbs(f,prod)});
+  $('#absFile_'+prod).onchange=e=>{const f=e.target.files[0];if(f)importAbs(f,prod);e.target.value=''}}
+['diesel','arla'].forEach(prod=>{$('#restoreAbsBtn_'+prod).onclick=()=>{ls.del('pm-abs-'+prod);bootAbs();derive();destroyAll();renderAll()}});
+/* v4.6: caixas informativas com X; as fechadas ficam gravadas no navegador e "Mostrar os textos informativos" reabre todas */
+function infoAplicar(){let f=[];try{f=JSON.parse(ls.get('pm-info-fechado')||'[]')}catch(e){}
+  const bx=$$('.info-box[data-info]');bx.forEach(b=>b.hidden=f.includes(b.dataset.info));$('#infoRest').hidden=!bx.some(b=>b.hidden)}
+$$('.info-box .info-x').forEach(x=>x.addEventListener('click',()=>{let f=[];try{f=JSON.parse(ls.get('pm-info-fechado')||'[]')}catch(e){}
+  const k=x.closest('.info-box').dataset.info;if(!f.includes(k))f.push(k);ls.set('pm-info-fechado',JSON.stringify(f));infoAplicar()}));
+$('#infoRest button').onclick=()=>{ls.del('pm-info-fechado');infoAplicar()};
+infoAplicar();
 $('#themeBtn').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true);
 /* ---------- Exportar PDF (aba atual, paisagem, tema atual) ---------- */
 let PRINT_IMGS=[],PRINT_TITLE=null;
@@ -2498,8 +2687,12 @@ async function startOnline(){SB.load();if(!SB.sess){gate('login');return}
     if(!PAGES.some(p=>podeVer(p.id))){gate('pendente','Nenhuma aba está liberada para o usuário '+userName(SB.sess.email)+'. Fale com o administrador.');return}
     gate('carregando','Carregando as bases do Supabase…');
     const ult=t=>SB.req(`cargas?select=*&tipo=eq.${t}&order=feito_em.desc&limit=1`).then(a=>a[0]||null);// última carga de cada base
-    const[os,fr,es,cO,cF,cE]=await Promise.all([SB.todos('os_linhas?select=data,os,placa,tecnico,minutos,tempo,tarefas&order=id'),SB.todos('frota_veiculos?select=placa,marca,modelo,tipo,proprietario,ano&order=id'),
-      verCusto()?SB.todos('estoque_mov?select=data,saida,placa,os,codigo,peca,quantidade,valor_unit,valor_total,motivo,local,fornecedor&order=id'):Promise.resolve([]),ult('os'),ult('frota'),ult('estoque')]);
+    const[os,fr,es,ab,cO,cF,cE,cD,cA]=await Promise.all([SB.todos('os_linhas?select=data,os,placa,tecnico,minutos,tempo,tarefas&order=id'),SB.todos('frota_veiculos?select=placa,marca,modelo,tipo,proprietario,ano&order=id'),
+      verCusto()?SB.todos('estoque_mov?select=data,saida,placa,os,codigo,peca,quantidade,valor_unit,valor_total,motivo,local,fornecedor&order=id'):Promise.resolve([]),
+      verCusto()?SB.todos('abastecimentos?select=produto,data,hora,tipo,sinal,placa,litros,preco_litro,valor&order=id'):Promise.resolve([]),ult('os'),ult('frota'),ult('estoque'),ult('diesel'),ult('arla')]);
+    // v4.6: abastecimentos de diesel e ARLA (uma carga por produto)
+    ABS={rows:[],meta:{}};[['diesel',cD],['arla',cA]].forEach(([prod,c])=>{const L=ab.filter(r=>r.produto===prod).map(absFromDb);loadAbs(prod,L,{fonte:c?c.arquivo:'—',quando:c?fmtTs(c.feito_em):'—'});
+      $('#absStatus_'+prod).textContent=L.length?`Base do Supabase: ${c?c.arquivo:''} · ${num(L.filter(r=>r.tipo==='saida').length)} abastecimentos`:`Nenhuma planilha de ${COMB[prod]} no Supabase`+(isAdmin()?': importe acima.':'')});
     loadVeh(fr.map(r=>[r.placa,r.marca,r.modelo,r.tipo,r.proprietario,r.ano]),{fonte:cF?cF.arquivo:'—',quando:cF?fmtTs(cF.feito_em):'—'});
     $('#vehStatus').textContent=fr.length?`Tabela do Supabase: ${cF?cF.arquivo:''} · ${num(VEH.size)} veículos`:'Nenhuma tabela de veículos no Supabase';
     loadEst(es.map(estFromDb),{fonte:cE?cE.arquivo:'—',quando:cE?fmtTs(cE.feito_em):'—'});
@@ -2512,15 +2705,15 @@ async function startOnline(){SB.load();if(!SB.sess){gate('login');return}
   }catch(err){if(!SB.sess)gate('login',err.message,'err');else gate('erro','Não foi possível carregar: '+err.message,'err')}}
 function applyRole(){const adm=isAdmin();document.body.classList.toggle('ro',!adm);aplicarAbas();
   const nm=userName(SB.sess.email);$('#userChip').hidden=false;$('#userChip').title=`${nm} · ${adm?'Administrador':'Usuário'} · clique para sair`;$('#userMail').textContent=nm;$('#userMail').title=nm;$('#userRole').textContent=adm?'Administrador':'Usuário';$('#userIc').textContent=(nm||'?')[0].toUpperCase();
-  ['#restoreBtn','#restoreVehBtn','#restoreEstBtn'].forEach(s=>{const b=$(s);if(b)b.closest('.toolbar').hidden=true});
-  $$('#drop,#dropVeh,#dropEst').forEach(d=>d.classList.add('adm-only'));
+  ['#restoreBtn','#restoreVehBtn','#restoreEstBtn','#restoreAbsBtn_diesel','#restoreAbsBtn_arla'].forEach(s=>{const b=$(s);if(b)b.hidden=true});
+  $$('#drop,#dropVeh,#dropEst,#dropAbs_diesel,#dropAbs_arla').forEach(d=>d.classList.add('adm-only'));
   $$('.page[data-page="dados"] .note').forEach(n=>{n.innerHTML=n.innerHTML.replace(/A última (base|tabela) importada fica salva neste navegador\./,'Ao importar, a base anterior é substituída no Supabase para todos os usuários (somente administrador).')});
   $('#admCard').hidden=!adm;if(adm)admLoad()}
 async function admLoad(){if(!SB_ON||!isAdmin())return;const m=$('#admMsg');
   try{const[us,cg]=await Promise.all([SB.req('perfis?select=*&order=criado_em'),SB.req('cargas?select=*&order=feito_em.desc&limit=30')]);SB.cargas=cg;
     $('#admUsers').innerHTML=us.map(u=>`<tr><td>${esc(userName(u.email)||'—')}</td><td>${fmtTs(u.criado_em).slice(0,10)}</td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="ativo"${u.ativo?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode bloquear o próprio acesso"':''} aria-label="Liberar ${esc(u.email)}"></td><td><input type="checkbox" class="adm-ck" data-u="${u.id}" data-f="admin"${u.admin?' checked':''}${u.id===SB.sess.uid?' disabled title="Você não pode tirar o próprio perfil de administrador"':''} aria-label="Administrador ${esc(u.email)}"></td></tr>`).join('')||'<tr><td colspan="4" class="empty">—</td></tr>';
     admAbasRender(us);
-    $('#admCargas').innerHTML=cg.map(c=>`<tr><td>${fmtTs(c.feito_em)}</td><td>${({os:'OS',frota:'Veículos',estoque:'Estoque'})[c.tipo]||esc(c.tipo)}</td><td>${esc(c.arquivo||'—')}</td><td class="n">${num(c.linhas)}</td><td>${esc(userName(c.feito_por_email)||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Nenhuma atualização ainda.</td></tr>';
+    $('#admCargas').innerHTML=cg.map(c=>`<tr><td>${fmtTs(c.feito_em)}</td><td>${({os:'OS',frota:'Veículos',estoque:'Estoque',diesel:'Diesel',arla:'ARLA'})[c.tipo]||esc(c.tipo)}</td><td>${esc(c.arquivo||'—')}</td><td class="n">${num(c.linhas)}</td><td>${esc(userName(c.feito_por_email)||'—')}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Nenhuma atualização ainda.</td></tr>';
     m.textContent=''}catch(e){m.className='pv-msg err';m.textContent='Falha ao carregar: '+e.message}}
 $('#admReload').onclick=admLoad;
 // v4.1: quadro "O que cada usuário vê" (uma linha por usuário, uma coluna por aba). perfis.abas: null = todas
@@ -2555,7 +2748,7 @@ $('#tbLogo').src=$('.brand-logo').src;
 REF_MODE=ls.get('pm-ref')||'today';
 buildNav();setTheme(document.documentElement.dataset.theme||'dark',false);
 if(SB_ON)startOnline();// versão online: login e as 3 bases vêm do Supabase
-else{bootVeh();bootEst();bootData();go(ls.get('pm-page')||'overview')}
+else{bootVeh();bootEst();bootAbs();bootData();go(ls.get('pm-page')||'overview')}
 </script>
 </body>
 </html>
