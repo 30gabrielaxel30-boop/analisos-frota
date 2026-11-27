@@ -227,3 +227,107 @@ drop policy if exists planos_config_tudo on public.planos_config;
 create policy planos_config_tudo on public.planos_config for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
 -- As demais abas usam a base de OS (os_linhas), que continua liberada para todo usuário ativo:
 -- esconder essas abas vale só no painel. Só o administrador altera perfis (política perfis_admin).
+
+-- ======================================================================
+-- v4.6 (APLICADO em 26/11/2026, migração v46_abastecimentos)
+-- ======================================================================
+-- Abastecimentos de diesel e ARLA do tanque próprio (cada produto é substituído a cada importação)
+create table if not exists public.abastecimentos (
+  id bigint generated always as identity primary key,
+  produto text not null check (produto in ('diesel','arla')),
+  data date not null,
+  hora text,
+  tipo text not null check (tipo in ('saida','entrada','ajuste')),  -- saida = abastecimento de veículo (custo)
+  sinal smallint not null check (sinal in (-1,1)),                 -- +1 entra no tanque, -1 sai
+  placa text,
+  litros numeric, preco_litro numeric, valor numeric
+);
+create index if not exists abastecimentos_produto_idx on public.abastecimentos(produto);
+alter table public.abastecimentos enable row level security;
+drop policy if exists abastecimentos_ver on public.abastecimentos;
+create policy abastecimentos_ver on public.abastecimentos for select to authenticated using (public.pode_ver('custos'));
+
+alter table public.cargas drop constraint if exists cargas_tipo_check;
+alter table public.cargas add constraint cargas_tipo_check check (tipo in ('os','frota','estoque','diesel','arla'));
+
+-- troca a base de um produto (tudo ou nada, só administrador)
+-- cada linha: [data, hora, tipo, sinal, placa, litros, preco_litro, valor]
+create or replace function public.substituir_abastecimentos(p_produto text, p_linhas jsonb, p_arquivo text, p_ini date, p_fim date)
+returns integer language plpgsql security definer set search_path = public as $$
+declare n integer;
+begin
+  if not public.eh_admin() then raise exception 'Somente administradores podem atualizar a base de abastecimentos'; end if;
+  if p_produto is null or p_produto not in ('diesel','arla') then raise exception 'Produto inválido: use diesel ou arla'; end if;
+  if jsonb_typeof(p_linhas) <> 'array' or jsonb_array_length(p_linhas) = 0 then raise exception 'Base vazia: nada foi alterado'; end if;
+  delete from public.abastecimentos where produto = p_produto;
+  insert into public.abastecimentos(produto,data,hora,tipo,sinal,placa,litros,preco_litro,valor)
+    select p_produto, (e->>0)::date, nullif(e->>1,''), e->>2, (e->>3)::smallint, nullif(e->>4,''),
+           (e->>5)::numeric, (e->>6)::numeric, (e->>7)::numeric
+    from jsonb_array_elements(p_linhas) e;
+  get diagnostics n = row_count;
+  insert into public.cargas(tipo,arquivo,linhas,periodo_ini,periodo_fim,feito_por_email)
+    values (p_produto,p_arquivo,n,p_ini,p_fim,(select email from public.perfis where id = auth.uid()));
+  return n;
+end $$;
+revoke execute on function public.substituir_abastecimentos(text,jsonb,text,date,date) from public, anon;
+grant execute on function public.substituir_abastecimentos(text,jsonb,text,date,date) to authenticated;
+
+-- ================= v4.7: Preventivas por km =================
+-- v4.7: Preventivas por km (cronograma de dezembro/2026).
+-- Só cria tabelas novas. As tabelas antigas (prev_veiculos, revisoes, planos_config) não são alteradas e ficam como registro.
+-- Rodar uma vez no Supabase (SQL Editor) do projeto analisos-frota.
+create table public.prev2_veiculos (
+  placa text primary key,
+  marca text not null,
+  modelo text,
+  ano integer,
+  km integer,
+  km_data date,
+  atualizado_em timestamptz not null default now()
+);
+create table public.prev2_planos (
+  id text primary key,
+  placa text not null,
+  tipo text not null,
+  ultima integer,
+  ult0 integer,
+  base text,
+  orig text,
+  obs text,
+  atualizado_em timestamptz not null default now()
+);
+create index prev2_planos_placa on public.prev2_planos (placa);
+create table public.prev2_hist (
+  id text primary key,
+  k text not null check (k in ('rev','km')),
+  placa text not null,
+  tipo text,
+  data date,
+  km integer,
+  obs text,
+  src text,
+  ts bigint not null default 0,
+  criado_por uuid default auth.uid(),
+  criado_em timestamptz not null default now()
+);
+create index prev2_hist_placa on public.prev2_hist (placa, k);
+create table public.prev2_cfg (
+  id integer primary key check (id = 1),
+  cfg jsonb not null,
+  marcas jsonb not null default '[]'::jsonb,
+  bk date,
+  atualizado_em timestamptz not null default now()
+);
+create trigger prev2_veiculos_atualizado before update on public.prev2_veiculos for each row execute function public.tocar_atualizado();
+create trigger prev2_planos_atualizado before update on public.prev2_planos for each row execute function public.tocar_atualizado();
+create trigger prev2_cfg_atualizado before update on public.prev2_cfg for each row execute function public.tocar_atualizado();
+alter table public.prev2_veiculos enable row level security;
+alter table public.prev2_planos enable row level security;
+alter table public.prev2_hist enable row level security;
+alter table public.prev2_cfg enable row level security;
+-- mesma regra das preventivas antigas: usuário ativo com a aba Preventivas liberada
+create policy prev2_veiculos_tudo on public.prev2_veiculos for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
+create policy prev2_planos_tudo on public.prev2_planos for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
+create policy prev2_hist_tudo on public.prev2_hist for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
+create policy prev2_cfg_tudo on public.prev2_cfg for all to authenticated using (public.pode_ver('prev')) with check (public.pode_ver('prev'));
+grant select, insert, update, delete on public.prev2_veiculos, public.prev2_planos, public.prev2_hist, public.prev2_cfg to authenticated;

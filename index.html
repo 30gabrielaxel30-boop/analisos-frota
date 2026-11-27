@@ -692,116 +692,162 @@ body.collapsed .user-chip{justify-content:center;padding:8px 0;background:none}
 body.ro .adm-only{display:none!important}
 @media print{.gate{display:none!important}}
 
-/* ---------- Preventivas (operacional) ---------- */
-body.pg-prev .kpis,body.pg-prev #periodSel,body.pg-prev #svcBox,body.pg-prev .hb-filters>.search,body.pg-prev #chip{display:none!important}
-body.pg-prev .tb-row{margin-bottom:0}
-.pv-top{display:flex;justify-content:space-between;align-items:center;gap:10px 14px;flex-wrap:wrap;margin-top:6px}
-.pv-seg{height:38px;padding:0 3px;border-radius:var(--r)}
-.pv-seg button{height:32px;padding:0 15px;font-size:12.5px;border-radius:var(--r-sm);display:inline-flex;align-items:center;gap:7px}
-.pv-seg button b{font-size:10.5px;font-weight:700;background:var(--surface);color:var(--ink-2);border-radius:999px;padding:1px 7px}
-.pv-seg button.on b{background:rgba(0,0,0,.18);color:inherit}
-.pv-save{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
-.pv-save i{width:7px;height:7px;border-radius:50%;background:var(--good)}
-.kb-bar{display:flex;justify-content:space-between;align-items:center;gap:10px 16px;flex-wrap:wrap;margin-top:14px}
-.kb-bar p{margin:0;font-size:12px;color:var(--muted);max-width:720px}
-.kb{display:grid;grid-template-columns:repeat(6,minmax(215px,1fr));gap:12px;margin-top:12px;overflow-x:auto;padding-bottom:6px;align-items:start}
-.kb-col{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:10px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:10px;min-width:0}
-.kb-h{display:flex;align-items:center;gap:10px;padding:2px 4px 4px}
-.kb-h .pcode{height:30px;min-width:46px;font-size:12.5px;border-radius:9px}
-.kb-h b{display:block;font-size:12.5px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kb-h small{display:block;font-size:10.5px;color:var(--muted)}
-.kb-h>div{min-width:0}
-.kb-ball{--c:var(--muted);border-radius:14px;background:color-mix(in srgb,var(--c) 8%,var(--surface-2));border:1px solid color-mix(in srgb,var(--c) 30%,var(--line))}
-.kb-ball.b-late{--c:#d03b3b}.kb-ball.b-soon{--c:#fab219}.kb-ball.b-ok{--c:#0ca30c}
-.kb-ball header{display:flex;align-items:center;gap:7px;padding:8px 10px;font-size:12px;font-weight:700;color:var(--ink)}
-.kb-ball header i{width:9px;height:9px;border-radius:50%;background:var(--c);flex:none}
-.kb-ball header b{margin-left:auto;font-size:11px;min-width:22px;height:20px;padding:0 6px;border-radius:999px;display:grid;place-items:center;background:var(--c);color:#fff}
-.kb-ball.b-soon header b{color:#111}
-.kb-list{display:flex;flex-direction:column;gap:6px;padding:0 6px 6px;max-height:380px;overflow-y:auto}
-.kb-none{font-size:11.5px;color:var(--muted);padding:2px 6px 6px}
-.kb-card{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:8px 10px;border-left:3px solid var(--c)}
-.kb-c1{display:flex;align-items:center;justify-content:space-between;gap:6px}
-.kb-c1 .pv-act{padding:3px 7px;font-size:11.5px}
-.kb-tp{font-size:10.5px;color:var(--muted);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.kb-kv{display:grid;grid-template-columns:auto 1fr;gap:2px 8px;margin:6px 0 0;font-size:11.5px}
-.kb-kv dt{color:var(--muted)}
-.kb-kv dd{margin:0;font-variant-numeric:tabular-nums;min-width:0}
-.kb-kv dd small{color:var(--muted);margin-left:6px}
-.kb-fal{font-size:11.5px;font-weight:700;margin-top:5px;color:var(--good-ink)}
-.kb-fal.late{color:var(--crit)}.kb-fal.soon{color:var(--serious)}
-.kb-card .nexec{margin-top:4px;display:block}
-.kb-sem{border-top:1px dashed var(--line);padding:8px 4px 2px;font-size:11px;color:var(--muted)}
-.kb-sem>div{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.kb-chip{all:unset;cursor:pointer;font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:2px 7px;border-radius:7px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
-.kb-chip:hover{border-color:var(--accent);color:var(--accent)}
-.pv-due{display:flex;flex-direction:column;line-height:1.3}
-.pv-due small{font-size:11px;color:var(--muted)}
-.pv-due .late{color:var(--crit);font-weight:700}
-.pv-due .soon{color:var(--serious);font-weight:700}
-.pcode{display:inline-grid;place-items:center;min-width:40px;height:22px;padding:0 7px;border-radius:7px;font-size:11px;font-weight:800;letter-spacing:.04em;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
-.pcode.c-RP1,.pcode.c-RP2{background:color-mix(in srgb,var(--s2) 14%,transparent);color:var(--s2);border-color:color-mix(in srgb,var(--s2) 35%,transparent)}
+/* ---------- Preventivas: peças comuns (códigos de plano, formulários, botões de ação) ---------- */
+.pcode{display:inline-grid;place-items:center;min-width:40px;height:22px;padding:0 7px;border-radius:var(--r-sm);font-size:11px;font-weight:800;letter-spacing:.04em;background:var(--accent-soft);color:var(--accent);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent)}
 .pcode.c-INT{background:color-mix(in srgb,var(--s3) 14%,transparent);color:var(--s3);border-color:color-mix(in srgb,var(--s3) 35%,transparent)}
-.pv-act{all:unset;cursor:pointer;font-size:12px;font-weight:600;color:var(--accent);padding:5px 9px;border-radius:8px;white-space:nowrap}
-.pv-act:hover{background:var(--accent-soft)}
-.pv-del{all:unset;cursor:pointer;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:var(--muted)}
-.pv-del:hover{background:color-mix(in srgb,var(--crit) 14%,transparent);color:var(--crit)}
+.pv-act{all:unset;cursor:pointer;font-size:12px;font-weight:600;color:var(--accent);padding:5px 9px;border-radius:var(--r-sm);white-space:nowrap}
+.pv-act:hover{background:var(--accent-soft)}.pv-act:focus-visible{outline:2px solid var(--accent)}
+.pv-del{all:unset;cursor:pointer;width:26px;height:26px;border-radius:var(--r-sm);display:inline-grid;place-items:center;color:var(--muted)}
+.pv-del:hover{background:color-mix(in srgb,var(--crit) 14%,transparent);color:var(--crit)}.pv-del:focus-visible{outline:2px solid var(--accent)}
 .pv-del svg{width:15px;height:15px}
-.inp.sm{padding:5px 8px;font-size:12px;border-radius:8px}
-td .inp.sm{width:118px}
-td select.inp.sm{width:150px}
+.inp.sm{padding:5px 8px;font-size:12.5px;border-radius:var(--r-sm)}
 .pv-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;align-items:end}
 .fld label{display:block;font-size:11.5px;color:var(--ink-2);font-weight:600;margin-bottom:5px}
 .fld .inp{width:100%}
 .fld .opt{font-weight:400;color:var(--muted)}
-textarea.inp{resize:vertical;min-height:84px;font-family:inherit;line-height:1.5}
-.pv-plans{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:14px;margin-top:14px;align-items:start}
-.pv-plan .ph{display:flex;gap:12px;align-items:flex-start}
-.pv-plan .ph .pcode{height:34px;min-width:52px;font-size:14px;border-radius:10px}
-.pv-plan h3{margin:0;font-size:14.5px;font-weight:650;line-height:1.3}
-.pv-plan .iv{margin:4px 0 0;font-size:12.5px;color:var(--ink-2)}
-.pv-plan .iv b{color:var(--ink)}
-.chips{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
-.chips span{font-size:10.5px;font-weight:600;letter-spacing:.03em;padding:3px 8px;border-radius:999px;background:var(--surface-2);border:1px solid var(--line);color:var(--ink-2)}
-.pv-plan .desc{font-size:12px;color:var(--muted);margin:10px 0 0}
-.pv-plan .cfg{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px;font-size:12px;color:var(--ink-2)}
-.pv-plan .cfg .inp{width:96px}
-.pv-plan details{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}
-.pv-plan summary{cursor:pointer;font-size:12.5px;font-weight:600;color:var(--accent);list-style:none;display:flex;align-items:center;gap:6px}
-.pv-plan summary::-webkit-details-marker{display:none}
-.pv-plan summary::before{content:"\25B8";font-size:11px;transition:transform .15s}
-.pv-plan details[open] summary::before{transform:rotate(90deg)}
-.svg-grp{margin-top:10px}
-.svg-grp h5{margin:0 0 4px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between}
-.svg-grp ul{margin:0;padding:0 0 0 16px;font-size:12px;color:var(--ink-2);line-height:1.6}
-.svg-grp li::marker{color:var(--axis)}
-.pv-scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
-.pv-drawer{position:fixed;top:14px;right:14px;bottom:14px;width:min(760px,calc(100vw - 28px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:22px;z-index:81;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45);transform:translateX(calc(100% + 30px));transition:transform .25s ease;overflow:hidden}
-body.pv-open .pv-scrim{opacity:1;pointer-events:auto}
-body.pv-open .pv-drawer{transform:none}
-.pv-drawer .pv-form{grid-template-columns:repeat(6,minmax(0,1fr))}
-.pv-drawer .pv-form .fld{grid-column:span 2}
-.pv-drawer .pv-form .fld:nth-child(-n+2),.pv-drawer .pv-form.no-km .fld:nth-child(3),.pv-drawer .pv-form.no-km .fld:nth-child(5){grid-column:span 3}
-@media screen and (max-width:640px){.pv-drawer .pv-form{grid-template-columns:1fr}.pv-drawer .pv-form .fld,.pv-drawer .pv-form .fld:nth-child(-n+2){grid-column:auto}}
-.pv-next{margin-top:14px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.pv-next div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
-.pv-next span{display:block;font-size:11px;color:var(--muted)}
-.pv-next b{display:block;font-size:16px;margin-top:2px;font-variant-numeric:tabular-nums}
-.pv-next .msg{grid-column:1/-1;font-size:12px;color:var(--ink-2)}
-.ck-grp{margin-top:12px}
-.ck-grp h5{margin:0 0 4px;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
-.ck-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 10px}
-.ck-list label{display:flex;gap:8px;align-items:flex-start;padding:5px 8px;border-radius:8px;font-size:12px;cursor:pointer;line-height:1.35}
-.ck-list label:hover{background:var(--surface-2)}
-.ck-list input{margin:1px 0 0;accent-color:var(--accent);flex:none}
-.ck-list label.off{color:var(--crit);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--crit) 50%,transparent)}
 .pv-msg{font-size:12.5px;font-weight:600;min-height:18px;margin-top:10px;color:var(--good-ink)}
 .pv-msg.err{color:var(--crit)}
 .pv-empty{text-align:center;padding:34px 16px;color:var(--muted)}
 .pv-empty b{display:block;color:var(--ink);font-size:15px;margin-bottom:4px}
-.nexec{color:var(--crit);font-size:11.5px}
-@media screen and (max-width:640px){.ck-list{grid-template-columns:1fr}.pv-next{grid-template-columns:1fr}.pv-plans{grid-template-columns:1fr}.pv-drawer{top:0;right:0;bottom:0;width:100vw;border-radius:0}}
-body.printing .pv-top,body.printing .pv-act,body.printing .pv-del{display:none!important}
-body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible}body.printing .kb-list{max-height:none}
+/* ---------- Preventivas v4.7: cronograma por km (sub-abas em cascata no menu) ---------- */
+body.pg-prev .topbar,body.pg-prev #periodSel,body.pg-prev #svcBox,body.pg-prev .hb-filters>.search,body.pg-prev #chip{display:none!important}
+:root{--warn-ink:#b5620a}:root[data-theme="dark"]{--warn-ink:#ffa24d}
+.pg-crumb{color:var(--muted);font-weight:500;font-size:.8em;margin-left:4px}
+.pv2 .p2-sub{display:none}.pv2 .p2-sub.active{display:block;animation:fade .25s ease}
+.p2-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:14px}
+.p2-bar[hidden],.pv2 .kpis[hidden]{display:none}
+.p2-bar .search .inp{width:180px}
+.p2-save{margin-left:auto;font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.p2-save i{width:7px;height:7px;border-radius:50%;background:var(--good)}
+.pv2>.kpis{margin-top:12px}
+.pv2 .kpi{cursor:pointer;transition:border-color .15s}.pv2 .kpi:hover{border-color:var(--axis)}.pv2 .kpi.sel{border-color:var(--accent)}
+.pv2 .plate{white-space:nowrap}
+.pv2 .kpi .l{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pv2 .kpi .ic.warn{color:var(--warn)}.pv2 .kpi .ic.mut{color:var(--muted)}
+.pv2 .card-side{flex-wrap:wrap}
+.pv2 .mseg{height:30px}.pv2 .mseg button{height:24px;padding:0 11px;font-size:12px}
+.pv2 .table-wrap.tall{max-height:calc(100vh - var(--hb) - 300px);min-height:320px}
+.pv2 td.c,.pv2 th.c{text-align:center}.pv2 td.mut,.pv2 .mut{color:var(--muted)}
+.pv2 th.km-h{color:var(--accent)}
+.pv2 td.km-c{background:color-mix(in srgb,var(--accent) 7%,transparent)}
+.pv2 tr.grp td{background:var(--surface-2);border-bottom:1px solid var(--line);box-shadow:inset 3px 0 0 var(--accent);padding:9px 12px;position:sticky;top:34px;z-index:1}
+.pv2 tr.grp:hover{background:none}
+.pv2 tr.grp b{font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.pv2 tr.grp span{margin-left:10px;font-size:11.5px;color:var(--muted)}
+.pv2 .badge i{background:var(--muted)}
+.pv2 .badge.late i{background:var(--crit)}.pv2 .badge.soon i{background:var(--warn)}.pv2 .badge.ok i{background:var(--good)}.pv2 .badge.nxt i{background:var(--accent)}
+.pv2 .badge.late{color:var(--crit);border-color:color-mix(in srgb,var(--crit) 40%,var(--line))}
+.pv2 .meter{min-width:96px}
+#p2CronTab th,#p2CronTab td{padding:8px 8px}#p2CronTab .km-in{width:92px}
+.pv2 .meter span{border:1px solid var(--line)}
+.pv2 .meter span i{background:var(--good)}.pv2 .meter.soon span i{background:var(--warn)}.pv2 .meter.late span i{background:var(--crit)}
+.pv2 .meter b{font-size:11.5px;min-width:34px}
+.falt{display:flex;flex-direction:column;line-height:1.2;white-space:nowrap}
+.falt b{font-variant-numeric:tabular-nums;color:var(--good-ink)}
+.falt small{font-size:10.5px;color:var(--muted)}
+.falt.soon b{color:var(--warn-ink)}.falt.late b{color:var(--crit)}
+.pcode.c-MP2{background:color-mix(in srgb,var(--s2) 12%,transparent);color:var(--s2);border-color:color-mix(in srgb,var(--s2) 35%,transparent)}
+.pcode.c-MP3{background:color-mix(in srgb,#a66bd6 16%,transparent);color:#b98be3;border-color:color-mix(in srgb,#a66bd6 40%,transparent)}
+:root:not([data-theme="dark"]) .pcode.c-MP3{color:#7a3fb0}
+.pv2 .pcode{border-radius:var(--r-sm);white-space:nowrap}
+.p2-src{font-size:11px;font-weight:600;white-space:nowrap}
+.p2-src.est{color:var(--warn-ink)}.p2-src.pen{color:var(--muted)}.p2-src.cad{color:var(--good-ink)}.p2-src.reg{color:var(--s3)}
+.p2-nov{color:var(--crit);font-weight:700;font-size:11px;white-space:nowrap}
+.pv2 .km-in{width:100px;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.pv2 .km-in.chg{border-color:var(--accent);background:var(--accent-soft)}
+.p2-fila{display:flex;flex-direction:column;gap:6px}
+.p2-fila-i{display:grid;grid-template-columns:96px 58px minmax(0,1fr) 110px 92px;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-left:3px solid var(--good);border-radius:var(--r-sm);background:var(--surface-2)}
+.p2-fila-i.soon{border-left-color:var(--warn)}.p2-fila-i.late{border-left-color:var(--crit)}
+.p2-fila-i .md{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.p2-hi{display:flex;gap:10px;align-items:flex-start;padding:9px 2px;border-bottom:1px solid var(--line)}
+.p2-hi:last-child{border-bottom:0}
+.p2-hi .dt{width:74px;flex:none;font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:2px}
+.p2-hi .tx{min-width:0;flex:1;font-size:12.5px}
+.p2-hi .tx small{display:block;color:var(--muted);font-size:11.5px}
+.p2-mtab td,.p2-mtab th{text-align:center}.p2-mtab td:first-child,.p2-mtab th:first-child{text-align:left}
+.p2-mtab tfoot td{font-weight:700;background:var(--accent-soft);border-top:2px solid var(--accent)}
+.p2-mtab td.tot{font-weight:700}
+.pv2 .donut{height:230px}
+.pv2 .donut-c b{font-size:26px}
+.p2-lkbar{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.p2-lkbar .fld{width:170px}
+.p2-rod{font-variant-numeric:tabular-nums;font-weight:700;color:var(--good-ink)}.p2-rod.neg{color:var(--crit)}
+.p2-pm{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;white-space:nowrap;margin-right:8px}
+.p2-pm b{font-variant-numeric:tabular-nums}
+.p2-pm.late b{color:var(--crit)}.p2-pm.soon b{color:var(--warn-ink)}.p2-pm.ok b{color:var(--good-ink)}
+.pv2 .pv-form .wide{grid-column:1/-1}
+.p2-acts{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:14px}
+.p2-cfg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.p2-cfg .fld{border:1px solid var(--line);border-radius:var(--r);background:var(--surface-2);padding:10px}
+.p2-info{border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:var(--r-sm);background:var(--surface-2);padding:10px 14px;font-size:12.5px;color:var(--ink-2)}
+.pv2 .rules{columns:2 420px;column-gap:32px}.pv2 .rules p{break-inside:avoid}
+.p2-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin:0}
+.p2-stats div{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:10px 12px;min-width:0}
+.p2-stats span{display:block;font-size:11px;color:var(--muted)}
+.p2-stats b{display:block;font-size:18px;margin-top:2px;font-variant-numeric:tabular-nums}
+.p2-stats small{display:block;font-size:11px;color:var(--muted)}
+/* gaveta do veículo */
+.p2-scrim{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:80;opacity:0;pointer-events:none;transition:opacity .2s}
+.p2-drawer{position:fixed;top:14px;right:14px;bottom:14px;width:min(760px,calc(100vw - 28px));background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:var(--r);z-index:81;display:flex;flex-direction:column;box-shadow:0 24px 60px rgba(0,0,0,.45);transform:translateX(calc(100% + 30px));transition:transform .25s ease;overflow:hidden}
+body.p2-open .p2-scrim{opacity:1;pointer-events:auto}
+body.p2-open .p2-drawer{transform:none}
+.p2-drawer .sum-body{padding:16px 20px 22px}
+.p2-sec{margin:18px 0 8px;font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-2)}
+.p2-pl{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-left:3px solid var(--good);border-radius:var(--r-sm);background:var(--surface-2);margin-bottom:6px}
+.p2-pl.soon{border-left-color:var(--warn)}.p2-pl.late{border-left-color:var(--crit)}.p2-pl.na{border-left-color:var(--muted)}
+.p2-pl .kv{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.p2-pl .kv b{color:var(--ink);font-variant-numeric:tabular-nums}
+.p2-box{border:1px solid var(--line);border-radius:var(--r);padding:14px;background:var(--surface)}
+.p2-box.hl{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+.p2-prev{margin-top:12px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.p2-prev div{background:var(--surface-2);border:1px solid var(--line);border-radius:var(--r);padding:8px 10px}
+.p2-prev span{display:block;font-size:11px;color:var(--muted)}
+.p2-prev b{font-variant-numeric:tabular-nums}
+.p2-toast{position:fixed;right:20px;bottom:20px;z-index:120;max-width:420px;background:var(--side);color:#f2f2f2;border:1px solid var(--side-line);border-left:3px solid var(--accent);border-radius:var(--r);padding:11px 14px;font-size:12.5px;box-shadow:0 14px 36px rgba(0,0,0,.4);transform:translateY(20px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s}
+.p2-toast.on{opacity:1;transform:none}.p2-toast b{color:var(--accent)}
+@media screen and (max-width:980px){.p2-fila-i{grid-template-columns:90px 54px minmax(0,1fr) 92px}.p2-fila-i .meter{display:none}}
+@media screen and (max-width:640px){.p2-drawer{top:0;right:0;bottom:0;width:100vw;border-radius:0}.p2-prev{grid-template-columns:1fr}.p2-bar .search{flex:1 1 140px}.p2-bar .search .inp{width:100%}}
+@media print{.p2-drawer,.p2-scrim,.p2-toast,.pv2 .no-print,.pv2 .pv-act,.pv2 .pv-del{display:none!important}.pv2 .table-wrap.tall{max-height:none!important;overflow:visible!important}.pv2 tr.grp td{position:static}.pv2 .km-in{border:0;background:none;padding:0}}
+body.printing .p2-bar,body.printing .pv2 .no-print,body.printing .pv2 .pv-act,body.printing .pv2 .pv-del{display:none!important}
+body.printing .pv2 .table-wrap.tall{max-height:none!important;overflow:visible!important}
+
+/* ---------- Menu v4.7: Preventivas com sub-abas em cascata ----------
+   Trilho expandido: as sub-abas abrem embaixo de Preventivas, com uma linha-guia. Trilho recolhido (só ícones):
+   o clique em Preventivas abre um painel ao lado do trilho com as sub-abas. */
+.rail-tree{display:flex;flex-direction:column}
+.rail-nav .tree-ch{width:14px!important;height:14px!important;margin-left:auto;margin-right:14px;opacity:0;transition:transform .24s ease,opacity .16s ease}
+body.menu-ab .rail-nav .tree-ch{opacity:.75}
+.rail-tree.open .tree-ch{transform:rotate(180deg)}
+.tree-sub{display:grid;grid-template-rows:0fr;transition:grid-template-rows .26s cubic-bezier(.2,.8,.2,1)}
+.tree-sub>div{min-height:0;overflow:hidden;display:flex;flex-direction:column;position:relative;visibility:hidden;transition:visibility 0s .26s}
+body.menu-ab .rail-tree.open .tree-sub{grid-template-rows:1fr}
+body.menu-ab .rail-tree.open .tree-sub>div{visibility:visible;transition:visibility 0s}
+.tree-sub>div::before{content:"";position:absolute;left:26px;top:2px;bottom:8px;width:1px;background:#2e3036}
+.rail-nav .tree-sub button{height:33px;padding-left:40px;color:#8b8e96}
+.rail-nav .tree-sub button:last-child{margin-bottom:6px}
+.rail-nav .tree-sub .rail-lb{margin-left:0;font-size:12px}
+.rail-nav .tree-sub button:hover{background:var(--side-hover);color:#f2f2f2}
+.rail-nav .tree-sub button.active{background:none;color:var(--nav-on);font-weight:600}
+.rail-nav .tree-sub button.active::before{left:25px;top:8px;bottom:8px;width:3px;border-radius:2px}
+.rail-nav .tree-hd .cnt,.rail-nav .tree-sub .cnt,.rail-fly .cnt{min-width:16px;height:16px;padding:0 4px;border-radius:8px;background:var(--crit);color:#fff;font-size:9.5px;font-weight:700;display:grid;place-items:center;line-height:1}
+.rail-nav .tree-hd .cnt{position:absolute;left:30px;top:6px}
+body.menu-ab .rail-nav .tree-hd .cnt{position:static;margin-left:8px}
+.rail-nav .tree-sub .cnt{margin-left:8px}
+.rail-fly .cnt{margin-left:auto}
+.rail-fly{position:fixed;left:var(--rw);top:0;z-index:59;width:232px;background:var(--side);border:1px solid var(--side-line);border-left:0;border-radius:0 var(--r) var(--r) 0;box-shadow:14px 14px 36px rgba(0,0,0,.35);padding:0 0 6px;opacity:0;visibility:hidden;transform:translateX(-8px);transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1),visibility 0s .22s}
+.rail-fly.on{opacity:1;visibility:visible;transform:none;transition:opacity .18s ease,transform .22s cubic-bezier(.2,.8,.2,1),visibility 0s}
+.rail-fly h4{margin:0 0 4px;padding:12px 16px 10px;font-size:13px;font-weight:700;color:#f2f2f2;border-bottom:1px solid var(--side-line);letter-spacing:.02em}
+.rail-fly button{all:unset;box-sizing:border-box;position:relative;display:flex;align-items:center;gap:11px;width:100%;height:38px;padding:0 16px;color:#9a9da5;font-size:12.5px;cursor:pointer;transition:background .15s,color .15s}
+.rail-fly button svg{width:17px;height:17px;flex:none}
+.rail-fly button:hover{background:var(--side-hover);color:#f2f2f2}
+.rail-fly button.active{color:var(--nav-on);background:var(--side-active)}
+.rail-fly button.active::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--nav-bar)}
+.rail-fly button:focus-visible{outline:2px solid var(--nav-bar);outline-offset:-2px}
+body.menu-ab .rail-fly{display:none}
+@media screen and (max-width:980px){.rail-fly{display:none}.rail-tree.open .tree-sub{grid-template-rows:1fr}.rail-tree.open .tree-sub>div{visibility:visible;transition:visibility 0s}.rail-nav .tree-ch{opacity:.75}.rail-nav .tree-hd .cnt{position:static;margin-left:8px}}
+@media (prefers-reduced-motion:reduce){.tree-sub,.rail-fly,.rail-nav .tree-ch{transition:none}}
+@media print{.rail-fly{display:none!important}}
+body.printing .rail-fly{display:none!important}
 </style>
 </head>
 <body>
@@ -1040,7 +1086,7 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
         <p><b>Marca e modelo:</b> vêm da Tabela de Veículos, ligados pela placa (sem diferenciar traço, espaço ou maiúsculas). Placas das OS que não estão na tabela aparecem como “Sem cadastro”. Se o mesmo nome de modelo existir em marcas diferentes, a marca é acrescentada ao nome. <b>OS por veículo</b> considera os veículos atendidos no período.</p>
         <p><b>Hoje:</b> no seletor de período, mostra as OS com apontamento na data de hoje.</p>
         <p><b>Período:</b> o seletor do topo restringe as OS analisadas. Os dias sem manutenção sempre usam o histórico completo.</p>
-        <p><b>Preventivas:</b> a próxima revisão é a última + o intervalo do plano, em km e em meses; vence no que chegar primeiro. <b>Vencida</b> = passou da data ou o km atual passou do km previsto. <b>Próxima</b> = faltam até 15 dias ou até 10% do intervalo em km. Cada tipo de revisão é independente: a próxima MP1 conta só a partir da última MP1, e assim por diante. RP1 e RP2 (carretas) são sob demanda: não têm intervalo nem km, porque carretas não têm hodômetro. Sem o km atual do veículo, a situação usa só a data. Os cadastros ficam salvos no navegador em que foram feitos; use “Fazer backup” para guardar ou levar para outro computador.</p>
+        <p><b>Preventivas:</b> cronograma de revisões por km. Próxima revisão = última revisão do plano + intervalo (Intermediária 20.000, MP1 40.000, MP2 80.000 e MP3 120.000 km). <b>Faltante</b> = próxima − km atual; negativo é revisão <b>Atrasada</b>. Prioridade <b>Alta</b> até 1.000 km ou vencida, <b>Média</b> até 3.000 km. Cada plano é independente. O km atual vale para todos os planos da placa. As regras completas e os intervalos ficam em Preventivas › Critérios e backup.</p>
         <p class="cost-only"><b>Custo de peças:</b> soma do “Valor Total do Item” das <b>saídas</b> do estoque. O veículo vem de “Veículo destino” e a OS de “O.S. do Item”. O custo de uma OS é a soma das saídas com o número dela, e o custo de um veículo é a soma das saídas com a placa dele, com ou sem OS. As <b>entradas</b> são compras para o estoque e não entram no custo por veículo, para não contar duas vezes. O período das saídas segue o seletor do topo, pela data da movimentação. <b>Mão de obra</b> (opcional, na aba Custos) = horas-homem × valor da hora informado.</p>
         <p class="cost-only"><b>Combustível:</b> soma do “Valor da transação” das <b>saídas</b> das planilhas de abastecimento (diesel e ARLA do tanque próprio), pela placa do “Equipamento” e pela data do abastecimento. As <b>entradas</b> (compras para o tanque) e os <b>ajustes</b> de inventário ficam só na conferência do tanque, para não contar duas vezes. O combustível não tem OS, por isso não entra no custo por OS, no custo médio por OS nem no índice de Prioridades, e fica de fora quando há filtro de serviço ou de técnico. Na aba Custos, “Custo considerado” escolhe o que os gráficos somam: total, só manutenção (peças) ou só combustível. Abastecimentos feitos fora da base (postos, cartão-frota) não estão nessas planilhas. <b>ARLA / diesel</b> = litros de ARLA ÷ litros de diesel; o consumo normal fica perto de 3% a 5%.</p>
         <p><b>Tipo e proprietário:</b> vêm da Tabela de Veículos. Os nomes de tipo são padronizados (ex.: “CAR/ S REBOQUE/C FECHADA” = Semi-reboque baú) e agrupados em cavalos, caminhões, implementos e leves.</p>
@@ -1061,19 +1107,132 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
     </div>
   </section>
 
-  <!-- PREVENTIVAS (operacional) -->
-  <section class="page" data-page="prev">
-    <div class="pv-top">
-      <div class="mseg pv-seg" id="pvSeg" role="tablist" aria-label="Seções de preventivas"></div>
-      <div class="toolbar">
-        <span class="pv-save" id="pvSave"></span>
-        <button class="btn" id="pvBkExp" type="button" title="Baixar todos os cadastros em um arquivo .json">Fazer backup</button>
-        <button class="btn" id="pvBkImp" type="button" title="Carregar um backup .json">Restaurar backup</button>
-        <input type="file" id="pvBkFile" accept=".json,application/json" hidden>
-        <button class="btn primary" id="pvNew" type="button">+ Registrar revisão</button>
+  <!-- PREVENTIVAS (v4.7): cronograma por km, com as sub-abas em cascata no menu -->
+  <section class="page pv2" data-page="prev" id="p2">
+    <div class="p2-bar" id="p2Bar">
+      <select class="inp" id="p2FMarca" aria-label="Marca" title="Marca"></select>
+      <select class="inp" id="p2FPlano" aria-label="Plano" title="Plano de revisão"></select>
+      <select class="inp" id="p2FSt" aria-label="Situação" title="Situação"></select>
+      <div class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input class="inp" id="p2FQ" list="p2PlList" placeholder="Filtrar placa…" autocomplete="off" aria-label="Filtrar placa"><datalist id="p2PlList"></datalist></div>
+      <span class="p2-save" id="p2Save"></span>
+    </div>
+    <div class="kpis" id="p2Kpis"></div>
+
+    <div class="p2-sub" data-sub="painel">
+      <div class="grid c32">
+        <div class="card">
+          <div class="card-h"><div><h3>Fila de atenção</h3><p>As revisões mais próximas de vencer, pelo km que falta</p></div><div class="card-side"><button class="btn no-print" type="button" data-sgo="cron">Ver cronograma</button></div></div>
+          <div class="p2-fila" id="p2Fila"></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>Últimas revisões</h3><p>Revisões registradas, da mais recente para a mais antiga</p></div><div class="card-side"><button class="btn no-print" type="button" data-sgo="hist">Histórico</button></div></div>
+          <div id="p2PnHist"></div>
+        </div>
+      </div>
+      <div class="grid c2">
+        <div class="card"><div class="card-h"><div><h3>Revisões por marca e plano</h3><p>Quantidade de revisões no cronograma</p></div></div><div class="table-wrap"><table class="p2-mtab" id="p2MP"></table></div></div>
+        <div class="card"><div class="card-h"><div><h3>Situação por marca</h3><p>Próximas, atrasadas e pendentes de km</p></div></div><div class="table-wrap"><table class="p2-mtab" id="p2MS"></table></div></div>
+      </div>
+      <div class="grid c3">
+        <div class="card"><div class="card-h"><div><h3>Revisões por marca</h3></div></div><div class="donut"><canvas id="p2ChM"></canvas><div class="donut-c"><div><b id="p2Dc1"></b><span>revisões</span></div></div></div></div>
+        <div class="card"><div class="card-h"><div><h3>Tipos de revisão</h3></div></div><div class="donut"><canvas id="p2ChT"></canvas><div class="donut-c"><div><b id="p2Dc2"></b><span>revisões</span></div></div></div></div>
+        <div class="card"><div class="card-h"><div><h3>Distribuição por prioridade</h3></div></div><div class="donut"><canvas id="p2ChP"></canvas><div class="donut-c"><div><b id="p2Dc3"></b><span>revisões</span></div></div></div></div>
       </div>
     </div>
-    <div id="pvView"></div>
+
+    <div class="p2-sub" data-sub="cron">
+      <div class="card" style="margin-top:14px">
+        <div class="card-h">
+          <div><h3>Cronograma de revisões</h3><p>Digite o KM atual na coluna laranja e tecle Enter: o faltante, o % de uso, a situação e a prioridade se recalculam na hora</p></div>
+          <div class="card-side no-print">
+            <div class="mseg" id="p2CronOrd"><button type="button" data-o="marca" class="on">Por marca</button><button type="button" data-o="falt">Por faltante</button></div>
+            <button class="btn" type="button" id="p2CronCsv">Exportar CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap tall"><table id="p2CronTab"></table></div>
+        <div class="tcount" id="p2CronN"></div>
+      </div>
+    </div>
+
+    <div class="p2-sub" data-sub="km">
+      <div class="card" style="margin-top:14px">
+        <div class="card-h"><div><h3>Lançar leituras de KM</h3><p>Uma linha por veículo. Preencha o hodômetro dos que você tem e grave tudo de uma vez: cada leitura vai para o histórico</p></div></div>
+        <div class="p2-lkbar no-print">
+          <div class="fld"><label for="p2LkData">Data da leitura</label><input class="inp" type="date" id="p2LkData"></div>
+          <button class="btn primary" type="button" id="p2LkSave">Gravar leituras</button>
+          <button class="btn" type="button" id="p2LkClear">Limpar</button>
+          <span class="pv-msg" id="p2LkMsg" style="margin:0"></span>
+        </div>
+        <div class="table-wrap tall" style="margin-top:14px"><table id="p2LkTab"></table></div>
+      </div>
+    </div>
+
+    <div class="p2-sub" data-sub="hist">
+      <div class="card" style="margin-top:14px">
+        <div class="card-h">
+          <div><h3>Histórico</h3><p>Revisões registradas e leituras de KM. Use o filtro de placa para ver um veículo só</p></div>
+          <div class="card-side no-print">
+            <div class="mseg" id="p2HiTipo"><button type="button" data-t="rev" class="on">Revisões</button><button type="button" data-t="km">Leituras de KM</button><button type="button" data-t="all">Tudo</button></div>
+            <button class="btn" type="button" id="p2HiCsv">Exportar CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap tall"><table id="p2HiTab"></table></div>
+        <div class="tcount" id="p2HiN"></div>
+      </div>
+    </div>
+
+    <div class="p2-sub" data-sub="cad">
+      <div class="grid">
+        <div class="card" id="p2CadCard">
+          <div class="card-h"><div><h3 id="p2CadTit">Incluir revisão no cronograma</h3><p>Um veículo pode ter mais de um plano (ex.: Intermediária e MP2). Cada plano é independente: uma revisão maior não zera as menores</p></div></div>
+          <form class="pv-form" id="p2CadForm" autocomplete="off">
+            <div class="fld"><label for="p2CPlaca">Placa</label><input class="inp" id="p2CPlaca" required placeholder="ABC-1D23" list="p2PlList"></div>
+            <div class="fld"><label for="p2CMarca">Marca / grupo</label><input class="inp" id="p2CMarca" required list="p2MkList"><datalist id="p2MkList"></datalist></div>
+            <div class="fld"><label for="p2CModelo">Modelo</label><input class="inp" id="p2CModelo"></div>
+            <div class="fld"><label for="p2CAno">Ano <span class="opt">(opcional)</span></label><input class="inp" id="p2CAno" inputmode="numeric"></div>
+            <div class="fld"><label for="p2CTipo">Plano</label><select class="inp" id="p2CTipo"></select></div>
+            <div class="fld"><label for="p2CUlt">KM da última revisão <span class="opt">(vazio = a informar)</span></label><input class="inp" id="p2CUlt" inputmode="numeric"></div>
+            <div class="fld"><label for="p2CKm">KM atual do veículo</label><input class="inp" id="p2CKm" inputmode="numeric"></div>
+            <div class="fld"><label for="p2CBase">Base do KM</label><select class="inp" id="p2CBase"><option>Cadastro</option><option>Estimado</option><option>Registrado</option><option>Pendente</option></select></div>
+            <div class="fld"><label for="p2COrig">Origem</label><input class="inp" id="p2COrig" placeholder="Dezembro, Pendência Nov.…"></div>
+          </form>
+          <div class="p2-acts"><button class="btn primary" type="button" id="p2CadSave">Incluir</button><button class="btn" type="button" id="p2CadCancel" hidden>Cancelar edição</button><span class="pv-msg" id="p2CadMsg" style="margin:0"></span></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>Planos cadastrados</h3><p>Editar muda os dados do plano; excluir tira a revisão do cronograma (o histórico do veículo continua)</p></div></div>
+          <div class="table-wrap tall"><table id="p2CadTab"></table></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="p2-sub" data-sub="crit">
+      <div class="grid c2">
+        <div class="card">
+          <div class="card-h"><div><h3>Intervalos dos planos e prioridade</h3><p>Mudou aqui, todo o cronograma se recalcula</p></div></div>
+          <div class="p2-cfg" id="p2CfgPlanos"></div>
+          <div class="p2-cfg" style="margin-top:10px">
+            <div class="fld"><label for="p2CfgAlta">Prioridade Alta: faltam até (km)</label><input class="inp" id="p2CfgAlta" inputmode="numeric"></div>
+            <div class="fld"><label for="p2CfgMedia">Prioridade Média: faltam até (km)</label><input class="inp" id="p2CfgMedia" inputmode="numeric"></div>
+          </div>
+          <div class="p2-acts"><button class="btn primary" type="button" id="p2CfgSave">Salvar critérios</button><span class="pv-msg" id="p2CfgMsg" style="margin:0"></span></div>
+        </div>
+        <div class="card">
+          <div class="card-h"><div><h3>Backup e armazenamento</h3><p id="p2BkSub">Os dados ficam gravados neste navegador, neste computador</p></div></div>
+          <div class="p2-info">Faça um backup de vez em quando. O backup também serve para levar os dados a outro computador (Restaurar backup).</div>
+          <div class="p2-acts">
+            <button class="btn primary" type="button" id="p2BkSave">Fazer backup</button>
+            <label class="btn" for="p2BkFile">Restaurar backup</label><input type="file" id="p2BkFile" accept=".json,application/json" hidden>
+            <button class="btn" type="button" id="p2BkReset">Voltar ao cronograma de dezembro</button>
+          </div>
+          <div class="pv-msg" id="p2BkMsg"></div>
+          <dl class="p2-stats" id="p2DbStats" style="margin-top:12px"></dl>
+        </div>
+        <div class="card full">
+          <div class="card-h"><div><h3>Critérios de cálculo</h3></div></div>
+          <div class="rules" id="p2Rules"></div>
+        </div>
+      </div>
+    </div>
   </section>
   </main>
 <div class="gate" id="gate" hidden>
@@ -1091,26 +1250,13 @@ body.printing .kb{grid-template-columns:repeat(3,minmax(0,1fr));overflow:visible
     <div class="gate-act" id="gateAct"></div>
   </div>
 </div>
-<div class="pv-scrim" id="pvScrim"></div>
-<aside class="pv-drawer" id="pvDrawer" role="dialog" aria-modal="true" aria-labelledby="pvDTitle" aria-hidden="true">
-  <header class="sum-h"><div><div class="sum-kind">Preventivas</div><h2 id="pvDTitle">Registrar revisão</h2><p id="pvDSub">Informe o veículo, o tipo de revisão e o km do hodômetro no dia</p></div><button type="button" class="sum-x" id="pvDClose" aria-label="Fechar">×</button></header>
-  <div class="sum-body">
-    <div class="pv-form">
-      <div class="fld"><label for="rvP">Veículo</label><select class="inp" id="rvP"></select></div>
-      <div class="fld"><label for="rvPl">Tipo de revisão</label><select class="inp" id="rvPl"></select></div>
-      <div class="fld"><label for="rvD">Data da revisão</label><input class="inp" type="date" id="rvD"></div>
-      <div class="fld"><label for="rvK">KM da revisão</label><input class="inp" type="number" id="rvK" min="0" step="1" inputmode="numeric" placeholder="ex.: 412500"></div>
-      <div class="fld"><label for="rvO">Nº da OS <span class="opt">(opcional)</span></label><input class="inp" id="rvO" autocomplete="off"></div>
-    </div>
-    <div class="fld" style="margin-top:12px"><label for="rvObs">Observação <span class="opt">(opcional)</span></label><input class="inp" id="rvObs" autocomplete="off"></div>
-    <div class="pv-next" id="rvNext"></div>
-    <div class="pv-msg" id="rvMsg" role="status"></div>
-    <div class="sum-actions"><button class="btn primary" id="rvSave" type="button">Salvar revisão</button><button class="btn" id="rvPrint" type="button">Imprimir checklist</button></div>
-    <h4 class="sum-sec" id="rvCkT">Checklist</h4>
-    <p class="note mt0">Desmarque o que <b>não</b> foi executado. Fica registrado no histórico.</p>
-    <div id="rvCk"></div>
-  </div>
+<div class="p2-scrim" id="p2Scrim"></div>
+<aside class="p2-drawer pv2" id="p2Drawer" role="dialog" aria-modal="true" aria-labelledby="p2DrTit" aria-hidden="true">
+  <header class="sum-h"><div><div class="sum-kind" id="p2DrKind"></div><h2 id="p2DrTit"></h2><p id="p2DrSub"></p></div><button type="button" class="sum-x" id="p2DrX" aria-label="Fechar">×</button></header>
+  <div class="sum-body" id="p2DrBody"></div>
 </aside>
+<div class="p2-toast" id="p2Toast" role="status"></div>
+<div class="rail-fly" id="railFly" role="menu" aria-label="Sub-abas de Preventivas"></div>
 <div class="sum-scrim" id="sumScrim"></div>
 <aside class="sum-drawer" id="sumDrawer" role="dialog" aria-modal="true" aria-labelledby="sumTitle" aria-hidden="true">
   <header class="sum-h"><div><div class="sum-kind" id="sumKind"></div><h2 id="sumTitle"></h2><p id="sumSub"></p></div><button type="button" class="sum-x" id="sumClose" aria-label="Fechar resumo">×</button></header>
@@ -1199,7 +1345,7 @@ const PAGES=[
  {id:'equipe',t:'Equipe técnica',c:'Equipe',s:'Carga de trabalho e tempo de execução por técnico',ic:'users'},
  {id:'confiab',t:'Confiabilidade',s:'MTBF, MTTR, disponibilidade física e duração das OS',ic:'pulse'},
  {id:'risco',t:'Prioridades',s:'Fila de atenção por veículo: tempo sem manutenção, reincidência, retrabalho e custo',sc:'Fila de atenção por veículo: tempo sem manutenção, reincidência e retrabalho',ic:'alert'},
- {id:'prev',t:'Preventivas',s:'Cadastro de veículos, registro de revisões e próximas preventivas por km ou data',ic:'clip'},
+ {id:'prev',t:'Preventivas',s:'Cronograma de revisões por km: quanto falta, registro das revisões e histórico',ic:'clip'},
  {id:'dados',t:'Dados e critérios',c:'Dados',s:'Importação da planilha e regras de cálculo',ic:'upload',g:'sis'}
 ];
 // grupos do menu (v4.1): Preventivas passou para Análises; o grupo Análises recolhe e expande pelo título
@@ -2021,6 +2167,7 @@ $('#csVh').addEventListener('change',e=>{VH=Math.max(0,+e.target.value||0);ls.se
 
 /* ---------- Versões ---------- */
 const VERSIONS=[
+ {v:'4.7',d:'27/11/2026',c:'Nova aba Preventivas: o cronograma de revisões por km (dezembro/2026) substitui o Kanban. No menu, Preventivas abre as sub-abas em cascata: Painel, Cronograma, Lançar KM, Histórico, Cadastro e Critérios e backup. No Cronograma, o km atual é digitado direto na tabela e o faltante, o % de uso, a situação e a prioridade se recalculam na hora. A ficha do veículo registra a revisão feita e mostra o histórico. Saíram os checklists e os planos RP1/RP2 das carretas.'},
   {v:'4.6',d:'26/11/2026',c:'Combustível no custo dos veículos. Nova Base 4, Abastecimentos, com as planilhas de diesel e de ARLA do tanque próprio (um espaço para cada uma; o preço do litro confere se não foram trocadas). Na aba Custos, o seletor “Custo considerado” (Total, Manutenção ou Combustível) define o que os gráficos por veículo, tipo, proprietário, marca e mês somam, com peças, diesel e ARLA em cores separadas. Novos: custo por mês (manutenção × combustível), preço médio do litro, conferência do tanque (compras, abastecimentos e ajustes) e a tabela Combustível por veículo (litros, R$/L e ARLA/diesel). A tabela Custo por veículo ganhou as colunas Diesel, ARLA e Total. O custo por OS, o custo médio por OS e as Prioridades continuam só com peças. Dados e critérios mais compacto: as 5 bases (OS, veículos, estoque, diesel e ARLA) ficam lado a lado, cada uma com o botão de importar e um resumo curto; o cruzamento das bases virou mini-cartões; saíram os textos de colunas; os critérios de cálculo e os avisos de acesso viraram caixas com X para fechar (“Mostrar os textos informativos” reabre).'},
   {v:'4.5',d:'26/11/2026',c:'Menu lateral mais leve: o nome das abas passou para letra normal e menor (12,5 px), e o trilho ficou um pouco mais estreito (52 px recolhido, 212 px expandido), com ícones e linhas um pouco menores.'},
   {v:'4.4',d:'26/11/2026',c:'O painel em cascata saiu: o trilho mostra as abas fixas e um clique abre a aba direto. O botão › no canto inferior esquerdo expande o trilho com o nome das abas; o mesmo botão, como ‹ Recolher menu, recolhe de volta para só ícones, com animação suave. A escolha fica gravada no navegador. No celular, o ☰ abre o menu já com os nomes. Saíram a linha de destaques da Visão geral e a linha de cartões de custo da aba Custos.'},
@@ -2175,14 +2322,39 @@ function go(id){// abas antigas (aging, retrab, marcas) e abas não liberadas ca
    O clique no ícone, ou no nome, abre a aba. O botão ›/‹ no canto inferior esquerdo expande e recolhe o trilho,
    e o estado fica gravado no navegador (pm-menu). No tablet e no celular, o trilho abre pelo ☰ já com os nomes. */
 const NAV_NOME={reinc:'Reincidência'};// nome curto da aba no menu, quando o título da página é longo
-function markNav(){$$('#nav button[data-id]').forEach(b=>{const on=b.dataset.id===PAGE;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')})}
+/* v4.7: Preventivas tem sub-abas em cascata (PV2.SUBS). Com o trilho expandido (ou no celular), elas abrem embaixo de
+   Preventivas, com uma linha-guia; o clique no título abre e fecha a árvore. Com o trilho recolhido (só ícones), o clique em
+   Preventivas abre o painel #railFly ao lado do trilho com as sub-abas; clicar fora ou apertar Esc fecha. */
+let TREE_OPEN=null;// null = segue a aba atual (aberta quando Preventivas está na tela)
+const subsPrev=()=>(PV2&&PV2.SUBS)||[];
+const treeAberta=()=>TREE_OPEN==null?PAGE==='prev':TREE_OPEN;
+function markNav(){$$('#nav button[data-id]').forEach(b=>{const on=b.dataset.id===PAGE;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')});
+  const tr=$('#nav .rail-tree');if(!tr)return;const ab=treeAberta();tr.classList.toggle('open',ab);tr.querySelector('.tree-hd').setAttribute('aria-expanded',String(ab));
+  const sb=PV2?PV2.SUB:'';$$('#nav [data-sub],#railFly [data-sub]').forEach(b=>{const on=PAGE==='prev'&&b.dataset.sub===sb;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')});
+  const n=PV2?PV2.badge():'',cnt=n?`<span class="cnt" title="Revisões atrasadas ou de prioridade alta">${n}</span>`:'';
+  $$('#nav .tree-hd .cnt,#nav [data-sub="cron"] .cnt,#railFly [data-sub="cron"] .cnt').forEach(e=>e.remove());
+  if(cnt){tr.querySelector('.tree-hd .rail-lb').insertAdjacentHTML('afterend',cnt);$$('#nav [data-sub="cron"],#railFly [data-sub="cron"]').forEach(b=>b.insertAdjacentHTML('beforeend',cnt))}}
 function buildNav(){
   $('#nav').innerHTML=GRUPOS.map(g=>{const it=PAGES.filter(p=>(p.g||'an')===g.id&&podeVer(p.id));if(!it.length)return'';
-    return`<div class="rail-grp" data-grp="${g.id}">${it.map(p=>{const n=NAV_NOME[p.id]||p.t;return`<button type="button" data-id="${p.id}" title="${n}">${svg(p.ic)}<span class="rail-lb">${n}</span></button>`}).join('')}</div>`}).join('');
-  $$('#nav button[data-id]').forEach(b=>b.onclick=()=>go(b.dataset.id));
+    return`<div class="rail-grp" data-grp="${g.id}">${it.map(p=>{const n=NAV_NOME[p.id]||p.t;
+      if(p.id==='prev'&&subsPrev().length)return`<div class="rail-tree"><button type="button" class="tree-hd" data-id="prev" title="${n}" aria-expanded="false">${svg(p.ic)}<span class="rail-lb">${n}</span><svg class="tree-ch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        <div class="tree-sub"><div>${subsPrev().map(s=>`<button type="button" data-sub="${s.id}" title="${s.t}"><span class="rail-lb">${s.t}</span></button>`).join('')}</div></div></div>`;
+      return`<button type="button" data-id="${p.id}" title="${n}">${svg(p.ic)}<span class="rail-lb">${n}</span></button>`}).join('')}</div>`}).join('');
+  $('#railFly').innerHTML=`<h4>Preventivas</h4>${subsPrev().map(s=>`<button type="button" role="menuitem" data-sub="${s.id}">${svg(s.ic)}<span>${s.t}</span></button>`).join('')}`;
+  $$('#nav button[data-id]').forEach(b=>b.onclick=()=>b.dataset.id==='prev'?navPrev(b):go(b.dataset.id));
+  $$('#nav [data-sub],#railFly [data-sub]').forEach(b=>b.onclick=()=>{flyClose();TREE_OPEN=null;PV2.sub(b.dataset.sub)});
   markNav()}
+const trilhoRecolhido=()=>!document.body.classList.contains('menu-ab')&&!matchMedia('(max-width:980px)').matches;
+function navPrev(b){
+  if(trilhoRecolhido()){const fl=$('#railFly');if(fl.classList.contains('on')){flyClose();return}
+    fl.style.top=Math.max(b.getBoundingClientRect().top-1,0)+'px';fl.classList.add('on');if(PAGE!=='prev')go('prev');return}
+  if(PAGE!=='prev'){TREE_OPEN=null;go('prev');return}
+  TREE_OPEN=!treeAberta();markNav()}
+function flyClose(){const fl=$('#railFly');if(fl)fl.classList.remove('on')}
+document.addEventListener('click',e=>{if($('#railFly').classList.contains('on')&&!e.target.closest('#railFly,.tree-hd'))flyClose()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')flyClose()});
 function navClose(){document.body.classList.remove('nav-open')}
-function menuAberto(ab,salvar){document.body.classList.toggle('menu-ab',ab);
+function menuAberto(ab,salvar){document.body.classList.toggle('menu-ab',ab);flyClose();
   const t=$('#railTog'),r=ab?'Recolher menu':'Expandir menu';t.title=r;t.setAttribute('aria-label',r);t.setAttribute('aria-expanded',String(ab));
   if(salvar)ls.set('pm-menu',ab?'1':'0')}
 // aplica as abas liberadas: refaz o menu e esconde os valores em R$ se a aba Custos não estiver liberada
@@ -2313,38 +2485,6 @@ $('#menuBtn').onclick=()=>document.body.classList.toggle('nav-open');
 $('#scrim').onclick=navClose;
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(document.body.classList.contains('nav-open'))navClose();else if(F){F=null;renderAll()}}});
 
-/* ================= PREVENTIVAS (operacional) ================= */
-const PV_MOTOR=['CAVALO 6X2','CAVALO 6X4','CAMINHÃO TRUCK','FURGÃO','FROTA LEVE'];
-const PV_CARR=['CARRETA 13 M','CARRETA 15 M','CARRETA SIDER'];
-const PV_TIPOS=[...PV_MOTOR,...PV_CARR];
-const EL=a=>a.map(s=>'⚡ ELÉTRICA · '+s);
-const SV_CAB=['Completar: GRAXA CUBO ARTICULADO DIANT.','Inspecionar: DESGASTE LONA DE FREIO/AJUSTAD','Inspecionar: COMPRESSOR DE AR','Inspecionar: RADIADOR - ÁGUA E % DE ADITIVO','Inspecionar: DESGASTE DOS PNEUS','Inspecionar: CABOS/CONEXÕES/CHICOTES ELÉTRI','Inspecionar: BATERIA GERAL/TERMINAL/TENSÃO','Inspecionar: FARÓIS E LUZES EXTERNAS','Inspecionar: FOLGA TERM. DIREÇÃO-VER COIFA','Inspecionar: INTERCLIMA','Inspecionar: LUZES E SÍMBOLOS DO PAINEL','Inspecionar: PINTURA/ADESIVAGEM CABINE','Inspecionar: EXTINTOR DE INCÊNDIO','Inspecionar: CINTOS DE SEGURANÇA','Inspecionar: BUZINA E SIRENE','Inspecionar: ACIONAMENTO DOS VIDROS','Inspecionar: PARABRISA, LIMPADOR E ESGUICHO','Inspecionar: BANCOS, TAPETES E ESTOFAMENTO','Inspecionar: VENTILAÇÃO INTERNA','Inspecionar: FREIO DE SERVIÇO/ESTACIONAMENT','Inspecionar: FAIXAS REFLETIVAS','Inspecionar: PINTURA/ADESIVAGEM IMPLEMENTO','Inspecionar: PORTAS/ABERTURAS IMPLEMENTO','Inspecionar: PINTURA/PROTEÇÃO INTERNA','Inspecionar: CORREIA E TENSOR DA CORREIA MO','Inspecionar: TUBOS/MANGUEIRAS ARREFECIMENTO','Inspecionar: TUBO ADMISSÃO FILTRO AR/MOTOR','Inspecionar: SUSPENSOR PNEUMÁTICO EIXO AUX','Inspecionar: MOTOR DE PARTIDA E ALTERNADOR','Inspecionar: PROTEÇÃO DE CICLISTA E LAMEIRA','Inspecionar: SUP MANCAIS ÁRV TRANSM/CHASSI','Inspecionar: ÁRV TRANS FOLGA/DESGA CRUZETA','Inspecionar: CRUZETA/LUVA DESLIZANTE/MANCAL','Inspecionar: ÓLEO DA DIREÇÃO HIDRÁULICA','Inspecionar: INDICADOR DESGASTE EMBREAGEM','Inspecionar: ÓLEO E RESPIRO CAIXA DE MARCHA','Inspecionar: TRAVA ELÉT. PORTAS DA CABINE','Inspecionar: ÓLEO E RESPIRO DIFERENCIAL'];
-const SV_INSP2=['Inspecionar: AMORTECEDORES DIANT E TRAS','Inspecionar: FEIXE DE MOLAS','Inspecionar: 3º EIXO - FIXAÇÃO E DESGASTE','Inspecionar: FIXAÇÃO CRUZETA/COLUNA DIREÇÃO','Inspecionar: TUBULAÇÕES CAIXA DE MARCHA','Inspecionar: VEDAÇÃO DO BOCAL TQ COMBUSTIVE'];
-const SV_LUB=['Lubrificar: COMPONENTES DAS PORTAS CABINE','Lubrificar: PINO-MESTRES E BALANCINS','Lubrificar: SUSPENSÃO D/T e MANGA EIXO','Lubrificar: PINOS DOS OLHAIS E JUMELOS','Lubrificar: TRAVAS DA CABINE','Lubrificar: ÁRV. TRANSM. E ARTIC. DIVERSAS','Lubrificar: FEIXE DE MOLAS (SUSP. DIANT.)','Lubrificar: EIXO CAME E AJUSTADOR FREIO','Lubrificar: ÁRV. TRANSMISSÃO. JUNTAS/LUVAS'];
-const SV_REAP=['Reapertar: COXINS DO MOTOR','Reapertar: BARRAS ESTABILIZADORAS D/T','Reapertar: CAIXA DE DIREÇÃO','Reapertar: CINTA DE FIXAÇÃO TQ COMBUSTIVE','Reapertar: GRAMPOS E SUPORTES DAS MOLAS','Reapertar: AMORTECEDORES DIANT E TRAS','Reapertar: PINOS DOS OLHAIS E JUMELOS','Reapertar: 3º EIXO - BRAÇOS/CÂMARA FREIO'];
-const SV_EL1=['Antiquebra: ALTERNADOR, PARTIDA E CHICOTES','Inspecionar: ★ CABO BATERIA → MOTOR DE PARTIDA','Inspecionar: ★ FIO DO SOLENOIDE (MOTOR PARTIDA)','Inspecionar: ★ TERMINAIS DO MOTOR DE PARTIDA','Inspecionar: ★ CABO B+ E FIO D+ DO ALTERNADOR','Inspecionar: ★ CONECTOR DO REGULADOR ALTERNADOR','Inspecionar: ★ MALHA DE MASSA MOTOR/CHASSI/CABINE','Medir: ★ TENSÃO DAS BATERIAS EM REPOUSO','Medir: ★ TENSÃO DE CARGA DO ALTERNADOR','Verificar: ★ PARTIDA (PERGUNTAR AO MOTORISTA)'];
-const SV_EL2=['Testar: ★ CONDUTÂNCIA DAS BATERIAS','Medir: ★ QUEDA DE TENSÃO CIRCUITO PARTIDA','Medir: ★ TENSÃO NO MOTOR PARTIDA GIRANDO','Medir: ★ QUEDA DE TENSÃO COMANDO SOLENOIDE','Medir: ★ QUEDA MASSA BATERIA → BLOCO','Medir: ★ QUEDA CIRCUITO DE CARGA (B+)','Reapertar: ★ SUPORTES ALTERNADOR E M. PARTIDA','Inspecionar: ★ ROLAMENTO E POLIA DO ALTERNADOR'];
-const SV_EL3=['Medir: ★ CORRENTE DE SAÍDA DO ALTERNADOR','Medir: ★ SOBRETENSÃO DO ALTERNADOR','Medir: ★ CORRENTE DE PARTIDA','Limpar: ★ TERMINAIS SOB AS CAPAS (ALT/PART)','Verificar: ★ IDADE DAS BATERIAS'];
-const PLANOS=[
- {id:'MP1',curto:'Preventiva 40 mil km',nome:'Checklist Preventivo de 40.000 km',km:40000,meses:3,tipos:PV_MOTOR,
-  sv:[...SV_CAB,'Inspecionar: FILTRO COMBUSTÍVEL','Limpar: RADIADOR','Limpar: VÁLV. DESCARGA PÓ - FILTRO AR',...SV_LUB,'Regular: FREIO DAS RODAS.','Trocar: ÓLEO LUBRIFICANTE','Trocar: FILTRO LUBRIFICANTE','Trocar: FILTRO RACCOR','Trocar: FILTRO COMBUSTÍVEL','Trocar: FILTRO DE AR','Realiza Viagem: VIAGEM TESTE (POS MANUTENÇÃO)',...EL(SV_EL1)]},
- {id:'MP2',curto:'Preventiva 80 mil km',nome:'Checklist Preventivo de 80.000 km',km:80000,meses:6,tipos:PV_MOTOR,
-  sv:[...SV_CAB,...SV_INSP2,'Limpar: RADIADOR','Limpar: VÁLV. DESCARGA PÓ - FILTRO AR','Limpar: SIST HIDRÁUL ACIONAMENTO CAIXA',...SV_LUB,...SV_REAP,'Regular: FREIO DAS RODAS.','Regular: FOLGA VÁLVULA (REG SE NECESSAR','Regular: VÁLVULA DO FREIO MOTOR','Trocar: FLUIDO DO SIST HID ACION CAIXA','Trocar: ÓLEO LUBRIFICANTE','Trocar: ÓLEO DA CAIXA DE MARCHA','Trocar: FILTRO LUBRIFICANTE','Trocar: FILTRO RACCOR','Trocar: FILTRO COMBUSTÍVEL','Trocar: FILTRO DE AR DO MOTOR','Trocar: FILTRO DE APU','Realiza Viagem: VIAGEM TESTE (POS MANUTENÇÃO)',...EL(SV_EL1),...EL(SV_EL2)]},
- {id:'MP3',curto:'Preventiva 120 mil km',nome:'Checklist Preventivo de 120.000 km',km:120000,meses:12,tipos:PV_MOTOR,
-  sv:[...SV_CAB,...SV_INSP2,'Inspecionar: VÁLVULA ALB. FORÇA DE FRENAGEM','Inspecionar: FREIO-MOTOR. AJUSTE/FUNCIONAME','Inspecionar: SISTEMA DE ESCAPAMENTO','Inspecionar: ALINHAMENTO DOS FARÓIS','Inspecionar: FOLGA VÁLVULA (REG SE NECESSÁRIO)','Limpar: RADIADOR','Limpar: VÁLV. DESCARGA PÓ - FILTRO AR','Limpar: SIST HIDRÁUL ACIONAMENTO CAIXA','Limpar: SENSOR VELOC/RODA DENTADA - AB',...SV_LUB,...SV_REAP,'Regular: PARAFUSO ENCOSTO COROA EIXO TR','Regular: PARAFUSO ENCOSTO COROA EIXO DI','Regular: FREIO DAS RODAS.','Regular: VÁLVULA DO FREIO MOTOR','Revisar: RADIADOR - DANOS/OBSTRUÇÃO','Revisar: EIXO CAME E AJUSTADOR FREIO','Trocar: FLUIDO DO SIST HID ACION CAIXA','Trocar: CORREIA DO MOTOR','Trocar: ÓLEO LUBRIFICANTE','Trocar: ÓLEO DIFERENCIAL','Trocar: ÓLEO DA CAIXA DE MARCHA','Trocar: FILTRO LUBRIFICANTE','Trocar: FILTRO RACCOR','Trocar: FILTRO COMBUSTÍVEL','Trocar: FILTRO DE AR DO MOTOR','Trocar: FILTRO DO ARLA','Trocar: FILTRO DO AR CONDICIONADO','Trocar: GRAXA CUBO DE RODA TRUCK DIANT','Trocar: LÍQUIDO DE ARREFECIMENTO',...EL(SV_EL1),...EL(SV_EL2),...EL(SV_EL3)]},
- {id:'INT',curto:'Intermediária',nome:'Revisão intermediária',km:20000,meses:2,tipos:['CAVALO 6X2','CAVALO 6X4'],desc:'Troca dos filtros de diesel e racor entre as preventivas.',
-  sv:['TROCA DE FILTRO DIESEL','TROCA DE FILTRO RACOR']},
- {id:'RP1',curto:'Recuperação carretas',nome:'Recuperação e Inspeção de Carretas',km:null,meses:null,sob:true,tipos:PV_CARR,desc:'Plano corretivo para carretas 13 m, 15 m e Sider. Reúne inspeções de pneus, freios, elétrica, estrutura, pintura e suspensão para abertura técnica padronizada.',
-  sv:['Calibragem Geral','Movimentação/Troca de Pneus','INSPECIONAR CABOS/CONEXÕES/CHICOTES ELÉTRICA','TROCA DE LÂMPADAS/LANTERNAS','Inspeção Sistema de Ar','REGULAR FREIO DAS RODAS.','REVISAR/TROCAR LONAS DE FREIO.','INSPEÇÃO DE CHAPAS COMPLETO','REPARO OU TROCA DO TETO','REPOSIÇÃO DE PARALAMAS','PINTURA ASSOALHO','Inspeção Estrutural Metálica','REPARO ESTRUTURAL','REPARO ESTRUTURAL DOS PÉS','SOLDAS PONTUAIS','INSPECIONAR FEIXE DE MOLAS','INSPEÇÃO DE BALANÇA E FEIXE DE MOLA','TROCA DE ROLAMENTO']},
- {id:'RP2',curto:'Corretiva carretas',nome:'Revisão Corretiva de Carretas',km:null,meses:null,sob:true,tipos:PV_CARR,desc:'Plano corretivo para carretas 13 m, 15 m e Sider: pneus, iluminação, freios, suspensão e estrutura. Faixas refletivas, para-choque e quinta roda são exclusivos das carretas 13 m.',
-  sv:['CALIBRAGEM GERAL','MOVIMENTAÇÃO/TROCA DE PNEUS','TROCA DE LÂMPADAS E LANTERNAS','INSPEÇÃO DO SISTEMA DE AR','REGULAR FREIO DAS RODAS.','REVISAR/TROCAR LONAS DE FREIO.','LUBRIFICAÇÃO DAS CATRACAS E BALANÇAS','TROCA DE CUICA DE FREIO','INSPEÇÃO DE BALANÇA E FEIXE DE MOLA','REPARO ESTRUTURAL','LONA DO TETO','REPOSIÇÃO DE PARALAMAS','REPOSIÇÃO DE FAIXAS REFLETIVAS E PARACHOQUE','INSPEÇÃO DE ROLAMENTOS','INSPEÇÃO DE BUCHAS E TIRANTES','INSPEÇÃO E LUBRIFICAÇÃO DE QUINTA RODA']}];
-const PLAN=Object.fromEntries(PLANOS.map(p=>[p.id,p]));
-const PV_ST={'Vencida':'#d03b3b','Próxima':'#fab219','Em dia':'#0ca30c','Sem registro':'#80858f','Sob demanda':'#5fa3d6'};
-const PV_RANK={'Vencida':0,'Próxima':1,'Sem registro':2,'Em dia':3,'Sob demanda':4};
-const semHod=t=>PV_CARR.includes(t); // carretas não têm hodômetro: sem km
-const pvBadge=s=>`<span class="badge"><i style="background:${PV_ST[s]}"></i>${s}</span>`;
-const pcode=id=>`<span class="pcode c-${id}">${id}</span>`;
-let PV={v:1,veics:[],revs:[],cfg:{},bk:null},PV_VIEW='painel',PV_F={q:''},PV_VQ={q:'',t:''},PV_HQ={q:'',pl:''},PV_OK=true,PV_FLASH='';
 /* ---------- Camada de dados das preventivas ----------
    Toda gravação passa por PV_DB (adicionar/alterar/remover veículo, revisão e intervalo).
    Hoje grava no navegador (localStorage). Para publicar com Supabase, basta preencher SUPABASE_CFG:
@@ -2376,280 +2516,462 @@ const isAdmin=()=>!SB_ON||!!(SB.perfil&&SB.perfil.ativo&&SB.perfil.admin);
 const fmtTs=s=>s?new Date(s).toLocaleString('pt-BR',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}):'—';
 const uuid=()=>{if(window.crypto&&crypto.randomUUID)try{return crypto.randomUUID()}catch(e){}
   const b=crypto.getRandomValues(new Uint8Array(16));b[6]=b[6]&15|64;b[8]=b[8]&63|128;const h=[...b].map(x=>x.toString(16).padStart(2,'0')).join('');return`${h.slice(0,8)}-${h.slice(8,12)}-${h.slice(12,16)}-${h.slice(16,20)}-${h.slice(20)}`};
-// conversão entre o formato do painel e as colunas do banco
-const DBMAP={veic:{to:v=>({placa:v.p,tipo:v.tipo,km_atual:v.km??null,km_data:v.kmData||null}),from:r=>({p:r.placa,tipo:r.tipo,km:r.km_atual,kmData:r.km_data,criado:r.criado_em?String(r.criado_em).slice(0,10):null})},
-  rev:{to:r=>({id:r.id,placa:r.p,plano:r.plano,data:r.data,km:r.km,os:r.os||null,obs:r.obs||null,nao_executados:r.nexec||[]}),from:r=>({id:r.id,p:r.placa,plano:r.plano,data:r.data,km:r.km,os:r.os||'',obs:r.obs||'',nexec:r.nao_executados||[],criado:r.criado_em})}};
-const PV_LOCAL={nome:'local',
-  async carregar(){const s=ls.get('pm-prev');if(!s)return null;const j=JSON.parse(s);return j&&j.v===1?j:null},
-  async gravar(){PV_OK=ls.set('pm-prev',JSON.stringify(PV))}};
-// Adaptador Supabase: tabelas prev_veiculos, revisoes e planos_config (login obrigatório)
-const PV_SUPA={nome:'supabase',
-  async carregar(){const bk=PV.bk;const[v,r,c]=await Promise.all([SB.todos('prev_veiculos?select=*&order=placa'),SB.todos('revisoes?select=*&order=data'),SB.req('planos_config?select=*')]);
-    return{v:1,veics:v.map(DBMAP.veic.from),revs:r.map(DBMAP.rev.from),cfg:Object.fromEntries(c.map(x=>[x.plano,{km:x.km,meses:x.meses}])),bk}},
-  async gravar(op,x){const up={method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'}},del={method:'DELETE'};
-    if(op==='veic')return SB.req('prev_veiculos',{...up,body:JSON.stringify(DBMAP.veic.to(x))});
-    if(op==='veicDel')return SB.req('prev_veiculos?placa=eq.'+encodeURIComponent(x),del);
-    if(op==='rev')return SB.req('revisoes',{...up,body:JSON.stringify(DBMAP.rev.to(x))});
-    if(op==='revDel')return SB.req('revisoes?id=eq.'+encodeURIComponent(x),del);
-    if(op==='cfg')return x.v?SB.req('planos_config',{...up,body:JSON.stringify({plano:x.id,km:x.v.km,meses:x.v.meses})}):SB.req('planos_config?plano=eq.'+x.id,del);
-    if(op==='tudo'){// restaurar backup: troca todos os cadastros pelos do arquivo
-      await SB.req('revisoes?id=not.is.null',del);await SB.req('prev_veiculos?placa=not.is.null',del);await SB.req('planos_config?plano=not.is.null',del);
-      if(PV.veics.length)await SB.req('prev_veiculos',{...up,body:JSON.stringify(PV.veics.map(DBMAP.veic.to))});
-      if(PV.revs.length)await SB.req('revisoes',{...up,body:JSON.stringify(PV.revs.map(DBMAP.rev.to))});
-      const cf=Object.entries(PV.cfg);if(cf.length)await SB.req('planos_config',{...up,body:JSON.stringify(cf.map(([k,v])=>({plano:k,km:v.km,meses:v.meses})))})}}};
-const PV_STORE=SB_ON?PV_SUPA:PV_LOCAL;
-const PV_DB={
-  veicAdd(v){v.criado=v.criado||todayIso();PV.veics.push(v);return pvSync('veic',v)},
-  veicUpd(v){return pvSync('veic',v)},
-  veicDel(p){PV.veics=PV.veics.filter(v=>v.p!==p);PV.revs=PV.revs.filter(r=>r.p!==p);return pvSync('veicDel',p)},
-  revAdd(r){r.id=r.id||uuid();r.criado=r.criado||new Date().toISOString();PV.revs.push(r);return pvSync('rev',r)},
-  revDel(id){PV.revs=PV.revs.filter(r=>r.id!==id);return pvSync('revDel',id)},
-  cfgSet(id,v){if(v)PV.cfg[id]=v;else delete PV.cfg[id];return pvSync('cfg',{id,v})},
-  substituir(j){PV={v:1,veics:j.veics,revs:j.revs.map(r=>({...r,id:/^[0-9a-f-]{36}$/.test(r.id||'')?r.id:uuid()})),cfg:j.cfg||{},bk:PV.bk};return pvSync('tudo')}};
-async function pvSync(op,x){try{if(PV_STORE===PV_LOCAL)await PV_LOCAL.gravar();else{await PV_SUPA.gravar(op,x);PV_OK=true}}
-  catch(e){PV_OK=false;console.error(e);PV_FLASH='';if(SB_ON)alert('Não foi possível gravar no Supabase: '+e.message+'\nA tela será recarregada com os dados do banco.');if(SB_ON){await pvLoad();if(PAGE==='prev')pvRender()}}pvSaveLbl()}
-let PV_LOADED=0;
-async function pvLoad(){try{const j=await PV_STORE.carregar();if(j)PV={v:1,veics:j.veics||[],revs:j.revs||[],cfg:j.cfg||{},bk:j.bk||(SB_ON?ls.get('pm-prev-bk'):null)};PV_OK=true;PV_LOADED=Date.now()}catch(e){PV_OK=false;console.error(e)}}
-function pvSave(){pvSync('tudo')} // compatibilidade: grava o estado inteiro
-function pvSaveLbl(){const el=$('#pvSave');if(!el)return;const onde=PV_STORE===PV_SUPA?'Salvo no Supabase':'Salvo neste navegador';
-  el.innerHTML=PV_OK?`<i></i>${onde} · ${PV.bk?'último backup em '+fmtDate(PV.bk):'nenhum backup feito'}`:`<i style="background:var(--crit)"></i>${PV_STORE===PV_SUPA?'Falha ao gravar no Supabase.':'Este navegador não está salvando.'} Faça backup.`}
-const pvIv=id=>{const c=PV.cfg[id]||{},p=PLAN[id];if(p.sob)return{km:null,meses:null};return{km:'km'in c?c.km:p.km,meses:'meses'in c?c.meses:p.meses}};
-const todayIso=()=>iso(new Date());
-function addMonths(s,n){const[y,m,d]=s.split('-').map(Number);const last=new Date(y,m-1+n+1,0).getDate();return iso(new Date(y,m-1+n,Math.min(d,last)))}
-const kmf=n=>n==null?'—':num(Math.round(n))+' km';
-const pvVeh=p=>PV.veics.find(v=>v.p===p);
-const plansFor=t=>PLANOS.filter(p=>p.tipos.includes(t));
-const ivTxt=iv=>iv.km||iv.meses?[iv.km?num(iv.km)+' km':'',iv.meses?iv.meses+(iv.meses===1?' mês':' meses'):''].filter(Boolean).join(' ou '):'sob demanda';
-const vehDesc=p=>{const x=VEH.get(p);return x?`${x.marca} ${x.modelo}`:''};
-// cada tipo de revisão é independente: a próxima conta só a partir da última do mesmo tipo
-function pvLast(p,id){let b=null;
-  for(const r of PV.revs)if(r.p===p&&r.plano===id&&(!b||r.data>b.data||(r.data===b.data&&(r.km||0)>(b.km||0))))b=r;return b}
-function pvNext(last,id){const iv=pvIv(id);return{iv,nk:last&&last.km!=null&&iv.km?last.km+iv.km:null,nd:last&&iv.meses?addMonths(last.data,iv.meses):null}}
-function pvStatus(v,id){const last=pvLast(v.p,id),{nk,nd,iv}=pvNext(last,id);
-  const dias=nd?dayDiff(todayIso(),nd):null,kr=nk!=null&&v.km!=null?nk-v.km:null;let st;
-  if(PLAN[id].sob||(!iv.km&&!iv.meses))st='Sob demanda';else if(!last)st='Sem registro';
-  else if((dias!=null&&dias<0)||(kr!=null&&kr<=0))st='Vencida';
-  else if((dias!=null&&dias<=15)||(kr!=null&&iv.km&&kr<=iv.km*.1))st='Próxima';else st='Em dia';
-  return{p:v.p,tipo:v.tipo,v,id,last,nk,nd,dias,kr,st,iv}}
-const pvRows=()=>PV.veics.flatMap(v=>plansFor(v.tipo).map(pl=>pvStatus(v,pl.id)));
-function pvPlates(){const s=new Set(VEH.keys());if(RAW)RAW.os.forEach(o=>s.add(o.p));return[...s].sort()}
+/* ================= PREVENTIVAS (v4.7): cronograma de revisões por km =================
+   Substitui a aba de preventivas antiga (Kanban, checklists e planos RP das carretas).
+   Sub-abas (em cascata no menu): Painel, Cronograma, Lançar KM, Histórico, Cadastro e Critérios e backup.
+   Base inicial: Rodovitor_Cronograma_Dezembro_2026.pdf (emissão 24/11/2026). Dados gravados no navegador (pm-prev2).
+   Tudo fica dentro de PV2 para não misturar nomes com o resto do painel. */
+var PV2=(function(){
+const LS_DB='pm-prev2';
+const fmt=n=>n==null||isNaN(n)?'—':Math.round(n).toLocaleString('pt-BR');
+const parseKm=s=>{const d=String(s??'').replace(/\D/g,'');return d===''?null:+d};
+const hoje=()=>{const d=new Date();return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const fmtD=s=>s?s.slice(8,10)+'/'+s.slice(5,7)+'/'+s.slice(0,4):'—';
+const dias=(a,b)=>Math.round((new Date(b+'T12:00')-new Date(a+'T12:00'))/864e5);
+const addDias=(s,n)=>{const d=new Date(s+'T12:00');d.setDate(d.getDate()+Math.round(n));return d.toISOString().slice(0,10)};
+let UIDN=0;// o contador mantém a ordem de criação quando vários ids nascem no mesmo milissegundo
+const uid=()=>Date.now().toString(36)+(UIDN++%1679616).toString(36).padStart(4,'0')+Math.random().toString(36).slice(2,5);
+IC.edit='<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M14 6l4 4"/>';
 
-function pvRender(){
-  const R=pvRows(),cnt=s=>R.filter(r=>r.st===s).length;
-  const segs=[['painel','Painel de revisões',cnt('Vencida')+cnt('Próxima')],['veic','Veículos',PV.veics.length],['hist','Histórico',PV.revs.length],['planos','Planos e serviços',PLANOS.length]];
-  $('#pvSeg').innerHTML=segs.map(s=>`<button type="button" role="tab" data-v="${s[0]}" class="${PV_VIEW===s[0]?'on':''}" aria-selected="${PV_VIEW===s[0]}">${s[1]}<b>${num(s[2])}</b></button>`).join('');
-  pvSaveLbl();const V=$('#pvView');
-  if(PV_VIEW==='painel')V.innerHTML=pvViewPainel(R);
-  else if(PV_VIEW==='veic')V.innerHTML=pvViewVeic();
-  else if(PV_VIEW==='hist')V.innerHTML=pvViewHist();
-  else V.innerHTML=pvViewPlanos();
-  if(PV_VIEW==='painel'&&PV.veics.length)pvKanban();
-  if(PV_VIEW==='veic'){pvVehTable();pvHint()}
-  if(PV_VIEW==='hist'&&PV.revs.length)pvHistTable();
-}
-function pvFlash(){if(!PV_FLASH)return'';const m=PV_FLASH;PV_FLASH='';return`<div class="pv-msg" role="status" style="margin-top:12px">${esc(m)}</div>`}
-/* ---------- Painel de revisões em Kanban: uma coluna por tipo, três balões por coluna ---------- */
-const PV_KB=[['Próxima','Próximo','soon'],['Vencida','Vencidas','late'],['Em dia','Em dia','ok']];
-const PV_KB_ORD=['MP1','MP2','MP3','INT','RP1','RP2'];
-// RP1/RP2 são sob demanda: o balão vem do tempo desde a última passagem (até 90 dias em dia, 91 a 180 próximo, mais de 180 vencida)
-function pvKbSt(r){if(!r.last)return'Sem registro';if(!PLAN[r.id].sob)return r.st==='Sob demanda'?'Em dia':r.st;
-  const d=dayDiff(r.last.data,todayIso());return d<=90?'Em dia':d<=180?'Próxima':'Vencida'}
-function pvViewPainel(R){
-  if(!PV.veics.length)return pvFlash()+`<div class="card" style="margin-top:14px"><div class="pv-empty"><b>Nenhum veículo no controle de preventivas</b>Primeiro cadastre os veículos e o tipo de cada um. Depois registre a última revisão feita para o painel calcular as próximas.<div style="margin-top:14px"><button class="btn primary" type="button" data-go="veic">Cadastrar veículos</button></div></div></div>`;
-  return pvFlash()+`<div class="kb-bar"><p>Cada coluna é um tipo de revisão, independente das outras. RP1 e RP2 são sob demanda: em dia até 90 dias da última passagem, próximo de 91 a 180 dias e vencida depois disso.</p>
-    <div class="toolbar"><input class="inp" id="pvQ" placeholder="Buscar placa…" value="${esc(PV_F.q)}" autocomplete="off"><button class="btn" type="button" id="pvCsv1">Exportar CSV</button></div></div>
-  <div class="kb" id="pvKb"></div>`}
-let PV_PROWS=[];
-function pvKbCard(r){const L=r.last,sob=!!PLAN[r.id].sob,dd=n=>n===1?'1 dia':num(n)+' dias';
-  const ult=L?`${fmtDate(L.data)}${L.km!=null?' · '+kmf(L.km):''}`:'—';
-  let prx,fal='';
-  if(sob){prx='sob demanda';fal=L?`há ${dd(dayDiff(L.data,todayIso()))}`:''}
-  else{prx=r.nk!=null||r.nd?[r.nk!=null?kmf(r.nk):'',r.nd?fmtDate(r.nd):''].filter(Boolean).join(' ou '):'—';
-    const kmT=r.kr!=null?(r.kr<=0?`passou ${kmf(-r.kr)}`:`faltam ${kmf(r.kr)}`):'';
-    const dT=r.dias!=null?(r.dias<0?`venceu há ${dd(-r.dias)}`:r.dias===0?'vence hoje':`faltam ${dd(r.dias)}`):'';
-    fal=[kmT,dT].filter(Boolean).join(' · ')}
-  const st=pvKbSt(r),cls=st==='Vencida'?'late':st==='Próxima'?'soon':'';
-  return`<div class="kb-card"><div class="kb-c1"><span class="plate" data-pv-p="${r.p}">${r.p}</span><button class="pv-act" type="button" data-reg="${r.p}|${r.id}">Registrar</button></div>
-    <div class="kb-tp">${esc(r.tipo)}${vehDesc(r.p)?` · ${esc(vehDesc(r.p))}`:''}</div>
-    <dl class="kb-kv"><dt>Última</dt><dd>${ult}${L&&L.os?`<small>OS ${esc(L.os)}</small>`:''}</dd><dt>Próxima</dt><dd>${prx}</dd></dl>
-    ${fal?`<div class="kb-fal ${cls}">${fal}</div>`:''}${sob&&L&&(L.nexec||[]).length?`<div class="nexec">Não executado: ${L.nexec.map(esc).join(' · ')}</div>`:''}</div>`}
-function pvKanban(){const q=normPlate(PV_F.q),ALL=pvRows(),R=ALL.filter(r=>!q||r.p.includes(q));PV_PROWS=R;
-  const ord=(a,b)=>(a.dias??1e9)-(b.dias??1e9)||(a.kr??1e12)-(b.kr??1e12)||(a.last&&b.last?(a.last.data<b.last.data?-1:1):0)||a.p.localeCompare(b.p);
-  $('#pvKb').innerHTML=PV_KB_ORD.map(id=>{const P=PLAN[id],X=R.filter(r=>r.id===id),tot=ALL.filter(r=>r.id===id).length;
-    const sem=X.filter(r=>pvKbSt(r)==='Sem registro');
-    const balls=PV_KB.map(([st,lbl,c])=>{const Y=X.filter(r=>pvKbSt(r)===st).sort(ord);
-      return`<section class="kb-ball b-${c}"><header><i></i>${lbl}<b>${num(Y.length)}</b></header><div class="kb-list">${Y.length?Y.map(pvKbCard).join(''):'<div class="kb-none">Nenhum veículo</div>'}</div></section>`}).join('');
-    return`<div class="kb-col"><div class="kb-h">${pcode(id)}<div><b>${esc(P.curto)}</b><small>${esc(P.sob?'sob demanda':ivTxt(pvIv(id)))} · ${num(tot)} ${tot===1?'veículo':'veículos'}</small></div></div>${balls}
-      ${sem.length?`<div class="kb-sem"><span>Sem registro (${num(sem.length)})</span><div>${sem.map(r=>`<button type="button" class="kb-chip" data-reg="${r.p}|${r.id}" title="Registrar a última ${id} da ${r.p}">${r.p}</button>`).join('')}</div></div>`:''}</div>`}).join('')}
+const SUBS=[
+ {id:'painel',t:'Painel',s:'Resumo das revisões preventivas da frota',ic:'grid',kpi:1,fil:1},
+ {id:'cron',t:'Cronograma',s:'Atualize o KM atual e veja quanto falta para a próxima revisão',ic:'clip',kpi:1,fil:1},
+ {id:'km',t:'Lançar KM',s:'Leitura de hodômetro de vários veículos de uma vez',ic:'gauge',fil:1},
+ {id:'hist',t:'Histórico',s:'Últimas revisões feitas e leituras de KM',ic:'clock',fil:1},
+ {id:'cad',t:'Cadastro',s:'Incluir, editar e excluir veículos e planos do cronograma',ic:'truck'},
+ {id:'crit',t:'Critérios e backup',s:'Intervalos dos planos, faixas de prioridade e backup',ic:'file'}];
+let SUB=ls.get('pm-pv-sub');if(!SUBS.some(s=>s.id===SUB))SUB='painel';
 
-function pvViewVeic(){
-  return pvFlash()+`<div class="grid c2">
-  <div class="card"><div class="card-h"><div><h3>Adicionar veículo</h3><p>O tipo define quais revisões o veículo recebe. O km atual é opcional e serve para calcular quanto falta.</p></div></div>
-    <div class="pv-form">
-      <div class="fld"><label for="pvAP">Placa</label><input class="inp" id="pvAP" list="pvPlList" autocomplete="off" placeholder="ex.: QEV1B88" style="text-transform:uppercase"></div>
-      <div class="fld"><label for="pvAT">Tipo do veículo</label><select class="inp" id="pvAT"><option value="">Selecione…</option>${PV_TIPOS.map(t=>`<option>${t}</option>`).join('')}</select></div>
-      <div class="fld"><label for="pvAK">KM atual <span class="opt">(opcional)</span></label><input class="inp" id="pvAK" type="number" min="0" step="1" inputmode="numeric"></div>
-      <div class="fld"><button class="btn primary" type="button" id="pvAdd" style="width:100%;justify-content:center;box-sizing:border-box">Adicionar</button></div>
-    </div>
-    <p class="note" id="pvAHint"></p><div class="pv-msg" id="pvAMsg" role="status"></div>
-    <datalist id="pvPlList">${pvPlates().map(p=>`<option value="${p}">`).join('')}</datalist></div>
-  <div class="card"><div class="card-h"><div><h3>Adicionar várias placas de uma vez</h3><p>Cole as placas (uma por linha ou separadas por vírgula). Todas entram com o mesmo tipo.</p></div></div>
-    <textarea class="inp" id="pvBP" style="width:100%" placeholder="QEV1B88&#10;JUQ8E86&#10;…"></textarea>
-    <div class="pv-form" style="margin-top:10px"><div class="fld"><label for="pvBT">Tipo do veículo</label><select class="inp" id="pvBT"><option value="">Selecione…</option>${PV_TIPOS.map(t=>`<option>${t}</option>`).join('')}</select></div>
-      <div class="fld"><button class="btn primary" type="button" id="pvBAdd" style="width:100%;justify-content:center;box-sizing:border-box">Adicionar placas</button></div></div>
-    <div class="pv-msg" id="pvBMsg" role="status"></div></div>
-  <div class="card full"><div class="card-h"><div><h3>Veículos no controle de preventivas</h3><p>Altere o tipo ou o km atual direto na tabela. O km também é atualizado ao registrar uma revisão.</p></div>
-    <div class="toolbar"><input class="inp" id="pvVQ" placeholder="Buscar placa, marca ou modelo…" value="${esc(PV_VQ.q)}" autocomplete="off"><select class="inp" id="pvVT"><option value="">Todos os tipos</option>${PV_TIPOS.map(t=>`<option${PV_VQ.t===t?' selected':''}>${t}</option>`).join('')}</select><button class="btn" type="button" id="pvCsv2">Exportar CSV</button></div></div>
-    <div class="table-wrap" style="max-height:560px"><table><thead><tr><th>Placa</th><th>Marca / Modelo</th><th>Tipo</th><th>Revisões</th><th class="n">KM atual</th><th>Leitura do km</th><th class="n">Revisões lançadas</th><th></th></tr></thead><tbody id="pvVehT"></tbody></table></div><div class="tcount" id="pvVehN"></div></div></div>`}
-SORT_RENDER.pvVehT=()=>pvVehTable();
-function pvVehTable(){const q=normTxt(PV_VQ.q);
-  let L=PV.veics.filter(v=>(!PV_VQ.t||v.tipo===PV_VQ.t)&&(!q||normTxt(v.p+' '+vehDesc(v.p)).includes(q)));
-  L=sortRows('pvVehT',L.slice().sort((a,b)=>a.p.localeCompare(b.p)),[v=>v.p,v=>vehDesc(v.p)||null,v=>v.tipo,null,v=>v.km,v=>v.kmData,v=>PV.revs.filter(r=>r.p===v.p).length,null]);
-  $('#pvVehT').innerHTML=L.length?L.map(v=>`<tr><td><span class="plate" data-pv-p="${v.p}">${v.p}</span></td><td>${esc(vehDesc(v.p))||'<span class="nd">sem cadastro</span>'}</td>
-    <td><select class="inp sm" data-vt="${v.p}" aria-label="Tipo de ${v.p}">${PV_TIPOS.map(t=>`<option${t===v.tipo?' selected':''}>${t}</option>`).join('')}</select></td>
-    <td>${plansFor(v.tipo).map(p=>pcode(p.id)).join(' ')}</td>
-    <td class="n">${semHod(v.tipo)?'<span class="nd">sem hodômetro</span>':`<input class="inp sm" type="number" min="0" step="1" data-vk="${v.p}" value="${v.km??''}" placeholder="—" aria-label="KM atual de ${v.p}" style="text-align:right">`}</td>
-    <td>${!semHod(v.tipo)&&v.kmData?fmtDate(v.kmData):'<span class="nd">—</span>'}</td><td class="n">${num(PV.revs.filter(r=>r.p===v.p).length)}</td>
-    <td><button class="pv-del" type="button" data-vdel="${v.p}" title="Remover ${v.p} do controle" aria-label="Remover ${v.p}">${svg('trash')}</button></td></tr>`).join(''):`<tr><td colspan="8" class="empty">${PV.veics.length?'Nenhum veículo com esses filtros.':'Nenhum veículo cadastrado ainda.'}</td></tr>`;
-  $('#pvVehN').textContent=`${num(L.length)} de ${num(PV.veics.length)} veículos`}
-function pvHint(){const i=$('#pvAP'),h=$('#pvAHint');if(!i||!h)return;const p=normPlate(i.value);
-  h.textContent=!p?'Sugestões vêm da Tabela de Veículos e das placas das OS.':pvVeh(p)?`${p} já está no controle (${pvVeh(p).tipo}).`:VEH.get(p)?`${VEH.get(p).marca} ${VEH.get(p).modelo}`:'Placa fora da Tabela de Veículos. Pode adicionar mesmo assim.'}
+/* [marca, placa, modelo, ano, plano, km última revisão, km atual, base do km, origem, observação] */
+const REF_CRON='2026-11-24';
+const SEED=[
+ ['VOLVO','QVF-7F19','FH 540 6X4T',2022,'INT',886911,897894,'Cadastro','Dezembro','Referências do cadastro QVF-7F09 (mesmo modelo) — confirmar'],
+ ['VOLVO','QVW-8E57','FH 540 6X4T',2021,'INT',648550,660808,'Cadastro','Dezembro',''],
+ ['VOLVO','RXA-9I50','FH 540 6X4T',2021,'INT',531963,537529,'Cadastro','Dezembro','Serviço adicional solicitado: Óleo da Caixa / Transmissão, Óleo do Diferencial, Correia e Tensor'],
+ ['VOLVO','RXA-9I70','FH 540 6X4T',2022,'INT',517833,523922,'Cadastro','Dezembro','Serviço adicional solicitado: Óleo da Caixa / Transmissão, Óleo do Diferencial'],
+ ['VOLVO','UDZ-0B18','FH 540 EURO 6',2026,'INT',60000,64895,'Estimado','Dezembro','KM da última estimado — confirmar'],
+ ['VOLVO','UFM-8H71','FH 540 EURO 6',2026,'INT',60000,71092,'Estimado','Pendência Nov.','KM da última estimado — confirmar'],
+ ['VOLVO','UFP-5J98','FH 540 EURO 6',2026,'INT',40000,57833,'Estimado','Dezembro','KM da última estimado — confirmar'],
+ ['VOLVO','UGA-8C25','FH 540 EURO 6',2026,'INT',null,null,'Pendente','Pendência Nov.','KM da última revisão a informar'],
+ ['VOLVO','UGM-6H37','FH 540 EURO 6',2026,'INT',60000,64656,'Estimado','Dezembro','KM da última estimado — confirmar'],
+ ['VOLVO','UGS-3I41','FH 540 EURO 6',2026,'INT',40000,51816,'Estimado','Dezembro','KM da última estimado — confirmar'],
+ ['VOLVO','UQW-7E10','FH 540 EURO 6',2026,'INT',60000,64160,'Estimado','Dezembro','KM da última estimado — confirmar'],
+ ['VOLVO','QVQ-0C62','FH 460 6X2T',2021,'MP1',741788,775948,'Cadastro','Dezembro',''],
+ ['VOLVO','QVZ-2H28','FH 540 6X4T',2021,'MP2',600425,663360,'Cadastro','Dezembro','3 ref. completada(s) pelo padrão da família PL121'],
+ ['VOLVO','UEU-2J47','FH 540 EURO 6',2026,'MP2',0,72886,'Estimado','Dezembro','Primeiro ciclo do plano'],
+ ['VOLVO','UFI-1G76','FH 540 EURO 6',2026,'MP2',0,70948,'Estimado','Dezembro','Primeiro ciclo do plano'],
+ ['VOLVO','UFM-8H71','FH 540 EURO 6',2026,'MP2',0,71092,'Estimado','Dezembro','Primeiro ciclo do plano'],
+ ['VOLVO','UGU-5F32','FH 540 EURO 6',2026,'MP2',0,70223,'Estimado','Dezembro','Primeiro ciclo do plano'],
+ ['VOLVO','RXA-9I30','FH 540 6X4T',2022,'MP3',422098,531875,'Cadastro','Dezembro','7 ref. completada(s) pelo padrão da família PL121'],
+ ['DAF','QVN-7F13','XF FTS 480',2021,'INT',694389,null,'Cadastro','Pendência Nov.',''],
+ ['DAF','QVO-1C15','XF105 FTT 510A',2020,'INT',795842,803141,'Cadastro','Dezembro',''],
+ ['DAF','QVW-6H05','XF FTS 480',2021,'INT',678188,696448,'Cadastro','Dezembro',''],
+ ['DAF','TWT-0D90','XF FTT 530',2027,'INT',0,10683,'Estimado','Dezembro','Veículo não cadastrado na planilha de materiais — informar referências · Primeiro ciclo do plano'],
+ ['DAF','TWT-0E00','XF FTT 530',2027,'INT',0,12499,'Estimado','Dezembro','Veículo não cadastrado na planilha de materiais — informar referências · Primeiro ciclo do plano'],
+ ['DAF','QEQ-7797','XF105 FTT 510A',2019,'MP1',898550,905753,'Cadastro','Dezembro',''],
+ ['DAF','QVM-9B73','XF FTS 480',2021,'MP3',693292,806832,'Cadastro','Dezembro','3 ref. completada(s) pelo padrão da família 2169185'],
+ ['MERCEDES','QVE-9B97','ACTROS 2548 MP5 LS 480',2020,'MP2',639010,719097,'Cadastro','Dezembro','4 ref. completada(s) pelo padrão da família FS2022200'],
+ ['MAN','QVS-2A38','TGX 28.440 6X2T',2020,'MP1',null,426567,'Pendente','Dezembro','KM da última revisão a informar'],
+ ['MAN','QVS-2A58','TGX 28.440 6X2T',2020,'MP1',809611,841442,'Cadastro','Dezembro',''],
+ ['MAN','QVS-2A68','TGX 28.440 6X2T',2020,'MP1',776921,null,'Cadastro','Pendência Nov.',''],
+ ['METEOR','RIR-8E73','VW 29.520 METEOR 6X4',2022,'INT',151873,168198,'Cadastro','Dezembro',''],
+ ['METEOR','RJW-7E17','VW 29.520 METEOR 6X4',2023,'INT',121849,131765,'Cadastro','Dezembro',''],
+ ['METEOR','END-3F84','VW 28.460 METEOR 6X2',2022,'MP3',594274,704134,'Cadastro','Dezembro','4 ref. completada(s) pelo padrão da família PU9218X'],
+ ['METEOR','RWN-7I37','VW 28.460 METEOR 6X2',2022,'MP3',450858,564028,'Cadastro','Dezembro','4 ref. completada(s) pelo padrão da família PU9218X'],
+ ['CARROS DE ROTA','JUQ-8E86','A informar',null,'MP1',null,null,'Pendente','Dezembro','Veículo não cadastrado na planilha de materiais — informar referências · KM da última revisão a informar'],
+ ['CARROS DE ROTA','JVA-3C32','A informar',null,'MP3',null,null,'Pendente','Dezembro','Veículo não cadastrado na planilha de materiais — informar referências · KM da última revisão a informar'],
+ ['CARROS DE ROTA','JVR-1855','A informar',null,'MP3',null,null,'Pendente','Dezembro','Veículo não cadastrado na planilha de materiais — informar referências · KM da última revisão a informar']];
+const PLANOS_PAD={INT:{nome:'Intermediária',km:20000},MP1:{nome:'MP1',km:40000},MP2:{nome:'MP2',km:80000},MP3:{nome:'MP3',km:120000}};
 
-function pvViewHist(){
-  if(!PV.revs.length)return pvFlash()+`<div class="card" style="margin-top:14px"><div class="pv-empty"><b>Nenhuma revisão registrada</b>Use “+ Registrar revisão” ou o botão “Registrar” no painel.</div></div>`;
-  return pvFlash()+`<div class="grid"><div class="card full"><div class="card-h"><div><h3>Revisões registradas</h3><p>Todas as revisões lançadas, da mais recente para a mais antiga</p></div>
-    <div class="toolbar"><input class="inp" id="pvHQ" placeholder="Buscar placa ou OS…" value="${esc(PV_HQ.q)}" autocomplete="off"><select class="inp" id="pvHPl"><option value="">Todos os tipos de revisão</option>${PLANOS.map(p=>`<option value="${p.id}"${PV_HQ.pl===p.id?' selected':''}>${p.id} · ${esc(p.nome)}</option>`).join('')}</select><button class="btn" type="button" id="pvCsv3">Exportar CSV</button></div></div>
-    <div class="table-wrap" style="max-height:640px"><table><thead><tr><th>Data</th><th>Placa</th><th>Revisão</th><th class="n">KM</th><th>OS Nº</th><th>Itens não executados</th><th>Observação</th><th></th></tr></thead><tbody id="pvHistT"></tbody></table></div><div class="tcount" id="pvHistN"></div></div></div>`}
-SORT_RENDER.pvHistT=()=>pvHistTable();
-function pvHistTable(){const q=normTxt(PV_HQ.q);
-  let L=PV.revs.filter(r=>(!PV_HQ.pl||r.plano===PV_HQ.pl)&&(!q||normTxt(r.p+' '+(r.os||'')).includes(q))).sort((a,b)=>a.data<b.data?1:a.data>b.data?-1:(b.km||0)-(a.km||0));
-  L=sortRows('pvHistT',L,[r=>r.data,r=>r.p,r=>r.plano,r=>r.km,r=>r.os||null,r=>(r.nexec||[]).length,r=>r.obs||null,null]);
-  $('#pvHistT').innerHTML=L.length?L.map(r=>`<tr><td>${fmtDate(r.data)}</td><td><span class="plate" data-pv-p="${r.p}">${r.p}</span></td><td>${pcode(r.plano)} <span class="nd" style="font-size:11.5px">${esc(PLAN[r.plano]?PLAN[r.plano].nome:'')}</span></td><td class="n">${r.km!=null?num(r.km):'—'}</td><td>${esc(r.os||'—')}</td>
-    <td style="white-space:normal;max-width:320px">${(r.nexec||[]).length?`<span class="nexec">${(r.nexec||[]).map(esc).join(' · ')}</span>`:'<span class="nd">todos executados</span>'}</td><td style="white-space:normal;max-width:240px">${esc(r.obs||'')}</td>
-    <td><button class="pv-del" type="button" data-rdel="${r.id}" title="Excluir esta revisão" aria-label="Excluir revisão de ${r.p} em ${fmtDate(r.data)}">${svg('trash')}</button></td></tr>`).join(''):'<tr><td colspan="8" class="empty">Nenhuma revisão com esses filtros.</td></tr>';
-  $('#pvHistN').textContent=`${num(L.length)} de ${num(PV.revs.length)} revisões`}
+function semente(){
+  const db={v:1,criado:new Date().toISOString(),cfg:{planos:JSON.parse(JSON.stringify(PLANOS_PAD)),alta:1000,media:3000},marcas:[],veic:{},planos:[],hist:[],bk:null};
+  SEED.forEach(([marca,placa,modelo,ano,tipo,ult,km,base,orig,obs])=>{
+    if(!db.marcas.includes(marca))db.marcas.push(marca);
+    if(!db.veic[placa])db.veic[placa]={placa,marca,modelo,ano,km,kmData:km!=null?REF_CRON:null};
+    db.planos.push({id:uid(),placa,tipo,ultima:ult,ult0:ult,base,orig,obs});
+    if(ult)db.hist.push({id:uid(),k:'rev',placa,tipo,data:null,km:ult,obs:'Última revisão do cronograma de dezembro/2026',src:'cron',ts:0})});
+  Object.values(db.veic).forEach(v=>{if(v.km!=null)db.hist.push({id:uid(),k:'km',placa:v.placa,data:REF_CRON,km:v.km,obs:'Leitura do cronograma de dezembro/2026',src:'cron',ts:0})});
+  return db}
+function carregar(){try{const t=ls.get(LS_DB);if(t){const d=JSON.parse(t);if(d&&d.v===1&&d.planos)return d}}catch(e){}return semente()}
+let DB=carregar(),SAVE_OK=true;
+/* ---------- gravação ----------
+   Offline: tudo no navegador (pm-prev2). Online: tabelas prev2_veiculos, prev2_planos, prev2_hist e prev2_cfg do Supabase
+   (supabase/v47_preventivas_km.sql). Cada gravação compara o estado com o último gravado (SNAP) e envia só as linhas que
+   mudaram, para um usuário não apagar o lançamento de outro. Se as tabelas não existirem, cai para o navegador e avisa. */
+let ONLINE=SB_ON,SNAP=null,LIDO=0,SYNC=Promise.resolve(),FALHA='';
+const TAB={v:'prev2_veiculos',p:'prev2_planos',h:'prev2_hist',c:'prev2_cfg'},CHAVE={v:'placa',p:'id',h:'id'};
+const ROW={v:x=>({placa:x.placa,marca:x.marca,modelo:x.modelo||null,ano:x.ano??null,km:x.km??null,km_data:x.kmData||null}),
+  p:x=>({id:x.id,placa:x.placa,tipo:x.tipo,ultima:x.ultima??null,ult0:x.ult0??null,base:x.base||null,orig:x.orig||null,obs:x.obs||null}),
+  h:x=>({id:x.id,k:x.k,placa:x.placa,tipo:x.tipo||null,data:x.data||null,km:x.km??null,obs:x.obs||null,src:x.src||null,ts:x.ts||0})};
+const snapDe=db=>({v:Object.fromEntries(Object.values(db.veic).map(x=>[x.placa,JSON.stringify(ROW.v(x))])),
+  p:Object.fromEntries(db.planos.map(x=>[x.id,JSON.stringify(ROW.p(x))])),h:Object.fromEntries(db.hist.map(x=>[x.id,JSON.stringify(ROW.h(x))])),
+  c:JSON.stringify({cfg:db.cfg,marcas:db.marcas,bk:db.bk||null})});
+async function carregarBanco(){
+  if(!ONLINE)return;
+  try{const[v,p,h,c]=await Promise.all([SB.todos('prev2_veiculos?select=placa,marca,modelo,ano,km,km_data&order=placa'),SB.todos('prev2_planos?select=id,placa,tipo,ultima,ult0,base,orig,obs&order=id'),
+      SB.todos('prev2_hist?select=id,k,placa,tipo,data,km,obs,src,ts&order=id'),SB.req('prev2_cfg?select=cfg,marcas,bk')]);
+    if(!v.length&&!p.length&&!c.length){// primeiro acesso: grava o cronograma de dezembro no banco
+      DB=semente();SNAP={v:{},p:{},h:{},c:''};await sincronizar()}
+    else{const cf=c[0]||{};
+      DB={v:1,cfg:cf.cfg||JSON.parse(JSON.stringify({planos:PLANOS_PAD,alta:1000,media:3000})),marcas:cf.marcas||[...new Set(v.map(x=>x.marca))],bk:cf.bk||null,
+        veic:Object.fromEntries(v.map(x=>[x.placa,{placa:x.placa,marca:x.marca,modelo:x.modelo||'',ano:x.ano,km:x.km,kmData:x.km_data}])),
+        planos:p.map(x=>({id:x.id,placa:x.placa,tipo:x.tipo,ultima:x.ultima,ult0:x.ult0,base:x.base||'',orig:x.orig||'',obs:x.obs||''})).sort((a,b)=>a.id<b.id?-1:1),
+        hist:h.map(x=>({id:x.id,k:x.k,placa:x.placa,tipo:x.tipo,data:x.data,km:x.km,obs:x.obs||'',src:x.src||undefined,ts:+x.ts||0}))};
+      SNAP=snapDe(DB)}
+    LIDO=Date.now();SAVE_OK=true;FALHA=''}
+  catch(e){console.error(e);ONLINE=false;FALHA='As preventivas não abriram no Supabase ('+e.message+'). Gravando só neste navegador.';DB=carregar()}
+  filtros();saveLbl()}
+async function sincronizar(){
+  const N=snapDe(DB),json={method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'}};
+  for(const k of['v','p','h']){
+    const up=Object.entries(N[k]).filter(([id,j])=>SNAP[k][id]!==j).map(([,j])=>JSON.parse(j));
+    const del=Object.keys(SNAP[k]).filter(id=>!(id in N[k]));
+    for(let i=0;i<up.length;i+=500)await SB.req(TAB[k],{...json,body:JSON.stringify(up.slice(i,i+500))});
+    for(let i=0;i<del.length;i+=80)await SB.req(`${TAB[k]}?${CHAVE[k]}=in.(${del.slice(i,i+80).map(x=>encodeURIComponent('"'+x.replace(/"/g,'')+'"')).join(',')})`,{method:'DELETE'})}
+  if(N.c!==SNAP.c)await SB.req(TAB.c,{...json,body:JSON.stringify({id:1,...JSON.parse(N.c)})});
+  SNAP=N}
+function gravar(){
+  if(!ONLINE){SAVE_OK=ls.set(LS_DB,JSON.stringify(DB));saveLbl();return SYNC}
+  SAVE_OK=true;saveLbl('Gravando…');
+  SYNC=SYNC.then(sincronizar).then(()=>saveLbl()).catch(async e=>{console.error(e);SAVE_OK=false;saveLbl();
+    alert('Não foi possível gravar as preventivas no Supabase: '+e.message+'\nA tela será recarregada com os dados do banco.');await carregarBanco();if(PAGE==='prev')render()});
+  return SYNC}
+function saveLbl(txt){const e=$('#p2Save');if(!e)return;const onde=ONLINE?'Salvo no Supabase':'Salvo neste navegador';
+  if(FALHA){e.innerHTML=`<i style="background:var(--crit)"></i>${esc(FALHA)}`;return}
+  if(txt){e.innerHTML=`<i style="background:var(--warn)"></i>${esc(txt)}`;return}
+  e.innerHTML=SAVE_OK?`<i></i>${onde} · ${DB.bk?'último backup em '+fmtD(DB.bk):'nenhum backup feito'}`:`<i style="background:var(--crit)"></i>${ONLINE?'Falha ao gravar no Supabase.':'Este navegador não está salvando.'} Faça backup.`;
+  const s=$('#p2BkSub');if(s)s.textContent=ONLINE?'Os dados ficam no Supabase e são os mesmos para todos os usuários com a aba Preventivas':'Os dados ficam gravados neste navegador, neste computador'}
 
-function svGroups(list){const g=new Map();list.forEach((s,i)=>{let grp='Serviços',txt=s;
-  if(/^⚡ ELÉTRICA · /.test(s)){grp='Elétrica · antiquebra';txt=s.replace(/^⚡ ELÉTRICA · /,'')}else{const m=s.match(/^([^:]{3,22}):\s*(.+)$/);if(m){grp=m[1];txt=m[2]}}
-  if(!g.has(grp))g.set(grp,[]);g.get(grp).push({i,s,txt})});return g}
-function pvViewPlanos(){
-  return pvFlash()+`<div class="pv-plans">${PLANOS.map(p=>{const iv=pvIv(p.id),ed=PV.cfg[p.id]!=null,G=svGroups(p.sv);
-    return`<div class="card pv-plan"><div class="ph">${pcode(p.id)}<div><h3>${esc(p.nome)}</h3><p class="iv">${p.sob?'<b>Sob demanda</b>: sem intervalo, aplicada quando necessário (carretas não têm hodômetro)':iv.km||iv.meses?`A cada <b>${esc(ivTxt(iv))}</b>, o que vier primeiro`:'<b style="color:var(--serious)">Sem intervalo</b>: informe abaixo para o painel calcular a próxima'}</p></div></div>
-      <div class="chips">${p.tipos.map(t=>`<span>${t}</span>`).join('')}</div>
-      ${p.desc?`<p class="desc">${esc(p.desc)}</p>`:''}
-      ${p.sob?'':`<div class="cfg"><label>Intervalo</label><input class="inp sm" type="number" min="0" step="1000" data-cfg-km="${p.id}" value="${iv.km??''}" placeholder="km" aria-label="Intervalo em km do ${p.id}"> km <span class="nd">ou</span> <input class="inp sm" type="number" min="0" step="1" data-cfg-m="${p.id}" value="${iv.meses??''}" placeholder="meses" aria-label="Intervalo em meses do ${p.id}" style="width:72px"> meses${ed?` <button class="pv-act" type="button" data-cfg-rst="${p.id}">Voltar ao padrão</button>`:''}</div>`}
-      <details><summary>${num(p.sv.length)} serviços incluídos</summary>${[...G].map(([k,a])=>`<div class="svg-grp"><h5><span>${esc(k)}</span><span>${a.length}</span></h5><ul>${a.map(x=>`<li>${esc(x.txt)}</li>`).join('')}</ul></div>`).join('')}</details>
-      <div class="toolbar" style="margin-top:12px"><button class="btn" type="button" data-print="${p.id}">Imprimir checklist em branco</button></div></div>`}).join('')}</div>`}
+/* ---------- cálculo ---------- */
+const pNome=t=>(DB.cfg.planos[t]||{}).nome||t;
+const pCurto=t=>t==='INT'?'INTERM.':t;
+const ordData=(a,b)=>{const x=a.data||'',y=b.data||'';return x<y?1:x>y?-1:b.ts-a.ts};// mais recente primeiro
+function kmDia(placa){// média de km/dia entre a primeira e a última leitura (mínimo de 7 dias)
+  const l=DB.hist.filter(h=>h.k==='km'&&h.placa===placa&&h.data&&h.km!=null).sort((a,b)=>-ordData(a,b));
+  if(l.length<2)return null;const a=l[0],b=l[l.length-1],d=dias(a.data,b.data);
+  if(d<7||b.km<=a.km)return null;return{v:(b.km-a.km)/d,de:a.data,ate:b.data}}
+function calc(p){
+  const v=DB.veic[p.placa]||{},iv=(DB.cfg.planos[p.tipo]||{}).km||0;
+  const r={p,v,iv,ult:p.ultima,km:v.km,prox:null,falt:null,uso:null,st:'Pendente',pr:'Pendente',lvl:'na'};
+  if(p.ultima!=null)r.prox=p.ultima+iv;
+  if(r.prox!=null&&v.km!=null&&iv){
+    r.falt=r.prox-v.km;r.uso=(v.km-p.ultima)/iv;r.st=r.falt<0?'Atrasada':'Próxima';
+    r.pr=r.falt<=DB.cfg.alta?'Alta':r.falt<=DB.cfg.media?'Média':'Programada';
+    r.lvl=r.pr==='Alta'?'late':r.pr==='Média'?'soon':'ok';
+    const kd=kmDia(p.placa);if(kd&&r.falt>0)r.prevData=addDias(v.kmData||hoje(),r.falt/kd.v)}
+  return r}
+const ordemMarca=m=>{const i=DB.marcas.indexOf(m);return i<0?999:i};
+const PF={marca:'',tipo:'',st:'',q:''};
+const normQ=s=>String(s||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+function linhas(semSt){const q=normQ(PF.q);
+  return DB.planos.map(calc).filter(r=>{
+    if(PF.marca&&r.v.marca!==PF.marca)return false;
+    if(PF.tipo&&r.p.tipo!==PF.tipo)return false;
+    if(q&&!normQ(r.p.placa).includes(q))return false;
+    if(!semSt&&PF.st){if(PF.st==='Atrasada'||PF.st==='Próxima'?r.st!==PF.st:r.pr!==PF.st)return false}
+    return true})}
+function recalcVeic(placa){// o KM atual é a leitura mais recente
+  const v=DB.veic[placa],l=DB.hist.filter(h=>h.k==='km'&&h.placa===placa&&h.data).sort(ordData);if(l.length){v.km=l[0].km;v.kmData=l[0].data}}
+function recalcPlano(p){// a última revisão é o lançamento mais recente do plano; sem nenhum, volta ao valor do cadastro
+  const l=DB.hist.filter(h=>h.k==='rev'&&h.placa===p.placa&&h.tipo===p.tipo).sort(ordData);p.ultima=l.length?l[0].km:p.ult0}
+const dtLbl=h=>h.data?fmtD(h.data):h.src==='cad'?'cadastro':'cronograma';
+function setKm(placa,km,data){
+  const v=DB.veic[placa];if(!v)return false;
+  if(v.km!=null&&km<v.km&&!confirm(`O KM informado para ${placa} (${fmt(km)}) é menor que o atual (${fmt(v.km)}).\nGravar mesmo assim?`))return false;
+  if(v.km!=null&&km-v.km>60000&&!confirm(`${placa}: o KM informado (${fmt(km)}) é ${fmt(km-v.km)} km maior que o atual (${fmt(v.km)}).\nConfere?`))return false;
+  DB.hist.push({id:uid(),k:'km',placa,data:data||hoje(),km,obs:'',ts:Date.now()});recalcVeic(placa);return true}
 
-/* ----- registrar revisão (gaveta) ----- */
-function pvOpen(p,id){
-  if(!PV.veics.length){PV_VIEW='veic';PV_FLASH='Cadastre o veículo antes de registrar a revisão.';if(PAGE!=='prev')go('prev');else pvRender();return}
-  const vs=PV.veics.slice().sort((a,b)=>a.p.localeCompare(b.p));
-  $('#rvP').innerHTML=vs.map(v=>`<option value="${v.p}">${v.p} · ${v.tipo}</option>`).join('');
-  $('#rvP').value=p&&pvVeh(p)?p:vs[0].p;pvFillPlans(id);
-  $('#rvD').value=todayIso();$('#rvD').max=todayIso();$('#rvO').value='';$('#rvObs').value='';$('#rvMsg').textContent='';$('#rvMsg').className='pv-msg';
-  pvPrepKm();pvCk();pvPreview();
-  document.body.classList.add('pv-open');$('#pvDrawer').setAttribute('aria-hidden','false');$('#pvDrawer .sum-body').scrollTop=0;setTimeout(()=>$('#rvK').focus(),80)}
-function pvClose(){document.body.classList.remove('pv-open');$('#pvDrawer').setAttribute('aria-hidden','true')}
-function pvFillPlans(id){const v=pvVeh($('#rvP').value),L=plansFor(v.tipo);
-  $('#rvPl').innerHTML=L.map(p=>`<option value="${p.id}">${p.id} · ${esc(p.nome)}</option>`).join('');if(id&&L.some(p=>p.id===id))$('#rvPl').value=id}
-function pvPrepKm(){const v=pvVeh($('#rvP').value),iv=pvIv($('#rvPl').value),sh=semHod(v.tipo);$('#rvK').value='';
-  $('#rvK').closest('.fld').style.display=sh?'none':'';$('#pvDrawer .pv-form').classList.toggle('no-km',sh);
-  $('#pvDSub').textContent=sh?'Carreta sem hodômetro: informe o veículo, o tipo de revisão e a data':'Informe o veículo, o tipo de revisão e o km do hodômetro no dia';
-  $('#rvK').placeholder=v.km!=null?`atual: ${num(v.km)}`:iv.km?'ex.: 412500':'opcional'}
-function pvCk(){const p=PLAN[$('#rvPl').value];$('#rvCkT').textContent=`Checklist ${p.id} · ${p.sv.length} serviços`;
-  $('#rvCk').innerHTML=`<div class="toolbar" style="margin-top:6px"><button class="pv-act" type="button" id="ckAll">Marcar todos</button><button class="pv-act" type="button" id="ckNone">Desmarcar todos</button></div>`+[...svGroups(p.sv)].map(([k,a])=>`<div class="ck-grp"><h5>${esc(k)}</h5><div class="ck-list">${a.map(x=>`<label><input type="checkbox" checked data-ck="${x.i}"><span>${esc(x.txt)}</span></label>`).join('')}</div></div>`).join('')}
-function pvPreview(){const id=$('#rvPl').value,iv=pvIv(id),d=$('#rvD').value,k=$('#rvK').value===''?null:+$('#rvK').value;
-  const nk=k!=null&&iv.km?k+iv.km:null,nd=d&&iv.meses?addMonths(d,iv.meses):null,L=pvLast($('#rvP').value,id);
-  const ult=`<div><span>Última ${id} desta placa</span><b>${L?fmtDate(L.data)+(L.km!=null?' · '+num(L.km)+' km':''):'nenhuma'}</b></div>`;
-  $('#rvNext').innerHTML=PLAN[id].sob||(!iv.km&&!iv.meses)?ult+`<div class="msg" style="grid-column:span 2">Revisão sob demanda: não tem próxima programada.</div>`
-    :`<div><span>Próxima ${id} por km</span><b>${nk!=null?kmf(nk):iv.km?'informe o km':'—'}</b></div><div><span>Próxima ${id} por data</span><b>${nd?fmtDate(nd):'—'}</b></div>`+ult}
-function pvSaveRev(){const m=$('#rvMsg');m.className='pv-msg err';
-  const p=$('#rvP').value,id=$('#rvPl').value,d=$('#rvD').value,ks=$('#rvK').value.trim(),iv=pvIv(id),v=pvVeh(p);
-  if(!d){m.textContent='Informe a data da revisão.';return}
-  if(d>todayIso()){m.textContent='A data não pode ser futura.';return}
-  if(ks===''&&iv.km&&!semHod(v.tipo)){m.textContent=`Informe o km da revisão: a ${id} vence a cada ${num(iv.km)} km.`;$('#rvK').focus();return}
-  const k=ks===''||semHod(v.tipo)?null:Math.round(+ks);if(k!=null&&(!isFinite(k)||k<0)){m.textContent='KM inválido.';return}
-  const prev=PV.revs.filter(r=>r.p===p&&r.km!=null&&r.data<=d).sort((a,b)=>b.km-a.km)[0];
-  if(k!=null&&prev&&k<prev.km){m.textContent=`KM menor que o de uma revisão anterior (${num(prev.km)} km em ${fmtDate(prev.data)}). Confira o hodômetro.`;return}
-  const nexec=$$('#rvCk input[data-ck]').filter(c=>!c.checked).map(c=>PLAN[id].sv[+c.dataset.ck]);
-  PV_DB.revAdd({p,plano:id,data:d,km:k,os:$('#rvO').value.trim(),obs:$('#rvObs').value.trim(),nexec});
-  if(k!=null&&(v.km==null||k>=v.km)){v.km=k;v.kmData=d;PV_DB.veicUpd(v)}
-  pvClose();PV_FLASH=`Revisão ${id} da ${p} registrada em ${fmtDate(d)}${k!=null?` com ${num(k)} km`:''}.`;if(PAGE==='prev')pvRender()}
-function pvPrint(id,plate,extra){const p=PLAN[id],iv=pvIv(id),v=plate?pvVeh(plate):null,x=extra||{};
-  const w=window.open('','_blank');if(!w){alert('O navegador bloqueou a janela de impressão. Permita pop-ups para este arquivo.');return}
-  const rows=[...svGroups(p.sv)].map(([k,a])=>`<tr class="g"><td colspan="5">${esc(k)}</td></tr>`+a.map((s,j)=>`<tr><td class="c">${s.i+1}</td><td>${esc(s.txt)}</td><td class="c">☐</td><td class="c">☐</td><td class="o"></td></tr>`).join('')).join('');
-  w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Checklist ${p.id}${plate?' - '+plate:''}</title><style>
-  body{font:11.5px/1.35 "Segoe UI",Arial,sans-serif;margin:18px;color:#111}
-  .hd{display:flex;align-items:center;gap:18px;background:#111214;border-left:4px solid #ff7a1a;color:#fff;padding:12px 18px;border-radius:10px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .hd img{height:36px}.hd div{border-left:1px solid rgba(255,255,255,.3);padding-left:16px}.hd b{font-size:16px;display:block}.hd span{font-size:11px;color:#bccde9}
-  .meta{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin:12px 0}.meta div{border:1px solid #bbb;border-radius:6px;padding:5px 8px;min-height:36px}.meta small{display:block;color:#666;font-size:9.5px;text-transform:uppercase;letter-spacing:.05em}
-  table{width:100%;border-collapse:collapse}th,td{border:1px solid #c9ccd3;padding:4px 6px;text-align:left}th{background:#eef1f6;font-size:10px;text-transform:uppercase;letter-spacing:.05em;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  td.c{width:30px;text-align:center}td.o{width:28%}tr.g td{background:#f3f4f7;font-weight:700;font-size:10px;letter-spacing:.06em;text-transform:uppercase;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  .sig{display:grid;grid-template-columns:1fr 1fr 1fr;gap:30px;margin-top:40px}.sig div{border-top:1px solid #333;padding-top:4px;text-align:center;font-size:10.5px}
-  @page{size:A4;margin:10mm}@media print{body{margin:0}}</style></head><body>
-  <div class="hd"><img src="${$('.brand-logo').src}" alt="Rodovitor Transportes"><div><b>${p.id} · ${esc(p.nome)}</b><span>Intervalo: ${esc(ivTxt(iv))} · ${p.sv.length} serviços · ${esc(p.tipos.join(', '))}</span></div></div>
-  <div class="meta"><div><small>Placa</small>${plate||''}</div><div><small>Tipo</small>${v?esc(v.tipo):''}</div><div><small>Data</small>${x.data?fmtDate(x.data):''}</div><div><small>KM</small>${x.km!=null?num(x.km):''}</div><div><small>OS Nº</small>${esc(x.os||'')}</div><div><small>Técnico</small></div></div>
-  <table><thead><tr><th>#</th><th>Serviço</th><th>OK</th><th>NOK</th><th>Observação</th></tr></thead><tbody>${rows}</tbody></table>
-  <div class="sig"><div>Técnico</div><div>Líder / Supervisor</div><div>Motorista (viagem teste)</div></div></body></html>`);
-  w.document.close();w.focus();setTimeout(()=>w.print(),400)}
+/* ---------- peças visuais ---------- */
+const badgeSt=r=>r.st==='Atrasada'?'<span class="badge late"><i></i>Atrasada</span>':r.st==='Próxima'?'<span class="badge nxt"><i></i>Próxima</span>':'<span class="badge"><i></i>Pendente</span>';
+const badgePr=r=>`<span class="badge ${r.pr==='Alta'?'late':r.pr==='Média'?'soon':r.pr==='Programada'?'ok':''}"><i></i>${r.pr}</span>`;
+const faltHtml=r=>r.falt==null?'<span class="mut">—</span>':`<div class="falt ${r.lvl}"><b>${fmt(Math.abs(r.falt))} km</b><small>${r.falt<0?'excedidos':'faltantes'}</small></div>`;
+const meterHtml=r=>r.uso==null?'<span class="mut">—</span>':`<div class="meter ${r.lvl}"><span><i style="width:${Math.max(0,Math.min(100,r.uso*100))}%"></i></span><b>${Math.round(r.uso*100)}%</b></div>`;
+const baseHtml=b=>`<span class="p2-src ${b==='Estimado'?'est':b==='Pendente'?'pen':b==='Registrado'?'reg':'cad'}">${esc(b||'—')}</span>`;
+const origHtml=o=>/pend/i.test(o||'')?`<span class="p2-nov">${esc(o)}</span>`:`<span class="mut" style="font-size:11.5px">${esc(o||'—')}</span>`;
+const pcode=t=>`<span class="pcode c-${esc(t)}" title="${esc(pNome(t))}">${esc(pCurto(t))}</span>`;
+function toast(html){const t=$('#p2Toast');t.innerHTML=html;t.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(()=>t.classList.remove('on'),4200)}
+const msg=(id,t,err)=>{const e=$(id);e.className='pv-msg'+(err?' err':'');e.textContent=t};
 
-/* ----- eventos da aba ----- */
-$('#pvSeg').addEventListener('click',e=>{const b=e.target.closest('button[data-v]');if(b){PV_VIEW=b.dataset.v;ls.set('pm-pv-view',PV_VIEW);pvRender()}});
-$('#pvNew').onclick=()=>pvOpen();
-$('#pvDClose').onclick=pvClose;$('#pvScrim').onclick=pvClose;
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('pv-open'))pvClose()});
-$('#rvP').onchange=()=>{pvFillPlans();pvPrepKm();pvCk();pvPreview()};
-$('#rvPl').onchange=()=>{pvPrepKm();pvCk();pvPreview()};
-$('#rvD').oninput=pvPreview;$('#rvK').oninput=pvPreview;
-$('#rvSave').onclick=pvSaveRev;
-$('#rvPrint').onclick=()=>{const id=$('#rvPl').value;pvPrint(id,$('#rvP').value,{data:$('#rvD').value,km:$('#rvK').value===''?null:+$('#rvK').value,os:$('#rvO').value.trim(),nexec:$$('#rvCk input[data-ck]').filter(c=>!c.checked).map(c=>PLAN[id].sv[+c.dataset.ck])})};
-$('#rvCk').addEventListener('click',e=>{if(e.target.id==='ckAll'||e.target.id==='ckNone'){const on=e.target.id==='ckAll';$$('#rvCk input[data-ck]').forEach(c=>{c.checked=on;c.closest('label').classList.toggle('off',!on)})}});
-$('#rvCk').addEventListener('change',e=>{if(e.target.dataset.ck!=null)e.target.closest('label').classList.toggle('off',!e.target.checked)});
-$('#pvBkExp').onclick=()=>{PV.bk=todayIso();if(SB_ON){ls.set('pm-prev-bk',PV.bk);pvSaveLbl()}else PV_LOCAL.gravar().then(pvSaveLbl);const txt=JSON.stringify({app:'AnalisOS-preventivas',v:1,gerado:new Date().toISOString(),veics:PV.veics,revs:PV.revs,cfg:PV.cfg},null,1);
-  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([txt],{type:'application/json'}));a.download=`preventivas_backup_${todayIso()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500)};
-$('#pvBkImp').onclick=()=>$('#pvBkFile').click();
-$('#pvBkFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
-  try{const j=JSON.parse(await f.text());if(!j||!Array.isArray(j.veics)||!Array.isArray(j.revs))throw Error('arquivo não é um backup de preventivas');
-    if((PV.veics.length||PV.revs.length)&&!confirm(`Substituir os dados atuais (${PV.veics.length} veículos, ${PV.revs.length} revisões) pelos do backup (${j.veics.length} veículos, ${j.revs.length} revisões)?`))return;
-    PV_DB.substituir(j);PV_FLASH=`Backup restaurado: ${j.veics.length} veículos e ${j.revs.length} revisões.`;pvRender()}
-  catch(err){alert('Não foi possível restaurar: '+err.message)}};
-const PV_V=$('#pvView');
-PV_V.addEventListener('click',e=>{const t=e.target;let b;
-  if(b=t.closest('[data-go]')){PV_VIEW=b.dataset.go;pvRender();return}
-  if(b=t.closest('[data-reg]')){const[p,id]=b.dataset.reg.split('|');pvOpen(p,id);return}
-  if(b=t.closest('[data-pv-p]')){PV_F.q=PV_F.q===b.dataset.pvP&&PV_VIEW==='painel'?'':b.dataset.pvP;PV_VIEW='painel';pvRender();return}
-  if(b=t.closest('[data-print]')){pvPrint(b.dataset.print);return}
-  if(b=t.closest('[data-cfg-rst]')){PV_DB.cfgSet(b.dataset.cfgRst,null);pvRender();return}
-  if(b=t.closest('[data-vdel]')){const p=b.dataset.vdel,n=PV.revs.filter(r=>r.p===p).length;
-    if(!confirm(`Remover ${p} do controle de preventivas?${n?`\nAs ${n} revisões lançadas dessa placa também serão apagadas.`:''}`))return;
-    PV_DB.veicDel(p);PV_FLASH=`${p} removido do controle.`;pvRender();return}
-  if(b=t.closest('[data-rdel]')){const r=PV.revs.find(x=>x.id===b.dataset.rdel);if(!r||!confirm(`Excluir a revisão ${r.plano} da ${r.p} de ${fmtDate(r.data)}?`))return;
-    PV_DB.revDel(r.id);pvRender();return}
-  if(t.id==='pvAdd'){const m=$('#pvAMsg');m.className='pv-msg err';const p=normPlate($('#pvAP').value),tp=$('#pvAT').value,ks=$('#pvAK').value.trim();
-    if(!p){m.textContent='Informe a placa.';return}if(p.length>10){m.textContent='Placa muito longa.';return}if(!tp){m.textContent='Selecione o tipo do veículo.';return}
-    if(pvVeh(p)){m.textContent=`${p} já está no controle.`;return}
-    const kk=ks===''||semHod(tp)?null:Math.round(+ks);PV_DB.veicAdd({p,tipo:tp,km:kk,kmData:kk==null?null:todayIso()});
-    PV_FLASH=`${p} adicionado como ${tp}. Registre a última revisão feita para calcular a próxima.`;pvRender();setTimeout(()=>$('#pvAP')&&$('#pvAP').focus(),30);return}
-  if(t.id==='pvBAdd'){const m=$('#pvBMsg');m.className='pv-msg err';const tp=$('#pvBT').value;const L=[...new Set($('#pvBP').value.split(/[\s,;]+/).map(normPlate).filter(Boolean))];
-    if(!L.length){m.textContent='Cole pelo menos uma placa.';return}if(!tp){m.textContent='Selecione o tipo do veículo.';return}
-    const novas=L.filter(p=>!pvVeh(p)&&p.length<=10);novas.forEach(p=>PV_DB.veicAdd({p,tipo:tp,km:null,kmData:null}));
-    PV_FLASH=`${novas.length} ${novas.length===1?'placa adicionada':'placas adicionadas'} como ${tp}${L.length-novas.length?` · ${L.length-novas.length} já estavam no controle ou são inválidas`:''}.`;pvRender();return}
-  const csv={pvCsv1:()=>csvDownload('preventivas_painel',['Placa','Tipo','Marca/Modelo','Revisão','Intervalo','Última data','Última km','Última OS','Próxima km','Próxima data','KM atual','Faltam km','Faltam dias','Situação'],PV_PROWS.map(r=>[r.p,r.tipo,vehDesc(r.p),r.id,ivTxt(r.iv),r.last?fmtDate(r.last.data):'',r.last&&r.last.km!=null?r.last.km:'',r.last?r.last.os||'':'',r.nk??'',r.nd?fmtDate(r.nd):'',r.v.km??'',r.kr??'',r.dias??'',pvKbSt(r)==='Próxima'?'Próximo':pvKbSt(r)])),
-    pvCsv2:()=>csvDownload('preventivas_veiculos',['Placa','Marca/Modelo','Tipo','Revisões','KM atual','Leitura do km','Revisões lançadas'],PV.veics.map(v=>[v.p,vehDesc(v.p),v.tipo,plansFor(v.tipo).map(p=>p.id).join(' '),v.km??'',v.kmData?fmtDate(v.kmData):'',PV.revs.filter(r=>r.p===v.p).length])),
-    pvCsv3:()=>csvDownload('preventivas_historico',['Data','Placa','Revisão','KM','OS Nº','Itens não executados','Observação'],PV.revs.slice().sort((a,b)=>a.data<b.data?1:-1).map(r=>[fmtDate(r.data),r.p,r.plano,r.km??'',r.os||'',(r.nexec||[]).join(' | '),r.obs||'']))};
-  if(csv[t.id])csv[t.id]()});
-PV_V.addEventListener('input',e=>{const t=e.target;
-  if(t.id==='pvQ'){PV_F.q=t.value;pvKanban()}else if(t.id==='pvVQ'){PV_VQ.q=t.value;pvVehTable()}else if(t.id==='pvHQ'){PV_HQ.q=t.value;pvHistTable()}else if(t.id==='pvAP')pvHint()});
-PV_V.addEventListener('change',e=>{const t=e.target;
-  if(t.id==='pvVT'){PV_VQ.t=t.value;pvVehTable()}else if(t.id==='pvHPl'){PV_HQ.pl=t.value;pvHistTable()}
-  else if(t.dataset.vt){const v=pvVeh(t.dataset.vt);v.tipo=t.value;if(semHod(v.tipo)){v.km=null;v.kmData=null}PV_DB.veicUpd(v);pvVehTable()}
-  else if(t.dataset.vk){const v=pvVeh(t.dataset.vk),s=t.value.trim();v.km=s===''?null:Math.round(+s);v.kmData=s===''?null:todayIso();PV_DB.veicUpd(v);pvVehTable()}
-  else if(t.dataset.cfgKm||t.dataset.cfgM){const id=t.dataset.cfgKm||t.dataset.cfgM,c=PV.cfg[id]||(PV.cfg[id]={...pvIv(id)}),s=t.value.trim(),n=s===''||+s<=0?null:Math.round(+s);
-    if(t.dataset.cfgKm)c.km=n;else c.meses=n;PV_DB.cfgSet(id,c.km===PLAN[id].km&&c.meses===PLAN[id].meses?null:c);pvRender()}});
+/* ---------- indicadores ---------- */
+function contagem(){const R=DB.planos.map(calc);return{atr:R.filter(r=>r.st==='Atrasada').length,alta:R.filter(r=>r.pr==='Alta').length}}
+function renderKpis(){
+  const R=linhas(true),n=R.length,c=f=>R.filter(f).length;
+  const prox=c(r=>r.st==='Próxima'),atr=c(r=>r.st==='Atrasada'),alta=c(r=>r.pr==='Alta'),med=c(r=>r.pr==='Média'),pen=c(r=>r.st==='Pendente');
+  const est=c(r=>r.p.base==='Estimado'),vei=new Set(R.map(r=>r.p.placa)).size;
+  const K=[
+    {l:'Revisões',ic:'clip',v:n,nt:`${vei} veículos no cronograma`,st:''},
+    {l:'Próximas',ic:'timer',v:prox,nt:`${n?Math.round(prox/n*100):0}% do total · dentro do limite`,st:'Próxima'},
+    {l:'Atrasadas',ic:'alert',cls:'crit',v:atr,nt:'KM ultrapassado · ação imediata',st:'Atrasada'},
+    {l:'Prioridade alta',ic:'alert',cls:'crit',v:alta,nt:`faltam até ${fmt(DB.cfg.alta)} km (ou vencidas)`,st:'Alta'},
+    {l:'Prioridade média',ic:'gauge',cls:'warn',v:med,nt:`faltam até ${fmt(DB.cfg.media)} km`,st:'Média'},
+    {l:'Pendentes',ic:'file',cls:'mut',v:pen,nt:`KM a informar · ${est} com KM estimado`,st:'Pendente'}];
+  $('#p2Kpis').innerHTML=K.map(k=>`<div class="kpi${PF.st===k.st&&k.st?' sel':''}" data-st="${k.st}" title="${k.st?'Filtrar: '+k.l:'Limpar o filtro de situação'}"><div class="l"><span class="ic ${k.cls||''}">${svg(k.ic)}</span>${k.l}</div><div class="v">${k.v}</div><div class="n">${k.nt}</div></div>`).join('');
+  $$('#p2Kpis .kpi').forEach(e=>e.onclick=()=>{PF.st=PF.st===e.dataset.st?'':e.dataset.st;$('#p2FSt').value=PF.st;if(SUB==='painel'&&PF.st)sub('cron');else render()})}
+
+/* ---------- Painel ---------- */
+let CH=[];
+function renderPainel(){
+  const R=linhas();
+  const fila=R.filter(r=>r.falt!=null).sort((a,b)=>a.falt-b.falt).slice(0,10);
+  $('#p2Fila').innerHTML=fila.length?fila.map(r=>`<div class="p2-fila-i ${r.lvl}"><span class="plate" data-pl="${r.p.placa}">${r.p.placa}</span>${pcode(r.p.tipo)}<span class="md">${esc(r.v.marca)} · ${esc(r.v.modelo)}${r.prevData?` · previsão ${fmtD(r.prevData)}`:''}</span>${meterHtml(r)}${faltHtml(r)}</div>`).join(''):'<div class="empty">Nenhuma revisão com KM informado.</div>';
+  const H=[...DB.hist].sort(ordData).filter(h=>h.k==='rev'&&(!PF.marca||(DB.veic[h.placa]||{}).marca===PF.marca)).slice(0,8);
+  $('#p2PnHist').innerHTML=H.length?H.map(h=>`<div class="p2-hi"><div class="dt">${dtLbl(h)}</div><div class="tx"><span class="plate" data-pl="${h.placa}">${h.placa}</span> ${pcode(h.tipo)} <b style="margin-left:6px">${fmt(h.km)} km</b><small>${esc(h.obs||'')}</small></div></div>`).join(''):'<div class="empty">Nenhuma revisão registrada.</div>';
+  const tipos=Object.keys(DB.cfg.planos),marcas=[...new Set(R.map(r=>r.v.marca))].sort((a,b)=>ordemMarca(a)-ordemMarca(b));
+  const cnt=(m,f)=>R.filter(r=>r.v.marca===m&&f(r)).length,d=n=>n||'–';
+  $('#p2MP').innerHTML=`<thead><tr><th>Marca</th>${tipos.map(t=>`<th>${esc(pCurto(t))}</th>`).join('')}<th>Total</th></tr></thead><tbody>${marcas.map(m=>`<tr><td><b>${esc(m)}</b></td>${tipos.map(t=>`<td>${d(cnt(m,r=>r.p.tipo===t))}</td>`).join('')}<td class="tot">${cnt(m,()=>1)}</td></tr>`).join('')}</tbody><tfoot><tr><td>Total geral</td>${tipos.map(t=>`<td>${d(R.filter(r=>r.p.tipo===t).length)}</td>`).join('')}<td>${R.length}</td></tr></tfoot>`;
+  const sts=[['Próximas',r=>r.st==='Próxima'],['Atrasadas',r=>r.st==='Atrasada'],['Pendentes',r=>r.st==='Pendente']];
+  $('#p2MS').innerHTML=`<thead><tr><th>Marca</th>${sts.map(s=>`<th>${s[0]}</th>`).join('')}<th>Total</th></tr></thead><tbody>${marcas.map(m=>`<tr><td><b>${esc(m)}</b></td>${sts.map((s,i)=>{const n=cnt(m,s[1]);return`<td style="${n&&i===1?'color:var(--crit);font-weight:700':''}">${d(n)}</td>`}).join('')}<td class="tot">${cnt(m,()=>1)}</td></tr>`).join('')}</tbody><tfoot><tr><td>Total</td>${sts.map(s=>`<td>${d(R.filter(s[1]).length)}</td>`).join('')}<td>${R.length}</td></tr></tfoot>`;
+  CH.forEach(c=>c.destroy());CH=[];
+  $('#p2Dc1').textContent=$('#p2Dc2').textContent=$('#p2Dc3').textContent=R.length;
+  if(!window.Chart)return;
+  const cs=getComputedStyle(document.documentElement),cv=k=>cs.getPropertyValue(k).trim();
+  const PAL=[cv('--s1'),cv('--s3'),cv('--s2'),'#a66bd6','#2fbf4a','#8b8e96','#fab219'];
+  const donut=(id,lab,val,cores)=>CH.push(new Chart($(id),{type:'doughnut',data:{labels:lab,datasets:[{data:val,backgroundColor:cores,borderColor:cv('--surface'),borderWidth:2}]},
+    options:{cutout:'64%',maintainAspectRatio:false,animation:{duration:400},plugins:{legend:{position:'right',labels:{boxWidth:10,boxHeight:10,font:{size:11,family:cv('--f-ui')},color:cv('--ink-2'),generateLabels:ch=>ch.data.labels.map((l,i)=>({text:`${l}  ${ch.data.datasets[0].data[i]}`,fillStyle:cores[i],strokeStyle:cores[i],fontColor:cv('--ink-2'),index:i}))}},tooltip:{callbacks:{label:c=>` ${c.label}: ${c.raw} (${Math.round(c.raw/R.length*100)}%)`}}}}}));
+  donut('#p2ChM',marcas,marcas.map(m=>cnt(m,()=>1)),PAL);
+  const tp=tipos.filter(t=>R.some(r=>r.p.tipo===t));donut('#p2ChT',tp.map(pCurto),tp.map(t=>R.filter(r=>r.p.tipo===t).length),PAL);
+  const pr=['Alta','Média','Programada','Pendente'];donut('#p2ChP',pr,pr.map(p=>R.filter(r=>r.pr===p).length),[cv('--crit'),cv('--warn'),cv('--good'),cv('--muted')])}
+
+/* ---------- Cronograma ---------- */
+let CRON_ORD='marca';
+function renderCron(){
+  const R=linhas();
+  $$('#p2CronOrd button').forEach(b=>b.classList.toggle('on',b.dataset.o===CRON_ORD));
+  const head=`<thead><tr><th class="n">#</th><th>Placa</th><th>Modelo / veículo</th><th class="n">Ano</th><th>Plano</th><th class="n">Interv.</th><th class="n">Última rev.</th><th class="n km-h">KM atual</th><th class="n">Próx. rev.</th><th>Faltante</th><th>% uso</th><th>Status</th><th>Prioridade</th><th>Origem</th><th class="no-print"></th></tr></thead>`;
+  let i=0;const row=r=>`<tr><td class="n mut">${++i}</td><td><span class="plate" data-pl="${r.p.placa}">${r.p.placa}</span></td><td>${esc(r.v.modelo||'—')}</td><td class="n">${r.v.ano||'—'}</td><td>${pcode(r.p.tipo)}</td><td class="n mut">${fmt(r.iv)}</td><td class="n">${fmt(r.ult)}</td>
+    <td class="n km-c"><input class="inp sm km-in" data-placa="${r.p.placa}" value="${r.km==null?'':fmt(r.km)}" placeholder="informar" inputmode="numeric" aria-label="KM atual de ${r.p.placa}" title="${r.v.kmData?'Leitura de '+fmtD(r.v.kmData):'Sem leitura'}"></td>
+    <td class="n"><b>${fmt(r.prox)}</b></td><td>${faltHtml(r)}</td><td>${meterHtml(r)}</td><td>${badgeSt(r)}</td><td>${badgePr(r)}</td><td>${origHtml(r.p.orig)}</td>
+    <td class="no-print"><button class="pv-act" type="button" data-reg="${r.p.id}" title="Registrar revisão feita">Registrar</button></td></tr>`;
+  let body='';
+  if(CRON_ORD==='marca'){const g={};R.forEach(r=>(g[r.v.marca]=g[r.v.marca]||[]).push(r));
+    Object.keys(g).sort((a,b)=>ordemMarca(a)-ordemMarca(b)).forEach(m=>{const L=g[m],tc={};L.forEach(r=>tc[r.p.tipo]=(tc[r.p.tipo]||0)+1);
+      body+=`<tr class="grp"><td colspan="15"><b>${esc(m)}</b><span>${L.length} revis${L.length>1?'ões':'ão'} · ${Object.keys(DB.cfg.planos).filter(t=>tc[t]).map(t=>pCurto(t)+' '+tc[t]).join(' · ')}</span></td></tr>`+L.map(row).join('')})}
+  else body=[...R].sort((a,b)=>(a.falt==null)-(b.falt==null)||a.falt-b.falt).map(row).join('');
+  $('#p2CronTab').innerHTML=head+`<tbody>${body||'<tr><td colspan="15" class="empty">Nenhuma revisão com esses filtros.</td></tr>'}</tbody>`;
+  $('#p2CronN').textContent=`${R.length} de ${DB.planos.length} revisões · Próxima revisão = última + intervalo do plano · % uso = rodagem desde a última sobre o intervalo`;
+  $$('#p2CronTab .km-in').forEach(inp=>{
+    inp.onfocus=()=>inp.select();
+    inp.oninput=()=>inp.classList.toggle('chg',parseKm(inp.value)!==(DB.veic[inp.dataset.placa]||{}).km);
+    inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();salvarKmInput(inp)}else if(e.key==='Escape'){const v=DB.veic[inp.dataset.placa];inp.value=v.km==null?'':fmt(v.km);inp.classList.remove('chg');inp.blur()}};
+    inp.onchange=()=>salvarKmInput(inp)})}
+function salvarKmInput(inp){
+  const placa=inp.dataset.placa,km=parseKm(inp.value),v=DB.veic[placa];
+  if(km==null||km===v.km){inp.value=v.km==null?'':fmt(v.km);inp.classList.remove('chg');return}
+  if(!setKm(placa,km,hoje()))return render();
+  gravar();
+  toast(`<b>${placa}</b> · KM atualizado para ${fmt(km)}<br>`+DB.planos.filter(p=>p.placa===placa).map(calc).map(r=>`${pCurto(r.p.tipo)}: ${r.falt==null?'última revisão a informar':r.falt<0?fmt(-r.falt)+' km excedidos':'faltam '+fmt(r.falt)+' km'}`).join(' · '));
+  render();
+  const all=$$('#p2CronTab .km-in'),k=all.findIndex(e=>e.dataset.placa===placa),nx=all.slice(k+1).find(e=>e.dataset.placa!==placa);if(nx)nx.focus()}
+
+/* ---------- Lançar KM ---------- */
+function renderKm(){
+  const R=linhas(),pl={};R.forEach(r=>(pl[r.p.placa]=pl[r.p.placa]||[]).push(r));
+  const placas=Object.keys(pl).sort((a,b)=>ordemMarca(DB.veic[a].marca)-ordemMarca(DB.veic[b].marca));
+  $('#p2LkTab').innerHTML=`<thead><tr><th>Placa</th><th>Marca · modelo</th><th class="n">KM atual</th><th>Última leitura</th><th class="n km-h">Novo KM</th><th class="n">Rodou</th><th>Revisões (quanto falta)</th></tr></thead><tbody>${placas.map(p=>{const v=DB.veic[p];
+    return`<tr><td><span class="plate" data-pl="${p}">${p}</span></td><td><span class="mut">${esc(v.marca)}</span> · ${esc(v.modelo||'—')}</td><td class="n"><b>${fmt(v.km)}</b></td><td class="mut">${fmtD(v.kmData)}</td>
+    <td class="n km-c"><input class="inp sm km-in lk" data-placa="${p}" inputmode="numeric" placeholder="—" aria-label="Novo KM de ${p}"></td><td class="n"><span class="p2-rod" data-rod="${p}"></span></td>
+    <td>${pl[p].map(r=>`<span class="p2-pm ${r.lvl}">${pcode(r.p.tipo)}<b data-fa="${r.p.id}">${r.falt==null?'—':r.falt<0?'+'+fmt(-r.falt)+' km':fmt(r.falt)+' km'}</b></span>`).join('')}</td></tr>`}).join('')||'<tr><td colspan="7" class="empty">Nenhum veículo com esses filtros.</td></tr>'}</tbody>`;
+  $$('#p2LkTab .lk').forEach(inp=>{
+    inp.oninput=()=>{const km=parseKm(inp.value),v=DB.veic[inp.dataset.placa],rod=$(`#p2LkTab [data-rod="${inp.dataset.placa}"]`);
+      inp.classList.toggle('chg',km!=null);
+      if(km==null||v.km==null){rod.textContent='';rod.className='p2-rod'}else{const d=km-v.km;rod.textContent=(d>0?'+':'')+fmt(d);rod.className='p2-rod'+(d<0?' neg':'')}
+      DB.planos.filter(p=>p.placa===inp.dataset.placa).forEach(p=>{const r=calc(p),e=$(`#p2LkTab [data-fa="${p.id}"]`);if(!e||r.prox==null||(km??v.km)==null)return;const f=r.prox-(km??v.km);
+        e.textContent=f<0?'+'+fmt(-f)+' km':fmt(f)+' km';e.parentElement.className='p2-pm '+(f<=DB.cfg.alta?'late':f<=DB.cfg.media?'soon':'ok')})};
+    inp.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();const all=$$('#p2LkTab .lk'),k=all.indexOf(inp);(all[k+1]||$('#p2LkSave')).focus()}}});
+  if(!$('#p2LkData').value)$('#p2LkData').value=hoje()}
+function gravarLeituras(){
+  const data=$('#p2LkData').value||hoje();let n=0;
+  for(const inp of $$('#p2LkTab .lk')){const km=parseKm(inp.value);if(km==null)continue;if(setKm(inp.dataset.placa,km,data))n++}
+  if(!n)return msg('#p2LkMsg','Nenhuma leitura preenchida.',true);
+  gravar();render();msg('#p2LkMsg',`${n} leitura${n>1?'s':''} gravada${n>1?'s':''} em ${fmtD(data)}.`)}
+
+/* ---------- Histórico ---------- */
+let HI_T='rev';
+function histFiltrado(){const q=normQ(PF.q);
+  return[...DB.hist].sort(ordData).filter(h=>(HI_T==='all'||h.k===HI_T)&&(!q||normQ(h.placa).includes(q))&&(!PF.marca||(DB.veic[h.placa]||{}).marca===PF.marca)&&(!PF.tipo||h.k!=='rev'||h.tipo===PF.tipo))}
+function renderHist(){
+  const H=histFiltrado();
+  $$('#p2HiTipo button').forEach(b=>b.classList.toggle('on',b.dataset.t===HI_T));
+  $('#p2HiTab').innerHTML=`<thead><tr><th>Data</th><th>Placa</th><th>Marca · modelo</th><th>Lançamento</th><th class="n">KM</th><th class="n">Rodou desde a anterior</th><th>Observação</th><th class="no-print"></th></tr></thead><tbody>${H.map(h=>{const v=DB.veic[h.placa]||{};let rod='';
+    if(h.k==='km'){const ant=DB.hist.filter(x=>x.k==='km'&&x.placa===h.placa&&x.id!==h.id&&x.data&&(x.data<h.data||(x.data===h.data&&x.ts<h.ts))).sort(ordData)[0];if(ant)rod=(h.km-ant.km>0?'+':'')+fmt(h.km-ant.km)}
+    else{const ant=DB.hist.filter(x=>x.k==='rev'&&x.placa===h.placa&&x.tipo===h.tipo&&x.km<h.km).sort((a,b)=>b.km-a.km)[0];if(ant)rod=fmt(h.km-ant.km)}
+    return`<tr><td class="${h.data?'':'mut'}">${dtLbl(h)}</td><td><span class="plate" data-pl="${h.placa}">${h.placa}</span></td><td><span class="mut">${esc(v.marca||'')}</span> · ${esc(v.modelo||'')}</td>
+    <td>${h.k==='rev'?`Revisão ${pcode(h.tipo)}`:'<span class="mut">Leitura de KM</span>'}</td><td class="n"><b>${fmt(h.km)}</b></td><td class="n mut">${rod||'—'}</td><td style="font-size:12px;color:var(--ink-2)">${esc(h.obs||'—')}</td>
+    <td class="no-print"><button class="pv-del" type="button" data-hdel="${h.id}" title="Excluir lançamento" aria-label="Excluir lançamento">${svg('trash')}</button></td></tr>`}).join('')||'<tr><td colspan="8" class="empty">Nada no histórico com esses filtros.</td></tr>'}</tbody>`;
+  $('#p2HiN').textContent=`${H.length} lançamento${H.length!==1?'s':''} na lista · ${DB.hist.filter(h=>h.k==='rev').length} revisões e ${DB.hist.filter(h=>h.k==='km').length} leituras de KM no total`}
+function excluirHist(id){
+  const h=DB.hist.find(x=>x.id===id);if(!h)return;
+  if(!confirm(`Excluir ${h.k==='rev'?'a revisão '+pCurto(h.tipo):'a leitura de KM'} de ${h.placa} (${fmt(h.km)} km${h.data?', '+fmtD(h.data):''})?\n${h.k==='rev'?'A última revisão do plano volta para a anterior.':'O KM atual volta para a leitura anterior.'}`))return;
+  DB.hist=DB.hist.filter(x=>x.id!==id);
+  if(h.k==='km')recalcVeic(h.placa);else DB.planos.filter(p=>p.placa===h.placa&&p.tipo===h.tipo).forEach(recalcPlano);
+  gravar();render();if(DR_PL)abrirVeic(DR_PL)}
+
+/* ---------- ficha do veículo: resumo, atualizar KM e registrar revisão ---------- */
+let DR_PL=null;
+function abrirVeic(placa,regId){
+  const v=DB.veic[placa];if(!v)return;DR_PL=placa;
+  const rs=DB.planos.filter(p=>p.placa===placa).map(calc),kd=kmDia(placa),H=[...DB.hist].sort(ordData).filter(h=>h.placa===placa);
+  const reg=rs.find(r=>r.p.id===regId)||rs[0];
+  $('#p2DrKind').textContent='Preventivas · '+v.marca;$('#p2DrTit').textContent=placa;$('#p2DrSub').textContent=[v.modelo,v.ano].filter(Boolean).join(' · ');
+  $('#p2DrBody').innerHTML=`
+    <div class="p2-stats"><div><span>KM atual</span><b>${fmt(v.km)}</b><small>${v.kmData?'leitura de '+fmtD(v.kmData):'sem leitura'}</small></div>
+      <div><span>Média de rodagem</span><b>${kd?fmt(kd.v)+' km/dia':'—'}</b><small>${kd?fmtD(kd.de)+' a '+fmtD(kd.ate):'precisa de 2 leituras com 7+ dias'}</small></div>
+      <div><span>Revisões no cronograma</span><b>${rs.length}</b><small>${rs.map(r=>pCurto(r.p.tipo)).join(' · ')||'—'}</small></div></div>
+    <div class="p2-sec">Atualizar KM</div>
+    <div class="p2-box"><div class="pv-form"><div class="fld"><label for="p2DrKm">KM do hodômetro</label><input class="inp" id="p2DrKm" inputmode="numeric" value="${v.km==null?'':fmt(v.km)}"></div><div class="fld"><label for="p2DrKmD">Data</label><input class="inp" type="date" id="p2DrKmD" value="${hoje()}"></div><div class="fld"><button class="btn primary" type="button" id="p2DrKmSave" style="width:100%;justify-content:center">Gravar KM</button></div></div></div>
+    ${rs.length?`<div class="p2-sec">Revisões</div>
+    ${rs.map(r=>`<div class="p2-pl ${r.lvl}">${pcode(r.p.tipo)}<div><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">${badgeSt(r)} ${badgePr(r)} ${r.prevData?`<span class="mut" style="font-size:11.5px">previsão ${fmtD(r.prevData)}</span>`:''}</div>
+      <div class="kv" style="margin-top:6px"><span>Última <b>${fmt(r.ult)}</b></span><span>Próxima <b>${fmt(r.prox)}</b></span><span>${r.falt!=null&&r.falt<0?'Excedido':'Falta'} <b>${r.falt==null?'—':fmt(Math.abs(r.falt))+' km'}</b></span><span>Uso <b>${r.uso==null?'—':Math.round(r.uso*100)+'%'}</b></span></div>
+      ${r.p.obs?`<div class="mut" style="font-size:11.5px;font-style:italic;margin-top:4px">${esc(r.p.obs)}</div>`:''}</div><button class="pv-act" type="button" data-rsel="${r.p.id}">Registrar</button></div>`).join('')}
+    <div class="p2-sec">Registrar revisão feita</div>
+    <div class="p2-box hl" id="p2RgBox"><div class="pv-form">
+      <div class="fld"><label for="p2RgPl">Plano</label><select class="inp" id="p2RgPl">${rs.map(r=>`<option value="${r.p.id}"${r===reg?' selected':''}>${esc(pNome(r.p.tipo))} (${fmt(r.iv)} km)</option>`).join('')}</select></div>
+      <div class="fld"><label for="p2RgData">Data da revisão</label><input class="inp" type="date" id="p2RgData" value="${hoje()}"></div>
+      <div class="fld"><label for="p2RgKm">KM na revisão</label><input class="inp" id="p2RgKm" inputmode="numeric" value="${v.km==null?'':fmt(v.km)}"></div>
+      <div class="fld wide"><label for="p2RgObs">Observação <span class="opt">(opcional: OS, oficina, serviços extras)</span></label><input class="inp" id="p2RgObs"></div></div>
+      <div class="p2-prev" id="p2RgPrev"></div>
+      <div class="p2-acts"><button class="btn primary" type="button" id="p2RgSave">Registrar revisão</button><span class="pv-msg" id="p2RgMsg" style="margin:0"></span></div></div>`:''}
+    <div class="p2-sec">Histórico do veículo</div>
+    ${H.length?H.slice(0,40).map(h=>`<div class="p2-hi"><div class="dt">${dtLbl(h)}</div><div class="tx">${h.k==='rev'?`Revisão ${pcode(h.tipo)}`:'Leitura de KM'} <b style="margin-left:6px">${fmt(h.km)} km</b>${h.obs?`<small>${esc(h.obs)}</small>`:''}</div><button class="pv-del" type="button" data-hdel="${h.id}" title="Excluir lançamento" aria-label="Excluir lançamento">${svg('trash')}</button></div>`).join(''):'<div class="empty">Sem histórico.</div>'}`;
+  const B=$('#p2DrBody');
+  $$('#p2DrBody [data-hdel]').forEach(b=>b.onclick=()=>excluirHist(b.dataset.hdel));
+  $('#p2DrKmSave').onclick=()=>{const km=parseKm($('#p2DrKm').value);if(km==null||km===v.km)return;if(!setKm(placa,km,$('#p2DrKmD').value||hoje()))return;gravar();render();abrirVeic(placa);toast(`<b>${placa}</b> · KM atualizado para ${fmt(km)}`)};
+  if(rs.length){
+    const prev=()=>{const p=DB.planos.find(x=>x.id===$('#p2RgPl').value),km=parseKm($('#p2RgKm').value),iv=(DB.cfg.planos[p.tipo]||{}).km||0;
+      $('#p2RgPrev').innerHTML=`<div><span>Última revisão atual</span><b>${fmt(p.ultima)}</b></div><div><span>Nova última revisão</span><b>${fmt(km)}</b></div><div><span>Próxima ${esc(pCurto(p.tipo))} passa a ser</span><b style="color:var(--accent)">${km==null?'—':fmt(km+iv)+' km'}</b></div>`};
+    $('#p2RgPl').onchange=prev;$('#p2RgKm').oninput=prev;prev();
+    $$('#p2DrBody [data-rsel]').forEach(b=>b.onclick=()=>{$('#p2RgPl').value=b.dataset.rsel;prev();$('#p2RgBox').scrollIntoView({behavior:'smooth',block:'center'});$('#p2RgKm').focus()});
+    $('#p2RgSave').onclick=()=>{
+      const p=DB.planos.find(x=>x.id===$('#p2RgPl').value),km=parseKm($('#p2RgKm').value),data=$('#p2RgData').value||hoje();
+      if(km==null)return msg('#p2RgMsg','Informe o KM da revisão.',true);
+      if(p.ultima!=null&&km<p.ultima&&!confirm(`O KM informado (${fmt(km)}) é menor que a última ${pCurto(p.tipo)} (${fmt(p.ultima)}). Registrar mesmo assim?`))return;
+      DB.hist.push({id:uid(),k:'rev',placa,tipo:p.tipo,data,km,obs:$('#p2RgObs').value.trim(),ts:Date.now()});
+      recalcPlano(p);p.base='Registrado';
+      if(v.km==null||km>v.km){DB.hist.push({id:uid(),k:'km',placa,data,km,obs:'Lançado junto com a revisão '+pCurto(p.tipo),ts:Date.now()});recalcVeic(placa)}
+      gravar();render();abrirVeic(placa,p.id);toast(`<b>${placa}</b> · revisão ${pCurto(p.tipo)} registrada com ${fmt(km)} km. Próxima: ${fmt(p.ultima+((DB.cfg.planos[p.tipo]||{}).km||0))} km`)}}
+  B.scrollTop=0;document.body.classList.add('p2-open');$('#p2Drawer').setAttribute('aria-hidden','false');
+  if(regId&&rs.length)setTimeout(()=>{$('#p2RgBox').scrollIntoView({block:'center'});$('#p2RgKm').focus()},260)}
+function fecharVeic(){document.body.classList.remove('p2-open');$('#p2Drawer').setAttribute('aria-hidden','true');DR_PL=null}
+
+/* ---------- Cadastro ---------- */
+let CAD_ED=null;
+function renderCad(){
+  $('#p2CTipo').innerHTML=Object.keys(DB.cfg.planos).map(t=>`<option value="${t}">${esc(pNome(t))} (${fmt(DB.cfg.planos[t].km)} km)</option>`).join('');
+  if(CAD_ED){const p=DB.planos.find(x=>x.id===CAD_ED);if(p)$('#p2CTipo').value=p.tipo}
+  $('#p2MkList').innerHTML=DB.marcas.map(m=>`<option value="${esc(m)}">`).join('');
+  const R=linhas(true).sort((a,b)=>ordemMarca(a.v.marca)-ordemMarca(b.v.marca)||a.p.placa.localeCompare(b.p.placa));
+  $('#p2CadTab').innerHTML=`<thead><tr><th>Placa</th><th>Marca</th><th>Modelo</th><th class="n">Ano</th><th>Plano</th><th class="n">Última rev.</th><th class="n">KM atual</th><th>Base KM</th><th>Origem</th><th class="no-print"></th></tr></thead><tbody>${R.map(r=>`<tr><td><span class="plate" data-pl="${r.p.placa}">${r.p.placa}</span></td><td>${esc(r.v.marca)}</td><td>${esc(r.v.modelo||'—')}</td><td class="n">${r.v.ano||'—'}</td><td>${pcode(r.p.tipo)}</td><td class="n">${fmt(r.ult)}</td><td class="n">${fmt(r.km)}</td><td>${baseHtml(r.p.base)}</td><td>${origHtml(r.p.orig)}</td>
+    <td class="no-print" style="white-space:nowrap"><button class="pv-del" type="button" data-ced="${r.p.id}" title="Editar" aria-label="Editar">${svg('edit')}</button><button class="pv-del" type="button" data-cdel="${r.p.id}" title="Excluir do cronograma" aria-label="Excluir do cronograma">${svg('trash')}</button></td></tr>`).join('')||'<tr><td colspan="10" class="empty">Nenhuma revisão cadastrada.</td></tr>'}</tbody>`;
+  $$('#p2CadTab [data-ced]').forEach(b=>b.onclick=()=>editarPlano(b.dataset.ced));
+  $$('#p2CadTab [data-cdel]').forEach(b=>b.onclick=()=>{const p=DB.planos.find(x=>x.id===b.dataset.cdel);
+    if(!confirm(`Excluir a revisão ${pCurto(p.tipo)} de ${p.placa} do cronograma?\nO histórico do veículo continua guardado.`))return;
+    DB.planos=DB.planos.filter(x=>x!==p);gravar();render()})}
+function editarPlano(id){
+  const p=DB.planos.find(x=>x.id===id),v=DB.veic[p.placa];CAD_ED=id;
+  $('#p2CPlaca').value=p.placa;$('#p2CMarca').value=v.marca;$('#p2CModelo').value=v.modelo||'';$('#p2CAno').value=v.ano||'';$('#p2CTipo').value=p.tipo;
+  $('#p2CUlt').value=p.ultima==null?'':fmt(p.ultima);$('#p2CKm').value=v.km==null?'':fmt(v.km);$('#p2CBase').value=p.base||'Cadastro';$('#p2COrig').value=p.orig||'';
+  $('#p2CadTit').textContent=`Editar ${p.placa} · ${pNome(p.tipo)}`;$('#p2CadSave').textContent='Salvar alterações';$('#p2CadCancel').hidden=false;$('#p2CadMsg').textContent='';
+  $('#p2CadCard').scrollIntoView({behavior:'smooth',block:'start'})}
+function limparCad(){CAD_ED=null;$('#p2CadForm').reset();$('#p2CadTit').textContent='Incluir revisão no cronograma';$('#p2CadSave').textContent='Incluir';$('#p2CadCancel').hidden=true}
+function salvarCad(){
+  const placa=$('#p2CPlaca').value.trim().toUpperCase(),marca=$('#p2CMarca').value.trim().toUpperCase(),tipo=$('#p2CTipo').value;
+  if(!/^[A-Z]{3}-?[0-9][A-Z0-9][0-9]{2}$/.test(placa))return msg('#p2CadMsg','Placa inválida (ex.: ABC-1D23).',true);
+  if(!marca)return msg('#p2CadMsg','Informe a marca ou o grupo.',true);
+  const pl=placa.includes('-')?placa:placa.slice(0,3)+'-'+placa.slice(3);
+  if(DB.planos.some(p=>p.placa===pl&&p.tipo===tipo&&p.id!==CAD_ED))return msg('#p2CadMsg',`${pl} já tem o plano ${pCurto(tipo)} no cronograma.`,true);
+  const ult=parseKm($('#p2CUlt').value),km=parseKm($('#p2CKm').value),ano=parseKm($('#p2CAno').value),edit=!!CAD_ED;
+  if(!DB.marcas.includes(marca))DB.marcas.push(marca);
+  let p;
+  if(edit){p=DB.planos.find(x=>x.id===CAD_ED);
+    if(p.placa!==pl){DB.hist.forEach(h=>{if(h.placa===p.placa&&h.k==='rev'&&h.tipo===p.tipo)h.placa=pl});p.placa=pl}
+    p.tipo=tipo;
+    if(ult!==p.ultima){// o ajuste vira um lançamento no histórico, para não perder o valor anterior
+      if(ult!=null)DB.hist.push({id:uid(),k:'rev',placa:pl,tipo,data:hoje(),km:ult,obs:'KM da última revisão ajustado no cadastro',src:'cad',ts:Date.now()});else p.ult0=null;
+      p.ultima=ult}}
+  else{p={id:uid(),placa:pl,tipo,ultima:ult,ult0:ult,obs:''};DB.planos.push(p);
+    if(ult)DB.hist.push({id:uid(),k:'rev',placa:pl,tipo,data:null,km:ult,obs:'KM da última revisão informado no cadastro',src:'cad',ts:Date.now()})}
+  p.base=$('#p2CBase').value;p.orig=$('#p2COrig').value.trim();if(p.obs==null)p.obs='';
+  if(!DB.veic[pl])DB.veic[pl]={placa:pl,marca,modelo:'',ano:null,km:null,kmData:null};
+  const v=DB.veic[pl];v.marca=marca;v.modelo=$('#p2CModelo').value.trim();v.ano=ano;
+  if(km!=null&&km!==v.km){DB.hist.push({id:uid(),k:'km',placa:pl,data:hoje(),km,obs:'Informado no cadastro',ts:Date.now()});recalcVeic(pl)}
+  gravar();limparCad();filtros();render();msg('#p2CadMsg',edit?`${pl} · ${pCurto(tipo)} atualizado.`:`${pl} · ${pCurto(tipo)} incluído no cronograma.`)}
+
+/* ---------- Critérios e backup ---------- */
+function renderCrit(){
+  $('#p2CfgPlanos').innerHTML=Object.entries(DB.cfg.planos).map(([t,p])=>`<div class="fld"><label for="p2Cfg_${t}">${pcode(t)} ${esc(p.nome)} (km)</label><input class="inp" id="p2Cfg_${t}" data-t="${t}" value="${fmt(p.km)}" inputmode="numeric"></div>`).join('');
+  $('#p2CfgAlta').value=fmt(DB.cfg.alta);$('#p2CfgMedia').value=fmt(DB.cfg.media);
+  $('#p2DbStats').innerHTML=`<div><span>Veículos</span><b>${Object.keys(DB.veic).length}</b></div><div><span>Revisões no cronograma</span><b>${DB.planos.length}</b></div><div><span>Revisões registradas</span><b>${DB.hist.filter(h=>h.k==='rev'&&h.data).length}</b></div><div><span>Leituras de KM lançadas</span><b>${DB.hist.filter(h=>h.k==='km'&&h.src!=='cron').length}</b></div>`;
+  $('#p2Rules').innerHTML=`
+  <p><b>Próxima revisão</b> = KM da última revisão do plano + intervalo do plano (${Object.entries(DB.cfg.planos).map(([t,p])=>pCurto(t)+' '+fmt(p.km)+' km').join(', ')}).</p>
+  <p><b>Faltante</b> = próxima revisão − KM atual. Negativo é KM <b>excedido</b>, e a revisão fica <b>Atrasada</b>.</p>
+  <p><b>% uso</b> = (KM atual − última revisão) ÷ intervalo do plano.</p>
+  <p><b>Prioridade:</b> <b>Alta</b> quando faltam até ${fmt(DB.cfg.alta)} km ou já venceu; <b>Média</b> até ${fmt(DB.cfg.media)} km; <b>Programada</b> acima disso; <b>Pendente</b> quando falta o KM atual ou o da última revisão.</p>
+  <p><b>Planos independentes:</b> cada tipo de revisão tem o seu próprio controle. Fazer uma MP2 não zera a Intermediária do mesmo veículo; registre cada uma no seu plano.</p>
+  <p><b>KM atual</b> é a leitura mais recente (lançada no Cronograma, em Lançar KM ou na ficha do veículo) e vale para todos os planos da placa. Cada leitura fica no histórico.</p>
+  <p><b>Registrar revisão</b> grava a data e o KM no histórico, e esse KM passa a ser a última revisão do plano. Excluir o lançamento devolve a revisão anterior.</p>
+  <p><b>Previsão de data</b> usa a média de km/dia entre a primeira e a última leitura do veículo (mínimo de 7 dias entre elas).</p>
+  <p><b>Base KM:</b> Cadastro (KM da planilha de cadastro), Estimado (KM da última estimado, a confirmar), Registrado (revisão lançada no painel) e Pendente (KM a informar).</p>
+  <p><b>Origem dos dados:</b> cronograma de revisões de dezembro/2026, emitido em 24/11/2026. As revisões da planilha aparecem no histórico como "cronograma", sem data.</p>`}
+function salvarCfg(){
+  for(const inp of $$('#p2CfgPlanos input')){const n=parseKm(inp.value);if(!n)return msg('#p2CfgMsg','Todo intervalo precisa ser maior que zero.',true);DB.cfg.planos[inp.dataset.t].km=n}
+  const a=parseKm($('#p2CfgAlta').value),m=parseKm($('#p2CfgMedia').value);
+  if(a==null||m==null||m<a)return msg('#p2CfgMsg','A faixa da Média precisa ser maior ou igual à da Alta.',true);
+  DB.cfg.alta=a;DB.cfg.media=m;gravar();render();msg('#p2CfgMsg','Critérios salvos. O cronograma foi recalculado.')}
+function backup(){DB.bk=hoje();gravar();const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([JSON.stringify(DB,null,1)],{type:'application/json'}));a.download=`preventivas_backup_${hoje()}.json`;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);msg('#p2BkMsg','Backup baixado.')}
+function restaurar(f){const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(!d||d.v!==1||!Array.isArray(d.planos)||!d.veic)throw 0;
+  if(!confirm(`Restaurar o backup "${f.name}"?\nOs dados atuais serão substituídos (${d.planos.length} revisões no backup).`))return;
+  DB=d;gravar();filtros();render();msg('#p2BkMsg','Backup restaurado.')}catch(e){msg('#p2BkMsg','Arquivo inválido: não é um backup das preventivas.',true)}};rd.readAsText(f)}
+
+/* ---------- render geral, filtros e eventos ---------- */
+function filtros(){
+  $('#p2FMarca').innerHTML='<option value="">Todas as marcas</option>'+DB.marcas.filter(m=>Object.values(DB.veic).some(v=>v.marca===m)).map(m=>`<option>${esc(m)}</option>`).join('');
+  $('#p2FPlano').innerHTML='<option value="">Todos os planos</option>'+Object.keys(DB.cfg.planos).map(t=>`<option value="${t}">${esc(pNome(t))}</option>`).join('');
+  $('#p2FSt').innerHTML='<option value="">Todas as situações</option>'+[['Atrasada','Atrasadas'],['Próxima','Próximas'],['Alta','Prioridade alta'],['Média','Prioridade média'],['Programada','Programadas'],['Pendente','Pendentes']].map(([v,t])=>`<option value="${v}">${t}</option>`).join('');
+  $('#p2PlList').innerHTML=Object.keys(DB.veic).sort().map(p=>`<option value="${p}">`).join('');
+  if(PF.marca&&!DB.marcas.includes(PF.marca))PF.marca='';
+  $('#p2FMarca').value=PF.marca;$('#p2FPlano').value=PF.tipo;$('#p2FSt').value=PF.st}
+function render(){
+  const sb=SUBS.find(s=>s.id===SUB),ult=Object.values(DB.veic).map(v=>v.kmData).filter(Boolean).sort().pop();
+  $('#pgTitle').innerHTML=`Preventivas <span class="pg-crumb">› ${esc(sb.t)}</span>`;
+  $('#pgSub').textContent=sb.s+(ult?' · KM atualizado até '+fmtD(ult):'');
+  $$('#p2 .p2-sub').forEach(s=>s.classList.toggle('active',s.dataset.sub===SUB));
+  $('#p2Bar').hidden=!sb.fil;$('#p2Kpis').hidden=!sb.kpi;saveLbl();
+  renderKpis();({painel:renderPainel,cron:renderCron,km:renderKm,hist:renderHist,cad:renderCad,crit:renderCrit})[SUB]();
+  $$('#p2 .plate[data-pl]').forEach(e=>e.onclick=()=>abrirVeic(e.dataset.pl));
+  $$('#p2 [data-reg]').forEach(b=>b.onclick=()=>{const p=DB.planos.find(x=>x.id===b.dataset.reg);abrirVeic(p.placa,p.id)});
+  $$('#p2 [data-hdel]').forEach(b=>b.onclick=()=>excluirHist(b.dataset.hdel));
+  if(typeof markNav==='function')markNav()}
+function sub(id){if(!SUBS.some(s=>s.id===id))id='painel';SUB=id;ls.set('pm-pv-sub',id);
+  if(PAGE!=='prev')go('prev');else{window.scrollTo({top:0});render()}}
+// número em vermelho no menu: revisões atrasadas ou de prioridade alta
+function badge(){const c=contagem(),n=Math.max(c.atr,c.alta);return n>99?'99+':n||''}
+
+filtros();
+$('#p2FMarca').onchange=e=>{PF.marca=e.target.value;render()};
+$('#p2FPlano').onchange=e=>{PF.tipo=e.target.value;render()};
+$('#p2FSt').onchange=e=>{PF.st=e.target.value;render()};
+$('#p2FQ').oninput=e=>{PF.q=e.target.value;render()};
+$$('#p2 [data-sgo]').forEach(b=>b.onclick=()=>sub(b.dataset.sgo));
+$$('#p2CronOrd button').forEach(b=>b.onclick=()=>{CRON_ORD=b.dataset.o;render()});
+$$('#p2HiTipo button').forEach(b=>b.onclick=()=>{HI_T=b.dataset.t;render()});
+$('#p2CronCsv').onclick=()=>csvDownload('cronograma_preventivas_'+hoje(),['Marca','Placa','Modelo','Ano','Plano','Intervalo','Última revisão','KM atual','Data do KM','Próxima revisão','Faltante','% uso','Status','Prioridade','Origem'],
+  linhas().map(r=>[r.v.marca,r.p.placa,r.v.modelo,r.v.ano||'',pNome(r.p.tipo),r.iv,r.ult??'',r.km??'',fmtD(r.v.kmData),r.prox??'',r.falt??'',r.uso==null?'':Math.round(r.uso*100)+'%',r.st,r.pr,r.p.orig||'']));
+$('#p2HiCsv').onclick=()=>csvDownload('historico_preventivas_'+hoje(),['Data','Placa','Marca','Modelo','Lançamento','Plano','KM','Observação'],
+  histFiltrado().map(h=>{const v=DB.veic[h.placa]||{};return[dtLbl(h),h.placa,v.marca||'',v.modelo||'',h.k==='rev'?'Revisão':'Leitura de KM',h.k==='rev'?pNome(h.tipo):'',h.km,h.obs||'']}));
+$('#p2LkSave').onclick=gravarLeituras;
+$('#p2LkClear').onclick=()=>{$$('#p2LkTab .lk').forEach(i=>{i.value='';i.dispatchEvent(new Event('input'))});$('#p2LkMsg').textContent=''};
+$('#p2CadSave').onclick=salvarCad;$('#p2CadForm').onsubmit=e=>{e.preventDefault();salvarCad()};
+$('#p2CadCancel').onclick=()=>{limparCad();$('#p2CadMsg').textContent=''};
+$('#p2CfgSave').onclick=salvarCfg;$('#p2BkSave').onclick=backup;
+$('#p2BkFile').onchange=e=>{const f=e.target.files[0];if(f)restaurar(f);e.target.value=''};
+$('#p2BkReset').onclick=()=>{if(!confirm('Voltar ao cronograma de dezembro/2026?\nTudo o que foi lançado (KM, revisões e cadastros) será apagado. Faça um backup antes, se precisar.'))return;DB=semente();gravar();filtros();render();msg('#p2BkMsg','Cronograma de dezembro restaurado.')};
+$('#p2DrX').onclick=fecharVeic;$('#p2Scrim').onclick=fecharVeic;
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('p2-open'))fecharVeic()});
+window.addEventListener('storage',e=>{if(!ONLINE&&e.key===LS_DB){DB=carregar();filtros();if(PAGE==='prev')render()}});
+return{SUBS,sub,render,badge,carregar:carregarBanco,get SUB(){return SUB},get antigo(){return ONLINE&&Date.now()-LIDO>60000}};
+})();
 // online: ao abrir a aba, busca de novo no banco se os dados tiverem mais de 1 minuto (outros usuários podem ter lançado)
-R_.prev=()=>{pvRender();if(SB_ON&&Date.now()-PV_LOADED>60000)pvLoad().then(()=>{if(PAGE==='prev')pvRender()})};
-if(!SB_ON)pvLoad().then(()=>{if(PAGE==='prev')pvRender()});PV_VIEW=ls.get('pm-pv-view')||'painel';
+R_.prev=()=>{PV2.render();if(PV2.antigo)PV2.carregar().then(()=>{if(PAGE==='prev')PV2.render()})};
 
 /* ================= VERSÃO ONLINE: login, permissões e carga das bases ================= */
 let GATE_MODE='login';
@@ -2701,7 +3023,7 @@ async function startOnline(){SB.load();if(!SB.sess){gate('login');return}
     const objs=os.map(r=>({'Data':r.data,'OS Nº':r.os,'Placa':r.placa,'Técnico':r.tecnico,'Minutos (raw)':r.minutos,'Tempo (hh:mm)':r.tempo,'Tarefas':r.tarefas}));
     loadRaw(buildOS(objs),{fonte:cO?cO.arquivo:'Supabase',quando:cO?fmtTs(cO.feito_em):'—',linhas:os.length});
     $('#importStatus').textContent=`Base do Supabase: ${cO?cO.arquivo:''} · atualizada em ${cO?fmtTs(cO.feito_em):'—'}`;
-    if(podeVer('prev'))await pvLoad();applyRole();gateHide();go(ls.get('pm-page')||'overview');
+    if(podeVer('prev'))await PV2.carregar();applyRole();gateHide();go(ls.get('pm-page')||'overview');
   }catch(err){if(!SB.sess)gate('login',err.message,'err');else gate('erro','Não foi possível carregar: '+err.message,'err')}}
 function applyRole(){const adm=isAdmin();document.body.classList.toggle('ro',!adm);aplicarAbas();
   const nm=userName(SB.sess.email);$('#userChip').hidden=false;$('#userChip').title=`${nm} · ${adm?'Administrador':'Usuário'} · clique para sair`;$('#userMail').textContent=nm;$('#userMail').title=nm;$('#userRole').textContent=adm?'Administrador':'Usuário';$('#userIc').textContent=(nm||'?')[0].toUpperCase();

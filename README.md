@@ -16,9 +16,16 @@ Desde a v4.1, o administrador escolhe quais abas cada usuário vê, no quadro "O
 
 ## Bases
 
-São 3 bases: Ordens de Serviço, Tabela de Veículos (com tipo, proprietário e ano) e Movimentações de Estoque, que dão o custo de peças por veículo e por OS. Elas existem desde a v4.0.
+São 5 bases:
+1. Ordens de Serviço.
+2. Tabela de Veículos, com tipo, proprietário e ano.
+3. Movimentações de Estoque: dão o custo de peças por veículo e por OS (desde a v4.0).
+4. Diesel: abastecimentos do tanque próprio (desde a v4.6).
+5. ARLA: abastecimentos do tanque próprio (desde a v4.6).
 
-O administrador importa as planilhas na aba Dados e critérios. A base anterior é substituída por inteiro numa operação única: se falhar, a antiga continua.
+As bases 4 e 5 dão o custo de combustível por veículo. Na aba Custos, o seletor "Custo considerado" mostra o total, só a manutenção ou só o combustível.
+
+O administrador importa as planilhas na aba Dados e critérios. A base anterior é substituída por inteiro numa operação única: se falhar, a antiga continua. Diesel e ARLA são substituídos cada um por si, e o painel recusa a planilha colocada no espaço errado, conferindo pelo preço do litro.
 
 Preventivas: são gravadas no banco na hora e todos os usuários veem os mesmos dados.
 
