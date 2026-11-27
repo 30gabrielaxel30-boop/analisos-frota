@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Painel de Manutenção da Frota</title>
+<!-- v4.9: fonte das barras no visual do NOMOS (sem internet, cai na fonte do sistema) -->
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <script>(function(){var t=null;try{t=localStorage.getItem('pm-theme')}catch(e){}document.documentElement.dataset.theme=t||'dark'})();</script>
 <script>/* chart.umd.min.js embutido */
 /**
@@ -211,6 +214,10 @@ body.sum-open .sum-drawer{transform:none}
 .cs-modo{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--ink-2);font-weight:600}
 .cs-modo .mseg{height:28px}.cs-modo .mseg button{height:24px;padding:0 12px;font-size:12px}
 body.no-abs .abs-only{display:none!important}
+.cw[hidden],.ov-vazio[hidden],.ov-sem[hidden]{display:none!important}
+.ov-vazio{padding:22px 16px;text-align:center;font-size:12.5px;color:var(--muted);border:1px dashed var(--line);border-radius:var(--r);background:var(--surface-2)}
+.ov-vazio b{display:block;color:var(--ink-2);font-size:13px;margin-bottom:4px}
+.ov-sem{margin:10px 0 0;font-size:12px;color:var(--muted)}.ov-sem b{color:var(--ink-2)}
 .tq td,.tq th{white-space:nowrap}.tq td:first-child{color:var(--ink-2)}
 .sum-stats div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
 .sum-stats span{display:block;font-size:11px;color:var(--muted)}
@@ -848,6 +855,79 @@ body.menu-ab .rail-fly{display:none}
 @media (prefers-reduced-motion:reduce){.tree-sub,.rail-fly,.rail-nav .tree-ch{transition:none}}
 @media print{.rail-fly{display:none!important}}
 body.printing .rail-fly{display:none!important}
+
+/* ---------- v4.9: barra superior e trilho no visual do NOMOS ----------
+   Fonte IBM Plex Sans, grafite #151518, barra de 52 px com a trilha "AnalisOS › aba", campos escuros de 32 px,
+   botões de ícone sem borda e o usuário com avatar e nome. Trilho de 56 px só com ícones em botões de 44 px
+   arredondados; a aba ativa fica em destaque com o marcador à esquerda. O painel em cascata do NOMOS não entra.
+   Destaque dourado do NOMOS (opção A, escolhida em 27/11; a opção B era o laranja do painel). */
+:root{--rw:56px;--rw-ab:224px;--nm-bg:#151518;--nm-edge:#000;--nm-hover:#2a2a30;--nm-field:#26262b;--nm-field-line:#38383f;--nm-ink:#f4f2ed;--nm-mut:#9a9aa1;--nm-ic:#c9c9ce;--nm-sep:#25252a;
+  --nm-ac:#c99a43;--nm-ac2:#e5bd72;--nm-ring:rgba(201,154,67,.25);--f-nav:'IBM Plex Sans',system-ui,-apple-system,'Segoe UI',sans-serif}
+body{--nav-on:var(--nm-ac2);--nav-bar:var(--nm-ac)}
+.hbar{min-height:52px;padding:0 14px 0 0;gap:12px;background:var(--nm-bg);border-bottom:1px solid var(--nm-edge);font-family:var(--f-nav);font-size:13px;color:var(--nm-ink);
+  --surface:var(--nm-field);--line:var(--nm-field-line);--ink:var(--nm-ink);--ink-2:#c9c9ce;--muted:#8a8a92;--accent:var(--nm-ac);--accent-soft:var(--nm-ring);--on-accent:#0b0b0d}
+.hb-logo{height:30px;margin-left:14px}
+.hb-crumbs{display:flex;align-items:center;gap:6px;min-width:0;margin-left:6px;font-size:12.5px;color:var(--nm-mut);white-space:nowrap;overflow:hidden}
+.hb-crumbs svg{width:12px;height:12px;flex:none}
+.hb-crumbs b{color:var(--nm-ink);font-weight:600;overflow:hidden;text-overflow:ellipsis}
+.hb-crumbs #hbCrumbSub{display:inline-flex;align-items:center;gap:6px;min-width:0}.hb-crumbs #hbCrumbSub[hidden]{display:none}
+.hb-crumbs:has(#hbCrumbSub:not([hidden]))>b{color:var(--nm-mut);font-weight:400}
+.hb-filters{gap:8px}
+.hbar .inp{height:32px;border-radius:4px;background:var(--nm-field);border:1px solid var(--nm-field-line);color:var(--nm-ink);font-family:var(--f-nav);font-size:13px;box-shadow:none}
+.hbar .inp::placeholder{color:#8a8a92}
+.hbar .inp:hover{border-color:#4a4a52}
+.hbar .inp:focus{outline:none;background:#2c2c32;border-color:var(--nm-ac);box-shadow:0 0 0 2px var(--nm-ring)}
+.hbar select.inp{padding-right:28px}
+.hbar .search svg{left:9px;width:14px;height:14px;color:#8a8a92}
+.hbar .search .inp{padding-left:30px;width:230px}
+.hbar .chip{font-family:var(--f-nav);color:var(--nm-ink);background:var(--nm-ring);border-color:var(--nm-ac);border-radius:10px;padding:3px 4px 3px 10px;font-size:12px}
+.hb-acts{gap:4px;padding-left:4px;border-left:0}
+.hb-ic{width:32px;height:32px;border:1px solid transparent;border-radius:4px;color:var(--nm-ic)}
+.hb-ic:hover{background:var(--nm-hover);border-color:transparent;color:#fff}
+.hb-ic:focus-visible{outline:2px solid var(--nm-ac);outline-offset:1px}
+.hb-ic svg{width:18px;height:18px}
+.hb-ic .pdf-txt{fill:var(--nm-bg)}
+.hbar .menu-btn{width:32px;height:32px;border:0;border-radius:4px;color:var(--nm-ink);margin-left:8px}
+.hbar .menu-btn:hover{background:var(--nm-hover)}
+.hb-user{width:auto;height:32px;border-radius:4px;background:none;border:0;display:flex;align-items:center;gap:8px;padding:0 6px 0 4px;margin-left:4px;color:var(--nm-ink);font-weight:500}
+.hb-user:hover{background:var(--nm-hover);color:var(--nm-ink);border-color:transparent}
+.hb-user:focus-visible{outline:2px solid var(--nm-ac);outline-offset:1px}
+.hb-av{width:28px;height:28px;border-radius:50%;background:var(--nm-field);border:1px solid var(--nm-ac);color:var(--nm-ac2);font-size:11px;font-weight:600;display:grid;place-items:center;flex:none}
+.hb-un{font-size:13px;white-space:nowrap;max-width:140px;overflow:hidden;text-overflow:ellipsis}
+.hb-dn{width:16px;height:16px;color:var(--nm-ic);flex:none}
+/* trilho */
+.rail{background:var(--nm-bg);border-right:0;padding:8px 0 0;font-family:var(--f-nav)}
+.rail-nav,.rail-grp{gap:4px}
+.rail-grp+.rail-grp{border-top:1px solid var(--nm-sep);margin:6px 12px 0;padding-top:10px}
+.rail-grp+.rail-grp>button,.rail-grp+.rail-grp>.rail-tree>button{margin-left:-6px;margin-right:-6px}
+.rail-nav button,.rail-tog{width:auto;height:44px;margin:0 6px;padding-left:12px;border-radius:6px;color:var(--nm-mut);transition:background .15s,color .15s}
+.rail-nav button svg,.rail-tog svg{width:20px;height:20px;stroke-width:1.75}
+.rail-lb{margin-left:14px;font-size:13px;font-weight:500;letter-spacing:0}
+.rail-nav button:hover,.rail-tog:hover{background:var(--nm-hover);color:#fff}
+.rail-nav button.active{background:none;color:var(--nm-ac2)}
+.rail-nav button.active:hover{background:var(--nm-hover)}
+.rail-nav button.active::before{left:-6px;top:10px;bottom:10px;width:3px;border-radius:0 2px 2px 0;background:var(--nm-ac)}
+.rail-nav button:focus-visible,.rail-tog:focus-visible{outline:2px solid var(--nm-ac);outline-offset:-2px}
+.rail-foot{border-top:1px solid var(--nm-sep);margin:0;padding:6px 0 8px;gap:2px}
+.rail-ver{width:var(--rw);font-family:var(--f-nav);font-size:10.5px;color:#6e6e77}
+.rail-ver:hover{color:var(--nm-ac2)}
+/* contagem de revisões atrasadas (Preventivas): pílula no canto do ícone, como no NOMOS */
+.rail-nav .tree-hd .cnt,.rail-nav .tree-sub .cnt,.rail-fly .cnt{background:var(--nm-ac);color:#0b0b0d;font-size:10px;font-weight:600;border-radius:9px;height:15px;min-width:15px;padding:0 5px;line-height:15px}
+.rail-nav .tree-hd .cnt{left:auto;right:-2px;top:2px}
+body.menu-ab .rail-nav .tree-hd .cnt{position:static;margin-left:8px}
+.rail-nav .tree-sub button{height:34px;padding-left:46px;font-size:12.5px;color:#8a8a92;border-radius:6px}
+.rail-nav .tree-sub button.active{color:var(--nm-ac2);background:none}
+.rail-nav .tree-sub button.active::before{left:33px;top:9px;bottom:9px}
+.tree-sub>div::before{left:33px;background:var(--nm-sep)}
+.rail-fly{background:var(--nm-bg);border-color:var(--nm-sep);font-family:var(--f-nav);border-radius:0 6px 6px 0}
+.rail-fly h4{font-size:13px;font-weight:600;color:var(--nm-ink)}
+.rail-fly button{font-size:13px;color:var(--nm-mut)}
+.rail-fly button:hover{background:var(--nm-hover);color:#fff}
+.rail-fly button.active{background:none;color:var(--nm-ac2)}
+.rail-fly button.active::before{background:var(--nm-ac)}
+@media screen and (max-width:980px){.hb-crumbs{display:none}.hb-un,.hb-dn{display:none}.hbar{padding:0 12px 0 0}.hb-logo{margin-left:4px}}
+@media screen and (max-width:640px){.hb-logo{height:24px}}
+@media print{.hb-crumbs{display:none}}
 </style>
 </head>
 <body>
@@ -855,6 +935,7 @@ body.printing .rail-fly{display:none!important}
 <header class="hbar" id="hbar">
   <button class="menu-btn" id="menuBtn" type="button" aria-label="Abrir menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   <img class="hb-logo" id="tbLogo" alt="Rodovitor Transportes">
+  <nav class="hb-crumbs" id="hbCrumbs" aria-label="Você está em"><span>AnalisOS</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><b id="hbCrumbPg">Visão geral</b><span id="hbCrumbSub" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg><b></b></span></nav>
   <div class="hb-filters">
     <select class="inp" id="periodSel" aria-label="Período" title="Período"></select>
     <div class="search svc-search" id="svcBox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18v3h3l6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg><input class="inp" id="svcSearch" list="svcList" placeholder="Filtrar serviço…" autocomplete="off" aria-label="Filtrar por serviço (digitação livre)" title="Digite parte do nome do serviço (ex.: freio, pneu, óleo) e tecle Enter"><datalist id="svcList"></datalist><button type="button" class="svc-x" id="svcX" aria-label="Limpar filtro de serviço" title="Limpar serviço">×</button><span class="svc-n" id="svcN"></span></div>
@@ -864,7 +945,7 @@ body.printing .rail-fly{display:none!important}
   <div class="hb-acts">
     <button class="hb-ic" id="pdfBtn" type="button" title="Exportar PDF (aba atual, paisagem)" aria-label="Exportar a aba atual em PDF"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><rect class="pdf-tag" x="2.5" y="10" width="15" height="7.5" rx="1" fill="currentColor" stroke="none"/><text class="pdf-txt" x="10" y="15.9" text-anchor="middle" font-size="5.6" font-weight="700" stroke="none">PDF</text></svg></button>
     <button class="hb-ic" id="themeBtn" type="button"><span id="themeIc"></span><span class="sr-only" id="themeLbl">Modo claro</span></button>
-    <button class="hb-user" id="userChip" type="button" hidden><span id="userIc"></span><span class="sr-only"><b id="userMail"></b> <small id="userRole"></small></span></button>
+    <button class="hb-user" id="userChip" type="button" hidden><span class="hb-av" id="userIc"></span><span class="hb-un" id="userMail"></span><svg class="hb-dn" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg><small class="sr-only" id="userRole"></small></button>
   </div>
 </header>
 <aside class="rail" id="sidebar" aria-label="Navegação">
@@ -892,6 +973,9 @@ body.printing .rail-fly{display:none!important}
   <!-- VISÃO GERAL -->
   <section class="page" data-page="overview">
     <div class="grid c2">
+      <!-- v4.7: horas apontadas hoje por colaborador (sempre o dia de hoje, independe do período e dos filtros do topo) -->
+      <div class="card full"><div class="card-h"><div><h3>Horas apontadas hoje por colaborador</h3><p id="ovHojeSub">—</p></div><span class="tag" id="ovHojeTag">Hoje</span></div>
+        <div class="cw" id="ovHojeW"><canvas id="ovHoje"></canvas></div><div class="ov-vazio" id="ovHojeVazio" hidden></div><p class="ov-sem" id="ovHojeSem" hidden></p></div>
       <div class="card cost-only"><div class="card-h"><div><h3 id="ovCostT">Custo de peças por semana</h3><p>Saídas do estoque com destino a veículos · a semana corrente pode estar incompleta</p></div></div><div class="cw h260"><canvas id="ovCost"></canvas></div></div>
       <div class="card"><div class="card-h"><div><h3 id="ovMonthT">Atendimentos por semana</h3><p>OS consolidadas e veículos distintos atendidos</p></div></div><div class="cw h260"><canvas id="ovMonth"></canvas></div></div>
       <div class="card cost-only"><div class="card-h"><div><h3>Veículos com maior custo de peças</h3><p>Todas as placas com saída do estoque · 10 por página</p></div><span class="tag">Clique para detalhar</span></div><div class="cw"><canvas id="ovCostTop"></canvas></div></div>
@@ -1397,14 +1481,16 @@ function buildOS(rows){
     if(!d||!n||!p)continue;
     // 1 OS = Nº da OS + placa (uma OS aberta por vários dias continua sendo uma OS só)
     const key=n+'|'+p,dd=iso(d);
-    if(!os.has(key))os.set(key,{d:dd,e:dd,n,p,k:new Set(),dm:new Map(),kd:new Map(),h:0,t:new Map(),km:new Map()});
+    if(!os.has(key))os.set(key,{d:dd,e:dd,n,p,k:new Set(),dm:new Map(),kd:new Map(),kdm:new Map(),h:0,t:new Map(),km:new Map()});
     const o=os.get(key);if(dd<o.d)o.d=dd;if(dd>o.e)o.e=dd;
     let mins=kM?Number(String(r[kM]??'').replace(',','.')):0;if(!(mins>0))mins=kH?parseMin(r[kH]):0;
     const tasks=kTa?splitTasks(r[kTa]):[];
     if(!(mins>0))mins=sumBy(tasks,t=>t[1]);
     o.dm.set(dd,Math.max(o.dm.get(dd)||0,mins));o.h+=mins;
     const tec=techOf(r);
-    if(tec){o.k.add(tec);o.km.set(tec,(o.km.get(tec)||0)+mins);if(!o.kd.has(tec))o.kd.set(tec,new Set());o.kd.get(tec).add(dd)}
+    if(tec){o.k.add(tec);o.km.set(tec,(o.km.get(tec)||0)+mins);if(!o.kd.has(tec))o.kd.set(tec,new Set());o.kd.get(tec).add(dd);
+      // v4.7: minutos de cada técnico em cada dia (gráfico "Horas apontadas hoje")
+      if(!o.kdm.has(tec))o.kdm.set(tec,new Map());const km1=o.kdm.get(tec);km1.set(dd,(km1.get(dd)||0)+mins)}
     for(const[name,min]of tasks){const tk=name.toUpperCase();
       if(!variants.has(tk))variants.set(tk,new Map());const vm=variants.get(tk);vm.set(name,(vm.get(name)||0)+1);
       o.t.set(tk,(o.t.get(tk)||0)+min)}
@@ -1413,7 +1499,7 @@ function buildOS(rows){
   // nome de exibição: variante mais frequente, preferindo a que não está toda em maiúsculas
   const disp={};for(const[tk,vm]of variants){const arr=[...vm].sort((a,b)=>(a[0]===a[0].toUpperCase())-(b[0]===b[0].toUpperCase())||b[1]-a[1]);disp[tk]=arr[0][0]}
   // m = tempo de reparo da OS: em cada dia, o maior tempo entre os técnicos (trabalho em paralelo), somado entre os dias
-  const list=[...os.values()].map(o=>({d:o.d,e:o.e,ds:[...o.dm.keys()].sort(),n:o.n,p:o.p,m:sumBy([...o.dm.values()],x=>x),h:o.h,k:[...o.k],kd:Object.fromEntries([...o.kd].map(([k,s])=>[k,[...s]])),km:Object.fromEntries(o.km),t:Object.fromEntries([...o.t].map(([tk,min])=>[disp[tk],min]))})).sort((a,b)=>a.d<b.d?-1:1);
+  const list=[...os.values()].map(o=>({d:o.d,e:o.e,ds:[...o.dm.keys()].sort(),n:o.n,p:o.p,m:sumBy([...o.dm.values()],x=>x),h:o.h,k:[...o.k],kd:Object.fromEntries([...o.kd].map(([k,s])=>[k,[...s]])),kdm:Object.fromEntries([...o.kdm].map(([k,m])=>[k,Object.fromEntries(m)])),km:Object.fromEntries(o.km),t:Object.fromEntries([...o.t].map(([tk,min])=>[disp[tk],min]))})).sort((a,b)=>a.d<b.d?-1:1);
   list.orphans=orphans;
   return list;
 }
@@ -1764,7 +1850,31 @@ function renderKpis(f){
 
 /* ================= PÁGINAS ================= */
 const R_={};
+/* v4.7: horas apontadas HOJE por colaborador. Usa a base inteira (não depende do período nem dos filtros do topo):
+   minutos de cada técnico no dia de hoje, nas OS com placa e nas linhas sem placa. */
+function horasHoje(){const hoje=iso(new Date()),m=new Map(),g=k=>{if(!m.has(k))m.set(k,{k,min:0,os:new Set(),pl:new Set()});return m.get(k)};
+  for(const o of RAW.os||[]){if(o.e<hoje||o.d>hoje)continue;
+    for(const k of o.k){let mn=0;
+      if(o.kdm&&o.kdm[k])mn=o.kdm[k][hoje]||0;
+      else if(o.kd&&o.kd[k]&&o.kd[k].includes(hoje))mn=(o.km[k]||0)/o.kd[k].length;// base salva antes da v4.7: reparte por igual entre os dias
+      if(mn>0){const x=g(k);x.min+=mn;x.os.add(o.n+'|'+o.p);x.pl.add(o.p)}}}
+  for(const r of RAW.orphans||[])if(r.d===hoje&&r.min>0){const x=g(r.k);x.min+=r.min;x.os.add(r.n)}
+  // colaboradores que apontaram nos últimos 30 dias e ainda não apontaram hoje
+  const d30=new Date(hoje+'T00:00:00');d30.setDate(d30.getDate()-30);const lim=iso(d30),ativos=new Set();
+  for(const o of RAW.os||[]){if(o.e<lim)continue;for(const k of o.k)if((o.kd&&o.kd[k]||[o.d]).some(d=>d>=lim&&d<=hoje))ativos.add(k)}
+  for(const r of RAW.orphans||[])if(r.d>=lim&&r.d<=hoje)ativos.add(r.k);
+  return{hoje,L:[...m.values()].sort((a,b)=>b.min-a.min),sem:[...ativos].filter(k=>!m.has(k)).sort((a,b)=>a.localeCompare(b,'pt-BR'))}}
+function renderHoje(){const{hoje,L,sem}=horasHoje(),tot=sumBy(L,x=>x.min),q=(RAW.meta||{}).quando;
+  $('#ovHojeTag').textContent='Hoje · '+fmtDate(hoje).slice(0,5);
+  $('#ovHojeSub').textContent=(L.length?`${fmtMin(tot)} no total · ${num(L.length)} ${L.length===1?'colaborador':'colaboradores'}`:'Nenhum apontamento hoje')+(q&&q!=='—'?` · base de OS atualizada em ${q}`:'');
+  const w=$('#ovHojeW'),vz=$('#ovHojeVazio');w.hidden=!L.length;vz.hidden=!!L.length;
+  if(!L.length){if(CH.ovHoje){CH.ovHoje.destroy();delete CH.ovHoje}vz.innerHTML=`<b>Ainda não há horas apontadas hoje (${fmtDate(hoje)}) na base de OS.</b>Elas aparecem aqui assim que a base for atualizada com os apontamentos do dia.`}
+  else{w.style.height=Math.max(150,L.length*30+46)+'px';
+    hbar('ovHoje',L.map(x=>x.k),L.map(x=>+(x.min/60).toFixed(2)),{kind:'tech',label:'Horas apontadas',trunc:44,vlFmt:v=>fmtMin(v*60),valTick:v=>dec(v,v%1?1:0)+' h',
+      tip:{label:c=>{const x=L[c.dataIndex];return[` ${fmtMin(x.min)} apontadas hoje`,` ${num(x.os.size)} OS · ${num(x.pl.size)} ${x.pl.size===1?'placa':'placas'}`]}}})}
+  const s=$('#ovHojeSem');s.hidden=!sem.length||!L.length;if(sem.length&&L.length)s.innerHTML=`<b>Sem apontamento hoje</b> (apontaram nos últimos 30 dias): ${sem.map(esc).join(', ')}`}
 R_.overview=f=>{
+  renderHoje();
   const t=T(),V=f.V,pr=new Set(f.R.map(r=>r.placa)).size,tasks=taskAgg(f.R),E=f.E,ct=sumBy(E,e=>e.v);
   const cv=custoPor(E.filter(e=>e.p),e=>e.p);
   // v4.4: a linha de destaques (custo no período, concentração em 10 veículos, % reincidente, serviço mais reincidente) saiu
@@ -2167,6 +2277,8 @@ $('#csVh').addEventListener('change',e=>{VH=Math.max(0,+e.target.value||0);ls.se
 
 /* ---------- Versões ---------- */
 const VERSIONS=[
+ {v:'4.9',d:'27/11/2026',c:'Barra superior e menu lateral no visual do NOMOS: fonte IBM Plex Sans, grafite #151518, barra de 52 px com a trilha “AnalisOS › aba” ao lado da logo, campos escuros de 32 px, botões de ícone sem borda e o usuário com avatar e nome. Menu lateral de 56 px só com ícones em botões arredondados, com a aba ativa em dourado e o marcador à esquerda; o botão › continua expandindo o menu com os nomes. O destaque das barras é o dourado do NOMOS (#c99a43 / #e5bd72), e a contagem de Preventivas virou uma pílula dourada no canto do ícone. O painel em cascata do NOMOS não entrou.'},
+ {v:'4.8',d:'27/11/2026',c:'Novo primeiro gráfico da Visão geral: horas apontadas hoje por colaborador. Mostra sempre o dia de hoje, sem depender do período nem dos filtros do topo, com o total do dia, a hora da última atualização da base de OS e os colaboradores que apontaram nos últimos 30 dias e ainda não apontaram hoje. As horas contam o dia exato do apontamento, inclusive em OS que ficam abertas por vários dias, e as linhas sem placa também entram.'},
  {v:'4.7',d:'27/11/2026',c:'Nova aba Preventivas: o cronograma de revisões por km (dezembro/2026) substitui o Kanban. No menu, Preventivas abre as sub-abas em cascata: Painel, Cronograma, Lançar KM, Histórico, Cadastro e Critérios e backup. No Cronograma, o km atual é digitado direto na tabela e o faltante, o % de uso, a situação e a prioridade se recalculam na hora. A ficha do veículo registra a revisão feita e mostra o histórico. Saíram os checklists e os planos RP1/RP2 das carretas.'},
   {v:'4.6',d:'26/11/2026',c:'Combustível no custo dos veículos. Nova Base 4, Abastecimentos, com as planilhas de diesel e de ARLA do tanque próprio (um espaço para cada uma; o preço do litro confere se não foram trocadas). Na aba Custos, o seletor “Custo considerado” (Total, Manutenção ou Combustível) define o que os gráficos por veículo, tipo, proprietário, marca e mês somam, com peças, diesel e ARLA em cores separadas. Novos: custo por mês (manutenção × combustível), preço médio do litro, conferência do tanque (compras, abastecimentos e ajustes) e a tabela Combustível por veículo (litros, R$/L e ARLA/diesel). A tabela Custo por veículo ganhou as colunas Diesel, ARLA e Total. O custo por OS, o custo médio por OS e as Prioridades continuam só com peças. Dados e critérios mais compacto: as 5 bases (OS, veículos, estoque, diesel e ARLA) ficam lado a lado, cada uma com o botão de importar e um resumo curto; o cruzamento das bases virou mini-cartões; saíram os textos de colunas; os critérios de cálculo e os avisos de acesso viraram caixas com X para fechar (“Mostrar os textos informativos” reabre).'},
   {v:'4.5',d:'26/11/2026',c:'Menu lateral mais leve: o nome das abas passou para letra normal e menor (12,5 px), e o trilho ficou um pouco mais estreito (52 px recolhido, 212 px expandido), com ícones e linhas um pouco menores.'},
@@ -2328,7 +2440,10 @@ const NAV_NOME={reinc:'Reincidência'};// nome curto da aba no menu, quando o t�
 let TREE_OPEN=null;// null = segue a aba atual (aberta quando Preventivas está na tela)
 const subsPrev=()=>(PV2&&PV2.SUBS)||[];
 const treeAberta=()=>TREE_OPEN==null?PAGE==='prev':TREE_OPEN;
-function markNav(){$$('#nav button[data-id]').forEach(b=>{const on=b.dataset.id===PAGE;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')});
+// v4.9: trilha da barra superior (AnalisOS › aba › sub-aba de Preventivas); roda junto com markNav
+function hbCrumbs(){const p=PAGES.find(x=>x.id===PAGE);if(!p)return;$('#hbCrumbPg').textContent=NAV_NOME[p.id]||p.t;
+  const cs=$('#hbCrumbSub'),sb=PAGE==='prev'&&typeof PV2!=='undefined'&&PV2?subsPrev().find(s=>s.id===PV2.SUB):null;cs.hidden=!sb;if(sb)cs.querySelector('b').textContent=sb.t}
+function markNav(){hbCrumbs();$$('#nav button[data-id]').forEach(b=>{const on=b.dataset.id===PAGE;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')});
   const tr=$('#nav .rail-tree');if(!tr)return;const ab=treeAberta();tr.classList.toggle('open',ab);tr.querySelector('.tree-hd').setAttribute('aria-expanded',String(ab));
   const sb=PV2?PV2.SUB:'';$$('#nav [data-sub],#railFly [data-sub]').forEach(b=>{const on=PAGE==='prev'&&b.dataset.sub===sb;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false')});
   const n=PV2?PV2.badge():'',cnt=n?`<span class="cnt" title="Revisões atrasadas ou de prioridade alta">${n}</span>`:'';
